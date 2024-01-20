@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  //   basePath: "/github-pages",
+  basePath: "/github-pages",
   reactStrictMode: true,
-  distDir: "out",
+  distDir: "dist",
 };
 
 export default nextConfig;
