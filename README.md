@@ -6,7 +6,7 @@ My name is James Dow, and I am a web designer & developer. I work at the interse
 
  - Visit my [website](https://jamesdow.me)
  - Connect with me on [LinkedIn](https://linkedin.com/in/photodow)
- - Check out some of work on [Codepen](https://codepen.io/photodow)
+ - Check out some of my work on [Codepen](https://codepen.io/photodow)
  - Continue exploring my [GitHub](https://github.com/photodow)
 
 
