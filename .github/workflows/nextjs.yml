@@ -78,7 +78,8 @@ jobs:
       - name: Zip all files for upload between jobs
         # IMPORTANT: .next is a hidden folder and will NOT be included in the zip unless we specify it
         run: zip dist.zip ./* .next -qr
-      - name: files
+      - name: list files
+        run: echo ${{ steps.detect-package-manager.outputs.runner }}
         run: ls ./
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
