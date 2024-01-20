@@ -77,7 +77,9 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Zip all files for upload between jobs
         # IMPORTANT: .next is a hidden folder and will NOT be included in the zip unless we specify it
-        run: zip github-pages.zip ./* .next -qr
+        run: zip dist.zip ./* .next -qr
+      - name: files
+        run: ls ./
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
