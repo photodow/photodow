@@ -1,5 +1,5 @@
 ### Hi there 👋
-'m James Dow, a passionate Web Designer & Developer. I thrive at the intersection of these two dynamic disciplines, witnessing the evolution of an idea from conception to its vibrant existence. My journey involves bringing concepts to life and ensuring they resonate seamlessly in the digital realm. Let's embark on a creative journey together!
+I'm James Dow, a passionate Web Designer & Developer. I thrive at the intersection of these two dynamic disciplines, witnessing the evolution of an idea from conception to its vibrant existence. My journey involves bringing concepts to life and ensuring they resonate seamlessly in the digital realm. Let's embark on a creative journey together!
 
 #### My Skills
 `Javascript` `HTML5` `SCSS` `Figma` `Design Thinking` `Accessibility` `Animation` `Wireframing`
