@@ -1,4 +1,5 @@
 @use '@carbon/colors';
+@use '@carbon/grid';
 
 .jd-gridoverlay {
     pointer-events: none;
@@ -28,5 +29,25 @@
 
     &__2xcol__inner {
         background: colors.$gray-50;
+    }
+
+    // &__2xcol {
+    //     display: none;
+    // }
+
+    &__2xcol:nth-child(n+5) {
+        display: none;
+    }
+
+    @include grid.breakpoint-up('md') {
+        &__2xcol:nth-child(-n+8) {
+            display: block !important;
+        }
+    }
+    
+    @include grid.breakpoint-up('lg') {
+        &__2xcol {
+            display: block !important;
+        }
     }
 }
