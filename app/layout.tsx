@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from '@next/third-parties/google'
+// import Head from 'next/head'
 import Header from "./components/Header";
 import GridOverlay from "./components/GridOverlay";
+// import Script from 'next/script';
 import "./globals.scss";
+
+// declare global {
+//     interface Window {
+//         dataLayer:any;
+//         arguments:any;
+//     }
+// }
 
 export const metadata: Metadata = {
   title: "James Dow",
@@ -20,6 +30,7 @@ export default function RootLayout({
         {children}
         <GridOverlay />
       </body>
+      <GoogleAnalytics gaId="G-25V741CH1X" />
     </html>
   );
 }
