@@ -1,8 +1,15 @@
-import Image from "next/image";
-import styles from "./page.module.scss";
+// import Navigation from "./components/Navigation";
+import "./page.scss";
 
 export default function Home() {
   return (
-    <h1>Hi there, my name is James Dow 👋</h1>
+    // <Navigation />
+    <div className="cds--grid">
+      <div className="cds--row">
+        <div className="cds--col">
+          <p>Hi there, my name is James Dow 👋</p>
+        </div>
+      </div>
+    </div>
   );
 }

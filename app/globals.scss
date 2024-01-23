@@ -1,0 +1,38 @@
+@use '@carbon/themes/scss/themes' as *;
+@use '@carbon/themes';
+@use '@carbon/grid';
+@use '@carbon/type';
+
+@include grid.flex-grid();
+@include type.reset();
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  @include themes.theme($white);
+}
+
+[data-carbon-theme='g10'] {
+  @include themes.theme($g10);
+}
+
+[data-carbon-theme='g90'] {
+  @include themes.theme($g90);
+}
+
+[data-carbon-theme='g100'] {
+  @include themes.theme($g100);
+}
+
+html, body {
+  min-height: 100%;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  color: themes.$text-primary;
+  background: themes.$background;
+
+  @include type.type-style('body-02');
+}
