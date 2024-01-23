@@ -6,6 +6,7 @@
     color: themes.$text-primary;
     background: themes.$background;
     height: 100vh;
+    position: relative;
 
     &__inner {
         padding-top: layout.$spacing-05;

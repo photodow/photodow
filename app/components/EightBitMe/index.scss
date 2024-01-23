@@ -1,0 +1,1070 @@
+// css variable px and size?
+
+@use '@carbon/themes';
+
+.jd-eightbitme {
+    // --bit-px: 25%;
+
+    $px: 1em;
+    $columns: 17 * $px;
+    $rows: 12 * $px;
+    $top: 0;
+    $left: 0;
+    $hair-base: #493E3E;
+    $hair-highlight: #6F6767;
+    $hair-shadow: #262014;
+    $skin-base: #DEBAAD;
+    $skin-highlight: #E6CFC5;
+    $skin-shadow: #C59990;
+    $eye: #5268A7;
+    $eye-white: #ddd;
+
+    @function pixel($color, $x, $y, $pxSize: $px, $offsetX: $left, $offsetY: $top) {
+        @return ($px * $x + $offsetX) ($px * $y + $offsetY) $color;
+    }
+
+    position: fixed;
+    top: 0;
+    right: 50%;
+    transform: translate(50%, 0);
+    font-size: 16px;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    border-radius: 50%;
+    background: themes.$background;
+    // background: rgba(0, 0, 0, .2);
+    // transition: all .2s linear;
+
+    // &--small {
+    //     height: 64px;
+    //     font-size: 20%;
+    //     right: 0;
+    //     transform: translate(0, 0);
+    // }
+
+    &__avatar {
+        height: $columns;
+        width: $rows;
+        margin: auto;
+        position: relative;
+
+        .hair-wind {
+            background: transparent;
+            margin-top: 0;
+            width: $px;
+            height: $px;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow:
+                pixel($hair-highlight, 7, 0),
+                pixel($hair-highlight, 10, 0),
+                pixel($hair-highlight, 9, 1),
+                pixel($hair-highlight, 10, 2),
+                pixel($hair-base, 4, 1),
+                pixel($hair-base, 6, 1),
+                pixel($hair-base, 8, 1),
+            ;
+
+            animation: wind .35s;
+            animation-iteration-count: infinite;
+        }
+
+        .eyes {
+            background: transparent;
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin-top: 0;
+            width: $px;
+            height: $px;
+            display: block;
+            box-shadow:
+                // left eye
+                pixel($hair-base, 3, 8),
+                pixel($hair-shadow, 4, 8),
+
+                // right eye
+                pixel($hair-shadow, 7, 8),
+                pixel($hair-base, 8, 8),
+            ;
+
+            &:before,
+            &:after {
+                animation: blinking 4s;
+                animation-iteration-count: infinite;
+            }
+
+            &:before {
+                content: '';
+                width: $px;
+                height: 100%;
+                display: block;
+                box-shadow:
+                    // left eye
+                    pixel($eye-white, 3, 9),
+                    pixel($eye-white, 4, 9),
+
+                    // right eye
+                    pixel($eye-white, 7, 9),
+                    pixel($eye-white, 8, 9),
+                ;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: $px;
+                height: 100%;
+                display: block;
+                box-shadow:
+                    pixel($eye, 3.5, 9),
+                    pixel($eye, 7.5, 9),
+                    // pixel($eye, 4, 9),
+                    // pixel($eye, 7, 9),
+                ;
+            }
+
+        }
+
+        &:not(.right, .left, .up, .down) .eyes::after {
+            // cross eyed
+            box-shadow:
+                pixel($eye, 4, 9),
+                pixel($eye, 7, 9),
+            ;
+        }
+
+        &.down:not(.right, .left) .hair-wind {
+            top: 2 * $px;
+        }
+
+        &.left .eyes {
+            left: -1 * $px;
+
+            &:after {
+                box-shadow:
+                    pixel($eye, 3, 9),
+                    pixel($eye, 7, 9),
+                ;
+            }
+        }
+
+        &.right .eyes {
+            left: 1 * $px;
+
+            &:after {
+                box-shadow:
+                    pixel($eye, 4, 9),
+                    pixel($eye, 8, 9),
+                ;
+            }
+        }
+
+        &.up:not(.right, .left) .eyes {
+            top: -1 * $px;
+        }
+
+        &.down:not(.right, .left) .eyes {
+            top: 1 * $px;
+        }
+
+        &.up.right {
+            transform: rotate(-10deg);
+        }
+
+        &.up.left {
+            transform: rotate(10deg);
+        }
+
+        &.down.right {
+            transform: rotate(10deg);
+        }
+
+        &.down.left {
+            transform: rotate(-10deg);
+        }
+
+        &::before {
+            content: '';
+            background: transparent;
+            width: $px;
+            height: $px;
+            display: block;
+            box-shadow:
+                pixel($hair-shadow, 0, 5),
+                pixel($hair-shadow, 0, 6),
+                pixel($hair-base, 0, 7),
+                pixel($hair-highlight, 0, 8),
+                pixel($skin-highlight, 0, 9),
+                pixel($skin-base, 0, 10),
+                pixel($hair-highlight, 0, 11),
+
+                pixel($hair-base, 1, 4),
+                pixel($hair-base, 1, 5),
+                pixel($hair-shadow, 1, 6),
+                pixel($hair-shadow, 1, 7),
+                pixel($skin-shadow, 1, 8),
+                pixel($skin-base, 1, 9),
+                pixel($skin-base, 1, 10),
+                pixel($skin-highlight, 1, 11),
+                pixel($skin-highlight, 1, 12),
+
+                pixel($hair-highlight, 2, 3),
+                pixel($hair-base, 2, 4),
+                pixel($hair-shadow, 2, 5),
+                pixel($skin-shadow, 2, 6),
+                pixel($skin-base, 2, 7),
+                pixel($skin-base, 2, 8),
+                pixel($skin-base, 2, 9),
+                pixel($skin-base, 2, 10),
+                pixel($skin-base, 2, 11),
+                pixel($skin-base, 2, 12),
+                pixel($skin-highlight, 2, 13),
+                pixel($skin-highlight, 2, 14),
+
+                pixel($hair-highlight, 3, 2),
+                pixel($hair-base, 3, 3),
+                pixel($hair-highlight, 3, 4),
+                pixel($hair-base, 3, 5),
+                pixel($skin-shadow, 3, 6),
+                pixel($skin-base, 3, 7),
+                pixel($skin-base, 3, 8),
+                pixel($skin-base, 3, 9),
+                pixel($skin-base, 3, 10),
+                pixel($skin-base, 3, 11),
+                pixel($skin-base, 3, 12),
+                pixel($skin-base, 3, 13),
+                pixel($skin-base, 3, 14),
+                pixel($skin-highlight, 3, 15),
+
+                pixel($hair-base, 4, 2),
+                pixel($hair-highlight, 4, 3),
+                pixel($hair-base, 4, 4),
+                pixel($hair-shadow, 4, 5),
+                pixel($hair-base, 4, 6),
+                pixel($skin-base, 4, 7),
+                pixel($skin-base, 4, 8),
+                pixel($skin-base, 4, 9),
+                pixel($skin-base, 4, 10),
+                pixel($skin-base, 4, 11),
+                pixel($skin-base, 4, 12),
+                pixel($skin-base, 4, 13),
+                pixel($skin-base, 4, 14),
+                pixel($skin-base, 4, 15),
+                pixel($skin-highlight, 4, 16),
+
+                pixel($hair-highlight, 5, 2),
+                pixel($hair-base, 5, 3),
+                pixel($hair-shadow, 5, 4),
+                pixel($hair-base, 5, 5),
+                pixel($hair-shadow, 5, 6),
+                pixel($skin-shadow, 5, 7),
+                pixel($skin-base, 5, 8),
+                pixel($skin-base, 5, 9),
+                pixel($skin-base, 5, 10),
+                pixel($skin-base, 5, 11),
+                pixel($skin-base, 5, 12),
+                pixel($skin-base, 5, 13),
+                pixel($skin-base, 5, 14),
+                pixel($skin-base, 5, 15),
+                pixel($skin-shadow, 5, 16),
+
+                pixel($hair-base, 6, 2),
+                pixel($hair-shadow, 6, 3),
+                pixel($hair-highlight, 6, 4),
+                pixel($hair-base, 6, 5),
+                pixel($hair-base, 6, 6),
+                pixel($skin-shadow, 6, 7),
+                pixel($skin-base, 6, 8),
+                pixel($skin-base, 6, 9),
+                pixel($skin-base, 6, 10),
+                pixel($skin-base, 6, 11),
+                pixel($skin-base, 6, 12),
+                pixel($skin-base, 6, 13),
+                pixel($skin-base, 6, 14),
+                pixel($skin-base, 6, 15),
+                pixel($skin-shadow, 6, 16),
+
+                pixel($hair-shadow, 7, 2),
+                pixel($hair-highlight, 7, 3),
+                pixel($hair-base, 7, 4),
+                pixel($hair-shadow, 7, 5),
+                pixel($skin-shadow, 7, 6),
+                pixel($skin-base, 7, 7),
+                pixel($skin-base, 7, 8),
+                pixel($skin-base, 7, 9),
+                pixel($skin-base, 7, 10),
+                pixel($skin-base, 7, 11),
+                pixel($skin-base, 7, 12),
+                pixel($skin-base, 7, 13),
+                pixel($skin-base, 7, 14),
+                pixel($skin-base, 7, 15),
+                pixel($skin-shadow, 7, 16),
+
+                pixel($hair-highlight, 8, 2),
+                pixel($hair-base, 8, 3),
+                pixel($hair-shadow, 8, 4),
+                pixel($hair-base, 8, 5),
+                pixel($skin-shadow, 8, 6),
+                pixel($skin-base, 8, 7),
+                pixel($skin-base, 8, 8),
+                pixel($skin-base, 8, 9),
+                pixel($skin-base, 8, 10),
+                pixel($skin-base, 8, 11),
+                pixel($skin-base, 8, 12),
+                pixel($skin-base, 8, 13),
+                pixel($skin-base, 8, 14),
+                pixel($skin-shadow, 8, 15),
+
+                pixel($hair-base, 9, 2),
+                pixel($hair-shadow, 9, 3),
+                pixel($hair-base, 9, 4),
+                pixel($hair-shadow, 9, 5),
+                pixel($hair-base, 9, 6),
+                pixel($skin-shadow, 9, 7),
+                pixel($skin-base, 9, 8),
+                pixel($skin-base, 9, 9),
+                pixel($skin-base, 9, 10),
+                pixel($skin-base, 9, 11),
+                pixel($skin-base, 9, 12),
+                pixel($skin-shadow, 9, 13),
+                pixel($skin-shadow, 9, 14),
+
+                pixel($hair-base, 10, 3),
+                pixel($hair-shadow, 10, 4),
+                pixel($hair-base, 10, 5),
+                pixel($hair-shadow, 10, 6),
+                pixel($hair-shadow, 10, 7),
+                pixel($skin-shadow, 10, 8),
+                pixel($skin-base, 10, 9),
+                pixel($skin-base, 10, 10),
+                pixel($skin-base, 10, 11),
+                pixel($skin-shadow, 10, 12),
+
+                pixel($hair-highlight, 11, 4),
+                pixel($hair-base, 11, 5),
+                pixel($hair-base, 11, 6),
+                pixel($hair-shadow, 11, 7),
+                pixel($skin-base, 11, 8),
+                pixel($skin-base, 11, 9),
+                pixel($skin-shadow, 11, 10),
+                pixel($hair-highlight, 11, 11),
+            ;
+        }
+
+        &.left::before {
+            box-shadow:
+                pixel($hair-base, 0, 5),
+                pixel($hair-base, 0, 6),
+                pixel($hair-highlight, 0, 7),
+                pixel($hair-base, 0, 8),
+                pixel($hair-base, 0, 9),
+                pixel($hair-highlight, 0, 10),
+
+                pixel($hair-highlight, 1, 3),
+                pixel($hair-base, 1, 4),
+                pixel($hair-highlight, 1, 5),
+                pixel($skin-base, 1, 6),
+                pixel($skin-highlight, 1, 7),
+                pixel($skin-highlight, 1, 8),
+                pixel($skin-highlight, 1, 9),
+                pixel($skin-highlight, 1, 10),
+                pixel($skin-highlight, 1, 11),
+                pixel($skin-highlight, 1, 12),
+                pixel($skin-highlight, 1, 13),
+
+                pixel($hair-highlight, 2, 2),
+                pixel($hair-base, 2, 3),
+                pixel($hair-highlight, 2, 4),
+                pixel($hair-base, 2, 5),
+                pixel($skin-shadow, 2, 6),
+                pixel($skin-base, 2, 7),
+                pixel($skin-base, 2, 8),
+                pixel($skin-base, 2, 9),
+                pixel($skin-base, 2, 10),
+                pixel($skin-base, 2, 11),
+                pixel($skin-base, 2, 12),
+                pixel($skin-base, 2, 13),
+                pixel($skin-highlight, 2, 14),
+
+                pixel($hair-base, 3, 2),
+                pixel($hair-highlight, 3, 3),
+                pixel($hair-base, 3, 4),
+                pixel($hair-shadow, 3, 5),
+                pixel($hair-base, 3, 6),
+                pixel($skin-base, 3, 7),
+                pixel($skin-base, 3, 8),
+                pixel($skin-base, 3, 9),
+                pixel($skin-base, 3, 10),
+                pixel($skin-base, 3, 11),
+                pixel($skin-base, 3, 12),
+                pixel($skin-base, 3, 13),
+                pixel($skin-base, 3, 14),
+                pixel($skin-base, 3, 15),
+
+                pixel($hair-highlight, 4, 2),
+                pixel($hair-base, 4, 3),
+                pixel($hair-shadow, 4, 4),
+                pixel($hair-base, 4, 5),
+                pixel($hair-shadow, 4, 6),
+                pixel($skin-shadow, 4, 7),
+                pixel($skin-base, 4, 8),
+                pixel($skin-base, 4, 9),
+                pixel($skin-base, 4, 10),
+                pixel($skin-base, 4, 11),
+                pixel($skin-base, 4, 12),
+                pixel($skin-base, 4, 13),
+                pixel($skin-base, 4, 14),
+                pixel($skin-base, 4, 15),
+                pixel($skin-shadow, 4, 16),
+
+                pixel($hair-base, 5, 2),
+                pixel($hair-shadow, 5, 3),
+                pixel($hair-highlight, 5, 4),
+                pixel($hair-base, 5, 5),
+                pixel($hair-base, 5, 6),
+                pixel($skin-shadow, 5, 7),
+                pixel($skin-base, 5, 8),
+                pixel($skin-base, 5, 9),
+                pixel($skin-base, 5, 10),
+                pixel($skin-base, 5, 11),
+                pixel($skin-base, 5, 12),
+                pixel($skin-base, 5, 13),
+                pixel($skin-base, 5, 14),
+                pixel($skin-base, 5, 15),
+                pixel($skin-shadow, 5, 16),
+
+                pixel($hair-shadow, 6, 2),
+                pixel($hair-highlight, 6, 3),
+                pixel($hair-base, 6, 4),
+                pixel($hair-shadow, 6, 5),
+                pixel($skin-shadow, 6, 6),
+                pixel($skin-base, 6, 7),
+                pixel($skin-base, 6, 8),
+                pixel($skin-base, 6, 9),
+                pixel($skin-base, 6, 10),
+                pixel($skin-base, 6, 11),
+                pixel($skin-base, 6, 12),
+                pixel($skin-base, 6, 13),
+                pixel($skin-base, 6, 14),
+                pixel($skin-base, 6, 15),
+                pixel($skin-shadow, 6, 16),
+
+                pixel($hair-highlight, 7, 2),
+                pixel($hair-base, 7, 3),
+                pixel($hair-shadow, 7, 4),
+                pixel($hair-base, 7, 5),
+                pixel($skin-shadow, 7, 6),
+                pixel($skin-base, 7, 7),
+                pixel($skin-base, 7, 8),
+                pixel($skin-base, 7, 9),
+                pixel($skin-base, 7, 10),
+                pixel($skin-base, 7, 11),
+                pixel($skin-base, 7, 12),
+                pixel($skin-base, 7, 13),
+                pixel($skin-base, 7, 14),
+                pixel($skin-shadow, 7, 15),
+
+                pixel($hair-base, 8, 2),
+                pixel($hair-shadow, 8, 3),
+                pixel($hair-base, 8, 4),
+                pixel($hair-shadow, 8, 5),
+                pixel($hair-base, 8, 6),
+                pixel($skin-shadow, 8, 7),
+                pixel($skin-base, 8, 8),
+                pixel($skin-base, 8, 9),
+                pixel($skin-base, 8, 10),
+                pixel($skin-base, 8, 11),
+                pixel($skin-base, 8, 12),
+                pixel($skin-base, 8, 13),
+                pixel($skin-shadow, 8, 14),
+
+                pixel($hair-base, 9, 3),
+                pixel($hair-shadow, 9, 4),
+                pixel($hair-base, 9, 5),
+                pixel($hair-shadow, 9, 6),
+                pixel($hair-shadow, 9, 7),
+                pixel($hair-base, 9, 8),
+                pixel($skin-base, 9, 9),
+                pixel($skin-base, 9, 10),
+                pixel($skin-base, 9, 11),
+                pixel($skin-shadow, 9, 12),
+                pixel($skin-shadow, 9, 13),
+
+                pixel($hair-shadow, 10, 4),
+                pixel($hair-shadow, 10, 5),
+                pixel($hair-shadow, 10, 6),
+                pixel($hair-shadow, 10, 7),
+                pixel($skin-base, 10, 8),
+                pixel($skin-shadow, 10, 9),
+                pixel($skin-shadow, 10, 10),
+                pixel($hair-base, 10, 11),
+
+                pixel($hair-shadow, 11, 5),
+                pixel($hair-shadow, 11, 6),
+                pixel($skin-base, 11, 7),
+                pixel($skin-shadow, 11, 8),
+                pixel($skin-shadow, 11, 9),
+            ;
+        }
+
+        &.right::before {
+            box-shadow:
+                pixel($hair-shadow, 0, 5),
+                pixel($hair-shadow, 0, 6),
+                pixel($skin-base, 0, 7),
+                pixel($skin-shadow, 0, 8),
+                pixel($skin-shadow, 0, 9),
+
+                pixel($hair-shadow, 1, 4),
+                pixel($hair-shadow, 1, 5),
+                pixel($hair-shadow, 1, 6),
+                pixel($hair-shadow, 1, 7),
+                pixel($skin-base, 1, 8),
+                pixel($skin-shadow, 1, 9),
+                pixel($skin-shadow, 1, 10),
+                pixel($hair-base, 1, 11),
+
+                pixel($hair-base, 2, 3),
+                pixel($hair-shadow, 2, 4),
+                pixel($hair-base, 2, 5),
+                pixel($hair-shadow, 2, 6),
+                pixel($hair-shadow, 2, 7),
+                pixel($hair-base, 2, 8),
+                pixel($skin-base, 2, 9),
+                pixel($skin-base, 2, 10),
+                pixel($skin-base, 2, 11),
+                pixel($skin-shadow, 2, 12),
+                pixel($skin-shadow, 2, 13),
+
+                pixel($hair-base, 3, 2),
+                pixel($hair-shadow, 3, 3),
+                pixel($hair-base, 3, 4),
+                pixel($hair-shadow, 3, 5),
+                pixel($hair-base, 3, 6),
+                pixel($skin-shadow, 3, 7),
+                pixel($skin-base, 3, 8),
+                pixel($skin-base, 3, 9),
+                pixel($skin-base, 3, 10),
+                pixel($skin-base, 3, 11),
+                pixel($skin-base, 3, 12),
+                pixel($skin-base, 3, 13),
+                pixel($skin-shadow, 3, 14),
+
+                pixel($hair-highlight, 4, 2),
+                pixel($hair-base, 4, 3),
+                pixel($hair-shadow, 4, 4),
+                pixel($hair-base, 4, 5),
+                pixel($skin-shadow, 4, 6),
+                pixel($skin-base, 4, 7),
+                pixel($skin-base, 4, 8),
+                pixel($skin-base, 4, 9),
+                pixel($skin-base, 4, 10),
+                pixel($skin-base, 4, 11),
+                pixel($skin-base, 4, 12),
+                pixel($skin-base, 4, 13),
+                pixel($skin-base, 4, 14),
+                pixel($skin-shadow, 4, 15),
+
+                pixel($hair-shadow, 5, 2),
+                pixel($hair-highlight, 5, 3),
+                pixel($hair-base, 5, 4),
+                pixel($hair-shadow, 5, 5),
+                pixel($skin-shadow, 5, 6),
+                pixel($skin-base, 5, 7),
+                pixel($skin-base, 5, 8),
+                pixel($skin-base, 5, 9),
+                pixel($skin-base, 5, 10),
+                pixel($skin-base, 5, 11),
+                pixel($skin-base, 5, 12),
+                pixel($skin-base, 5, 13),
+                pixel($skin-base, 5, 14),
+                pixel($skin-base, 5, 15),
+                pixel($skin-shadow, 5, 16),
+
+                pixel($hair-base, 6, 2),
+                pixel($hair-shadow, 6, 3),
+                pixel($hair-highlight, 6, 4),
+                pixel($hair-base, 6, 5),
+                pixel($hair-base, 6, 6),
+                pixel($skin-base, 6, 7),
+                pixel($skin-base, 6, 8),
+                pixel($skin-base, 6, 9),
+                pixel($skin-base, 6, 10),
+                pixel($skin-base, 6, 11),
+                pixel($skin-base, 6, 12),
+                pixel($skin-base, 6, 13),
+                pixel($skin-base, 6, 14),
+                pixel($skin-base, 6, 15),
+                pixel($skin-shadow, 6, 16),
+
+                pixel($hair-highlight, 7, 2),
+                pixel($hair-base, 7, 3),
+                pixel($hair-shadow, 7, 4),
+                pixel($hair-base, 7, 5),
+                pixel($hair-shadow, 7, 6),
+                pixel($skin-shadow, 7, 7),
+                pixel($skin-base, 7, 8),
+                pixel($skin-base, 7, 9),
+                pixel($skin-base, 7, 10),
+                pixel($skin-base, 7, 11),
+                pixel($skin-base, 7, 12),
+                pixel($skin-base, 7, 13),
+                pixel($skin-base, 7, 14),
+                pixel($skin-base, 7, 15),
+                pixel($skin-shadow, 7, 16),
+
+                pixel($hair-base, 8, 2),
+                pixel($hair-highlight, 8, 3),
+                pixel($hair-base, 8, 4),
+                pixel($hair-shadow, 8, 5),
+                pixel($hair-base, 8, 6),
+                pixel($skin-base, 8, 7),
+                pixel($skin-base, 8, 8),
+                pixel($skin-base, 8, 9),
+                pixel($skin-base, 8, 10),
+                pixel($skin-base, 8, 11),
+                pixel($skin-base, 8, 12),
+                pixel($skin-base, 8, 13),
+                pixel($skin-base, 8, 14),
+                pixel($skin-base, 8, 15),
+
+                pixel($hair-base, 9, 2),
+                pixel($hair-base, 9, 3),
+                pixel($hair-highlight, 9, 4),
+                pixel($hair-base, 9, 5),
+                pixel($skin-shadow, 9, 6),
+                pixel($skin-base, 9, 7),
+                pixel($skin-base, 9, 8),
+                pixel($skin-base, 9, 9),
+                pixel($skin-base, 9, 10),
+                pixel($skin-base, 9, 11),
+                pixel($skin-base, 9, 12),
+                pixel($skin-base, 9, 13),
+                pixel($skin-highlight, 9, 14),
+
+                pixel($hair-highlight, 10, 3),
+                pixel($hair-base, 10, 4),
+                pixel($hair-highlight, 10, 5),
+                pixel($skin-base, 10, 6),
+                pixel($skin-highlight, 10, 7),
+                pixel($skin-highlight, 10, 8),
+                pixel($skin-highlight, 10, 9),
+                pixel($skin-highlight, 10, 10),
+                pixel($skin-highlight, 10, 11),
+                pixel($skin-highlight, 10, 12),
+                pixel($skin-highlight, 10, 13),
+
+                pixel($hair-base, 11, 5),
+                pixel($hair-base, 11, 6),
+                pixel($hair-highlight, 11, 7),
+                pixel($hair-base, 11, 8),
+                pixel($hair-base, 11, 9),
+                pixel($hair-highlight, 11, 10),
+            ;
+        }
+
+        &.up:not(.right, .left)::before {
+            box-shadow:
+                pixel($hair-shadow, 0, 5),
+                pixel($hair-base, 0, 6),
+                pixel($hair-highlight, 0, 7),
+                pixel($skin-highlight, 0, 8),
+                pixel($skin-base, 0, 9),
+                pixel($hair-highlight, 0, 10),
+
+                pixel($hair-base, 1, 4),
+                pixel($hair-shadow, 1, 5),
+                pixel($hair-shadow, 1, 6),
+                pixel($skin-shadow, 1, 7),
+                pixel($skin-base, 1, 8),
+                pixel($skin-base, 1, 9),
+                pixel($skin-highlight, 1, 10),
+                pixel($skin-highlight, 1, 11),
+
+                pixel($hair-base, 2, 3),
+                pixel($hair-shadow, 2, 4),
+                pixel($skin-shadow, 2, 5),
+                pixel($skin-base, 2, 6),
+                pixel($skin-base, 2, 7),
+                pixel($skin-base, 2, 8),
+                pixel($skin-base, 2, 9),
+                pixel($skin-base, 2, 10),
+                pixel($skin-base, 2, 11),
+                pixel($skin-highlight, 2, 12),
+
+                pixel($hair-base, 3, 2),
+                pixel($hair-highlight, 3, 3),
+                pixel($hair-base, 3, 4),
+                pixel($skin-shadow, 3, 5),
+                pixel($skin-base, 3, 6),
+                pixel($skin-base, 3, 7),
+                pixel($skin-base, 3, 8),
+                pixel($skin-base, 3, 9),
+                pixel($skin-base, 3, 10),
+                pixel($skin-base, 3, 11),
+                pixel($skin-base, 3, 12),
+                pixel($skin-base, 3, 13),
+                pixel($skin-highlight, 3, 14),
+
+                pixel($hair-highlight, 4, 2),
+                pixel($hair-base, 4, 3),
+                pixel($hair-shadow, 4, 4),
+                pixel($hair-base, 4, 5),
+                pixel($skin-base, 4, 6),
+                pixel($skin-base, 4, 7),
+                pixel($skin-base, 4, 8),
+                pixel($skin-base, 4, 9),
+                pixel($skin-base, 4, 10),
+                pixel($skin-base, 4, 11),
+                pixel($skin-base, 4, 12),
+                pixel($skin-base, 4, 13),
+                pixel($skin-base, 4, 14),
+                pixel($skin-highlight, 4, 15),
+
+                pixel($hair-base, 5, 2),
+                pixel($hair-shadow, 5, 3),
+                pixel($hair-base, 5, 4),
+                pixel($hair-shadow, 5, 5),
+                pixel($skin-shadow, 5, 6),
+                pixel($skin-base, 5, 7),
+                pixel($skin-base, 5, 8),
+                pixel($skin-base, 5, 9),
+                pixel($skin-base, 5, 10),
+                pixel($skin-base, 5, 11),
+                pixel($skin-base, 5, 12),
+                pixel($skin-base, 5, 13),
+                pixel($skin-base, 5, 14),
+                pixel($skin-highlight, 5, 15),
+
+                pixel($hair-shadow, 6, 2),
+                pixel($hair-highlight, 6, 3),
+                pixel($hair-base, 6, 4),
+                pixel($hair-base, 6, 5),
+                pixel($skin-shadow, 6, 6),
+                pixel($skin-base, 6, 7),
+                pixel($skin-base, 6, 8),
+                pixel($skin-base, 6, 9),
+                pixel($skin-base, 6, 10),
+                pixel($skin-base, 6, 11),
+                pixel($skin-base, 6, 12),
+                pixel($skin-base, 6, 13),
+                pixel($skin-base, 6, 14),
+                pixel($skin-highlight, 6, 15),
+
+                pixel($hair-highlight, 7, 2),
+                pixel($hair-base, 7, 3),
+                pixel($hair-shadow, 7, 4),
+                pixel($skin-shadow, 7, 5),
+                pixel($skin-base, 7, 6),
+                pixel($skin-base, 7, 7),
+                pixel($skin-base, 7, 8),
+                pixel($skin-base, 7, 9),
+                pixel($skin-base, 7, 10),
+                pixel($skin-base, 7, 11),
+                pixel($skin-base, 7, 12),
+                pixel($skin-base, 7, 13),
+                pixel($skin-base, 7, 14),
+                pixel($skin-highlight, 7, 15),
+
+                pixel($hair-base, 8, 2),
+                pixel($hair-shadow, 8, 3),
+                pixel($hair-base, 8, 4),
+                pixel($skin-shadow, 8, 5),
+                pixel($skin-base, 8, 6),
+                pixel($skin-base, 8, 7),
+                pixel($skin-base, 8, 8),
+                pixel($skin-base, 8, 9),
+                pixel($skin-base, 8, 10),
+                pixel($skin-base, 8, 11),
+                pixel($skin-base, 8, 12),
+                pixel($skin-base, 8, 13),
+                pixel($skin-highlight, 8, 14),
+
+                pixel($hair-shadow, 9, 2),
+                pixel($hair-base, 9, 3),
+                pixel($hair-shadow, 9, 4),
+                pixel($hair-base, 9, 5),
+                pixel($skin-shadow, 9, 6),
+                pixel($skin-base, 9, 7),
+                pixel($skin-base, 9, 8),
+                pixel($skin-base, 9, 9),
+                pixel($skin-base, 9, 10),
+                pixel($skin-base, 9, 11),
+                pixel($skin-highlight, 9, 12),
+
+                pixel($hair-shadow, 10, 3),
+                pixel($hair-base, 10, 4),
+                pixel($hair-shadow, 10, 5),
+                pixel($hair-shadow, 10, 6),
+                pixel($skin-shadow, 10, 7),
+                pixel($skin-base, 10, 8),
+                pixel($skin-base, 10, 9),
+                pixel($skin-base, 10, 10),
+                pixel($skin-highlight, 10, 11),
+
+                pixel($hair-base, 11, 4),
+                pixel($hair-base, 11, 5),
+                pixel($hair-shadow, 11, 6),
+                pixel($skin-base, 11, 7),
+                pixel($skin-base, 11, 8),
+                pixel($skin-highlight, 11, 9),
+                pixel($hair-highlight, 11, 10),
+            ;
+        }
+
+        &.down:not(.right, .left)::before {
+            box-shadow:
+                pixel($hair-shadow, 0, 6),
+                pixel($hair-shadow, 0, 7),
+                pixel($hair-base, 0, 8),
+                pixel($hair-highlight, 0, 9),
+                pixel($skin-base, 0, 10),
+                pixel($skin-shadow, 0, 11),
+
+                pixel($hair-base, 1, 5),
+                pixel($hair-base, 1, 6),
+                pixel($hair-shadow, 1, 7),
+                pixel($hair-shadow, 1, 8),
+                pixel($skin-shadow, 1, 9),
+                pixel($skin-base, 1, 10),
+                pixel($skin-base, 1, 11),
+                pixel($skin-shadow, 1, 12),
+                pixel($skin-shadow, 1, 13),
+
+                pixel($hair-highlight, 2, 4),
+                pixel($hair-base, 2, 5),
+                pixel($hair-shadow, 2, 6),
+                pixel($skin-shadow, 2, 7),
+                pixel($skin-base, 2, 8),
+                pixel($skin-base, 2, 9),
+                pixel($skin-base, 2, 10),
+                pixel($skin-base, 2, 11),
+                pixel($skin-base, 2, 12),
+                pixel($skin-base, 2, 13),
+                pixel($skin-shadow, 2, 14),
+
+                pixel($hair-highlight, 3, 3),
+                pixel($hair-base, 3, 4),
+                pixel($hair-highlight, 3, 5),
+                pixel($hair-base, 3, 6),
+                pixel($skin-shadow, 3, 7),
+                pixel($skin-base, 3, 8),
+                pixel($skin-base, 3, 9),
+                pixel($skin-base, 3, 10),
+                pixel($skin-base, 3, 11),
+                pixel($skin-base, 3, 12),
+                pixel($skin-base, 3, 13),
+                pixel($skin-base, 3, 14),
+                pixel($skin-shadow, 3, 15),
+
+                pixel($hair-base, 4, 3),
+                pixel($hair-highlight, 4, 4),
+                pixel($hair-base, 4, 5),
+                pixel($hair-shadow, 4, 6),
+                pixel($hair-base, 4, 7),
+                pixel($skin-base, 4, 8),
+                pixel($skin-base, 4, 9),
+                pixel($skin-base, 4, 10),
+                pixel($skin-base, 4, 11),
+                pixel($skin-base, 4, 12),
+                pixel($skin-base, 4, 13),
+                pixel($skin-base, 4, 14),
+                pixel($skin-shadow, 4, 15),
+                pixel($skin-shadow, 4, 16),
+
+                pixel($hair-highlight, 5, 3),
+                pixel($hair-base, 5, 4),
+                pixel($hair-shadow, 5, 5),
+                pixel($hair-base, 5, 6),
+                pixel($hair-shadow, 5, 7),
+                pixel($skin-shadow, 5, 8),
+                pixel($skin-base, 5, 9),
+                pixel($skin-base, 5, 10),
+                pixel($skin-base, 5, 11),
+                pixel($skin-base, 5, 12),
+                pixel($skin-base, 5, 13),
+                pixel($skin-base, 5, 14),
+                pixel($skin-base, 5, 15),
+                pixel($skin-shadow, 5, 16),
+
+                pixel($hair-base, 6, 3),
+                pixel($hair-shadow, 6, 4),
+                pixel($hair-highlight, 6, 5),
+                pixel($hair-base, 6, 6),
+                pixel($hair-base, 6, 7),
+                pixel($skin-shadow, 6, 8),
+                pixel($skin-base, 6, 9),
+                pixel($skin-base, 6, 10),
+                pixel($skin-base, 6, 11),
+                pixel($skin-base, 6, 12),
+                pixel($skin-base, 6, 13),
+                pixel($skin-base, 6, 14),
+                pixel($skin-base, 6, 15),
+                pixel($skin-shadow, 6, 16),
+
+                pixel($hair-shadow, 7, 3),
+                pixel($hair-highlight, 7, 4),
+                pixel($hair-base, 7, 5),
+                pixel($hair-shadow, 7, 6),
+                pixel($skin-shadow, 7, 7),
+                pixel($skin-base, 7, 8),
+                pixel($skin-base, 7, 9),
+                pixel($skin-base, 7, 10),
+                pixel($skin-base, 7, 11),
+                pixel($skin-base, 7, 12),
+                pixel($skin-base, 7, 13),
+                pixel($skin-base, 7, 14),
+                pixel($skin-shadow, 7, 15),
+                pixel($skin-shadow, 7, 16),
+
+                pixel($hair-highlight, 8, 3),
+                pixel($hair-base, 8, 4),
+                pixel($hair-shadow, 8, 5),
+                pixel($hair-base, 8, 6),
+                pixel($skin-shadow, 8, 7),
+                pixel($skin-base, 8, 8),
+                pixel($skin-base, 8, 9),
+                pixel($skin-base, 8, 10),
+                pixel($skin-base, 8, 11),
+                pixel($skin-base, 8, 12),
+                pixel($skin-base, 8, 13),
+                pixel($skin-base, 8, 14),
+                pixel($skin-shadow, 8, 15),
+
+                pixel($hair-base, 9, 3),
+                pixel($hair-shadow, 9, 4),
+                pixel($hair-base, 9, 5),
+                pixel($hair-shadow, 9, 6),
+                pixel($hair-base, 9, 7),
+                pixel($skin-shadow, 9, 8),
+                pixel($skin-base, 9, 9),
+                pixel($skin-base, 9, 10),
+                pixel($skin-base, 9, 11),
+                pixel($skin-base, 9, 12),
+                pixel($skin-base, 9, 13),
+                pixel($skin-shadow, 9, 14),
+
+                pixel($hair-base, 10, 4),
+                pixel($hair-shadow, 10, 5),
+                pixel($hair-base, 10, 6),
+                pixel($hair-shadow, 10, 7),
+                pixel($hair-shadow, 10, 8),
+                pixel($skin-shadow, 10, 9),
+                pixel($skin-base, 10, 10),
+                pixel($skin-base, 10, 11),
+                pixel($skin-shadow, 10, 12),
+                pixel($skin-shadow, 10, 13),
+
+                pixel($hair-highlight, 11, 5),
+                pixel($hair-base, 11, 6),
+                pixel($hair-base, 11, 7),
+                pixel($hair-shadow, 11, 8),
+                pixel($skin-base, 11, 9),
+                pixel($skin-base, 11, 10),
+                pixel($skin-shadow, 11, 11),
+            ;
+        }
+    }
+
+    @keyframes blinking {
+        0% {
+            margin-top: 0;
+            height: $px;
+        }
+
+        94% {
+            margin-top: 0;
+            height: $px;
+        }
+
+        97% {
+            margin-top: $px / 2;
+            height: 0px;
+        }
+
+        100% {
+            margin-top: 0;
+            height: $px;
+        }
+    }
+
+    @keyframes wind {
+        0% {
+            box-shadow:
+                pixel($hair-highlight, 7, 0),
+                pixel(transparent, 10, 0),
+                pixel(transparent, 9, 0),
+                pixel($hair-highlight, 10, 1),
+                pixel($hair-highlight, 9, 1),
+                pixel($hair-highlight, 10, 2),
+                pixel($hair-highlight, 4, 1),
+                pixel($hair-base, 6, 1),
+                pixel($hair-base, 8, 1),
+                pixel(transparent, 10, 3),
+        }
+
+        25% {
+            box-shadow:
+                pixel($hair-base, 7, 0),
+                pixel($hair-highlight, 10, 0),
+                pixel(transparent, 9, 0),
+                pixel(transparent, 10, 1),
+                pixel($hair-highlight, 9, 1),
+                pixel(transparent, 10, 2),
+                pixel($hair-base, 4, 1),
+                pixel($hair-base, 6, 1),
+                pixel($hair-highlight, 8, 1),
+                pixel($hair-base, 10, 3),
+        }
+
+        50% {
+            box-shadow:
+                pixel($hair-highlight, 7, 0),
+                pixel(transparent, 10, 0),
+                pixel($hair-highlight, 9, 0),
+                pixel(transparent, 10, 1),
+                pixel($hair-highlight, 9, 1),
+                pixel($hair-highlight, 10, 2),
+                pixel($hair-highlight, 4, 1),
+                pixel($hair-base, 6, 1),
+                pixel($hair-base, 8, 1),
+                pixel(transparent, 10, 3),
+        }
+
+        75% {
+            box-shadow:
+                pixel(transparent, 7, 0),
+                pixel($hair-base, 10, 0),
+                pixel(transparent, 9, 0),
+                pixel(transparent, 10, 1),
+                pixel($hair-base, 9, 1),
+                pixel(transparent, 10, 2),
+                pixel($hair-highlight, 4, 1),
+                pixel($hair-base, 6, 1),
+                pixel($hair-base, 8, 1),
+                pixel($hair-highlight, 9, 2),
+                pixel(transparent, 10, 3),
+        }
+
+        100% {
+            box-shadow:
+                pixel($hair-highlight, 7, 0),
+                pixel(transparent, 10, 0),
+                pixel($hair-highlight, 9, 0),
+                pixel(transparent, 10, 1),
+                pixel($hair-highlight, 9, 1),
+                pixel(transparent, 10, 2),
+                pixel($hair-base, 4, 1),
+                pixel($hair-highlight, 6, 1),
+                pixel($hair-base, 8, 1),
+                pixel(transparent, 10, 3),
+                pixel($hair-highlight, 9, 2),
+        }
+    }
+}

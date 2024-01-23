@@ -1,4 +1,6 @@
 import Navigation from '../Navigation';
+import EightBitMe from '../EightBitMe';
+
 import "./index.scss";
 
 export default function Header() {
@@ -17,6 +19,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <EightBitMe />
     </header>
   );
 }
