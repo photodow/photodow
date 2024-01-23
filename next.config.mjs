@@ -3,7 +3,7 @@ const nextConfig = {
   output: "export",
   basePath: "/github-pages",
   reactStrictMode: true,
-  distDir: "dist",
+  // distDir: "dist",
 };
 
 export default nextConfig;
