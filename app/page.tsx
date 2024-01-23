@@ -1,9 +1,7 @@
-// import Navigation from "./components/Navigation";
 import "./page.scss";
 
 export default function Home() {
   return (
-    // <Navigation />
     <div className="cds--grid">
       <div className="cds--row">
         <div className="cds--col">

@@ -6,7 +6,7 @@ export default function GridOverlay() {
 
     for (let i = 0; i < 16; i++) {
         Cols.push(
-            <div className="jd-gridoverlay__2xcol cds--col-sm-1 cds--col-md-1 cds--col-lg-1">
+            <div className="jd-gridoverlay__2xcol cds--col-sm-1 cds--col-md-1 cds--col-lg-1" key={`2xgrid${i}`}>
                 <div className="jd-gridoverlay__2xcol__inner"></div>
             </div>
         );

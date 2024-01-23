@@ -1,0 +1,35 @@
+@use '@carbon/themes';
+@use '@carbon/type';
+@use '@carbon/layout';
+
+.jd-header {
+    color: themes.$text-primary;
+    background: themes.$background;
+    height: 100vh;
+
+    &__inner {
+        padding-top: layout.$spacing-05;
+        padding-bottom: layout.$spacing-05;
+        background: themes.$background;
+        position: sticky;
+        top: 0;
+    }
+
+    &__title {
+        margin: 0;
+        padding: 0;
+    }
+
+    &__role,
+    &__name {
+        display: block;
+    }
+
+    &__name {
+        @include type.type-style('heading-02');
+    }
+    
+    &__role {
+        @include type.type-style('body-compact-01');
+    }
+}

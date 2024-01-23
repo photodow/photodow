@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Header from "./components/Header";
 import GridOverlay from "./components/GridOverlay";
 import "./globals.scss";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "James Dow",
@@ -16,8 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-carbon-theme="g90">
-      <body className={inter.className}>
+    <html lang="en" data-carbon-theme="g100">
+      <body>
+        <Header />
         {children}
         <GridOverlay />
       </body>
