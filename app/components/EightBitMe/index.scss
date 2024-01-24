@@ -42,8 +42,6 @@ $base: 'jd-eightbitme';
                 width: 100%;
             }
         }
-
-
     }
 
     &__inner {
@@ -127,6 +125,15 @@ $base: 'jd-eightbitme';
 
         &:not(.right, .left, .up, .down) .eyes::after {
             @include iris(4, -1); // cross eyed
+        }
+
+        &:active:not(.right, .left, .up, .down) {
+            animation: poking-shake .2s;
+            animation-iteration-count: infinite;
+        }
+        
+        &:active:not(.right, .left, .up, .down) .eyes::after {
+            @include iris(3, 1); // eyes out on click
         }
 
         &.down:not(.right, .left) .hair-wind {
