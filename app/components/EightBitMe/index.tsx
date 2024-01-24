@@ -51,10 +51,20 @@ function resizeAvatar (e: Event) {
   }
 
   eightbitContainer.style.height = `${eightBitBox.height}px`;
-  eightbitContainer.style.top = `${8 - ((eightBitBox.height - minHeight) / (originalHeight - minHeight) * 8)}px`;
-  eightbitContainer.style.right = `calc(${((eightBitBox.height - minHeight) / (originalHeight - minHeight) * 50)}% + ${8 - ((eightBitBox.height - minHeight) / (originalHeight - minHeight) * 8)}px)`;
-  eightbitContainer.style.transform = `translate(${((eightBitBox.height - minHeight) / (originalHeight - minHeight) * 50)}%, 0)`;
-  eightbitContainer.style.fontSize = `${((eightBitBox.height - minHeight) / (originalHeight - minHeight) * (16 - 2.25)) + 2.25}px`;
+  eightbitContainer.style.fontSize =  `${calcMidPointBy(16, 2.25)}px`;
+  eightbitContainer.style.transform = `translate(${calcMidPointBy(50, 0)}%, 0)`;
+  eightbitContainer.style.top = `${calcMidPointBy(0, 8)}px`;
+  eightbitContainer.style.right = `calc(${calcMidPointBy(50, 0)}% + ${calcMidPointBy(0, 8)}px)`;
+}
+
+function calcMidPointBy (
+  from: number = 0,
+  to: number = 0,
+  height: number = eightBitBox?.height || 0,
+  fromHeight: number = originalHeight,
+  toHeight: number = minHeight
+) {
+  return ((height - toHeight) / (fromHeight - toHeight) * (from - to)) + to;
 }
 
 function setLookingDirection (e: MouseEvent) {
