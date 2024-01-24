@@ -1,5 +1,5 @@
-@use '@carbon/colors';
-@use '@carbon/grid';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/colors';
 
 .jd-gridoverlay {
     pointer-events: none;
@@ -39,13 +39,13 @@
         display: none;
     }
 
-    @include grid.breakpoint-up('md') {
+    @include breakpoint('md') {
         &__2xcol:nth-child(-n+8) {
             display: block !important;
         }
     }
     
-    @include grid.breakpoint-up('lg') {
+    @include breakpoint('lg') {
         &__2xcol {
             display: block !important;
         }

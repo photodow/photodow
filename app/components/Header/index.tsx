@@ -1,3 +1,5 @@
+"use client";
+
 import Navigation from '../Navigation';
 import EightBitMe from '../EightBitMe';
 
@@ -19,7 +21,12 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <EightBitMe />
+      <EightBitMe mobileNavControl={openMobileNav} />
     </header>
   );
+}
+
+function openMobileNav () {
+  // todo: if given breakpoint
+  document.body.classList.add('active-mobile-nav');
 }

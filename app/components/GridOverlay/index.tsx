@@ -1,3 +1,5 @@
+"use client";
+
 import { Grid, Column } from "@carbon/react";
 import "./index.scss";
 

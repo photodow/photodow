@@ -1,19 +1,19 @@
-@use '@carbon/themes';
-@use '@carbon/type';
-@use '@carbon/layout';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme';
 
 .jd-header {
-    color: themes.$text-primary;
-    background: themes.$background;
+    color: theme.$text-primary;
+    background: theme.$background;
     height: 100vh;
     position: relative;
 
     &__inner {
-        padding-top: layout.$spacing-05;
-        padding-bottom: layout.$spacing-05;
-        background: themes.$background;
+        padding-top: spacing.$spacing-05;
+        padding-bottom: spacing.$spacing-05;
         position: sticky;
         top: 0;
+        z-index: 1;
     }
 
     &__title {

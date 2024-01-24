@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from '@next/third-parties/google'
-// import Head from 'next/head'
+import { GoogleAnalytics } from '@next/third-parties/google';
 import Header from "./components/Header";
 import GridOverlay from "./components/GridOverlay";
-// import Script from 'next/script';
 import "./globals.scss";
-
-// declare global {
-//     interface Window {
-//         dataLayer:any;
-//         arguments:any;
-//     }
-// }
 
 export const metadata: Metadata = {
   title: "James Dow",
@@ -24,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-carbon-theme="g100">
+    <html lang="en">
       <body>
         <Header />
         {children}

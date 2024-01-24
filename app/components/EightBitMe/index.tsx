@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 
 import "./index.scss";
 
 let eightBitMeElement: HTMLElement | null;
 
-export default function EightBitMe() {
+export default function EightBitMe({ mobileNavControl }: {mobileNavControl: MouseEventHandler}) {
   useEffect(() => {
     eightBitMeElement = document.querySelector('.jd-eightbitme__avatar');
     document.addEventListener('mousemove', setLookingDirection);
@@ -15,7 +15,7 @@ export default function EightBitMe() {
 
   return (
     <div className="jd-eightbitme">
-      <div className="jd-eightbitme__avatar left">
+      <div className="jd-eightbitme__avatar left" onClick={mobileNavControl}>
         <div className="hair-wind"></div>
         <div className="eyes"></div>
       </div>

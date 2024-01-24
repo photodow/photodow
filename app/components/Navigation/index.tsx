@@ -3,6 +3,10 @@
 import { Link } from '@carbon/react';
 import "./index.scss";
 
+// todo: mobile navigation
+// todo: open when clicked
+// todo: animate in
+
 export default function Navigation() {
   const sections = ['About', 'Resume', 'Portfolio', 'Contact'];
   const links: React.ReactNode[] = [];

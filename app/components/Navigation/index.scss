@@ -1,6 +1,6 @@
-@use '@carbon/layout';
-@use '@carbon/themes';
-@use '@carbon/type';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme';
 
 .jd-nav {
     display: none;
@@ -15,11 +15,11 @@
     
     &__item {
         float: left;
-        margin-left: layout.$spacing-05;
+        margin-left: spacing.$spacing-05;
     }
     
     &__link {
-        color: themes.$text-primary;
+        color: theme.$text-primary;
         @include type.type-style('body-compact-02');
     }
 }
