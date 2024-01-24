@@ -20,7 +20,6 @@ $base: 'jd-eightbitme';
     @import './mixins';
 
     position: fixed;
-    cursor: pointer;
     top: 0;
     right: 50%;
     transform: translate(50%, 0);
@@ -69,6 +68,7 @@ $base: 'jd-eightbitme';
         height: $columns;
         width: $rows;
         margin: auto;
+        cursor: pointer;
         position: relative;
 
         .hair-wind {
