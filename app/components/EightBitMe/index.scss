@@ -128,7 +128,7 @@ $base: 'jd-eightbitme';
         }
 
         &:active:not(.right, .left, .up, .down) {
-            animation: poking-shake .2s;
+            animation: poking-shake .25s;
             animation-iteration-count: infinite;
         }
         
