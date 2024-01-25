@@ -21,8 +21,8 @@ export default function EightBitMe() {
     resizeAvatar();
     setShowMe('jd-eightbitme--active');
 
-    document.addEventListener('resize', () => resizeAvatar());
-    document.addEventListener('scroll', () => resizeAvatar());
+    document.addEventListener('resize', resizeAvatar);
+    document.addEventListener('scroll', resizeAvatar);
 
     document.addEventListener('mousemove', e => {
       setMousePosition({ x: e.x, y: e.y});
