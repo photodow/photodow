@@ -6,53 +6,50 @@ import miniUnits from '../../utils/miniUnits';
 
 import "./index.scss";
 
-export default function EightBitMe({ mobileNavControl }: {mobileNavControl: MouseEventHandler}) {
-  const mouseEventCount = useRef(0);
-  const container = useRef<HTMLDivElement>(null);
-  const bg = useRef<HTMLDivElement>(null);
+export default function EightBitMe() {
+
+  const remDirection = useRef('left');
+  const moveCount = useRef(0);
   const avatar = useRef<HTMLDivElement>(null);
+
   const [showMe, setShowMe] = useState('');
-  const [lookingDirection, setLookingDirection] = useState('left');
   const [bgStyles, setBgStyles] = useState({});
   const [containerStyles, setContainerStyles] = useState({});
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    resizeAvatar(container.current, bg.current);
+    resizeAvatar();
     setShowMe('jd-eightbitme--active');
 
-    document.addEventListener('resize', e => resizeAvatar(container.current, bg.current));
-    document.addEventListener('scroll', e => resizeAvatar(container.current, bg.current));
+    document.addEventListener('resize', () => resizeAvatar());
+    document.addEventListener('scroll', () => resizeAvatar());
 
     document.addEventListener('mousemove', e => {
-      calcLookingDirection(e.x, e.y);
+      setMousePosition({ x: e.x, y: e.y});
     });
 
     document.addEventListener("touchmove", e => {
       const changedTouches = e.changedTouches[0];
-      calcLookingDirection(changedTouches.clientX, changedTouches.clientY);
+      setMousePosition({ x: changedTouches.clientX, y: changedTouches.clientY});
     });
   }, []);
 
   return (
-    <div ref={container} className={`jd-eightbitme ${showMe}`}  style={containerStyles}>
+    <div className={`jd-eightbitme ${showMe}`} style={containerStyles}>
       <div className={`jd-eightbitme__inner`}>
-        <div ref={avatar} className={`jd-eightbitme__avatar ${lookingDirection}`} onClick={mobileNavControl}>
+        <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
           <div className="hair-wind"></div>
           <div className="eyes"></div>
         </div>
       </div>
-      <div ref={bg} className={`jd-eightbitme__bg`} style={bgStyles} />
+      <div className={`jd-eightbitme__bg`} style={bgStyles} />
     </div>
   );
 
-  function resizeAvatar (container: HTMLDivElement | null, bg: HTMLDivElement | null) {
-    if (!container || !bg) {
-      return false;
-    }
-
+  function resizeAvatar () {
     const padding = miniUnits(2);
     const maxHeight = window.innerHeight - padding * 2;
-    const minHeight = miniUnits(8); // header-inner - padding
+    const minHeight = miniUnits(8);
     let currentHeight = maxHeight - window.scrollY;
 
     if (currentHeight <= minHeight) {
@@ -86,30 +83,33 @@ export default function EightBitMe({ mobileNavControl }: {mobileNavControl: Mous
     });
   }
 
-  function calcLookingDirection (x: number, y: number) {
+  function calcLookingDirection () {
     const avatarEl = avatar.current;
-
-    if (!avatarEl || mouseEventCount.current < 30) {
-      mouseEventCount.current++;
-      return;
+  
+    if (avatarEl == null || moveCount.current < 30) {
+      moveCount.current++;
+      return remDirection.current;
     }
 
-    let direction = [];
     const avatarRectBox = avatarEl.getBoundingClientRect();
+    let direction = [];
 
-    if (x < avatarRectBox.left) {
+    moveCount.current = 0;
+
+    if (mousePosition.x < avatarRectBox.left) {
         direction.push('left');
-    } else if (x > avatarRectBox.right) {
+    } else if (mousePosition.x > avatarRectBox.right) {
         direction.push('right');
     }
     
-    if (y < avatarRectBox.top) {
+    if (mousePosition.y < avatarRectBox.top) {
         direction.push('up');
-    } else if (y > avatarRectBox.bottom) {
+    } else if (mousePosition.y > avatarRectBox.bottom) {
         direction.push('down');
     }
 
-    setLookingDirection(direction.join(' '));
-    mouseEventCount.current = 0;
+    remDirection.current = direction.join(' ');
+
+    return remDirection.current;
   }
 }

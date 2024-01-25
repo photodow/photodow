@@ -6,6 +6,7 @@ import EightBitMe from '../EightBitMe';
 import "./index.scss";
 
 export default function Header() {
+
   return (
     <header className="jd-header" data-carbon-theme="g10">
       <div className="jd-header__inner cds--grid">
@@ -21,7 +22,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <EightBitMe mobileNavControl={openMobileNav} />
+      <EightBitMe />
     </header>
   );
 }
