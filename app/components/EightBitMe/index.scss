@@ -27,6 +27,7 @@ $base: 'jd-eightbitme';
     height: 100%;
     width: auto;
     display: grid;
+    user-select: none;
     aspect-ratio: 1 / 1;
 
     &--active {
@@ -127,13 +128,14 @@ $base: 'jd-eightbitme';
             @include iris(4, -1); // cross eyed
         }
 
-        &:active:not(.right, .left, .up, .down) {
+        &:active {
             animation: poking-shake .25s;
             animation-iteration-count: infinite;
-        }
-        
-        &:active:not(.right, .left, .up, .down) .eyes::after {
-            @include iris(3, 1); // eyes out on click
+
+            .eyes::after {
+                left: 0 !important;
+                @include iris(3, 1); // eyes out on click
+            }
         }
 
         &.down:not(.right, .left) .hair-wind {
