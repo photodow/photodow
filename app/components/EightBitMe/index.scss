@@ -27,7 +27,6 @@ $base: 'jd-eightbitme';
     height: 100%;
     width: auto;
     display: grid;
-    user-select: none;
     aspect-ratio: 1 / 1;
 
     &--active {
@@ -69,6 +68,7 @@ $base: 'jd-eightbitme';
         height: $columns;
         width: $rows;
         margin: auto;
+        user-select: none;
         cursor: pointer;
         position: relative;
 

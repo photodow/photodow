@@ -92,12 +92,15 @@ function calcMidPointBy (
 }
 
 function calcLookingDirection (x: number, y: number, ref: HTMLElement | null, update: Function) {
-  if (!ref) {
+  if (!ref || x % 3 > 0 || y % 3 > 0) {
+    // x % 3 to try and slow responsive down slightly
     return;
   }
 
   let direction = [];
   const avatarBox = ref.getBoundingClientRect();
+
+  console.log(x, y)
 
   if (x < avatarBox.left) {
       direction.push('left');
@@ -112,4 +115,5 @@ function calcLookingDirection (x: number, y: number, ref: HTMLElement | null, up
   }
 
   update(direction.join(' '));
+
 }
