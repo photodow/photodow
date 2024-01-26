@@ -1,21 +1,31 @@
 "use client";
 
-import { MouseEventHandler, useEffect, useState, useRef } from 'react';
+import "./index.scss";
+
+import { useEffect, useState, useRef } from 'react';
 import calcMidPoint from '../../utils/calcMidPoint';
 import miniUnits from '../../utils/miniUnits';
+// import { DefinitionTooltip, Tooltip } from '@carbon/react';
+import TooltipExt from "../Tooltip";
 
-import "./index.scss";
+// click for menu
+//  - automatic show
+//  - don't show if already shown
+//  - don't show if menu has been opened
+//  - localstorage, or not?
 
 export default function EightBitMe() {
 
   const remDirection = useRef('left');
   const moveCount = useRef(0);
+  const tooltipShown = useRef(false);
   const avatar = useRef<HTMLDivElement>(null);
 
   const [showMe, setShowMe] = useState('');
   const [bgStyles, setBgStyles] = useState({});
   const [containerStyles, setContainerStyles] = useState({});
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [openTooltip, setOpenTooltip] = useState(false);
 
   useEffect(() => {
     resizeAvatar();
@@ -36,12 +46,14 @@ export default function EightBitMe() {
 
   return (
     <div className={`jd-eightbitme ${showMe}`} style={containerStyles}>
-      <div className={`jd-eightbitme__inner`}>
-        <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
-          <div className="hair-wind"></div>
-          <div className="eyes"></div>
-        </div>
-      </div>
+      <button className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu Navigation" onMouseOver={() => tooltipShown.current && setOpenTooltip(false)}>
+        <TooltipExt label="Open Menu" align={'left'} open={openTooltip} disable={!openTooltip} openOnHover={false}>
+          <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
+            <div className="hair-wind"></div>
+            <div className="eyes"></div>
+          </div>
+        </TooltipExt>
+      </button>
       <div className={`jd-eightbitme__bg`} style={bgStyles} />
     </div>
   );
@@ -54,8 +66,20 @@ export default function EightBitMe() {
 
     if (currentHeight <= minHeight) {
       currentHeight = minHeight;
+
+      if (!tooltipShown.current) {
+        setOpenTooltip(true);
+        tooltipShown.current = true;
+
+        setTimeout(() => {
+          setOpenTooltip(false);
+        }, 10000);
+      }
     } else if (currentHeight >= maxHeight) {
       currentHeight = maxHeight;
+      if (tooltipShown.current) {
+        setOpenTooltip(false);
+      }
     }
 
     const fontSize = { start: 16, end: 3 };
@@ -95,17 +119,17 @@ export default function EightBitMe() {
     let direction = [];
 
     moveCount.current = 0;
-
-    if (mousePosition.x < avatarRectBox.left) {
-        direction.push('left');
-    } else if (mousePosition.x > avatarRectBox.right) {
-        direction.push('right');
-    }
     
     if (mousePosition.y < avatarRectBox.top) {
         direction.push('up');
     } else if (mousePosition.y > avatarRectBox.bottom) {
         direction.push('down');
+    }
+
+    if (mousePosition.x < avatarRectBox.left) {
+        direction.push('left');
+    } else if (mousePosition.x > avatarRectBox.right) {
+        direction.push('right');
     }
 
     remDirection.current = direction.join(' ');
