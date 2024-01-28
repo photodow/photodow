@@ -1,35 +1,48 @@
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
+
+@import "../../utils/long-shadow";
 
 .jd-header {
-    color: theme.$text-primary;
-    background: theme.$background;
-    height: 100vh;
-    position: relative;
+  color: theme.$text-primary;
+  background: theme.$background;
+  height: 100vh;
+  position: relative;
 
-    &__inner {
-        padding-top: spacing.$spacing-05;
-        padding-bottom: spacing.$spacing-05;
-        position: sticky;
-        top: 0;
-    }
+  &__inner {
+    padding-top: spacing.$spacing-05;
+    padding-bottom: spacing.$spacing-05;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
-    &__title {
-        margin: 0;
-        padding: 0;
-    }
+  &__inner {
+    z-index: 0;
+  }
+  & .jd-eightbitme {
+    z-index: 2;
+  }
+  & .jd-nav {
+    z-index: 1;
+  }
 
-    &__role,
-    &__name {
-        display: block;
-    }
+  &__title {
+    margin: 0;
+    padding: 0;
+  }
 
-    &__name {
-        @include type.type-style('heading-02');
-    }
-    
-    &__role {
-        @include type.type-style('body-compact-01');
-    }
+  &__role,
+  &__name {
+    display: block;
+  }
+
+  &__name {
+    @include type.type-style("heading-02");
+  }
+
+  &__role {
+    @include type.type-style("body-compact-01");
+  }
 }

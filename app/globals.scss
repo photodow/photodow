@@ -1,9 +1,9 @@
-@use '@carbon/styles/scss/grid';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/themes' as *;
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/grid";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/themes" as *;
+@use "@carbon/styles/scss/theme";
 
-@use '@carbon/styles/scss/components/link';
+@use "@carbon/styles/scss/components/link";
 
 @include grid.flex-grid();
 @include type.reset();
@@ -16,19 +16,20 @@
   @include theme.theme($g100);
 }
 
-[data-carbon-theme='g10'] {
+[data-carbon-theme="g10"] {
   @include theme.theme($g10);
 }
 
-[data-carbon-theme='g90'] {
+[data-carbon-theme="g90"] {
   @include theme.theme($g90);
 }
 
-[data-carbon-theme='g100'] {
+[data-carbon-theme="g100"] {
   @include theme.theme($g100);
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
   position: relative;
   padding: 0;
@@ -36,5 +37,9 @@ html, body {
   color: theme.$text-primary;
   background: theme.$background;
 
-  @include type.type-style('body-02');
+  @include type.type-style("body-02");
+}
+
+.jd-body--noscroll {
+  overflow: hidden;
 }

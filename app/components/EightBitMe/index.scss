@@ -1,296 +1,309 @@
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/colors';
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/spacing";
 
-$base: 'jd-eightbitme';
+$base: "jd-eightbitme";
 
 .#{$base} {
-    $px: 1em;
-    $columns: 17 * $px;
-    $rows: 12 * $px;
-    $top: 0;
-    $left: 0;
-    $hair-base: #493E3E;
-    $hair-highlight: #6F6767;
-    $hair-shadow: #262014;
-    $skin-base: #DEBAAD;
-    $skin-highlight: #E6CFC5;
-    $skin-shadow: #C59990;
-    $eye: #5268A7;
-    $eye-white: #ddd;
+  $px: 1em;
+  $columns: 17 * $px;
+  $rows: 12 * $px;
+  $top: 0;
+  $left: 0;
+  $hair-base: #493e3e;
+  $hair-highlight: #6f6767;
+  $hair-shadow: #262014;
+  $skin-base: #debaad;
+  $skin-highlight: #e6cfc5;
+  $skin-shadow: #c59990;
+  $eye: #5268a7;
+  $eye-white: #ddd;
 
-    @import './mixins';
+  @import "./mixins";
 
-    position: fixed;
-    top: 0;
-    right: 50%;
-    transform: translate(50%, 0);
-    font-size: 16px;
-    height: 100%;
-    width: auto;
-    display: grid;
+  position: fixed;
+  top: 0;
+  right: 50%;
+  transform: translate(50%, 0);
+  font-size: 16px;
+  height: 100%;
+  width: auto;
+  display: grid;
+  aspect-ratio: 1 / 1;
+
+  transition: all 0.25s linear;
+
+  .jd-nav--open + & {
+    top: spacing.$spacing-03 !important;
+    height: spacing.$spacing-03 * 25 !important;
+    font-size: 10px !important;
+    right: 50% !important;
+    transform: translate(50%, 0) !important;
+
+    & .#{$base}__bg {
+      transform: scale(0) translate(-50%, -50%) !important;
+    }
+  }
+
+  &--btn {
+    font-size: 1em;
+    height: auto;
+    width: $columns;
+    max-width: 100%;
     aspect-ratio: 1 / 1;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: auto;
+    outline: none;
+    cursor: pointer;
 
-    &--btn {
-        font-size: 1em;
-        height: auto;
-        width: $columns;
-        max-width: 100%;
-        aspect-ratio: 1 / 1;
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin: auto;
-        outline: none;
-        cursor: pointer;
+    &:focus,
+    &:hover {
+      .#{$base}--active & {
+        transform: scale(1.05) rotate(0deg);
+        transition: transform 0.2s ease-in-out;
+      }
 
-        &:focus,
-        &:hover {
-            .#{$base}--active & {
-                transform: scale(1.05) rotate(0deg);
-                transition: transform .2s ease-in-out;
-            }
-
-            .#{$base} {
-                &__avatar {
-                    filter: brightness(1);
-                }
-            }
-
-            + .#{$base} {
-                &__bg {
-                    &::before {
-                        background: theme.$background-hover;
-                    }
-                }
-            }
+      .#{$base} {
+        &__avatar {
+          filter: brightness(1);
         }
+      }
 
-        &:focus {
-            + .#{$base} {
-                &__bg {
-                    border-color: theme.$border-interactive;
-                }
-            }
+      + .#{$base} {
+        &__bg {
+          &::before {
+            background: theme.$background-hover;
+          }
         }
-
-        &:active {
-            .#{$base} {
-                &__avatar {
-                    filter: brightness(.9);
-                }
-            }
-
-            .#{$base}--active & {
-                transform: scale(1) rotate(0deg);
-                transition: transform .2s ease-in-out;
-            }
-
-            +.#{$base} {
-                &__bg {
-                    border-color: transparent;
-
-                    &::before {
-                        background: theme.$background-active;
-                    }
-                }
-            }
-        }
+      }
     }
 
-    &--active {
-        .#{$base} {
-            &__inner {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-
-            &__bg {
-                height: 100%;
-                width: 100%;
-            }
+    &:focus {
+      + .#{$base} {
+        &__bg {
+          border: 1em solid theme.$border-interactive;
         }
+      }
     }
 
-    &__inner {
-        display: grid;
-        opacity: 0;
-        transform: scale(0) rotate(360deg);
-        transition: transform 1s ease-in-out, opacity .5s ease-in-out;
+    &:active {
+      .#{$base} {
+        &__avatar {
+          filter: brightness(0.9);
+        }
+      }
+
+      .#{$base}--active & {
+        transform: scale(1) rotate(0deg);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      + .#{$base} {
+        &__bg {
+          border: 0 solid transparent;
+
+          &::before {
+            background: theme.$background-active;
+          }
+        }
+      }
+    }
+  }
+
+  &--active {
+    .#{$base} {
+      &__inner {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+
+      &__bg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  &__inner {
+    display: grid;
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+    transition: transform 1s ease-in-out, opacity 0.5s ease-in-out;
+  }
+
+  &__bg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 0;
+    width: 0;
+    z-index: -1;
+    border: 0 solid transparent;
+    background: theme.$background;
+    border-radius: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(50%, 50%);
+    transform-origin: top left;
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out,
+      border 0.2s ease-in-out, transform 0.25s ease-in-out;
+
+    &::before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      border-radius: 50%;
+      left: 0;
+      top: 0;
+      background: transparent;
+      transition: background 0.2s ease-in-out;
+    }
+  }
+
+  &__avatar {
+    height: $columns;
+    width: $rows;
+    margin: auto;
+    user-select: none;
+    filter: brightness(1.1);
+    cursor: pointer;
+    position: relative;
+    transition: filter 0.2s ease-in-out;
+
+    .hair-wind {
+      background: transparent;
+      margin-top: 0;
+      width: $px;
+      height: $px;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include hairWindBase();
+
+      animation: wind 0.35s;
+      animation-iteration-count: infinite;
     }
 
-    &__bg {
+    .eyes {
+      background: transparent;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 0;
+      width: $px;
+      height: $px;
+      display: block;
+      @include eyebrows(3);
+
+      &:before,
+      &:after {
+        animation: blinking 4s;
+        animation-iteration-count: infinite;
+      }
+
+      &:before {
+        content: "";
+        width: $px;
+        height: 100%;
+        display: block;
+        @include eyeWhites(3);
+      }
+
+      &:after {
+        content: "";
         position: absolute;
-        left: 50%;
-        top: 50%;
-        height: 0;
-        width: 0;
-        z-index: -1;
-        border: .75em solid transparent;
-        background: theme.$background;
-        border-radius: 50%;
-        overflow: hidden;
-        transform: scale(0) translate(50%, 50%);
-        transform-origin: top left;
-        transition: height .5s ease-in-out,
-            width .5s ease-in-out,
-            border .2s ease-in-out;
-
-        &::before {
-            content: '';
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            border-radius: 50%;
-            left: 0;
-            top: 0;
-            background: transparent;
-            transition: background .2s ease-in-out;
-        }
+        top: 0;
+        width: $px;
+        height: 100%;
+        display: block;
+        @include iris(3.5); // looking straight ahead
+      }
     }
 
-    &__avatar {
-        height: $columns;
-        width: $rows;
-        margin: auto;
-        user-select: none;
-        filter: brightness(1.1);
-        cursor: pointer;
-        position: relative;
-        transition: filter .2s ease-in-out;
-
-        .hair-wind {
-            background: transparent;
-            margin-top: 0;
-            width: $px;
-            height: $px;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            @include hairWindBase();
-
-            animation: wind .35s;
-            animation-iteration-count: infinite;
-        }
-
-        .eyes {
-            background: transparent;
-            position: absolute;
-            left: 0;
-            top: 0;
-            margin-top: 0;
-            width: $px;
-            height: $px;
-            display: block;
-            @include eyebrows(3);
-
-            &:before,
-            &:after {
-                animation: blinking 4s;
-                animation-iteration-count: infinite;
-            }
-
-            &:before {
-                content: '';
-                width: $px;
-                height: 100%;
-                display: block;
-                @include eyeWhites(3);
-            }
-
-            &:after {
-                content: '';
-                position: absolute;
-                top: 0;
-                width: $px;
-                height: 100%;
-                display: block;
-                @include iris(3.5); // looking straight ahead
-            }
-
-        }
-
-        &:not(.right, .left, .up, .down) .eyes::after {
-            @include iris(4, -1); // cross eyed
-        }
-
-        &:active {
-            animation: poking-shake .25s;
-            animation-iteration-count: infinite;
-
-            .eyes::after {
-                left: 0 !important;
-                @include iris(3, 1); // eyes out on click
-            }
-        }
-
-        &.down:not(.right, .left) .hair-wind {
-            top: 2 * $px;
-        }
-
-        &.left .eyes {
-            left: -1 * $px;
-
-            &:after {
-                left: -.5 * $px; // look left
-            }
-        }
-
-        &.right .eyes {
-            left: 1 * $px;
-
-            &:after {
-                left: .5 * $px; // look right
-            }
-        }
-
-        &.up:not(.right, .left) .eyes {
-            top: -1 * $px;
-        }
-
-        &.down:not(.right, .left) .eyes {
-            top: 1 * $px;
-        }
-
-        &::before {
-            content: '';
-            background: transparent;
-            width: $px;
-            height: $px;
-            display: block;
-            @include avatarLookingStraight();
-        }
-
-        &.left::before {
-            @include avatarLookingLeft();
-        }
-
-        &.right::before {
-            @include avatarLookingRight();
-        }
-
-        &.up:not(.right, .left)::before {
-            @include avatarLookingUp();
-        }
-
-        &.down:not(.right, .left)::before {
-            @include avatarLookingDown();
-        }
-
-        &.up.right {
-            transform: rotate(-10deg);
-        }
-
-        &.up.left {
-            transform: rotate(10deg);
-        }
-
-        &.down.right {
-            transform: rotate(10deg);
-        }
-
-        &.down.left {
-            transform: rotate(-10deg);
-        }
+    &:not(.right, .left, .up, .down) .eyes::after {
+      @include iris(4, -1); // cross eyed
     }
+
+    &:active {
+      animation: poking-shake 0.25s;
+      animation-iteration-count: infinite;
+
+      .eyes::after {
+        left: 0 !important;
+        @include iris(3, 1); // eyes out on click
+      }
+    }
+
+    &.down:not(.right, .left) .hair-wind {
+      top: 2 * $px;
+    }
+
+    &.left .eyes {
+      left: -1 * $px;
+
+      &:after {
+        left: -0.5 * $px; // look left
+      }
+    }
+
+    &.right .eyes {
+      left: 1 * $px;
+
+      &:after {
+        left: 0.5 * $px; // look right
+      }
+    }
+
+    &.up:not(.right, .left) .eyes {
+      top: -1 * $px;
+    }
+
+    &.down:not(.right, .left) .eyes {
+      top: 1 * $px;
+    }
+
+    &::before {
+      content: "";
+      background: transparent;
+      width: $px;
+      height: $px;
+      display: block;
+      @include avatarLookingStraight();
+    }
+
+    &.left::before {
+      @include avatarLookingLeft();
+    }
+
+    &.right::before {
+      @include avatarLookingRight();
+    }
+
+    &.up:not(.right, .left)::before {
+      @include avatarLookingUp();
+    }
+
+    &.down:not(.right, .left)::before {
+      @include avatarLookingDown();
+    }
+
+    &.up.right {
+      transform: rotate(-10deg);
+    }
+
+    &.up.left {
+      transform: rotate(10deg);
+    }
+
+    &.down.right {
+      transform: rotate(10deg);
+    }
+
+    &.down.left {
+      transform: rotate(-10deg);
+    }
+  }
 }

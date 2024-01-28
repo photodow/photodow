@@ -2,23 +2,18 @@
 
 import "./index.scss";
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, MouseEventHandler, MouseEvent } from 'react';
 import calcMidPoint from '../../utils/calcMidPoint';
 import miniUnits from '../../utils/miniUnits';
-// import { DefinitionTooltip, Tooltip } from '@carbon/react';
 import TooltipExt from "../Tooltip";
 
-// click for menu
-//  - automatic show
-//  - don't show if already shown
-//  - don't show if menu has been opened
-//  - localstorage, or not?
-
-export default function EightBitMe() {
+export default function EightBitMe({ onClick }: { onClick: MouseEventHandler<HTMLButtonElement> }) {
 
   const remDirection = useRef('left');
   const moveCount = useRef(0);
   const tooltipShown = useRef(false);
+  const tooltipTimeout = useRef<NodeJS.Timeout>();
+  const transition = useRef<string>();
   const avatar = useRef<HTMLDivElement>(null);
 
   const [showMe, setShowMe] = useState('');
@@ -28,9 +23,9 @@ export default function EightBitMe() {
   const [openTooltip, setOpenTooltip] = useState(false);
 
   useEffect(() => {
-    resizeAvatar();
     setShowMe('jd-eightbitme--active');
 
+    resizeAvatar();
     document.addEventListener('resize', resizeAvatar);
     document.addEventListener('scroll', resizeAvatar);
 
@@ -45,18 +40,32 @@ export default function EightBitMe() {
   }, []);
 
   return (
-    <div className={`jd-eightbitme ${showMe}`} style={containerStyles}>
-      <button className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu Navigation" onMouseOver={() => tooltipShown.current && setOpenTooltip(false)}>
-        <TooltipExt label="Open Menu" align={'left'} open={openTooltip} disable={!openTooltip} openOnHover={false}>
+    <div className={`jd-eightbitme ${showMe}`} style={{"transition": transition.current, ...containerStyles}}>
+      <button className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu Navigation" onMouseOver={_onMouseOver} onClick={_onClick}>
+        <TooltipExt label="Open Menu" align={'left'} open={openTooltip} disable={!openTooltip}>
           <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
             <div className="hair-wind"></div>
             <div className="eyes"></div>
           </div>
         </TooltipExt>
       </button>
-      <div className={`jd-eightbitme__bg`} style={bgStyles} />
+      <div className={`jd-eightbitme__bg`}  style={{"transition": transition.current, ...bgStyles}} />
     </div>
   );
+
+  function _onMouseOver () {
+    clearTimeout(tooltipTimeout.current);
+    tooltipShown.current = true;
+    setOpenTooltip(false);
+  }
+
+  function _onClick (e: MouseEvent<HTMLButtonElement>) {
+    transition.current = undefined;
+    clearTimeout(tooltipTimeout.current);
+    tooltipShown.current = true;
+    setOpenTooltip(false);
+    onClick(e);
+  }
 
   function resizeAvatar () {
     const padding = miniUnits(2);
@@ -68,20 +77,30 @@ export default function EightBitMe() {
       currentHeight = minHeight;
 
       if (!tooltipShown.current) {
-        setOpenTooltip(true);
-        tooltipShown.current = true;
+        const oneSecond = 1000;
+        const initialDelay = 2 * oneSecond;
+        const hideDelay = (10 * oneSecond) + initialDelay;
+
+        clearTimeout(tooltipTimeout.current);
+        tooltipTimeout.current = setTimeout(() => {
+          remDirection.current = 'left';
+          tooltipShown.current = true;
+          setOpenTooltip(true);
+        }, initialDelay);
 
         setTimeout(() => {
           setOpenTooltip(false);
-        }, 10000);
+        }, hideDelay);
       }
     } else if (currentHeight >= maxHeight) {
       currentHeight = maxHeight;
+      clearTimeout(tooltipTimeout.current);
       if (tooltipShown.current) {
         setOpenTooltip(false);
       }
     }
 
+    transition.current = 'none';
     const fontSize = { start: 16, end: 3 };
     const translateX = { start: 50, end: 0 };
     const top = { start: 0, end: padding };
@@ -100,7 +119,7 @@ export default function EightBitMe() {
       transform: `translate(${calcMidPoint(translateX, containerHeight)}%, 0)`,
       top: `${calcMidPoint(top, containerHeight)}px`,
       right: `calc(${calcMidPoint(rightPerc, containerHeight)}% + ${calcMidPoint(rightPx, containerHeight)}px)`,
-    })
+    });
 
     setBgStyles({
       transform: `scale(${calcMidPoint(bgScale, containerHeight)}) translate(-50%, -50%)`

@@ -1,25 +1,115 @@
-@use '@carbon/styles/scss/spacing';
-@use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/theme';
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
 
-.jd-nav {
-    display: none;
-    float: right;
+$base: "jd-nav";
 
-    &__items,
-    &__item {
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
+// - [] close button
+// - [] disable face on click?
+// - [] build in elements one at a time on open at least
+
+.#{$base} {
+  float: right;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+
+  &__inner {
+    opacity: 0;
+    $eightbitmeTop: spacing.$spacing-03;
+    $eightbitmeHeight: (spacing.$spacing-03 * 25);
+    z-index: 1;
+    position: relative;
+    padding-top: $eightbitmeTop + $eightbitmeHeight + (spacing.$spacing-03 * 2);
+    transition: opacity 0.25s ease-in-out; // out
+  }
+
+  &__bg {
+    z-index: 0;
+    background: theme.$layer-01;
+    height: 2px;
+    width: 0;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    transition: width 0.125s 0.375s ease-in-out, height 0.125s 0.25s ease-in-out; // out
+  }
+
+  &--open {
+    .#{$base} {
+      &__inner {
+        opacity: 1;
+        transition: opacity 0.5s 0.5s ease-in-out; // in
+      }
+
+      &__bg {
+        height: 100%;
+        width: 100%;
+        transition: width 0.125s ease-in-out, height 0.125s 0.125s ease-in-out; // in
+      }
     }
-    
-    &__item {
-        float: left;
-        margin-left: spacing.$spacing-05;
+  }
+
+  &__header {
+    margin-bottom: (spacing.$spacing-03 * 4);
+  }
+
+  &__name,
+  &__role {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__name {
+    @include type.type-style("heading-04");
+    font-weight: bold;
+  }
+
+  &__role {
+    @include type.type-style("heading-03");
+  }
+
+  &__items,
+  &__item {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+
+  &__link {
+    color: theme.$text-secondary;
+    text-decoration: none;
+    text-align: center;
+    border-radius: spacing.$spacing-03;
+    // font-weight: 500;
+    padding: (spacing.$spacing-03 * 2);
+    @include type.type-style("heading-04");
+    display: block;
+    outline: none;
+    box-shadow: inset 0 0 0 0 theme.$border-interactive;
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+
+    &:focus {
+      box-shadow: inset 0 0 0 2px theme.$border-interactive;
     }
-    
-    &__link {
-        color: theme.$text-primary;
-        @include type.type-style('body-compact-02');
+
+    &:hover {
+      color: theme.$text-primary;
+      background: linear-gradient(
+        to right,
+        transparent,
+        theme.$background-hover,
+        transparent
+      );
     }
+
+    &:active {
+      background: theme.$background-active;
+    }
+  }
 }
