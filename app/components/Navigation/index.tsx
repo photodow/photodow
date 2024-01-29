@@ -2,55 +2,61 @@
 
 import "./index.scss";
 import CloseIcon from "../CloseIcon";
-import { useRef, KeyboardEvent, FocusEvent, RefObject } from "react";
+import { useRef, KeyboardEvent, FocusEvent, RefObject, ReactElement } from "react";
+import LogoLinkedin from "@carbon/icons-react/lib/LogoLinkedin";
+import LogoGithub from "@carbon/icons-react/lib/LogoGithub";
+import LogoCodepen from "../LogoCodepen";
 
 type NavItem = {
   text: string,
   href: string,
   target?: string,
-  icon?: string
+  icon?: ReactElement
 }
+
+const links: NavItem[] = [
+  {
+    text: 'About',
+    href: '#about'
+  },
+  {
+    text: 'Resume',
+    href: '/james-dow-resume.pdf',
+    target: '_blank'
+  },
+  {
+    text: 'Portfolio',
+    href: 'https://github.com/photodow',
+    target: '_blank'
+  },
+  {
+    text: 'Contact',
+    href: '#contact'
+  }
+];
+
+const socialLinks: NavItem[] = [
+  {
+    text: 'LinkedIn',
+    href: 'https://linkedin.com/in/photodow',
+    icon: <LogoLinkedin size={32} />
+  },
+  {
+    text: 'Codepen',
+    href: 'https://codepen.io/photodow',
+    icon: <LogoCodepen />
+  },
+  {
+    text: 'GitHub',
+    href: 'https://github.com/photodow',
+    icon: <LogoGithub size={32} />
+  }
+];
 
 export default function Navigation({ open, toggleNav, firstFocusItem }: { open: boolean, toggleNav: Function, firstFocusItem: RefObject<HTMLButtonElement> }) {
 
   const tabState = useRef(false);
   const lastFocusItem = useRef<HTMLDivElement>(null);
-
-  const links: NavItem[] = [
-    {
-      text: 'About',
-      href: '#about'
-    },
-    {
-      text: 'Resume',
-      href: '/james-dow-resume.pdf',
-      target: '_blank'
-    },
-    {
-      text: 'Portfolio',
-      href: 'https://github.com/photodow',
-      target: '_blank'
-    },
-    {
-      text: 'Contact',
-      href: '#contact'
-    }
-  ];
-
-  const socialLinks: NavItem[] = [
-    {
-      text: 'LinkedIn',
-      href: 'https://linkedin.com/in/photodow'
-    },
-    {
-      text: 'Codepen',
-      href: 'https://codepen.io/photodow'
-    },
-    {
-      text: 'GitHub',
-      href: 'https://github.com/photodow'
-    }
-  ];
 
   return (
     <nav className={`jd-nav${open ? ' jd-nav--open' : ''}`} onKeyDown={handleKeyStateDown} onKeyUp={handleKeyStateUp}>
@@ -85,7 +91,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: { open: 
               {socialLinks.map(link => {
                 return (
                   <li className="jd-nav__social-item" key={link.text}>
-                    <a className="jd-nav__social-link" href={link.href} target={link.target} onClick={() => closeNav()}>{link.text}</a>
+                    <a className="jd-nav__social-link" href={link.href} target={link.target} onClick={() => closeNav()}>{link.icon}</a>
                   </li>
                 );
               })}

@@ -4,11 +4,8 @@
 
 $base: "jd-nav";
 
-// - [] close button
-// - [] disable face on click?
 // - [] build in elements one at a time on open at least
-// - [] capture focus
-// - [] change focus on open/close?
+// - [] scroll if screen is too small
 
 .#{$base} {
   visibility: hidden;
@@ -21,19 +18,33 @@ $base: "jd-nav";
   transition: visibility 0s 0.5s linear; // out
 
   .jd-close {
-    position: absolute;
+    position: fixed;
     right: 0;
     top: 0;
   }
 
   &__inner {
-    opacity: 0;
     $eightbitmeTop: spacing.$spacing-03;
     $eightbitmeHeight: (spacing.$spacing-03 * 25);
+
+    opacity: 0;
+    height: 100%;
+    overflow: auto;
     z-index: 1;
     position: relative;
     padding-top: $eightbitmeTop + $eightbitmeHeight + (spacing.$spacing-03 * 2);
+    padding-bottom: spacing.$spacing-03 * 8;
     transition: opacity 0.25s ease-in-out; // out
+
+    &::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: $eightbitmeTop + $eightbitmeHeight + (spacing.$spacing-03 * 2);
+      width: 100%;
+      background: linear-gradient(theme.$layer-01 90%, transparent 100%);
+    }
   }
 
   &__bg {
@@ -118,6 +129,49 @@ $base: "jd-nav";
         theme.$background-hover,
         transparent
       );
+      transform: scale(1.1);
+    }
+
+    &:active {
+      background: theme.$background-active;
+      transform: scale(1);
+    }
+  }
+
+  &__social-items,
+  &__social-item {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__social-items {
+    text-align: center;
+    margin-top: spacing.$spacing-03 * 4;
+  }
+
+  &__social-item {
+    display: inline-block;
+  }
+
+  &__social-link {
+    padding: spacing.$spacing-03;
+    color: theme.$text-secondary;
+    display: block;
+    border-radius: spacing.$spacing-03;
+    outline: none;
+
+    svg {
+      display: block;
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 3px theme.$border-interactive;
+    }
+
+    &:hover {
+      color: theme.$text-primary;
+      background: theme.$background-hover;
       transform: scale(1.1);
     }
 
