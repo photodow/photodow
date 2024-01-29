@@ -49,7 +49,7 @@ export default function EightBitMe({ onClick }: { onClick: MouseEventHandler<HTM
           </div>
         </TooltipExt>
       </button>
-      <div className={`jd-eightbitme__bg`}  style={{"transition": transition.current, ...bgStyles}} />
+      <div className={`jd-eightbitme__bg`}  style={bgStyles} />
     </div>
   );
 
@@ -122,7 +122,8 @@ export default function EightBitMe({ onClick }: { onClick: MouseEventHandler<HTM
     });
 
     setBgStyles({
-      transform: `scale(${calcMidPoint(bgScale, containerHeight)}) translate(-50%, -50%)`
+      // transform: `scale(${calcMidPoint(bgScale, containerHeight)}) translate(-50%, -50%)`
+      transform: `scale(${calcMidPoint(bgScale, containerHeight)})`
     });
   }
 
