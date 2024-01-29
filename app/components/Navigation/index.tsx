@@ -7,6 +7,8 @@ import LogoLinkedin from "@carbon/icons-react/lib/LogoLinkedin";
 import LogoGithub from "@carbon/icons-react/lib/LogoGithub";
 import LogoCodepen from "../LogoCodepen";
 
+// todo: add phone and email to nav
+
 type NavItem = {
   text: string,
   href: string,
@@ -96,6 +98,11 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: { open: 
                 );
               })}
             </ul>
+          </div>
+        </div>
+
+        <div className="cds--row">
+          <div className="cds--col-sm-4">
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Header from "./components/Header";
 import GridOverlay from "./components/GridOverlay";
+import "./utils/firebase";
 import "./globals.scss";
 
 export const metadata: Metadata = {

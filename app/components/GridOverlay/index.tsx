@@ -4,6 +4,19 @@ import { Grid, Column } from "@carbon/react";
 import "./index.scss";
 
 export default function GridOverlay() {
+    
+  return (
+    <div className="jd-gridoverlay">
+        <div className="jd-gridoverlay__mini-unit" />
+        <div className="jd-gridoverlay__2xgrid cds--grid">
+            <div className="jd-gridoverlay__2xrow cds--row">
+                <CreateColumns />
+            </div>
+        </div>
+    </div>
+  );
+
+  function CreateColumns () {
     const Cols = [];
 
     for (let i = 0; i < 16; i++) {
@@ -13,14 +26,7 @@ export default function GridOverlay() {
             </div>
         );
     }
-  return (
-    <div className="jd-gridoverlay">
-        <div className="jd-gridoverlay__mini-unit" />
-        <div className="jd-gridoverlay__2xgrid cds--grid">
-            <div className="jd-gridoverlay__2xrow cds--row">
-                {Cols}
-            </div>
-        </div>
-    </div>
-  );
+
+    return Cols;
+  }
 }
