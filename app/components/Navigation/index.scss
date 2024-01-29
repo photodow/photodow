@@ -7,14 +7,24 @@ $base: "jd-nav";
 // - [] close button
 // - [] disable face on click?
 // - [] build in elements one at a time on open at least
+// - [] capture focus
+// - [] change focus on open/close?
 
 .#{$base} {
+  visibility: hidden;
   float: right;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
   position: fixed;
+  transition: visibility 0s 0.5s linear; // out
+
+  .jd-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 
   &__inner {
     opacity: 0;
@@ -39,6 +49,9 @@ $base: "jd-nav";
   }
 
   &--open {
+    visibility: visible;
+    transition: visibility 0s 0s linear; // in
+
     .#{$base} {
       &__inner {
         opacity: 1;
@@ -85,14 +98,13 @@ $base: "jd-nav";
     text-decoration: none;
     text-align: center;
     border-radius: spacing.$spacing-03;
-    // font-weight: 500;
-    padding: (spacing.$spacing-03 * 2);
+    padding: spacing.$spacing-03;
     @include type.type-style("heading-04");
     display: block;
     outline: none;
     box-shadow: inset 0 0 0 0 theme.$border-interactive;
     transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
+      box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
     &:focus {
       box-shadow: inset 0 0 0 2px theme.$border-interactive;
@@ -106,10 +118,12 @@ $base: "jd-nav";
         theme.$background-hover,
         transparent
       );
+      transform: scale(1.1);
     }
 
     &:active {
       background: theme.$background-active;
+      transform: scale(1);
     }
   }
 }

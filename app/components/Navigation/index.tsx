@@ -1,9 +1,8 @@
 "use client";
 
-import { Link } from '@carbon/react';
 import "./index.scss";
-
-// todo: animate in
+import CloseIcon from "../CloseIcon";
+import { useRef, KeyboardEvent, FocusEvent, RefObject } from "react";
 
 type NavItem = {
   text: string,
@@ -12,7 +11,11 @@ type NavItem = {
   icon?: string
 }
 
-export default function Navigation({ open }: { open: boolean }) {
+export default function Navigation({ open, toggleNav, firstFocusItem }: { open: boolean, toggleNav: Function, firstFocusItem: RefObject<HTMLButtonElement> }) {
+
+  const tabState = useRef(false);
+  const lastFocusItem = useRef<HTMLDivElement>(null);
+
   const links: NavItem[] = [
     {
       text: 'About',
@@ -33,6 +36,7 @@ export default function Navigation({ open }: { open: boolean }) {
       href: '#contact'
     }
   ];
+
   const socialLinks: NavItem[] = [
     {
       text: 'LinkedIn',
@@ -49,8 +53,13 @@ export default function Navigation({ open }: { open: boolean }) {
   ];
 
   return (
-    <nav className={`jd-nav${open ? ' jd-nav--open' : ''}`}>
+    <nav className={`jd-nav${open ? ' jd-nav--open' : ''}`} onKeyDown={handleKeyStateDown} onKeyUp={handleKeyStateUp}>
       <div className="cds--grid jd-nav__inner">
+        <CloseIcon
+          active={open}
+          onClick={() => closeNav()}
+          refObj={firstFocusItem}
+        />
         <div className="cds--row">
           <div className="cds--col-sm-4 jd-nav__header">
             <p className="jd-nav__name">James Dow</p>
@@ -63,7 +72,7 @@ export default function Navigation({ open }: { open: boolean }) {
               {links.map(link => {
                 return (
                   <li className="jd-nav__item" key={link.text}>
-                    <a className="jd-nav__link" href={link.href} target={link.target}>{link.text}</a>
+                    <a className="jd-nav__link" href={link.href} target={link.target} onClick={() => closeNav()}>{link.text}</a>
                   </li>
                 );
               })}
@@ -76,7 +85,7 @@ export default function Navigation({ open }: { open: boolean }) {
               {socialLinks.map(link => {
                 return (
                   <li className="jd-nav__social-item" key={link.text}>
-                    <a className="jd-nav__social-link" href={link.href} target={link.target}>{link.text}</a>
+                    <a className="jd-nav__social-link" href={link.href} target={link.target} onClick={() => closeNav()}>{link.text}</a>
                   </li>
                 );
               })}
@@ -84,7 +93,32 @@ export default function Navigation({ open }: { open: boolean }) {
           </div>
         </div>
       </div>
-      <div className="jd-nav__bg" />
+      <div className="jd-nav__bg" tabIndex={0} ref={lastFocusItem} onFocus={_handleLastTab} />
     </nav>
   );
+
+  function closeNav () {
+    // focus on eightBitMe
+    toggleNav();
+  }
+
+  function _handleLastTab (e: FocusEvent) {
+    if (tabState.current) {
+      firstFocusItem?.current?.focus();
+    }
+  }
+
+  function handleKeyStateDown (e: KeyboardEvent) {
+    if (e.key === 'Tab') {
+      tabState.current = true;
+    } else if (e.key === 'Escape') {
+      closeNav();
+    }
+  }
+
+  function handleKeyStateUp (e: KeyboardEvent) {
+    if (e.key === 'Tab') {
+      tabState.current = false;
+    }
+  }
 }

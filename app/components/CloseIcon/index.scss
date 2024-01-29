@@ -1,0 +1,71 @@
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/spacing";
+
+// pull out and shares button icon interactions
+
+.jd-close {
+  $thick: 3px;
+  $size: spacing.$spacing-03 * 4;
+
+  width: $size;
+  height: $size;
+  margin: spacing.$spacing-03;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: spacing.$spacing-03;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out,
+    background 0.2s ease-in-out;
+
+  cursor: pointer;
+
+  &:focus {
+    box-shadow: 0 0 0 2px theme.$border-interactive;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: theme.$background-hover;
+  }
+
+  &:active {
+    transform: scale(1);
+    background-color: theme.$background-active;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+
+    display: block;
+    height: $thick;
+    width: 0;
+    border-radius: $thick;
+    background: theme.$text-secondary;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: rotate(0deg) translate(-50%, -50%);
+    transform-origin: 0 0;
+
+    transition: width 0.25s 0.25s ease-in-out, transform 0.25s 0s ease-in-out; // out
+  }
+
+  &--active {
+    &::after,
+    &::before {
+      background: theme.$text-secondary;
+      width: calc(100% - $thick * 2);
+
+      transition: width 0.25s 0s ease-in-out, transform 0.25s 0.75s ease-in-out; // in
+    }
+
+    &::after {
+      transform: rotate(-45deg) translate(-50%, -50%);
+    }
+
+    &::before {
+      transform: rotate(45deg) translate(-50%, -50%);
+    }
+  }
+}

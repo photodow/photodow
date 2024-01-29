@@ -2,12 +2,12 @@
 
 import "./index.scss";
 
-import { useEffect, useState, useRef, MouseEventHandler, MouseEvent } from 'react';
+import { useEffect, useState, useRef, MouseEventHandler, MouseEvent, RefObject } from 'react';
 import calcMidPoint from '../../utils/calcMidPoint';
 import miniUnits from '../../utils/miniUnits';
 import TooltipExt from "../Tooltip";
 
-export default function EightBitMe({ onClick }: { onClick: MouseEventHandler<HTMLButtonElement> }) {
+export default function EightBitMe({ onClick, refObj }: { onClick: MouseEventHandler<HTMLButtonElement>, refObj: RefObject<HTMLButtonElement> }) {
 
   const remDirection = useRef('left');
   const moveCount = useRef(0);
@@ -41,7 +41,7 @@ export default function EightBitMe({ onClick }: { onClick: MouseEventHandler<HTM
 
   return (
     <div className={`jd-eightbitme ${showMe}`} style={{"transition": transition.current, ...containerStyles}}>
-      <button className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu Navigation" onMouseOver={_onMouseOver} onClick={_onClick}>
+      <button ref={refObj} title="Open Menu" className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu" onMouseOver={_onMouseOver} onClick={_onClick}>
         <TooltipExt label="Open Menu" align={'left'} open={openTooltip} disable={!openTooltip}>
           <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
             <div className="hair-wind"></div>
