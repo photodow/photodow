@@ -7,7 +7,13 @@ import calcMidPoint from '../../utils/calcMidPoint';
 import miniUnits from '../../utils/miniUnits';
 import TooltipExt from "../Tooltip";
 
-export default function EightBitMe({ onClick, refObj }: { onClick: MouseEventHandler<HTMLButtonElement>, refObj: RefObject<HTMLButtonElement> }) {
+type Comp = {
+  onClick: MouseEventHandler<HTMLButtonElement>,
+  refObj: RefObject<HTMLButtonElement>
+  miniMe?: boolean
+}
+
+export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
 
   const remDirection = useRef('left');
   const moveCount = useRef(0);
@@ -23,7 +29,10 @@ export default function EightBitMe({ onClick, refObj }: { onClick: MouseEventHan
   const [openTooltip, setOpenTooltip] = useState(false);
 
   useEffect(() => {
-    setShowMe('jd-eightbitme--active');
+
+    setTimeout(() => {
+      setShowMe('jd-eightbitme--active');
+    }, 0);
 
     resizeAvatar();
     document.addEventListener('resize', resizeAvatar);
@@ -40,7 +49,7 @@ export default function EightBitMe({ onClick, refObj }: { onClick: MouseEventHan
   }, []);
 
   return (
-    <div className={`jd-eightbitme ${showMe}`} style={{"transition": transition.current, ...containerStyles}}>
+    <div className={`jd-eightbitme ${showMe}${miniMe ? ' jd-eightbitme--mini-me' : ''}`} style={{"transition": transition.current, ...containerStyles}}>
       <button ref={refObj} title="Open Menu" className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu" onMouseOver={_onMouseOver} onClick={_onClick}>
         <TooltipExt label="Open Menu" align={'left'} open={openTooltip} disable={!openTooltip}>
           <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
@@ -68,6 +77,10 @@ export default function EightBitMe({ onClick, refObj }: { onClick: MouseEventHan
   }
 
   function resizeAvatar () {
+    if (miniMe) {
+      return;
+    }
+
     const padding = miniUnits(2);
     const maxHeight = window.innerHeight - padding * 2;
     const minHeight = miniUnits(8);

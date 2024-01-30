@@ -1,12 +1,19 @@
 "use client";
 
 import "./index.scss";
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import Navigation from '../Navigation';
 import EightBitMe from '../EightBitMe';
+import { SiteDataContext } from "../../utils/contexts";
 
-export default function Header() {
+type Comp = {
+  mini?: boolean
+}
+
+export default function Header({ mini = false }: Comp) {
+
+  const siteData = useContext(SiteDataContext);
 
   const eightBitMe = useRef<HTMLButtonElement>(null);
   const navOpenFocusRef = useRef<HTMLButtonElement>(null);
@@ -26,20 +33,20 @@ export default function Header() {
     }
   }, [navOpen]);
 
-  return (
-    <header className="jd-header" data-carbon-theme="g10">
-      <div className="jd-header__inner cds--grid">
+  return siteData && (
+    <header className={`jd-header${mini ? ' jd-header--mini' : ''}`} data-carbon-theme="g10">
+      {!mini && (<div className="jd-header__inner cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-4">
             <h1 className="jd-header__title">
-              <span className="jd-header__name">James Dow</span>
-              <span className="jd-header__role">Web Designer & Developer</span>
+              <span className="jd-header__name">{siteData.name}</span>
+              <span className="jd-header__role">{siteData.role}</span>
             </h1>
           </div>
         </div>
-      </div>
+      </div>)}
       <Navigation open={navOpen} toggleNav={() => setNavOpen(!navOpen)} firstFocusItem={navOpenFocusRef} />
-      <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} />
+      <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={mini} />
     </header>
   );
 }

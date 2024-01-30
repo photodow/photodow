@@ -18,9 +18,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-type FetchedSiteData = Partial<SiteData> | null;
+async function getDefaultData (): Promise<SiteData | null> {
+    return getUnmergedSiteData('default') as Promise<SiteData | null>;
+}
 
-async function getUnmergedSiteData (id: string): Promise<FetchedSiteData> {
+async function getUnmergedSiteData (id: string): Promise<Partial<SiteData> | null> {
     const starCountRef = ref(db, id);
 
     return new Promise((resolve) => {
@@ -36,13 +38,13 @@ async function getUnmergedSiteData (id: string): Promise<FetchedSiteData> {
     });
 }
 
-export async function getSiteData (override?: string): Promise<Partial<SiteData>> {
-    const siteData: FetchedSiteData = await getUnmergedSiteData('default') || {};
-    let overrideData: FetchedSiteData = {};
+export async function getSiteData (override?: string | null): Promise<SiteData> {
+    const siteData: SiteData | null = await getDefaultData();
+    let overrideData: Partial<SiteData> | null = {};
 
     if (override) {
         overrideData = await getUnmergedSiteData(override);
     }
 
-    return Object.assign(siteData, overrideData);
+    return Object.assign(siteData || {}, overrideData) as Promise<SiteData>;
 }

@@ -2,10 +2,11 @@
 
 import "./index.scss";
 import CloseIcon from "../CloseIcon";
-import { useRef, KeyboardEvent, FocusEvent, RefObject, ReactElement } from "react";
+import { useRef, KeyboardEvent, FocusEvent, RefObject, ReactElement, useContext } from "react";
 import LogoLinkedin from "@carbon/icons-react/lib/LogoLinkedin";
 import LogoGithub from "@carbon/icons-react/lib/LogoGithub";
 import LogoCodepen from "../LogoCodepen";
+import { SiteDataContext } from "../../utils/contexts";
 
 // todo: add phone and email to nav
 
@@ -55,12 +56,20 @@ const socialLinks: NavItem[] = [
   }
 ];
 
-export default function Navigation({ open, toggleNav, firstFocusItem }: { open: boolean, toggleNav: Function, firstFocusItem: RefObject<HTMLButtonElement> }) {
+type Comp = {
+  open: boolean,
+  toggleNav: Function,
+  firstFocusItem: RefObject<HTMLButtonElement>
+}
+
+export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
+
+  const siteData = useContext(SiteDataContext);
 
   const tabState = useRef(false);
   const lastFocusItem = useRef<HTMLDivElement>(null);
 
-  return (
+  return siteData && (
     <nav className={`jd-nav${open ? ' jd-nav--open' : ''}`} onKeyDown={handleKeyStateDown} onKeyUp={handleKeyStateUp}>
       <div className="cds--grid jd-nav__inner">
         <CloseIcon
@@ -70,8 +79,8 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: { open: 
         />
         <div className="cds--row">
           <div className="cds--col-sm-4 jd-nav__header">
-            <p className="jd-nav__name">James Dow</p>
-            <p className="jd-nav__role">Design Technologist</p>
+            <p className="jd-nav__name">{siteData.name}</p>
+            <p className="jd-nav__role">{siteData.role}</p>
           </div>
         </div>
         <div className="cds--row">

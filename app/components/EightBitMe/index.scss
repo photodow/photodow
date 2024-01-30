@@ -125,6 +125,21 @@ $base: "jd-eightbitme";
     }
   }
 
+  &--mini-me {
+    top: spacing.$spacing-03 * 2;
+    right: calc(0% + 16px);
+    font-size: 3px;
+    transform: translate(0%, 0%);
+    height: spacing.$spacing-03 * 8;
+
+    // transition: none 0s ease 0s;
+    // height: 64px;
+    // font-size: 3px;
+    // transform: translate(0%, 0px);
+    // top: 16px;
+    // right: calc(0% + 16px);
+  }
+
   &__inner {
     display: grid;
     opacity: 0;

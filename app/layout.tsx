@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-import { GoogleAnalytics } from '@next/third-parties/google';
-import Header from "./components/Header";
-import GridOverlay from "./components/GridOverlay";
-import "./utils/firebase";
 import "./globals.scss";
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+import GridOverlay from "./components/GridOverlay";
+import type { Metadata } from 'next'
+ 
 export const metadata: Metadata = {
-  title: "James Dow",
-  description: "I'm James Dow, a passionate Web Designer & Developer. I thrive at the intersection of these two dynamic disciplines, witnessing the evolution of an idea from conception to its vibrant existence. My journey involves bringing concepts to life and ensuring they resonate seamlessly in the digital realm. Let's embark on a creative journey together!",
-};
+  title: 'James Dow',
+  description: 'blah blah blah blah blah',
+}
 
 export default function RootLayout({
   children,
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
         {children}
         <GridOverlay />
       </body>
