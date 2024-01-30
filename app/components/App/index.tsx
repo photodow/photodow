@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import { getSiteData } from "../../utils/firebase";
 import { SiteDataContext } from "../../utils/contexts";
-import { SiteData } from "../../types/siteData";
+import { SiteData } from "../../types/SiteData";
 import getDataId from "../../utils/getDataId";
 import resetDataId from "../../utils/resetDataId";
 

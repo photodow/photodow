@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { SiteData } from "../types/siteData";
+import { SiteData } from "../types/SiteData";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

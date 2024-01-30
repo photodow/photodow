@@ -160,6 +160,8 @@ $base: "jd-nav";
     display: block;
     border-radius: spacing.$spacing-03;
     outline: none;
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
     svg {
       display: block;
