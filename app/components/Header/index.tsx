@@ -33,14 +33,14 @@ export default function Header({ mini = false }: Comp) {
     }
   }, [navOpen]);
 
-  return siteData && (
+  return (
     <header className={`jd-header${mini ? ' jd-header--mini' : ''}`} data-carbon-theme="g10">
       {!mini && (<div className="jd-header__inner cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-4">
             <h1 className="jd-header__title">
-              <span className="jd-header__name">{siteData.name}</span>
-              <span className="jd-header__role">{siteData.role}</span>
+              <span className="jd-header__name">{siteData?.main?.name}</span>
+              <span className="jd-header__role">{siteData?.main?.role}</span>
             </h1>
           </div>
         </div>

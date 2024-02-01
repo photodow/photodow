@@ -11,7 +11,7 @@ export default function About() {
     <div className="cds--grid">
       <div className="cds--row">
         <div className="cds--col" style={{height: '1000px'}}>
-          <p>Hi there, my name is {siteData.name}, and I am a {siteData.role} 👋</p>
+          <p>Hi there, my name is {siteData?.main?.name}, and I am a {siteData?.main?.role} 👋</p>
         </div>
       </div>
     </div>

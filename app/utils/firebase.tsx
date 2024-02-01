@@ -2,6 +2,15 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { SiteData } from "../types/SiteData";
+import { Experience } from "../types/Experience";
+import { Image } from "../types/Image";
+import { Link } from "../types/Link";
+import { Organization } from "../types/Organization";
+import { Person } from "../types/Person";
+import { PortfolioItem } from "../types/Portfolio";
+import { Testimonial } from "../types/Testimonial";
+import getDataId from "./getDataId";
+import resetData from "./resetData";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,13 +26,51 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const data: Promise<SiteData> = init();
 
-async function getDefaultData (): Promise<SiteData | null> {
-    return getUnmergedSiteData('default') as Promise<SiteData | null>;
+async function init (): Promise<SiteData> {
+    resetData();
+
+    const id = getDataId();
+    let buildingData: SiteData | null = JSON.parse(localStorage.getItem('siteData') as string);
+
+    if (buildingData) {
+        const weekAgo = new Date(new Date().valueOf() - (7 * 24 * 60 * 60 * 1000));
+        const storedLastUpdate = buildingData.main.lastUpdate;
+        const dataLastUpdate = await getData(`main/${id}/lastUpdate`); // check for last update
+
+        if (
+            dataLastUpdate
+         && storedLastUpdate
+         && new Date(dataLastUpdate) <= new Date(storedLastUpdate)
+         && new Date(dataLastUpdate) > weekAgo
+        ) {
+            // return stored data if it hasn't been updated since storing
+            return buildingData;
+        }
+    }
+
+    // refresh data
+    buildingData = {
+        experiences: await getData(`experiences`) as Experience[],
+        images: await getData(`images`) as Image[],
+        links: await getData(`links`) as Link[],
+        organizations: await getData(`organizations`) as Organization[],
+        people: await getData(`people`) as Person[],
+        portfolio: await getData(`portfolio`) as PortfolioItem[],
+        testimonials: await getData(`testimonials`) as Testimonial[],
+        main: Object.assign(
+            await getData(`main/_default`),
+            await getData(`main/${getDataId()}`)
+        )
+    };
+
+
+    return buildingData;
 }
 
-async function getUnmergedSiteData (id: string): Promise<Partial<SiteData> | null> {
-    const starCountRef = ref(db, id);
+async function getData (key: string): Promise<any> {
+    const starCountRef = ref(db, key);
 
     return new Promise((resolve) => {
         onValue(starCountRef, (snapshot) => {
@@ -38,13 +85,6 @@ async function getUnmergedSiteData (id: string): Promise<Partial<SiteData> | nul
     });
 }
 
-export async function getSiteData (override?: string | null): Promise<SiteData> {
-    const siteData: SiteData | null = await getDefaultData();
-    let overrideData: Partial<SiteData> | null = {};
-
-    if (override) {
-        overrideData = await getUnmergedSiteData(override);
-    }
-
-    return Object.assign(siteData || {}, overrideData) as Promise<SiteData>;
+export async function getSiteData(): Promise<SiteData> {
+    return data;
 }

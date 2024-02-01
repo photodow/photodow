@@ -1,22 +1,28 @@
 
+import { IconKeys } from "../components/Icon";
+
+export type LinkKey = 'string';
+
 export const enum LinkType {
-    Contact = "Contact",
-    Social = "Social",
-    Website = "Website"
+    Contact = "contact",
+    Social = "social",
+    Website = "website",
+    Navigation = "navigation",
 }
 
 export const enum Protocol {
     Phone = "tel:",
     Email = "mailto:",
-    Web = "https://"
+    Web = "https://",
+    Hash = "#",
 }
 
 export type Link = {
-    id: string,
+    _key: string,
     type: LinkType,
     text: string,
     protocol: Protocol,
     value: string,
-    order: number,
-    active: boolean,
+    target?: string,
+    icon?: IconKeys // react element, or maybe a key of icons?
 }

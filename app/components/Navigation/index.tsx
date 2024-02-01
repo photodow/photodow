@@ -1,60 +1,11 @@
 "use client";
 
 import "./index.scss";
+
 import CloseIcon from "../CloseIcon";
-import { useRef, KeyboardEvent, FocusEvent, RefObject, ReactElement, useContext } from "react";
-import LogoLinkedin from "@carbon/icons-react/lib/LogoLinkedin";
-import LogoGithub from "@carbon/icons-react/lib/LogoGithub";
-import LogoCodepen from "../LogoCodepen";
+import { useRef, KeyboardEvent, FocusEvent, RefObject, useContext } from "react";
 import { SiteDataContext } from "../../utils/contexts";
-
-// todo: add phone and email to nav
-
-type NavItem = {
-  text: string,
-  href: string,
-  target?: string,
-  icon?: ReactElement
-}
-
-const links: NavItem[] = [
-  {
-    text: 'About',
-    href: '#about'
-  },
-  {
-    text: 'Resume',
-    href: '/james-dow-resume.pdf',
-    target: '_blank'
-  },
-  {
-    text: 'Portfolio',
-    href: 'https://github.com/photodow',
-    target: '_blank'
-  },
-  {
-    text: 'Contact',
-    href: '#contact'
-  }
-];
-
-const socialLinks: NavItem[] = [
-  {
-    text: 'LinkedIn',
-    href: 'https://linkedin.com/in/photodow',
-    icon: <LogoLinkedin size={32} />
-  },
-  {
-    text: 'Codepen',
-    href: 'https://codepen.io/photodow',
-    icon: <LogoCodepen />
-  },
-  {
-    text: 'GitHub',
-    href: 'https://github.com/photodow',
-    icon: <LogoGithub size={32} />
-  }
-];
+import Links from "../Links";
 
 type Comp = {
   open: boolean,
@@ -69,7 +20,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
   const tabState = useRef(false);
   const lastFocusItem = useRef<HTMLDivElement>(null);
 
-  return siteData && (
+  return !siteData ? null : (
     <nav className={`jd-nav${open ? ' jd-nav--open' : ''}`} onKeyDown={handleKeyStateDown} onKeyUp={handleKeyStateUp}>
       <div className="cds--grid jd-nav__inner">
         <CloseIcon
@@ -79,39 +30,36 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         />
         <div className="cds--row">
           <div className="cds--col-sm-4 jd-nav__header">
-            <p className="jd-nav__name">{siteData.name}</p>
-            <p className="jd-nav__role">{siteData.role}</p>
-          </div>
-        </div>
-        <div className="cds--row">
-          <div className="cds--col-sm-4">
-            <ul className="jd-nav__items">
-              {links.map(link => {
-                return (
-                  <li className="jd-nav__item" key={link.text}>
-                    <a className="jd-nav__link" href={link.href} target={link.target} onClick={() => closeNav()}>{link.text}</a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-        <div className="cds--row">
-          <div className="cds--col-sm-4">
-            <ul className="jd-nav__social-items">
-              {socialLinks.map(link => {
-                return (
-                  <li className="jd-nav__social-item" key={link.text}>
-                    <a className="jd-nav__social-link" href={link.href} target={link.target} onClick={() => closeNav()}>{link.icon}</a>
-                  </li>
-                );
-              })}
-            </ul>
+            <p className="jd-nav__name">{siteData?.main?.name}</p>
+            <p className="jd-nav__role">{siteData?.main?.role}</p>
           </div>
         </div>
 
         <div className="cds--row">
           <div className="cds--col-sm-4">
+            <Links
+              context="navigation"
+              className="jd-nav__items"
+              text={true}
+            />
+          </div>
+        </div>
+        <div className="cds--row">
+          <div className="cds--col-sm-4">
+            <Links
+              context="social"
+              className="jd-nav__social"
+              icon={true}
+            />
+          </div>
+        </div>
+        <div className="cds--row">
+          <div className="cds--col-sm-4">
+            <Links
+              context="contact"
+              className="jd-nav__contact"
+              value={true}
+            />
           </div>
         </div>
       </div>

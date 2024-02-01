@@ -1,24 +1,20 @@
+import { PortfolioItem } from "./Portfolio";
+import { Organization } from "./Organization";
 import { Experience } from "./Experience";
+import { Person } from "./Person";
+import { Image } from "./Image";
 import { Link } from "./Link";
-import { Markdown } from "./Markdown";
-import { PortfolioItem, PortfolioLayouts } from "./Portfolio";
-import { TestimonialKey } from "./Testimonial";
-import { OrgKey } from "./organization";
+import { Testimonial } from "./Testimonial";
+import { MainItem } from "./main";
 
-export interface SiteData {
-    name: string,
-    role: string,
-    description: Markdown,
-    _override: {
-        orgKey: OrgKey,
-        msg: Markdown, // template
-    },
+export type SiteData = {
+    experiences: Experience[],
+    // educations: Experience[],
+    images: Image[],
     links: Link[],
-    experience: Experience[],
-    education: Experience[],
-    portfolio: {
-        type: PortfolioLayouts,
-        items: PortfolioItem[],
-    },
-    testimonials: TestimonialKey[];
+    organizations: Organization[],
+    people: Person[],
+    portfolio: PortfolioItem[],
+    testimonials: Testimonial[],
+    main: MainItem
 }

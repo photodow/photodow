@@ -1,6 +1,8 @@
 import { Markdown } from "./Markdown";
-import { PortfolioRef } from "./Portfolio";
-import { OrgKey } from "./organization";
+import { OrgKey } from "./Organization";
+import { Ref } from "./Ref";
+
+export type ExpKey = string;
 
 export const enum experienceType {
     Remote = "Remote",
@@ -9,14 +11,15 @@ export const enum experienceType {
 }
 
 export type Experience = {
+    _key: ExpKey,
     orgKey: OrgKey,
-    location: string,
     role: string,
-    type: experienceType,
     start: number,
     end: number | 'Present',
-    description: Markdown,
-    details: Markdown[],
-    skills: string[],
-    portfolio: PortfolioRef[],
+    location?: string,
+    type?: experienceType,
+    description?: Markdown,
+    details?: Markdown[],
+    skills?: string[],
+    portfolio?: Ref[],
 }

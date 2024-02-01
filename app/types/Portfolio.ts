@@ -1,7 +1,7 @@
 import { Image } from "./Image";
-import { Link } from "./Link";
 import { Markdown } from "./Markdown";
-import { OrgKey } from "./organization";
+import { OrgKey } from "./Organization";
+import { Ref } from "./Ref";
 
 export type PortfolioKey = string;
 
@@ -15,29 +15,22 @@ export const enum PortfolioSize {
     Large = "Large"
 }
 
-export type PortfolioRef = {
-    key: PortfolioKey,
-    order: number,
-    active: boolean,
-    size: PortfolioSize,
-    _override: Partial<PortfolioItem>
-}
-
 export type PortfolioItem = {
-    key: PortfolioKey,
-    title: string,
-    description: Markdown,
+    _key: PortfolioKey,
     orgKey: OrgKey,
-    details: Markdown[],
-    cover: Image,
-    sections: PortfolioSection[],
-    actions: Link[],
+    title: string,
+    cover?: Image,
+    description?: Markdown,
+    details?: Markdown[],
+    sections?: PortfolioSection[],
+    actions?: Ref[],
 }
 
 export type PortfolioSection = {
-    title: string,
-    description: string,
-    cover: Image,
-    images: Image[],
-    actions: Link[],
+    // add a key reference?
+    title?: string,
+    description?: string,
+    cover?: Image,
+    images?: Ref[],
+    actions?: Ref[],
 }

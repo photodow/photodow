@@ -3,9 +3,9 @@
 @use "@carbon/styles/scss/theme";
 
 $base: "jd-nav";
+$linkListBase: "jd-linklist";
 
 // - [] build in elements one at a time on open at least
-// - [] scroll if screen is too small
 
 .#{$base} {
   visibility: hidden;
@@ -97,89 +97,70 @@ $base: "jd-nav";
     @include type.type-style("heading-03");
   }
 
-  &__items,
-  &__item {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-  }
-
-  &__link {
-    color: theme.$text-secondary;
-    text-decoration: none;
+  .#{$linkListBase} {
     text-align: center;
-    border-radius: spacing.$spacing-03;
-    padding: spacing.$spacing-03;
-    @include type.type-style("heading-04");
-    display: block;
-    outline: none;
-    box-shadow: inset 0 0 0 0 theme.$border-interactive;
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
 
-    &:focus {
-      box-shadow: inset 0 0 0 2px theme.$border-interactive;
-    }
-
-    &:hover {
-      color: theme.$text-primary;
-      background: linear-gradient(
-        to right,
-        transparent,
-        theme.$background-hover,
-        transparent
-      );
-      transform: scale(1.1);
-    }
-
-    &:active {
-      background: theme.$background-active;
-      transform: scale(1);
-    }
-  }
-
-  &__social-items,
-  &__social-item {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-
-  &__social-items {
-    text-align: center;
-    margin-top: spacing.$spacing-03 * 4;
-  }
-
-  &__social-item {
-    display: inline-block;
-  }
-
-  &__social-link {
-    padding: spacing.$spacing-03;
-    color: theme.$text-secondary;
-    display: block;
-    border-radius: spacing.$spacing-03;
-    outline: none;
-    transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-
-    svg {
+    &__link {
+      padding: spacing.$spacing-03;
+      color: theme.$text-secondary;
       display: block;
-    }
+      border-radius: spacing.$spacing-03;
+      outline: none;
+      box-shadow: inset 0 0 0 0 theme.$border-interactive;
+      transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-    &:focus {
-      box-shadow: inset 0 0 0 3px theme.$border-interactive;
-    }
+      svg {
+        display: block;
+      }
 
-    &:hover {
-      color: theme.$text-primary;
-      background: theme.$background-hover;
-      transform: scale(1.1);
-    }
+      &:visited {
+        color: theme.$text-secondary;
+      }
 
-    &:active {
-      background: theme.$background-active;
-      transform: scale(1);
+      &:focus {
+        box-shadow: inset 0 0 0 2px theme.$border-interactive;
+      }
+
+      &:hover {
+        text-decoration: none;
+        color: theme.$text-primary;
+        background: theme.$background-hover;
+        transform: scale(1.05);
+      }
+
+      &:active {
+        background: theme.$background-active;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &__items .#{$linkListBase}__link {
+    @include type.type-style("heading-04");
+  }
+
+  &__social.#{$linkListBase} {
+    margin-top: spacing.$spacing-03 * 4;
+
+    .#{$linkListBase}__item {
+      display: inline-block;
+    }
+  }
+
+  &__contact.#{$linkListBase} {
+    .#{$linkListBase} {
+      &__item {
+        display: inline-block;
+      }
+
+      &__link:hover {
+        text-decoration: underline;
+        background: transparent;
+      }
     }
   }
 }
