@@ -5,7 +5,7 @@ import { Person } from "./Person";
 import { Image } from "./Image";
 import { Link } from "./Link";
 import { Testimonial } from "./Testimonial";
-import { MainItem } from "./main";
+import { MainItem } from "./Main";
 
 export type SiteData = {
     experiences: Experience[],

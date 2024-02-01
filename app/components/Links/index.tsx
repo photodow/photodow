@@ -7,7 +7,7 @@ import { SiteDataContext } from "../../utils/contexts";
 import GetRefs from "../../utils/getRefs";
 import { Ref, RefList } from "../../types/Ref";
 import { Link as LinkData } from "../../types/Link";
-import { MainItem } from "../../types/main";
+import { MainItem } from "../../types/Main";
 import { Link } from "@carbon/react";
 import { Icon } from "../Icon";
 
