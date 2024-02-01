@@ -20,7 +20,6 @@ export default function App({ id, children, miniHeader }: Comp) {
   const [siteData, setSiteData] = useState<SiteData | null>(null);
 
   useEffect(() => {
-    resetData();
     getSiteData().then(d => setSiteData(d));
     // todo: handle a 404 scenario incase data doesn't load?
   }, [id]);
