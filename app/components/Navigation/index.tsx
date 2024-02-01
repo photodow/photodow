@@ -4,7 +4,7 @@ import "./index.scss";
 
 import CloseIcon from "../CloseIcon";
 import { useRef, KeyboardEvent, FocusEvent, RefObject, useContext } from "react";
-import { SiteDataContext } from "../../utils/contexts";
+import { SiteDataContext } from "../../_utils/contexts";
 import Links from "../Links";
 
 type Comp = {
