@@ -10,8 +10,8 @@ export default function About() {
   return siteData && (
     <div className="cds--grid">
       <div className="cds--row">
-        <div className="cds--col" style={{height: '1000px'}}>
-          <p>Hi there, my name is {siteData?.main?.name}, and I am a {siteData?.main?.role} 👋</p>
+        <div className="cds--col">
+          <p>Hi there, my name is {siteData?.main?.name}! 👋</p>
         </div>
       </div>
     </div>
