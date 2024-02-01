@@ -14,8 +14,6 @@ type Comp = {
 }
 
 export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
-
-  const firstRender = useRef(false);
   const remDirection = useRef('left');
   const moveCount = useRef(0);
   const tooltipShown = useRef(false);
@@ -94,11 +92,6 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
   }, [miniMe]);
 
   const handleFirstRender = useCallback(() => {
-    if (!firstRender.current) {
-      firstRender.current = true;
-      return;
-    }
-    
     resizeAvatar();
     setShowMe('jd-eightbitme--active');
     
