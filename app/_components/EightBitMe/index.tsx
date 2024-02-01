@@ -15,6 +15,7 @@ type Comp = {
 
 export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
 
+  const firstRender = useRef(false);
   const remDirection = useRef('left');
   const moveCount = useRef(0);
   const tooltipShown = useRef(false);
@@ -92,25 +93,29 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
     });
   }, [miniMe]);
 
-  useEffect(() => {
-
-    setTimeout(() => {
-      setShowMe('jd-eightbitme--active');
-    }, 0);
-
+  const handleFirstRender = useCallback(() => {
+    if (!firstRender.current) {
+      firstRender.current = true;
+      return;
+    }
+    
     resizeAvatar();
-    document.addEventListener('resize', resizeAvatar);
-    document.addEventListener('scroll', resizeAvatar);
+    setShowMe('jd-eightbitme--active');
+    
+    window.addEventListener('resize', resizeAvatar);
+    window.addEventListener('scroll', resizeAvatar);
 
-    document.addEventListener('mousemove', e => {
+    window.addEventListener('mousemove', e => {
       setMousePosition({ x: e.x, y: e.y});
     });
 
-    document.addEventListener("touchmove", e => {
+    window.addEventListener("touchmove", e => {
       const changedTouches = e.changedTouches[0];
       setMousePosition({ x: changedTouches.clientX, y: changedTouches.clientY});
     });
   }, [resizeAvatar]);
+
+  useEffect(handleFirstRender, [handleFirstRender]);
 
   return (
     <div

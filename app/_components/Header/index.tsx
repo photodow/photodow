@@ -15,19 +15,25 @@ export default function Header({ mini = false }: Comp) {
 
   const siteData = useContext(SiteDataContext);
 
+  const firstRender = useRef(false);
   const eightBitMe = useRef<HTMLButtonElement>(null);
   const navOpenFocusRef = useRef<HTMLButtonElement>(null);
 
   const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
+    if (!firstRender.current) {
+      firstRender.current = true;
+      return;
+    }
+
     const noScrollClass = 'jd-body--noscroll';
     const body = document.body.classList;
 
-    if (navOpen) {
+    if (navOpen && !body.contains(noScrollClass)) {
       body.add(noScrollClass);
       navOpenFocusRef.current?.focus();
-    } else {
+    } else if (!navOpen && body.contains(noScrollClass)) {
       body.remove(noScrollClass);
       eightBitMe.current?.focus();
     }
