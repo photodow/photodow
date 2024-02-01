@@ -32,7 +32,12 @@ async function init (): Promise<SiteData> {
     resetData();
 
     const id = getDataId();
-    let buildingData: SiteData | null = JSON.parse(localStorage.getItem('siteData') as string);
+    let buildingData: SiteData | null = null;
+    
+    if (typeof localStorage !== 
+    "undefined") {
+        buildingData = JSON.parse(localStorage.getItem('siteData') as string);
+    }
 
     if (buildingData) {
         const weekAgo = new Date(new Date().valueOf() - (7 * 24 * 60 * 60 * 1000));

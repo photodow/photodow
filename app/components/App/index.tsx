@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { getSiteData } from "../../utils/firebase";
 import { SiteDataContext } from "../../utils/contexts";
 import { SiteData } from "../../types/SiteData";
-import getDataId from "../../utils/getDataId";
-import resetData from "../../utils/resetData";
 
 type Comp = {
   id?: string,

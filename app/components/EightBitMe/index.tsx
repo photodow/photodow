@@ -2,7 +2,7 @@
 
 import "./index.scss";
 
-import { useEffect, useState, useRef, MouseEventHandler, MouseEvent, RefObject } from 'react';
+import { useEffect, useState, useRef, MouseEventHandler, MouseEvent, RefObject, useCallback } from 'react';
 import calcMidPoint from '../../utils/calcMidPoint';
 import miniUnits from '../../utils/miniUnits';
 import TooltipExt from "../Tooltip";
@@ -28,55 +28,7 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [openTooltip, setOpenTooltip] = useState(false);
 
-  useEffect(() => {
-
-    setTimeout(() => {
-      setShowMe('jd-eightbitme--active');
-    }, 0);
-
-    resizeAvatar();
-    document.addEventListener('resize', resizeAvatar);
-    document.addEventListener('scroll', resizeAvatar);
-
-    document.addEventListener('mousemove', e => {
-      setMousePosition({ x: e.x, y: e.y});
-    });
-
-    document.addEventListener("touchmove", e => {
-      const changedTouches = e.changedTouches[0];
-      setMousePosition({ x: changedTouches.clientX, y: changedTouches.clientY});
-    });
-  }, []);
-
-  return (
-    <div className={`jd-eightbitme ${showMe}${miniMe ? ' jd-eightbitme--mini-me' : ''}`} style={{"transition": transition.current, ...containerStyles}}>
-      <button ref={refObj} title="Open Menu" className={`jd-eightbitme__inner jd-eightbitme--btn`} aria-label="Open Menu" onMouseOver={_onMouseOver} onClick={_onClick}>
-        <TooltipExt label="Open Menu" align={'left'} open={openTooltip} disable={!openTooltip}>
-          <div ref={avatar} className={`jd-eightbitme__avatar ${calcLookingDirection()}`}>
-            <div className="hair-wind"></div>
-            <div className="eyes"></div>
-          </div>
-        </TooltipExt>
-      </button>
-      <div className={`jd-eightbitme__bg`}  style={bgStyles} />
-    </div>
-  );
-
-  function _onMouseOver () {
-    clearTimeout(tooltipTimeout.current);
-    tooltipShown.current = true;
-    setOpenTooltip(false);
-  }
-
-  function _onClick (e: MouseEvent<HTMLButtonElement>) {
-    transition.current = undefined;
-    clearTimeout(tooltipTimeout.current);
-    tooltipShown.current = true;
-    setOpenTooltip(false);
-    onClick(e);
-  }
-
-  function resizeAvatar () {
+  const resizeAvatar = useCallback(() => {
     if (miniMe) {
       return;
     }
@@ -138,6 +90,72 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
       // transform: `scale(${calcMidPoint(bgScale, containerHeight)}) translate(-50%, -50%)`
       transform: `scale(${calcMidPoint(bgScale, containerHeight)})`
     });
+  }, [miniMe]);
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      setShowMe('jd-eightbitme--active');
+    }, 0);
+
+    resizeAvatar();
+    document.addEventListener('resize', resizeAvatar);
+    document.addEventListener('scroll', resizeAvatar);
+
+    document.addEventListener('mousemove', e => {
+      setMousePosition({ x: e.x, y: e.y});
+    });
+
+    document.addEventListener("touchmove", e => {
+      const changedTouches = e.changedTouches[0];
+      setMousePosition({ x: changedTouches.clientX, y: changedTouches.clientY});
+    });
+  }, [resizeAvatar]);
+
+  return (
+    <div
+      className={`jd-eightbitme ${showMe}${miniMe ? ' jd-eightbitme--mini-me' : ''}`} 
+      style={{"transition": transition.current, ...containerStyles}}
+    >
+      <button
+        ref={refObj}
+        title="Open Menu"
+        className={`jd-eightbitme__inner jd-eightbitme--btn`}
+        aria-label="Open Menu"
+        onMouseOver={_onMouseOver}
+        onClick={_onClick}
+      >
+        <TooltipExt
+          label="Open Menu"
+          align={'left'}
+          open={openTooltip}
+          disable={!openTooltip}
+        >
+          <div
+            ref={avatar}
+            className={`jd-eightbitme__avatar ${calcLookingDirection()}`}
+          >
+            <div className="hair-wind"></div>
+            <div className="eyes"></div>
+          </div>
+        </TooltipExt>
+      </button>
+      <div className={`jd-eightbitme__bg`} style={bgStyles} />
+    </div>
+  );
+
+  function _onMouseOver () {
+    clearTimeout(tooltipTimeout.current);
+    tooltipShown.current = true;
+    setOpenTooltip(false);
+  }
+
+  function _onClick (e: MouseEvent<HTMLButtonElement>) {
+    transition.current = undefined;
+    clearTimeout(tooltipTimeout.current);
+    tooltipShown.current = true;
+    setOpenTooltip(false);
+    onClick(e);
   }
 
   function calcLookingDirection () {

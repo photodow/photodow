@@ -1,5 +1,5 @@
 export default function resetData () {
-    if (!window) {
+    if (typeof window === "undefined") {
         return;
     }
 
