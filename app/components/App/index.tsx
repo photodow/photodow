@@ -4,9 +4,9 @@ import "./index.scss";
 
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
-import { getSiteData } from "../../utils/firebase";
-import { SiteDataContext } from "../../utils/contexts";
-import SiteData from "./../../types/SiteData";
+import { getSiteData } from "../../_utils/firebase";
+import { SiteDataContext } from "../../_utils/contexts";
+import { SiteData } from "../../_types/SiteData";
 
 type Comp = {
   id?: string,

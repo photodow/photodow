@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 
 import Navigation from '../Navigation';
 import EightBitMe from '../EightBitMe';
-import { SiteDataContext } from "../../utils/contexts";
+import { SiteDataContext } from "../../_utils/contexts";
 
 type Comp = {
   mini?: boolean

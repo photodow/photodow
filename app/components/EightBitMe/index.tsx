@@ -3,8 +3,8 @@
 import "./index.scss";
 
 import { useEffect, useState, useRef, MouseEventHandler, MouseEvent, RefObject, useCallback } from 'react';
-import calcMidPoint from '../../utils/calcMidPoint';
-import miniUnits from '../../utils/miniUnits';
+import calcMidPoint from '../../_utils/calcMidPoint';
+import miniUnits from '../../_utils/miniUnits';
 import TooltipExt from "../Tooltip";
 
 type Comp = {

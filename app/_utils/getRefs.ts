@@ -1,5 +1,5 @@
-import { Overrides, Ref, RefList } from "../types/Ref";
-import SiteData from "../types/SiteData";
+import { Overrides, Ref, RefList } from "../_types/Ref";
+import { SiteData } from "../_types/SiteData";
 
 export default function GetRefs (
   overrideRefs: Ref[] = [],

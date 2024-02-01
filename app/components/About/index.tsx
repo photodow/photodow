@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { SiteDataContext } from "../../utils/contexts";
+import { SiteDataContext } from "../../_utils/contexts";
 import "./index.scss";
 
 export default function About() {

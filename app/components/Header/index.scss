@@ -2,7 +2,7 @@
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
 
-@import "../../utils/long-shadow";
+@import "../../_utils/long-shadow";
 
 .jd-header {
   color: theme.$text-primary;

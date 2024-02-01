@@ -3,11 +3,11 @@
 import "./index.scss";
 
 import { useContext, useEffect, useRef } from "react";
-import { SiteDataContext } from "../../utils/contexts";
-import GetRefs from "../../utils/getRefs";
-import { Ref, RefList } from "../../types/Ref";
-import { Link as LinkData } from "../../types/Link";
-import { MainItem } from "../../types/Main";
+import { SiteDataContext } from "../../_utils/contexts";
+import GetRefs from "../../_utils/getRefs";
+import { Ref, RefList } from "../../_types/Ref";
+import { Link as LinkData } from "../../_types/Link";
+import { MainItem } from "../../_types/Main";
 import { Link } from "@carbon/react";
 import { Icon } from "../Icon";
 
