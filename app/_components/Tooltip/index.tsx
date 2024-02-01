@@ -2,7 +2,7 @@
 import "./index.scss";
 
 import { Tooltip } from "@carbon/react";
-import { TooltipProps } from "@carbon/react/lib/components/Tooltip/Tooltip";
+import { TooltipProps } from "@carbon/react/lib/_components/Tooltip/Tooltip";
 
 interface Comp extends TooltipProps<React.ElementType> {
    open?: boolean; 

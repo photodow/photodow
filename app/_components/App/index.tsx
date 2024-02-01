@@ -2,7 +2,7 @@
 
 import "./index.scss";
 
-import Header from "../../components/Header";
+import Header from "../../_components/Header";
 import { useEffect, useState } from "react";
 import { getSiteData } from "../../_utils/firebase";
 import { SiteDataContext } from "../../_utils/contexts";

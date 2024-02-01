@@ -1,0 +1,9 @@
+@use "@carbon/styles/scss/_components/tooltip";
+
+.cds--tooltip-content {
+  padding: 8px;
+}
+
+.cds--popover--hide .cds--popover {
+  display: none;
+}

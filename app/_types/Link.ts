@@ -1,5 +1,5 @@
 
-import { IconKeys } from "../components/Icon";
+import { IconKeys } from "../_components/Icon";
 
 export type LinkKey = 'string';
 

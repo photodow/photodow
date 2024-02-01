@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import App from "../components/App";
+import App from "../_components/App";
 
 export default function Portfolio() {
   return (

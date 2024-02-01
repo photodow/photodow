@@ -1,7 +1,7 @@
 import "./globals.scss";
 
 import { GoogleAnalytics } from '@next/third-parties/google';
-import GridOverlay from "./components/GridOverlay";
+import GridOverlay from "./_components/GridOverlay";
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
