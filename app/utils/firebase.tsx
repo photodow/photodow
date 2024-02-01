@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { SiteData } from "../types/SiteData";
+import SiteData from "../types/SiteData";
 import { Experience } from "../types/Experience";
 import { Image } from "../types/Image";
 import { Link } from "../types/Link";

@@ -7,7 +7,7 @@ import { Link } from "./Link";
 import { Testimonial } from "./Testimonial";
 import { MainItem } from "./Main";
 
-export type SiteData = {
+export default interface SiteData {
     experiences: Experience[],
     // educations: Experience[],
     images: Image[],
