@@ -159,7 +159,7 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
   function calcLookingDirection () {
     const avatarEl = avatar.current;
   
-    if (avatarEl == null || moveCount.current < 30) {
+    if (avatarEl == null || moveCount.current < 15) {
       moveCount.current++;
       return remDirection.current;
     }
