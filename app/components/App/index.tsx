@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import { getSiteData } from "../../utils/firebase";
 import { SiteDataContext } from "../../utils/contexts";
-import SiteData from "../../types/SiteData";
+import SiteData from "./../../types/SiteData";
 
 type Comp = {
   id?: string,
