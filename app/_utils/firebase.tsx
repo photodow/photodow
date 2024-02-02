@@ -32,8 +32,9 @@ async function init (): Promise<SiteData> {
     resetData();
 
     const id = getDataId();
+
     let buildingData: SiteData | null = null;
-    
+
     if (typeof localStorage !== 
     "undefined") {
         buildingData = JSON.parse(localStorage.getItem('siteData') as string);
@@ -45,33 +46,53 @@ async function init (): Promise<SiteData> {
         const dataLastUpdate = await getData(`main/${id}/lastUpdate`); // check for last update
 
         if (
+         !(
             dataLastUpdate
          && storedLastUpdate
          && new Date(dataLastUpdate) <= new Date(storedLastUpdate)
          && new Date(dataLastUpdate) > weekAgo
+         )
         ) {
-            // return stored data if it hasn't been updated since storing
-            return buildingData;
+            // unset data so we can refresh downstream.
+            buildingData = null;
         }
     }
 
-    // refresh data
-    buildingData = {
-        experiences: await getData(`experiences`) as Experience[],
-        images: await getData(`images`) as Image[],
-        links: await getData(`links`) as Link[],
-        organizations: await getData(`organizations`) as Organization[],
-        people: await getData(`people`) as Person[],
-        portfolio: await getData(`portfolio`) as PortfolioItem[],
-        testimonials: await getData(`testimonials`) as Testimonial[],
-        main: Object.assign(
-            await getData(`main/_default`),
-            await getData(`main/${getDataId()}`)
-        )
-    };
+    if (!buildingData) {
+        // refresh data
+        buildingData = {
+            experiences: await getData(`experiences`) as Experience[],
+            images: await getData(`images`) as Image[],
+            links: await getData(`links`) as Link[],
+            organizations: await getData(`organizations`) as Organization[],
+            people: await getData(`people`) as Person[],
+            portfolio: await getData(`portfolio`) as PortfolioItem[],
+            testimonials: await getData(`testimonials`) as Testimonial[],
+            main: Object.assign(
+                await getData(`main/_default`),
+                await getData(`main/${getDataId()}`)
+            )
+        };
 
+        const _metaOverride = buildingData.main._metaOverride;
+
+        if (_metaOverride) {
+            // retrieve organization data
+            _metaOverride.org = await getOrgData(buildingData.organizations, _metaOverride?.orgKey);
+
+            window.jdon = _metaOverride.org?.name;
+        }
+    }
 
     return buildingData;
+}
+
+async function getOrgData (orgs: Organization[], key: string | undefined): Promise<Organization | undefined> {
+    if (!key) {
+        return;
+    }
+
+    return orgs.filter(org => org._key === key)?.[0];
 }
 
 async function getData (key: string): Promise<any> {
