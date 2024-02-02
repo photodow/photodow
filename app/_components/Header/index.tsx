@@ -6,6 +6,8 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import Navigation from '../Navigation';
 import EightBitMe from '../EightBitMe';
 import { SiteDataContext } from "../../_utils/contexts";
+import { SkeletonText } from "@carbon/react";
+import { MainItem } from "../../_types/Main";
 
 type Comp = {
   mini?: boolean
@@ -38,10 +40,7 @@ export default function Header({ mini = false }: Comp) {
       {!mini && (<div className="jd-header__inner cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-4">
-            <h1 className="jd-header__title">
-              <span className="jd-header__name">{siteData?.main?.name}</span>
-              <span className="jd-header__role">{siteData?.main?.role}</span>
-            </h1>
+            {renderTitle(siteData?.main)}
           </div>
         </div>
       </div>)}
@@ -49,4 +48,17 @@ export default function Header({ mini = false }: Comp) {
       <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={mini} />
     </header>
   );
+
+  function renderTitle (main?: MainItem) {
+    return (
+      <h1 className={`jd-header__title${main ? ' jd-header__title--active' : ''}`}>
+        <div className="jd-header__title-skeleton">
+          <SkeletonText />
+          <SkeletonText />
+        </div>
+        <span className="jd-header__name">{main?.name}</span>
+        <span className="jd-header__role">{main?.role}</span>
+      </h1>
+    )
+  }
 }

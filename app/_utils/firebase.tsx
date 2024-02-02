@@ -9,7 +9,6 @@ import { Organization } from "../_types/Organization";
 import { Person } from "../_types/Person";
 import { PortfolioItem } from "../_types/Portfolio";
 import { Testimonial } from "../_types/Testimonial";
-import { sendGTMEvent } from '@next/third-parties/google'
 import getDataId from "./getDataId";
 import resetData from "./resetData";
 
@@ -88,8 +87,6 @@ async function init (): Promise<SiteData> {
             localStorage.setItem('siteData', JSON.stringify(buildingData));
         }
     }
-
-    sendGTMEvent({ jdon: orgName });
 
     return buildingData;
 }

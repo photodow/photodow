@@ -4,7 +4,10 @@
 
 @import "../../_utils/long-shadow";
 
-.jd-header {
+$base: "jd-header";
+$titleBase: $base + "__title";
+
+.#{$base} {
   color: theme.$text-primary;
   background: theme.$background;
   height: 100vh;
@@ -40,6 +43,8 @@
   &__role,
   &__name {
     display: block;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
   }
 
   &__name {
@@ -48,5 +53,42 @@
 
   &__role {
     @include type.type-style("body-compact-01");
+  }
+}
+
+.#{$titleBase} {
+  position: relative;
+
+  &-skeleton {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    max-width: 180px;
+    visibility: visible;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+
+    & .cds--skeleton__text {
+      margin: 4px 0;
+      width: 100%;
+
+      &:first-child {
+        width: 50% !important;
+      }
+    }
+  }
+
+  &--active {
+    .#{$titleBase}-skeleton {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .#{$base}__role,
+    .#{$base}__name {
+      opacity: 1;
+    }
   }
 }
