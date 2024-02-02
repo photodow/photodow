@@ -30,6 +30,14 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
   const [openTooltip, setOpenTooltip] = useState(false);
 
   const resizeAvatar = useCallback(() => {
+
+    clearTimeout(transitionTimeout.current);
+    transitionTimeout.current = setTimeout(() => {
+      // wait for the scrolling to end and then remove the transition
+      transition.current = undefined; // remove property style
+      setShowMe('jd-eightbitme--active');
+    }, 100);
+
     if (miniMe) {
       return;
     }
@@ -67,13 +75,6 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
     }
 
     transition.current = 'none';
-
-    clearTimeout(transitionTimeout.current);
-    transitionTimeout.current = setTimeout(() => {
-      // wait for the scrolling to end and then remove the transition
-      transition.current = undefined; // remove property style
-      setShowMe('jd-eightbitme--active');
-    }, 100);
 
     const fontSize = { start: 16, end: 3 };
     const translateX = { start: 50, end: 0 };
