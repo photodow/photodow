@@ -9,6 +9,7 @@ import { Organization } from "../_types/Organization";
 import { Person } from "../_types/Person";
 import { PortfolioItem } from "../_types/Portfolio";
 import { Testimonial } from "../_types/Testimonial";
+import { sendGTMEvent } from '@next/third-parties/google'
 import getDataId from "./getDataId";
 import resetData from "./resetData";
 
@@ -34,9 +35,9 @@ async function init (): Promise<SiteData> {
     const id = getDataId();
 
     let buildingData: SiteData | null = null;
+    let orgName: string | undefined;
 
-    if (typeof localStorage !== 
-    "undefined") {
+    if (typeof localStorage !== "undefined") {
         buildingData = JSON.parse(localStorage.getItem('siteData') as string);
     }
 
@@ -80,9 +81,15 @@ async function init (): Promise<SiteData> {
             // retrieve organization data
             _metaOverride.org = await getOrgData(buildingData.organizations, _metaOverride?.orgKey);
 
-            window.jdon = _metaOverride.org?.name;
+            orgName = _metaOverride.org?.name;
+        }
+
+        if (typeof localStorage !== "undefined") {
+            localStorage.setItem('siteData', JSON.stringify(buildingData));
         }
     }
+
+    sendGTMEvent({ jdon: orgName });
 
     return buildingData;
 }
