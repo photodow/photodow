@@ -19,8 +19,10 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
   const tooltipShown = useRef(false);
   const tooltipTimeout = useRef<NodeJS.Timeout>();
   const transition = useRef<string>();
+  const transitionTimeout = useRef<NodeJS.Timeout>();
   const avatar = useRef<HTMLDivElement>(null);
 
+  // const [transition, setTransition] = useState<string>();
   const [showMe, setShowMe] = useState('');
   const [bgStyles, setBgStyles] = useState({});
   const [containerStyles, setContainerStyles] = useState({});
@@ -65,6 +67,14 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
     }
 
     transition.current = 'none';
+
+    clearTimeout(transitionTimeout.current);
+    transitionTimeout.current = setTimeout(() => {
+      // wait for the scrolling to end and then remove the transition
+      transition.current = undefined; // remove property style
+      setShowMe('jd-eightbitme--active');
+    }, 100);
+
     const fontSize = { start: 16, end: 3 };
     const translateX = { start: 50, end: 0 };
     const top = { start: 0, end: padding };
@@ -77,6 +87,11 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
       current: currentHeight
     };
 
+    setBgStyles({
+      // transform: `scale(${calcMidPoint(bgScale, containerHeight)}) translate(-50%, -50%)`
+      transform: `scale(${calcMidPoint(bgScale, containerHeight)})`,
+    });
+
     setContainerStyles({
       height: `${currentHeight}px`,
       fontSize: `${calcMidPoint(fontSize, containerHeight)}px`,
@@ -84,16 +99,10 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
       top: `${calcMidPoint(top, containerHeight)}px`,
       right: `calc(${calcMidPoint(rightPerc, containerHeight)}% + ${calcMidPoint(rightPx, containerHeight)}px)`,
     });
-
-    setBgStyles({
-      // transform: `scale(${calcMidPoint(bgScale, containerHeight)}) translate(-50%, -50%)`
-      transform: `scale(${calcMidPoint(bgScale, containerHeight)})`
-    });
   }, [miniMe]);
 
   const handleFirstRender = useCallback(() => {
     resizeAvatar();
-    setShowMe('jd-eightbitme--active');
     
     window.addEventListener('resize', resizeAvatar);
     window.addEventListener('scroll', resizeAvatar);
@@ -138,7 +147,7 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
           </div>
         </TooltipExt>
       </button>
-      <div className={`jd-eightbitme__bg`} style={bgStyles} />
+      <div className={`jd-eightbitme__bg`} style={showMe ? { "transition": transition.current, ...bgStyles } : {}} />
     </div>
   );
 
@@ -149,7 +158,6 @@ export default function EightBitMe({ onClick, refObj, miniMe }: Comp) {
   }
 
   function _onClick (e: MouseEvent<HTMLButtonElement>) {
-    transition.current = undefined;
     clearTimeout(tooltipTimeout.current);
     tooltipShown.current = true;
     setOpenTooltip(false);
