@@ -1,10 +1,9 @@
-export default function resetData () {
-    if (typeof window === "undefined") {
-        return;
-    }
+import localStore from "./localStore";
+import urlParams from "./urlParams";
 
-    if (new URLSearchParams(location.search).has('clear')) {
-        localStorage.removeItem("id");
-        localStorage.removeItem("siteData");
+export default function resetData () {
+    if (urlParams().has('clear')) {
+        localStore().removeItem("id");
+        localStore().removeItem("siteData");
     }
 }

@@ -11,6 +11,7 @@ import { PortfolioItem } from "../_types/Portfolio";
 import { Testimonial } from "../_types/Testimonial";
 import getDataId from "./getDataId";
 import resetData from "./resetData";
+import localStore from "./localStore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -36,9 +37,7 @@ async function init (): Promise<SiteData> {
     let buildingData: SiteData | null = null;
     let orgName: string | undefined;
 
-    if (typeof localStorage !== "undefined") {
-        buildingData = JSON.parse(localStorage.getItem('siteData') as string);
-    }
+    buildingData = JSON.parse(localStore().getItem('siteData') as string);
 
     if (buildingData) {
         const weekAgo = new Date(new Date().valueOf() - (7 * 24 * 60 * 60 * 1000));
@@ -83,9 +82,7 @@ async function init (): Promise<SiteData> {
             orgName = _metaOverride.org?.name;
         }
 
-        if (typeof localStorage !== "undefined") {
-            localStorage.setItem('siteData', JSON.stringify(buildingData));
-        }
+        localStore().setItem('siteData', JSON.stringify(buildingData));
     }
 
     return buildingData;
