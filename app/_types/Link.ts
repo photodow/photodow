@@ -15,6 +15,7 @@ export const enum Protocol {
     Email = "mailto:",
     Web = "https://",
     Hash = "#",
+    Root = "/",
 }
 
 export type Link = {

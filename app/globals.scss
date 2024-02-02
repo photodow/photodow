@@ -4,6 +4,7 @@
 @use "@carbon/styles/scss/theme";
 
 @use "@carbon/styles/scss/components/link";
+@use "@carbon/styles/scss/components/loading";
 @use "@carbon/styles/scss/components/skeleton-styles";
 
 @include grid.flex-grid();

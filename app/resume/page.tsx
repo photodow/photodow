@@ -1,18 +1,22 @@
+"use client";
+
 import "./index.scss";
 
 import App from "../_components/App";
+import { useEffect } from "react";
+import getDataId from "../_utils/getDataId";
+import { Loading } from "@carbon/react";
 
 export default function Resume() {
 
+  // useEffect(() => {
+  //   const id = getDataId() || '2024';
+  //   location.href = `/resume/James Dow (${id}).pdf`; // redirect to resume
+  // }, []);
+
   return (
     <App miniHeader={true}>
-      <div className="cds--grid">
-        <div className="cds--row">
-          <div className="cds--col" style={{height: '1000px'}}>
-            <p>Loading...</p>
-          </div>
-        </div>
-      </div>
+      <Loading active={true} withOverlay={true} />
     </App>
   );
 }

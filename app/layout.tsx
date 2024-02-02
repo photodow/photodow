@@ -2,8 +2,8 @@ import "./globals.scss";
 
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import GridOverlay from "./_components/GridOverlay";
-import type { Metadata } from 'next'
- 
+import type { Metadata } from 'next';
+
 export const metadata: Metadata = {
   title: 'James Dow',
   description: 'blah blah blah blah blah',

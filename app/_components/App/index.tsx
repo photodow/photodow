@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { getSiteData } from "../../_utils/firebase";
 import { SiteDataContext } from "../../_utils/contexts";
 import { SiteData } from "../../_types/SiteData";
+import { sendGTMEvent } from "@next/third-parties/google";
+import getDataId from "../../_utils/getDataId";
+import redirectIfR from "../../_utils/redirectIfR";
+import urlParams from "../../_utils/urlParams";
 
 type Comp = {
   id?: string,
@@ -16,6 +20,11 @@ type Comp = {
 
 export default function App({ id, children, miniHeader }: Comp) {
   const [siteData, setSiteData] = useState<SiteData | null>(null);
+
+  useEffect(() => {
+    sendGTMEvent({ 'oid': getDataId() });
+    redirectIfR(urlParams().get('r'));
+  }, []);
 
   useEffect(() => {
     getSiteData().then(d => setSiteData(d));

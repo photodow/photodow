@@ -6,6 +6,7 @@ import { Image } from "./Image";
 import { Link } from "./Link";
 import { Testimonial } from "./Testimonial";
 import { MainItem } from "./Main";
+import { Redirect } from "./Redirect";
 
 export type SiteData = {
     experiences: Experience[],

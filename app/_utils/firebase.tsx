@@ -9,6 +9,7 @@ import { Organization } from "../_types/Organization";
 import { Person } from "../_types/Person";
 import { PortfolioItem } from "../_types/Portfolio";
 import { Testimonial } from "../_types/Testimonial";
+import { sendGTMEvent } from '@next/third-parties/google'
 import getDataId from "./getDataId";
 import resetData from "./resetData";
 import localStore from "./localStore";
@@ -33,9 +34,7 @@ async function init (): Promise<SiteData> {
     resetData();
 
     const id = getDataId();
-
     let buildingData: SiteData | null = null;
-    let orgName: string | undefined;
 
     buildingData = JSON.parse(localStore().getItem('siteData') as string);
 
@@ -78,8 +77,6 @@ async function init (): Promise<SiteData> {
         if (_metaOverride) {
             // retrieve organization data
             _metaOverride.org = await getOrgData(buildingData.organizations, _metaOverride?.orgKey);
-
-            orgName = _metaOverride.org?.name;
         }
 
         localStore().setItem('siteData', JSON.stringify(buildingData));
@@ -88,7 +85,7 @@ async function init (): Promise<SiteData> {
     return buildingData;
 }
 
-async function getOrgData (orgs: Organization[], key: string | undefined): Promise<Organization | undefined> {
+export async function getOrgData (orgs: Organization[], key: string | undefined): Promise<Organization | undefined> {
     if (!key) {
         return;
     }
@@ -96,7 +93,7 @@ async function getOrgData (orgs: Organization[], key: string | undefined): Promi
     return orgs.filter(org => org._key === key)?.[0];
 }
 
-async function getData (key: string): Promise<any> {
+export async function getData (key: string): Promise<any> {
     const starCountRef = ref(db, key);
 
     return new Promise((resolve) => {

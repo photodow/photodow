@@ -31,12 +31,12 @@ export default function Links({ context, className, text = null, icon = null, va
 
   return !links.current.length ? null : (
     <ul className={`jd-linklist ${className}`}>
-      {links.current.map(({ protocol, text: _text, value: _value, icon: _icon, target = null }, i) => {
+      {links.current.map(({ protocol, text: _text, value: _value, icon: _icon, target = undefined }, i) => {
         return (
           <li key={`${_text}${i}`} className="jd-linklist__item">
             <Link className="jd-linklist__link"
                href={`${protocol}${_value}`}
-               target={`${target}`}
+               target={target}
                title={_text}>
               
               {icon && _icon && <Icon iconRef={_icon} size={32} />}
