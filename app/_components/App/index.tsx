@@ -42,8 +42,10 @@ export default function App({ children, miniHeader }: Comp) {
 
   return (
     <SiteDataContext.Provider value={siteData}>
-        <Header mini={miniHeader} redirect={!!redirect} />
+      <Header mini={miniHeader} redirect={!!redirect} />
+      <main>
         {children}
+      </main>
     </SiteDataContext.Provider>
   );
 }

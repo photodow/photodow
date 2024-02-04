@@ -1,0 +1,31 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
+
+.jd-about {
+  background: theme.$background;
+  min-height: 100vh;
+  color: theme.$text-primary;
+  display: grid;
+
+  &__inner {
+    margin: auto;
+    padding: spacing.$spacing-03 * 8 0;
+  }
+
+  &__name {
+    @include type.type-style("heading-07");
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__role {
+    @include type.type-style("heading-04");
+    margin: spacing.$spacing-03 0;
+  }
+
+  &__desc {
+    @include type.type-style("heading-03");
+    margin: spacing.$spacing-03 * 6 0;
+  }
+}

@@ -46,3 +46,9 @@ body {
 .jd-body--noscroll {
   overflow: hidden;
 }
+
+.jd-body__section-title {
+  @include type.type-style("heading-03");
+  font-weight: bold;
+  color: theme.$text-secondary;
+}
