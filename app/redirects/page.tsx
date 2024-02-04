@@ -34,7 +34,7 @@ export default function Resume() {
       </div>
       <div className="cds--row">
         <div className="cds--col">
-          <Search className="jd-redirects__search" labelText="Search" placeholder="Search links..." onKeyUp={handleSearch} />
+          <Search className="jd-redirects__search" labelText="Search" placeholder="Search links..." onKeyUp={handleSearch} onClear={() => setSearchValue('')} />
         </div>
       </div>
       {renderLinks(links) as ReactNode}
