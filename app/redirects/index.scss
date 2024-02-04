@@ -33,6 +33,15 @@
     input {
       border-radius: spacing.$spacing-03;
     }
+
+    button {
+      border-radius: 0 spacing.$spacing-03 spacing.$spacing-03 0;
+    }
+  }
+
+  &__loading,
+  &__empty {
+    text-align: center;
   }
 
   &__items {

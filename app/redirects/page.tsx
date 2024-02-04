@@ -37,18 +37,16 @@ export default function Resume() {
           <Search className="jd-redirects__search" labelText="Search" placeholder="Search links..." onKeyUp={handleSearch} />
         </div>
       </div>
-      <ul className="cds--row jd-redirects__items">
-        {renderLinks(links) as ReactNode}
-      </ul>
+      {renderLinks(links) as ReactNode}
     </div>
   );
 
   function renderLinks (links: Redirect[] | null): ReactNode {
     if (!links) {
-      return null;
+      return renderEmptyState();
     }
 
-    return links.filter(({ key, description, title, url }) => {
+    links = links.filter(({ key, description, title, url }) => {
       const value = searchValue.toLowerCase();
       return (
         description.toLowerCase().indexOf(value) > -1
@@ -56,20 +54,25 @@ export default function Resume() {
         || url.toLowerCase().indexOf(value) > -1
         || (key && key.toLowerCase().indexOf(value) > -1)
       )
-    }).map(({ key, description, title, url }) => {
-      return (
-        <li key={key} className="jd-redirects__item cds--col-sm-4 cds--col-md-2 cds--col-lg-4">
-          <div className="jd-redirects__item-inner">
-            <h2 className="jd-redirects__key">{key}</h2>
-            <h3 className="jd-redirects__title">
-              <Link href={url} target="_blank">{title}</Link>
-            </h3>
-            <p className="jd-redirects__desc">{description}</p>
-            <p className="jd-redirects__redirect-link"><Link href={`https://jamesdow.me?r=${key}`} target="_blank">{`jamesdow.me?r=${key}`}</Link></p>
-          </div>
-        </li>
-      );
     });
+
+    return !links.length ? renderEmptyState() : 
+      <ul className="cds--row jd-redirects__items">
+        {links.map(({ key, description, title, url }) => {
+          return (
+            <li key={key} className="jd-redirects__item cds--col-sm-4 cds--col-md-4 cds--col-lg-4">
+              <div className="jd-redirects__item-inner">
+                <h2 className="jd-redirects__key">{key}</h2>
+                <h3 className="jd-redirects__title">
+                  <Link href={url} target="_blank">{title}</Link>
+                </h3>
+                <p className="jd-redirects__desc">{description}</p>
+                <p className="jd-redirects__redirect-link"><Link href={`https://jamesdow.me?r=${key}`} target="_blank">{`jamesdow.me?r=${key}`}</Link></p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>;
   }
 
   function handleSearch (e: KeyboardEvent<HTMLInputElement>) {
@@ -77,5 +80,13 @@ export default function Resume() {
     keyupTimeout.current = setTimeout(() => {
       setSearchValue((e.target as HTMLInputElement).value as string)
     }, 200);
+  }
+
+  function renderEmptyState () {
+    if (!links) {
+      return <p className="jd-redirects__loading">{`Loading...`}</p>
+    }
+
+    return <p className="jd-redirects__empty">{`Sorry, we couldn't find any matching results.`}</p>
   }
 }
