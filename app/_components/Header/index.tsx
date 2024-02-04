@@ -10,10 +10,11 @@ import { SkeletonText } from "@carbon/react";
 import { MainItem } from "../../_types/Main";
 
 type Comp = {
-  mini?: boolean
+  mini?: boolean,
+  redirect?: boolean
 }
 
-export default function Header({ mini = false }: Comp) {
+export default function Header({ mini = false, redirect }: Comp) {
 
   const siteData = useContext(SiteDataContext);
 
@@ -36,14 +37,14 @@ export default function Header({ mini = false }: Comp) {
   }, [navOpen]);
 
   return (
-    <header className={`jd-header${mini ? ' jd-header--mini' : ''}`} data-carbon-theme="g10">
-      {!mini && (<div className="jd-header__inner cds--grid">
+    <header className={`jd-header${mini ? ' jd-header--mini' : ''}${redirect ? ' jd-header--redirect' : ''}`} data-carbon-theme="g10">
+      <div className="jd-header__inner cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-4">
             {renderTitle(siteData?.main)}
           </div>
         </div>
-      </div>)}
+      </div>
       <Navigation open={navOpen} toggleNav={() => setNavOpen(!navOpen)} firstFocusItem={navOpenFocusRef} />
       <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={mini} />
     </header>

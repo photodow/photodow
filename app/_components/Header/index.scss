@@ -15,6 +15,16 @@ $titleBase: $base + "__title";
 
   &--mini {
     height: 0;
+
+    & .#{$base}__inner {
+      display: none;
+    }
+  }
+
+  &--redirect {
+    .jd-eightbitme {
+      display: none;
+    }
   }
 
   &__inner {
@@ -22,12 +32,9 @@ $titleBase: $base + "__title";
     padding-bottom: spacing.$spacing-05;
     position: sticky;
     top: 0;
-    z-index: 1;
-  }
-
-  &__inner {
     z-index: 0;
   }
+
   & .jd-eightbitme {
     z-index: 2;
   }

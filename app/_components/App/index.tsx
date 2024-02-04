@@ -3,7 +3,7 @@
 import "./index.scss";
 
 import Header from "../../_components/Header";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getSiteData } from "../../_utils/firebase";
 import { SiteDataContext } from "../../_utils/contexts";
 import { SiteData } from "../../_types/SiteData";
@@ -23,22 +23,26 @@ type Comp = {
   miniHeader?: boolean,
 }
 
-export default function App({ id, children, miniHeader }: Comp) {
+export default function App({ children, miniHeader }: Comp) {
+  const [redirect, setRedirect] = useState<string | null>(null);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
+
+  const setR = useCallback(() => setRedirect(urlParams().get('r')), [])
 
   useEffect(() => {
     sendGTMEvent({ 'oid': getDataId() });
-    redirectIfR(urlParams().get('r'));
-  }, []);
 
-  useEffect(() => {
-    getSiteData().then(d => setSiteData(d));
-    // todo: handle a 404 scenario incase data doesn't load?
-  }, [id]);
+    setR();
+    redirectIfR(redirect);
+
+    if (!redirect) {
+      getSiteData().then(d => setSiteData(d));
+    }
+  }, [redirect, setR]);
 
   return (
     <SiteDataContext.Provider value={siteData}>
-        <Header mini={miniHeader} />
+        <Header mini={miniHeader} redirect={!!redirect} />
         {children}
     </SiteDataContext.Provider>
   );
