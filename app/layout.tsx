@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'James Dow',
-  description: 'blah blah blah blah blah',
+  description: `James Dow is a passionate Web Designer & Developer. Sitting at the intersection of these two dynamic disciplines he witnesses the evolution of an idea from conception to production.`,
 }
 
 export default function RootLayout({

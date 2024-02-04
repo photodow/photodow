@@ -12,6 +12,11 @@ import getDataId from "../../_utils/getDataId";
 import redirectIfR from "../../_utils/redirectIfR";
 import urlParams from "../../_utils/urlParams";
 
+// get meta data
+// set meta data
+// then redirect or render page.
+// without flash is preferred in any instance
+
 type Comp = {
   id?: string,
   children?: React.ReactNode,

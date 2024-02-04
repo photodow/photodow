@@ -1,0 +1,94 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
+
+.jd-redirects {
+  padding-top: spacing.$spacing-03 * 8;
+  padding-bottom: spacing.$spacing-03 * 8;
+
+  &__main {
+    margin-bottom: spacing.$spacing-03 * 4;
+
+    &-title,
+    &-desc {
+      text-align: center;
+      margin: 0;
+    }
+
+    &-title {
+      @include type.type-style("heading-04");
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    &-desc {
+      @include type.type-style("heading-03");
+    }
+  }
+
+  &__search {
+    max-width: spacing.$spacing-03 * 80;
+    margin: auto;
+
+    input {
+      border-radius: spacing.$spacing-03;
+    }
+  }
+
+  &__items {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  &__item-inner {
+    padding: spacing.$spacing-03 * 2;
+    margin: spacing.$spacing-03 * 2 0;
+    background: theme.$layer-01;
+    border-radius: spacing.$spacing-03;
+    display: inline-block;
+    width: 100%;
+    transform: scale(1);
+    transition: transform 0.25s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &__key {
+    // tag?
+    @include type.type-style("helper-text-01");
+    margin: 0 0 spacing.$spacing-03/2;
+    color: theme.$text-secondary;
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: spacing.$spacing-03;
+
+    &,
+    & .cds--link {
+      @include type.type-style("heading-compact-02");
+      color: theme.$text-primary;
+    }
+  }
+
+  &__desc,
+  &__url,
+  &__redirect-link {
+    @include type.type-style("body-compact-02");
+    margin: 0;
+  }
+
+  &__desc {
+    color: theme.$text-secondary;
+    margin: spacing.$spacing-03 0;
+  }
+
+  &__url {
+  }
+
+  &__redirect-link {
+  }
+}

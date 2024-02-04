@@ -6,6 +6,7 @@
 @use "@carbon/styles/scss/components/link";
 @use "@carbon/styles/scss/components/loading";
 @use "@carbon/styles/scss/components/skeleton-styles";
+@use "@carbon/styles/scss/components/search";
 
 @include grid.flex-grid();
 @include type.reset();
