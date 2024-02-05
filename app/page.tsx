@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <App>
       <AboutMe />
-      {/* <MyExperience />
-      <MyWork /> */}
+      <MyExperience />
+      <MyWork />
     </App>
   );
 }

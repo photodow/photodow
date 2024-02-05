@@ -7,6 +7,8 @@ export type MainItem = {
     lastUpdate: string,
     name: string,
     role: string,
+    title: string,
+    subtitle: string,
     description: Markdown,
     _metaOverride?: {
         orgKey: OrgKey,

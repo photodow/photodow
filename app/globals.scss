@@ -1,5 +1,6 @@
 @use "@carbon/styles/scss/grid";
 @use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/colors";
 @use "@carbon/styles/scss/themes" as *;
 @use "@carbon/styles/scss/theme";
 
@@ -51,4 +52,14 @@ body {
   @include type.type-style("heading-03");
   font-weight: bold;
   color: theme.$text-secondary;
+}
+
+::selection {
+  background: colors.$yellow-20;
+  color: colors.$warm-gray-90;
+}
+
+::-moz-selection {
+  background: colors.$yellow-20;
+  color: colors.$warm-gray-90;
 }
