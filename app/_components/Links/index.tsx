@@ -2,7 +2,7 @@
 
 import "./index.scss";
 
-import { useContext, useEffect, useRef } from "react";
+import { EventHandler, MouseEventHandler, useContext, useEffect, useRef } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import GetRefs from "../../_utils/getRefs";
 import { Ref, RefList } from "../../_types/Ref";
@@ -17,9 +17,10 @@ interface Comp {
   icon?: true | null,
   text?: true | null,
   value?: true | null
+  onClick?: MouseEventHandler
 }
 
-export default function Links({ context, className, text = null, icon = null, value = null }: Comp) {
+export default function Links({ context, className, onClick, text = null, icon = null, value = null }: Comp) {
   const siteData = useContext(SiteDataContext);
   const links = useRef<LinkData[]>([]);
 
@@ -37,7 +38,8 @@ export default function Links({ context, className, text = null, icon = null, va
             <Link className="jd-linklist__link"
                href={`${protocol}${_value}`}
                target={target}
-               title={_text}>
+               title={_text}
+               onClick={onClick}>
               
               {icon && _icon && <Icon iconRef={_icon} size={32} />}
               {text && _text && _text}

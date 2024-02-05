@@ -41,6 +41,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
               context="navigation"
               className="jd-nav__items"
               text={true}
+              onClick={() => closeNav()}
             />
           </div>
         </div>
