@@ -1,4 +1,4 @@
-import { Overrides, Ref, RefList } from "../_types/Ref";
+import { KeyRef, Overrides, Ref, RefCollections, RefList } from "../_types/Ref";
 import { SiteData } from "../_types/SiteData";
 
 export default function GetRefs (
@@ -6,7 +6,18 @@ export default function GetRefs (
   scope: RefList,
   siteData: SiteData
 ): Overrides[] {
-  const defaultRefs = siteData[scope];
+  const defaultRefs = siteData[scope] as RefCollections;
+
+  if (!defaultRefs || !overrideRefs || !overrideRefs.length) {
+    return [];
+  }
+
+  const defaultKeys: KeyRef[] = Object.keys(defaultRefs);
+
+  if (!defaultKeys.length) {
+    return [];
+  }
+
   const refs = [];
 
   overrideRefs.sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -14,11 +25,16 @@ export default function GetRefs (
   for (let i = 0; i < overrideRefs.length; i++) {
     const overrideRef = overrideRefs[i]; 
 
-    for (let ii = 0; ii < defaultRefs.length; ii++) {
-      const defaultRef = defaultRefs[ii];
+    for (let ii = 0; ii < defaultKeys.length; ii++) {
+      const defaultKey = defaultKeys[ii];
+      const defaultRef = defaultRefs[defaultKey];
+      const overrideKey = overrideRef._key;
 
-      if (overrideRef.active !== false && overrideRef._key === defaultRef._key) {
-        refs.push(Object.assign(defaultRef, overrideRef._override) as Overrides);
+      if (
+        overrideRef.active !== false &&
+        defaultKey === overrideKey
+      ) {
+        refs.push(Object.assign({}, defaultRef, overrideRef._override) as Overrides);
         break; // should be unique _key, move onto next overrideRef
       }
     }

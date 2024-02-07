@@ -14,11 +14,7 @@
     min-width: 100vw;
     padding: $padding 0;
     background-color: theme.$background;
-    background-image: url("/jamesdow.png");
-    background-position: bottom left;
-    background-repeat: no-repeat;
-    background-size: 75vw;
-    padding-bottom: 75vw;
+    padding-bottom: 75vh;
 
     clip-path: polygon(
       0% 0%,
@@ -33,15 +29,46 @@
     }
 
     @include breakpoint("md") {
-      background-position: bottom left (30vw * -1);
-      background-size: 70vw;
-      padding-bottom: 0;
+      padding-bottom: $padding;
       display: grid;
     }
 
-    @include breakpoint("lg") {
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("/jamesdow.png");
+      background-position: bottom center;
+      background-repeat: no-repeat;
       background-size: contain;
-      background-position: bottom left (25vw * -1);
+      transform: scaleX(-1);
+      height: 75vh;
+      width: 100vw;
+
+      @include breakpoint("md") {
+        background-position: bottom right;
+        background-size: contain;
+        top: 0;
+        bottom: auto;
+        min-height: 90vh;
+        height: 100%;
+        width: auto;
+        aspect-ratio: 1 / 1;
+        left: auto;
+        right: (100 / 8 * 5) + vw; // more exact number? Might need it down the road
+
+        transform: scaleX(1);
+      }
+
+      @include breakpoint("lg") {
+        right: (100 / 16 * 10) + vw; // more exact number? Might need it down the road
+      }
+
+      @include breakpoint("xlg") {
+        right: (100 / 16 * 11) + vw; // more exact number? Might need it down the road
+      }
     }
   }
 

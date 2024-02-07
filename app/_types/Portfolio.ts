@@ -15,22 +15,18 @@ export const enum PortfolioSize {
     Large = "Large"
 }
 
-export type PortfolioItem = {
+export type PortfolioCard = {
     _key: PortfolioKey,
-    orgKey: OrgKey,
+    image: Ref,
     title: string,
-    cover?: Image,
     description?: Markdown,
-    details?: Markdown[],
-    sections?: PortfolioSection[],
     actions?: Ref[],
 }
 
-export type PortfolioSection = {
-    // add a key reference?
-    title?: string,
-    description?: string,
-    cover?: Image,
-    images?: Ref[],
-    actions?: Ref[],
+export type PortfolioItem = {
+    _key: PortfolioKey,
+    orgKey: OrgKey,
+    card: PortfolioCard,
 }
+
+export type Portfolio = Record<PortfolioKey, PortfolioItem>;

@@ -1,0 +1,11 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+
+.jd-linklist {
+  &,
+  &__item {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -23,3 +23,5 @@ export type Experience = {
     skills?: string[],
     portfolio?: Ref[],
 }
+
+export type Experiences = Record<ExpKey, Experience>;

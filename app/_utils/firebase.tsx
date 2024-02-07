@@ -2,13 +2,13 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { SiteData } from "../_types/SiteData";
-import { Experience } from "../_types/Experience";
-import { Image } from "../_types/Image";
-import { Link } from "../_types/Link";
-import { Organization } from "../_types/Organization";
-import { Person } from "../_types/Person";
-import { PortfolioItem } from "../_types/Portfolio";
-import { Testimonial } from "../_types/Testimonial";
+import { Experience, Experiences } from "../_types/Experience";
+import { Image, Images } from "../_types/Image";
+import { Link, Links } from "../_types/Link";
+import { Organization, Organizations } from "../_types/Organization";
+import { People, Person } from "../_types/Person";
+import { Portfolio, PortfolioItem } from "../_types/Portfolio";
+import { Testimonial, Testimonials } from "../_types/Testimonial";
 import { sendGTMEvent } from '@next/third-parties/google'
 import getDataId from "./getDataId";
 import resetData from "./resetData";
@@ -59,13 +59,13 @@ async function init (): Promise<SiteData> {
     if (!buildingData) {
         // refresh data
         buildingData = {
-            experiences: await getData(`experiences`) as Experience[],
-            images: await getData(`images`) as Image[],
-            links: await getData(`links`) as Link[],
-            organizations: await getData(`organizations`) as Organization[],
-            people: await getData(`people`) as Person[],
-            portfolio: await getData(`portfolio`) as PortfolioItem[],
-            testimonials: await getData(`testimonials`) as Testimonial[],
+            experiences: await getData(`experiences`) as Experiences,
+            images: await getData(`images`) as Images,
+            links: await getData(`links`) as Links,
+            organizations: await getData(`organizations`) as Organizations,
+            people: await getData(`people`) as People,
+            portfolio: await getData(`portfolio`) as Portfolio,
+            testimonials: await getData(`testimonials`) as Testimonials,
             main: Object.assign(
                 await getData(`main/_default`),
                 await getData(`main/${getDataId()}`)
@@ -85,12 +85,12 @@ async function init (): Promise<SiteData> {
     return buildingData;
 }
 
-export async function getOrgData (orgs: Organization[], key: string | undefined): Promise<Organization | undefined> {
+export async function getOrgData (orgs: Organizations, key: string | undefined): Promise<Organization | undefined> {
     if (!key) {
         return;
     }
 
-    return orgs.filter(org => org._key === key)?.[0];
+    return orgs[key];
 }
 
 export async function getData (key: string): Promise<any> {

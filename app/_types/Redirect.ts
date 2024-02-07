@@ -1,6 +1,10 @@
+export type RedirectKey = string;
+
 export type Redirect = {
     title: string,
     description: string,
     url: string,
-    key?: string
+    _key?: RedirectKey,
 }
+
+export type Redirects = Record<RedirectKey, Redirect>;

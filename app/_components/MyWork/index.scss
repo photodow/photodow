@@ -3,9 +3,13 @@
 @use "@carbon/styles/scss/theme";
 
 .jd-work {
-  //   &__title {
-  //     @include type.type-style("heading-03");
-  //     font-weight: bold;
-  //     color: theme.$text-secondary;
-  //   }
+  $sectionPadding: spacing.$spacing-03 * 8;
+  margin-top: $sectionPadding * -1;
+  padding: $sectionPadding * 2 0;
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    padding-bottom: $sectionPadding / 2;
+  }
 }

@@ -1,21 +1,22 @@
-import { PortfolioItem } from "./Portfolio";
-import { Organization } from "./Organization";
-import { Experience } from "./Experience";
-import { Person } from "./Person";
-import { Image } from "./Image";
-import { Link } from "./Link";
-import { Testimonial } from "./Testimonial";
+import { Portfolio } from "./Portfolio";
+import { Organizations } from "./Organization";
+import { Experiences } from "./Experience";
+import { People } from "./Person";
+import { Images } from "./Image";
+import { Links } from "./Link";
+import { Testimonials } from "./Testimonial";
 import { MainItem } from "./Main";
-import { Redirect } from "./Redirect";
+import { Redirects } from "./Redirect";
 
 export type SiteData = {
-    experiences: Experience[],
+    experiences: Experiences,
     // educations: Experience[],
-    images: Image[],
-    links: Link[],
-    organizations: Organization[],
-    people: Person[],
-    portfolio: PortfolioItem[],
-    testimonials: Testimonial[],
+    images: Images,
+    links: Links,
+    organizations: Organizations,
+    people: People,
+    portfolio: Portfolio,
+    testimonials: Testimonials,
+    redirects?: Redirects,
     main: MainItem
 }

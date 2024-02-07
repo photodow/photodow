@@ -7,3 +7,5 @@ export type Testimonial = {
     person: Person,
     quote: string
 }
+
+export type Testimonials = Record<TestimonialKey, Testimonial>;

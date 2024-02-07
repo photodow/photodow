@@ -5,7 +5,7 @@ import "./index.scss";
 import CloseIcon from "../CloseIcon";
 import { useRef, KeyboardEvent, FocusEvent, RefObject, useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
-import Links from "../Links";
+import LinksByRef from "../LinksByRef";
 
 type Comp = {
   open: boolean,
@@ -37,8 +37,8 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
 
         <div className="cds--row">
           <div className="cds--col-sm-4">
-            <Links
-              context="navigation"
+            <LinksByRef
+              refs={siteData.main.navigation}
               className="jd-nav__items"
               text={true}
               onClick={() => closeNav()}
@@ -47,8 +47,8 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         </div>
         <div className="cds--row">
           <div className="cds--col-sm-4">
-            <Links
-              context="social"
+            <LinksByRef
+              refs={siteData.main.social}
               className="jd-nav__social"
               icon={true}
             />
@@ -56,8 +56,8 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         </div>
         <div className="cds--row">
           <div className="cds--col-sm-4">
-            <Links
-              context="contact"
+            <LinksByRef
+              refs={siteData.main.contact}
               className="jd-nav__contact"
               value={true}
             />

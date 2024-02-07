@@ -7,3 +7,5 @@ export type Organization = {
     name: string,
     link?: Link
 }
+
+export type Organizations = Record<OrgKey, Organization>;

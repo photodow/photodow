@@ -1,0 +1,74 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
+
+.jd-portfolio-card {
+  background: theme.$layer-01;
+  border-radius: spacing.$spacing-03;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease-in-out, background 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.025);
+    background: theme.$layer-hover-01;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  &__cover {
+    height: auto;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    padding: spacing.$spacing-03 * 2;
+    padding-bottom: spacing.$spacing-03;
+  }
+
+  &__title {
+    margin: 0;
+    padding: 0;
+    color: theme.$text-primary;
+    margin-bottom: spacing.$spacing-03 / 2;
+    @include type.type-style("heading-compact-01");
+  }
+
+  &__description {
+    color: theme.$text-secondary;
+    margin: 0;
+    padding: 0;
+    margin-bottom: spacing.$spacing-03;
+    @include type.type-style("body-compact-01");
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &__actions {
+    margin-top: spacing.$spacing-03 * 3;
+    text-align: right;
+
+    li {
+      margin-left: spacing.$spacing-03 * 2;
+      display: inline-block;
+    }
+
+    a {
+      width: 100%;
+    }
+
+    svg {
+      margin-right: spacing.$spacing-03 / 2;
+    }
+  }
+}

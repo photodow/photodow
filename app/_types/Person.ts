@@ -9,3 +9,5 @@ export type Person = {
     location?: string,
     link?: Link
 }
+
+export type People = Record<PersonKey, Person>;

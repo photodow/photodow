@@ -6,3 +6,5 @@ export type Image = {
     alt: string,
     caption?: string,
 }
+
+export type Images = Record<ImageKey, Image>;

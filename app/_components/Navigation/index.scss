@@ -115,6 +115,9 @@ $linkListBase: "jd-linklist";
 
       svg {
         display: block;
+        height: spacing.$spacing-03 * 4;
+        width: auto;
+        aspect-ratio: 1 / 1;
       }
 
       &:visited {

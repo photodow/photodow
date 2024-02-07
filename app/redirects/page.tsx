@@ -46,28 +46,28 @@ export default function Resume() {
       return renderEmptyState();
     }
 
-    links = links.filter(({ key, description, title, url }) => {
+    links = links.filter(({ _key, description, title, url }) => {
       const value = searchValue.toLowerCase();
       return (
         description.toLowerCase().indexOf(value) > -1
         || title.toLowerCase().indexOf(value) > -1
         || url.toLowerCase().indexOf(value) > -1
-        || (key && key.toLowerCase().indexOf(value) > -1)
+        || (_key && _key.toLowerCase().indexOf(value) > -1)
       )
     });
 
     return !links.length ? renderEmptyState() : 
       <ul className="cds--row jd-redirects__items">
-        {links.map(({ key, description, title, url }) => {
+        {links.map(({ _key, description, title, url }) => {
           return (
-            <li key={key} className="jd-redirects__item cds--col-sm-4 cds--col-md-4 cds--col-lg-4">
+            <li key={_key} className="jd-redirects__item cds--col-sm-4 cds--col-md-4 cds--col-lg-4">
               <div className="jd-redirects__item-inner">
-                <h2 className="jd-redirects__key">{key}</h2>
+                <h2 className="jd-redirects__key">{_key}</h2>
                 <h3 className="jd-redirects__title">
                   <Link href={url} target="_blank">{title}</Link>
                 </h3>
                 <p className="jd-redirects__desc">{description}</p>
-                <p className="jd-redirects__redirect-link"><Link href={`https://jamesdow.me?r=${key}`} target="_blank">{`jamesdow.me?r=${key}`}</Link></p>
+                <p className="jd-redirects__redirect-link"><Link href={`https://jamesdow.me?r=${_key}`} target="_blank">{`jamesdow.me?r=${_key}`}</Link></p>
               </div>
             </li>
           );
