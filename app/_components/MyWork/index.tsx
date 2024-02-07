@@ -14,7 +14,7 @@ export default function MyWork() {
         <div className="cds--grid">
           <div className="cds--row">
             <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-4 cds--offset-lg-2">
-              <h2 className="jd-work__title jd-body__section-title" id="my-work">My Work</h2>
+              <h2 className="jd-work__title jd-body__section-title" id="work">My Work</h2>
             </div>
           </div>
         </div>
