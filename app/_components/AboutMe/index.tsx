@@ -13,7 +13,7 @@ export default function AboutMe() {
   const description = siteData?.main?.description;
 
   return (
-    <article className="jd-about" data-carbon-theme="g10">
+    <article className="jd-about" data-carbon-theme="g10" id="about">
       <div className="jd-about__inner">
         <div className="cds--grid">
           <div className="cds--row">
