@@ -2,8 +2,8 @@
 
 import "./index.scss";
 
-import { PortfolioCard, PortfolioItem } from "../../_types/Portfolio";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { PortfolioCard } from "../../_types/Portfolio";
+import { useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import { Ref, RefList } from "../../_types/Ref";
 import GetRefs from "../../_utils/getRefs";
@@ -12,22 +12,9 @@ import LinksByRef from "../LinksByRef";
 
 export default function PortfolioCard({ image, title, description, actions }: PortfolioCard) {
   const siteData = useContext(SiteDataContext);
-  const cardRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  const setObserver = useCallback(() => {
-    const observer = new IntersectionObserver(entries => {
-      setVisible(entries[0].isIntersecting);
-    });
-    observer.observe(cardRef.current as Element);
-  }, []);
-
-  useEffect(() => {
-    setObserver();
-  }, [setObserver]);
 
   return (
-    <article ref={cardRef} className={`jd-portfolio-card${visible ? ' visible' : ''}`}>
+    <article className={`jd-portfolio-card jd-fade-in`}>
         <div className="jd-portfolio-card__cover">
           {renderCover(image)}
         </div>

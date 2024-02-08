@@ -18,9 +18,9 @@ export default function AboutMe() {
         <div className="cds--grid">
           <div className="cds--row">
             <div className="cds--col-sm-4 cds--offset-md-3 cds--col-md-5 cds--col-lg-8 cds--offset-xlg-5">
-              {title && <h1 className="jd-about__name">{siteData?.main?.title}</h1>}
-              {subtitle && <h2 className="jd-about__role">{siteData?.main?.subtitle}</h2>}
-              {description && <p className="jd-about__desc">{siteData?.main?.description}</p>}
+              {title && <h1 className="jd-about__name jd-fade-in">{siteData?.main?.title}</h1>}
+              {subtitle && <h2 className="jd-about__role jd-fade-in">{siteData?.main?.subtitle}</h2>}
+              {description && <p className="jd-about__desc jd-fade-in">{siteData?.main?.description}</p>}
             </div>
           </div>
         </div>
