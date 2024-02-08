@@ -1,6 +1,10 @@
 let interObserver: IntersectionObserver | null = null;
 const visible = 'visible';
 const className = 'jd-fade-in';
+const interOptions = {
+    // rootMargin: '20% 0% 20% 0%'
+    threshold: .5
+}
 
 export function createFadeInObserver () {
     const main = document.querySelector('.jd-main');
@@ -14,7 +18,7 @@ export function createFadeInObserver () {
                 classList.remove(visible);
             }
         }
-    });
+    }, interOptions);
 
     const mutObserver = new MutationObserver((mutationList) => {
         for (const mutation of mutationList) {
@@ -28,7 +32,6 @@ export function createFadeInObserver () {
 
     main && mutObserver.observe(main, {
         childList: true,
-        attributes: true,
         subtree: true,
     });
 }
