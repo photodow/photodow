@@ -55,7 +55,7 @@ export default function LinksByRef({ refs = [], className, onClick, text = null,
               kind={kind}
               size={size}
               >
-              {icon && _icon && <Icon iconRef={_icon} />}
+              {icon && _icon && <Icon iconRef={_icon} size={16} />}
               {text && _text && _text}
               {value && _value && _value}
             </Component>

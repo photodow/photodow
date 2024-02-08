@@ -11,10 +11,6 @@ import { SiteDataContext } from "../../_utils/contexts";
 import { PortfolioItem } from "../../_types/Portfolio";
 import GetRefs from "../../_utils/getRefs";
 import { Ref, RefList } from "../../_types/Ref";
-import { Link as LinkObj } from "../../_types/Link";
-import { Link } from "@carbon/react";
-import { Image } from "../../_types/Image";
-import { Icon } from "../Icon";
 import PortfolioCard from "../PortfolioCard";
 
 export default function PortfolioGrid() {
