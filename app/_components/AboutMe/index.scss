@@ -14,7 +14,7 @@
     min-width: 100vw;
     padding: $padding 0;
     background-color: theme.$background;
-    padding-bottom: 75vh;
+    padding-bottom: 60vh;
 
     clip-path: polygon(
       0% 0%,
@@ -39,13 +39,15 @@
       left: 0;
       right: 0;
       bottom: 0;
+      margin: auto;
       background-image: url("/jamesdow.png");
       background-position: bottom center;
       background-repeat: no-repeat;
       background-size: contain;
       transform: scaleX(-1);
-      height: 75vh;
-      width: 100vw;
+      height: 60vh;
+      width: auto;
+      aspect-ratio: 1 / 1;
 
       @include breakpoint("md") {
         background-position: bottom right;
@@ -54,8 +56,6 @@
         bottom: auto;
         min-height: 90vh;
         height: 100%;
-        width: auto;
-        aspect-ratio: 1 / 1;
         left: auto;
         right: (100 / 8 * 5) + vw; // more exact number? Might need it down the road
 
