@@ -97,7 +97,6 @@ export async function getData (key: string): Promise<any> {
     const cache = JSON.parse(localStore().getItem('c') || '{}') || {};
 
     if (cache[key]) {
-        console.log('cache', cache[key]);
         return cache[key];
     }
 

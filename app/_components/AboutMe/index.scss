@@ -5,6 +5,7 @@
 
 .jd-about {
   $padding: spacing.$spacing-03 * 8;
+  $imageSize: 55vh;
 
   color: theme.$text-primary;
   position: relative;
@@ -14,7 +15,9 @@
     min-width: 100vw;
     padding: $padding 0;
     background-color: theme.$background;
-    padding-bottom: 60vh;
+    padding-bottom: $imageSize;
+
+    display: grid;
     overflow: hidden;
 
     clip-path: polygon(
@@ -31,33 +34,33 @@
 
     @include breakpoint("md") {
       padding-bottom: $padding;
-      display: grid;
     }
 
-    &::before {
+    &::after {
       content: "";
       position: absolute;
-      left: 0;
       right: 0;
       bottom: 0;
-      margin: auto;
       background-image: url("/jamesdow.png");
-      background-position: bottom center;
+      background-position: bottom right 64px;
       background-repeat: no-repeat;
       background-size: contain;
       transform: scaleX(-1);
-      height: 60vh;
-      width: auto;
+      height: $imageSize + 5vh;
+      max-width: 100%;
       aspect-ratio: 1 / 1;
 
       @include breakpoint("md") {
+        position: absolute;
         background-position: bottom right;
         background-size: contain;
         top: 0;
         bottom: auto;
+        margin: auto;
         min-height: 90vh;
         height: 100%;
-        left: auto;
+        width: auto;
+        aspect-ratio: 1 / 1;
         right: (100 / 8 * 5) + vw; // more exact number? Might need it down the road
 
         transform: scaleX(1);
