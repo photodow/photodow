@@ -5,5 +5,6 @@ export default function resetData () {
     if (urlParams().has('clear')) {
         localStore().removeItem("id");
         localStore().removeItem("siteData");
+        localStore().removeItem("c");
     }
 }

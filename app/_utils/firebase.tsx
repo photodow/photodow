@@ -2,14 +2,13 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { SiteData } from "../_types/SiteData";
-import { Experience, Experiences } from "../_types/Experience";
-import { Image, Images } from "../_types/Image";
-import { Link, Links } from "../_types/Link";
+import { Experiences } from "../_types/Experience";
+import { Images } from "../_types/Image";
+import { Links } from "../_types/Link";
 import { Organization, Organizations } from "../_types/Organization";
-import { People, Person } from "../_types/Person";
-import { Portfolio, PortfolioItem } from "../_types/Portfolio";
-import { Testimonial, Testimonials } from "../_types/Testimonial";
-import { sendGTMEvent } from '@next/third-parties/google'
+import { People } from "../_types/Person";
+import { Portfolio } from "../_types/Portfolio";
+import { Testimonials } from "../_types/Testimonial";
 import getDataId from "./getDataId";
 import resetData from "./resetData";
 import localStore from "./localStore";
@@ -94,6 +93,14 @@ export async function getOrgData (orgs: Organizations, key: string | undefined):
 }
 
 export async function getData (key: string): Promise<any> {
+
+    const cache = JSON.parse(localStore().getItem('c') || '{}') || {};
+
+    if (cache[key]) {
+        console.log('cache', cache[key]);
+        return cache[key];
+    }
+
     const starCountRef = ref(db, key);
 
     return new Promise((resolve) => {
@@ -104,6 +111,9 @@ export async function getData (key: string): Promise<any> {
                 data = snapshot.val();
             }
 
+            cache[key] = data;
+
+            localStore().setItem('c', JSON.stringify(cache));
             resolve(data);
         });
     });
