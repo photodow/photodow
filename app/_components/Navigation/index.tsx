@@ -41,7 +41,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
               refs={siteData.main.navigation}
               className="jd-nav__items"
               text={true}
-              onClick={() => closeNav()}
+              onClick={(e) => closeNav(e)}
             />
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
     </nav>
   );
 
-  function closeNav () {
+  function closeNav (e?: MouseEvent) {
     // focus on eightBitMe
     toggleNav();
   }

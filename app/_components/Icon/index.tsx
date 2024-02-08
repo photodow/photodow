@@ -9,6 +9,7 @@ import LogoLinkedin from "@carbon/icons-react/lib/LogoLinkedin";
 import Download from "@carbon/icons-react/lib/Download";
 import Rocket from "@carbon/icons-react/lib/Rocket";
 import Launch from "@carbon/icons-react/lib/Launch";
+import View from "@carbon/icons-react/lib/View";
 
 export const enum IconKeys {
     GitHub = 'github',
@@ -18,6 +19,7 @@ export const enum IconKeys {
     Download = 'download',
     Rocket = 'rocket',
     Launch = 'launch',
+    View = 'view',
 }
 interface Comp {
     iconRef: IconKeys,
@@ -32,6 +34,7 @@ const icons: Record<IconKeys, JSXElementConstructor<any>> = {
     [IconKeys.Install]: Download,
     [IconKeys.Launch]: Launch,
     [IconKeys.Rocket]: Rocket,
+    [IconKeys.View]: View,
 }
 
 export function Icon({ iconRef, size }: Comp) {

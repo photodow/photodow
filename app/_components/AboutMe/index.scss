@@ -15,6 +15,7 @@
     padding: $padding 0;
     background-color: theme.$background;
     padding-bottom: 60vh;
+    overflow: hidden;
 
     clip-path: polygon(
       0% 0%,
