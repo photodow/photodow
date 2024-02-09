@@ -6,8 +6,7 @@ import { MouseEventHandler, useCallback, useContext, useEffect, useRef, useState
 import { SiteDataContext } from "../../_utils/contexts";
 import GetRefs from "../../_utils/getRefs";
 import { Ref, RefList } from "../../_types/Ref";
-import { LinkComp, Link as LinkData, LinkKind, LinkSize } from "../../_types/Link";
-import { MainItem } from "../../_types/Main";
+import { LinkComp, Link as LinkData } from "../../_types/Link";
 import { Button, Link } from "@carbon/react";
 import { Icon } from "../Icon";
 

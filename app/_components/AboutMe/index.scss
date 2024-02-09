@@ -119,4 +119,12 @@
     background: rgba(0, 0, 0, 1);
     transform: rotate(-2.5deg);
   }
+
+  .jd-linklist {
+    margin-bottom: spacing.$spacing-03 * 2;
+
+    &__item {
+      display: inline-block;
+    }
+  }
 }

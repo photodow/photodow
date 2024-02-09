@@ -10,6 +10,9 @@ import Download from "@carbon/icons-react/lib/Download";
 import Rocket from "@carbon/icons-react/lib/Rocket";
 import Launch from "@carbon/icons-react/lib/Launch";
 import View from "@carbon/icons-react/lib/View";
+import Document from "@carbon/icons-react/lib/Document";
+import DownloadDocument from "@carbon/icons-react/lib/DocumentDownload";
+import ArrowDown from "@carbon/icons-react/lib/ArrowDown";
 
 export const enum IconKeys {
     GitHub = 'github',
@@ -20,6 +23,9 @@ export const enum IconKeys {
     Rocket = 'rocket',
     Launch = 'launch',
     View = 'view',
+    Document = 'document',
+    DownloadDocument = 'download-document',
+    ArrowDown = 'arrow-down',
 }
 interface Comp {
     iconRef: IconKeys,
@@ -35,6 +41,9 @@ const icons: Record<IconKeys, JSXElementConstructor<any>> = {
     [IconKeys.Launch]: Launch,
     [IconKeys.Rocket]: Rocket,
     [IconKeys.View]: View,
+    [IconKeys.Document]: Document,
+    [IconKeys.DownloadDocument]: DownloadDocument,
+    [IconKeys.ArrowDown]: ArrowDown,
 }
 
 export function Icon({ iconRef, size }: Comp) {
