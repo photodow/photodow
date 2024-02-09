@@ -1,6 +1,7 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/breakpoint" as *;
 
 .jd-work {
   $sectionPadding: spacing.$spacing-03 * 8;
@@ -11,5 +12,22 @@
     margin: 0;
     padding: 0;
     padding-bottom: $sectionPadding / 2;
+  }
+
+  &__search {
+    width: auto;
+    margin-bottom: spacing.$spacing-03;
+
+    @include breakpoint("md") {
+      margin-left: spacing.$spacing-03 * -2;
+    }
+
+    input {
+      border-radius: spacing.$spacing-03;
+    }
+
+    button {
+      border-radius: 0 spacing.$spacing-03 spacing.$spacing-03 0;
+    }
   }
 }

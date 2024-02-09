@@ -11,7 +11,6 @@ interface Comp {
 }
 
 export default function Skills ({ items, size, color, className }: Comp) {
-  console.log(items);
   return (
     <div className="jd-skills">
       {items?.length && items.map((skill, i) =>
