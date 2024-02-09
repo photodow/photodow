@@ -21,6 +21,7 @@ export type PortfolioCard = {
     title: string,
     description?: Markdown,
     actions?: Ref[],
+    skills?: string[]
 }
 
 export type PortfolioItem = {

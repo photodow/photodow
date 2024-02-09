@@ -9,12 +9,14 @@ import { Ref, RefList } from "../../_types/Ref";
 import GetRefs from "../../_utils/getRefs";
 import { Image } from "../../_types/Image";
 import LinksByRef from "../LinksByRef";
+import Skills from "../Skills";
 
-export default function PortfolioCard({ image, title, description, actions }: PortfolioCard) {
+export default function PortfolioCard({ image, title, description, actions, skills }: PortfolioCard) {
   const siteData = useContext(SiteDataContext);
 
   return (
     <article className={`jd-portfolio-card`}>
+        <Skills items={skills} color="blue" size="sm" />
         <div className="jd-portfolio-card__cover">
           {renderCover(image)}
         </div>

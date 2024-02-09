@@ -2,11 +2,14 @@
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
 
-.jd-portfolio-card {
+$base: jd-portfolio-card;
+
+.#{$base} {
   background: theme.$layer-01;
   border-radius: spacing.$spacing-03;
   overflow: hidden;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  position: relative;
   transition: transform 0.5s ease-in-out, background 0.5s ease-in-out,
     box-shadow 0.5s ease-in-out;
 
@@ -14,6 +17,13 @@
     transform: scale(1.025);
     background: theme.$layer-hover-01;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+
+    .jd-skills {
+      .cds--tag {
+        opacity: 1;
+        transform: translateX(spacing.$spacing-03);
+      }
+    }
   }
 
   &__cover {
@@ -69,6 +79,22 @@
 
     svg {
       margin-right: spacing.$spacing-03 / 2;
+    }
+  }
+
+  .jd-skills {
+    position: absolute;
+    z-index: 1;
+    top: spacing.$spacing-03 / 2;
+    left: 0;
+
+    .cds--tag {
+      @include type.type-style("label-01");
+      margin-left: 0;
+      opacity: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+      transform: translateX(spacing.$spacing-03 / 2);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     }
   }
 }
