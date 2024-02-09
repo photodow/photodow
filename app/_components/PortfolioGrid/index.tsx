@@ -43,7 +43,7 @@ export default function PortfolioGrid() {
         <ul className="jd-portfolio-grid__items cds--col-sm-3 cds--offset-md-1 cds--col-md-6 cds--offset-lg-2 cds--col-lg-12">
             {!items.length ? null : items.map(({ card }) => {
                 return (
-                  <li className="jd-portfolio-grid__item" key={card.title}>
+                  <li className="jd-portfolio-grid__item jd-fade-in" key={card.title}>
                       <PortfolioCard {...card} />
                   </li>
                 )

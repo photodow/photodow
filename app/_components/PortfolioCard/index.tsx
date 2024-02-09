@@ -14,7 +14,7 @@ export default function PortfolioCard({ image, title, description, actions }: Po
   const siteData = useContext(SiteDataContext);
 
   return (
-    <article className={`jd-portfolio-card jd-fade-in`}>
+    <article className={`jd-portfolio-card`}>
         <div className="jd-portfolio-card__cover">
           {renderCover(image)}
         </div>
