@@ -6,10 +6,8 @@
 .jd-portfolio-grid {
   &__items {
     list-style-type: none;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    margin: 0;
+    padding: 0;
     column-gap: spacing.$spacing-03 * 4;
 
     @include breakpoint("md") {
@@ -23,9 +21,45 @@
 
   &__item {
     margin-bottom: spacing.$spacing-03 * 2;
+    opacity: 1 !important;
 
     @include breakpoint("md") {
       margin-left: spacing.$spacing-03 * 2 * -1;
+    }
+  }
+}
+
+.jd-portfolio-grid__loading {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+
+  .jd-portfolio-grid--active & {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__inner {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .cds--skeleton__placeholder {
+    width: auto;
+    margin-left: spacing.$spacing-03 * -2;
+    border-radius: spacing.$spacing-03;
+    overflow: hidden;
+    min-height: spacing.$spacing-03 * 30;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+    &:first-child {
+      min-height: spacing.$spacing-03 * 32;
+    }
+
+    &:last-child {
+      min-height: spacing.$spacing-03 * 35;
     }
   }
 }

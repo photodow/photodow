@@ -10,6 +10,7 @@ $base: jd-portfolio-card;
   overflow: hidden;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   position: relative;
+  min-height: 200px;
   transition: transform 0.5s ease-in-out, background 0.5s ease-in-out,
     box-shadow 0.5s ease-in-out;
 
@@ -19,6 +20,10 @@ $base: jd-portfolio-card;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
 
     .jd-skills {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0s ease-in-out, visibility 0s ease-in-out; // in
+
       .cds--tag {
         opacity: 1;
         transform: translateX(spacing.$spacing-03);
@@ -87,14 +92,33 @@ $base: jd-portfolio-card;
     z-index: 1;
     top: spacing.$spacing-03 / 2;
     left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; // out
 
     .cds--tag {
-      @include type.type-style("label-01");
+      @include type.type-style("helper-text-01");
       margin-left: 0;
       opacity: 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
       transform: translateX(spacing.$spacing-03 / 2);
       transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    }
+  }
+
+  &__loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+
+    .visible .active & {
+      opacity: 0;
+      visibility: hidden;
     }
   }
 }

@@ -30,6 +30,12 @@
 
     & > .cds--grid {
       margin: auto;
+      width: 100%;
+    }
+
+    [class*="cds--col-"] {
+      position: relative;
+      min-height: spacing.$spacing-03 * 53;
     }
 
     @include breakpoint("md") {
@@ -113,6 +119,50 @@
 
     &__item {
       display: inline-block;
+    }
+  }
+
+  .jd-skills .cds--tag {
+    margin-left: 0;
+  }
+}
+
+.jd-about-skeleton {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  padding: 0 16px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+
+  .jd-about--visible & {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__title {
+    min-height: spacing.$spacing-03 * 8;
+    max-width: 50%;
+    margin: 0;
+  }
+
+  &__subtitle {
+    max-width: 75%;
+    min-height: spacing.$spacing-03 * 5;
+    margin: spacing.$spacing-03 0;
+  }
+
+  &__content {
+    min-height: spacing.$spacing-03 * 3;
+
+    &:first-child {
+      margin-top: spacing.$spacing-03 * 3;
+    }
+
+    &:last-child {
+      margin-bottom: spacing.$spacing-03 * 6;
     }
   }
 }

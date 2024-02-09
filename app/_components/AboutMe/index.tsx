@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import LinksByRef from "../LinksByRef";
 import Skills from "../Skills";
+import AboutLoading from "./loading";
 
 export default function AboutMe() {
   const siteData = useContext(SiteDataContext);
@@ -17,11 +18,12 @@ export default function AboutMe() {
   const skills = siteData?.main.skills;
 
   return (
-    <article className="jd-about" data-carbon-theme="g10" id="about">
+    <article className={`jd-about${siteData ? ' jd-about--visible' : ''}`} data-carbon-theme="g10" id="about">
       <div className="jd-about__inner">
         <div className="cds--grid">
           <div className="cds--row">
             <div className="cds--col-sm-4 cds--offset-md-3 cds--col-md-5 cds--col-lg-8 cds--offset-xlg-5">
+              <AboutLoading />
               {title && <h1 className="jd-about__name jd-fade-in">{title}</h1>}
               {subtitle && <h2 className="jd-about__role jd-fade-in">{subtitle}</h2>}
               {skills && <Skills items={skills} color="warm-gray" className="jd-fade-in" />}

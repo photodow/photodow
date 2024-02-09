@@ -1,6 +1,7 @@
 @use "@carbon/styles/scss/grid";
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/themes" as *;
 @use "@carbon/styles/scss/theme";
 
@@ -65,4 +66,8 @@ body {
 img {
   max-width: 100%;
   display: block;
+}
+
+.cds--btn {
+  border-radius: spacing.$spacing-03;
 }
