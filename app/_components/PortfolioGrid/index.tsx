@@ -52,7 +52,7 @@ export default function PortfolioGrid({ filterBy = '', isLoading }: Comp) {
     <article className={`jd-portfolio-grid${!isLoading ? ' jd-portfolio-grid--active' : ''}`}>
         <div className="cds--grid">
           <div className="cds--row">
-            <div className="cds--col-sm-3 cds--offset-md-1 cds--col-md-6 cds--offset-lg-2 cds--col-lg-12">
+            <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-6 cds--offset-lg-2 cds--col-lg-12">
             <LoadingPortfolioGrid className="jd-portfolio-grid__items" />
             {renderPortfolioGridItems()}
             </div>

@@ -22,7 +22,7 @@ export default function MyWork() {
             <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-3 cds--offset-lg-2 cds--col-lg-8">
               <h2 className="jd-work__title jd-body__section-title">My Projects</h2>
             </div>
-            <div className="cds--col-sm-3 cds--col-md-3 cds--col-lg-4">
+            <div className="cds--col-sm-4 cds--col-md-3 cds--col-lg-4">
               <Search
                 className="jd-work__search"
                 labelText=''

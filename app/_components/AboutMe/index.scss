@@ -13,10 +13,8 @@
   &__inner {
     min-height: 100vh;
     min-width: 100vw;
-    padding: $padding 0;
     background-color: theme.$background;
     padding-bottom: $imageSize;
-
     display: grid;
     overflow: hidden;
 
@@ -39,11 +37,12 @@
     }
 
     @include breakpoint("md") {
-      padding-bottom: $padding;
+      padding: $padding 0;
     }
 
     &::after {
       content: "";
+      overflow: hidden;
       position: absolute;
       right: 0;
       bottom: 0;
