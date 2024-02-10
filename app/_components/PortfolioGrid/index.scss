@@ -93,17 +93,27 @@ $base: jd-portfolio-grid;
     overflow: hidden;
     min-height: spacing.$spacing-03 * 30;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-
-    @include breakpoint("md") {
-      margin-left: spacing.$spacing-03 * -2;
-    }
+    display: none;
 
     &:first-child {
       min-height: spacing.$spacing-03 * 32;
+      display: block;
     }
 
     &:last-child {
       min-height: spacing.$spacing-03 * 35;
+    }
+
+    @include breakpoint("md") {
+      margin-left: spacing.$spacing-03 * -2;
+
+      &:last-child {
+        display: block;
+      }
+    }
+
+    @include breakpoint("lg") {
+      display: block;
     }
   }
 }
