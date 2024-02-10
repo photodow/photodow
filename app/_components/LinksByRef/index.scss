@@ -13,4 +13,14 @@
     fill: currentColor !important;
     margin-right: spacing.$spacing-03 / 2;
   }
+
+  .cds--btn {
+    transform: scale(1);
+    transition: transform 0.25s ease-in-out;
+    margin-right: spacing.$spacing-03;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
