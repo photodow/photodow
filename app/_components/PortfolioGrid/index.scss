@@ -39,6 +39,8 @@ $base: jd-portfolio-grid;
   }
 
   &__empty {
+    position: relative;
+    z-index: 3;
     text-align: center;
     width: 80%;
     max-width: spacing.$spacing-03 * 50;
@@ -72,7 +74,16 @@ $base: jd-portfolio-grid;
     z-index: 1;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    // todo hide wrapping loading cards.
+
+    @include breakpoint("md") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint("lg") {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .cds--skeleton__placeholder {
