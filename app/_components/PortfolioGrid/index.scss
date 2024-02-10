@@ -39,6 +39,7 @@ $base: jd-portfolio-grid;
 
   &__empty {
     text-align: center;
+    width: 80%;
     max-width: spacing.$spacing-03 * 50;
     margin: spacing.$spacing-03 * 10 auto;
     opacity: 0;
@@ -73,11 +74,15 @@ $base: jd-portfolio-grid;
 
   .cds--skeleton__placeholder {
     width: auto;
-    margin-left: spacing.$spacing-03 * -2;
+    margin-bottom: spacing.$spacing-03 * 2;
     border-radius: spacing.$spacing-03;
     overflow: hidden;
     min-height: spacing.$spacing-03 * 30;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+    @include breakpoint("md") {
+      margin-left: spacing.$spacing-03 * -2;
+    }
 
     &:first-child {
       min-height: spacing.$spacing-03 * 32;

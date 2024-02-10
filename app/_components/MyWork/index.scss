@@ -16,7 +16,7 @@
 
   &__search {
     width: auto;
-    margin-bottom: spacing.$spacing-03;
+    margin-bottom: spacing.$spacing-03 * 2;
 
     @include breakpoint("md") {
       margin-left: spacing.$spacing-03 * -2;
