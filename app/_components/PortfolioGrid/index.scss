@@ -71,6 +71,8 @@ $base: jd-portfolio-grid;
     position: absolute;
     z-index: 1;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .cds--skeleton__placeholder {
