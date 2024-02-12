@@ -12,6 +12,7 @@ export type MainItem = {
     title: string,
     subtitle: string,
     description: Markdown,
+    resume: string,
     _metaOverride?: {
         orgKey: OrgKey,
         org?: Organization,
