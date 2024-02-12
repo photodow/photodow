@@ -17,9 +17,10 @@ interface Comp {
   text?: true | null,
   value?: true | null
   onClick?: MouseEventHandler
+  delay?: boolean
 }
 
-export default function LinksByRef({ refs = [], className, onClick, text = null, icon = null, value = null }: Comp) {
+export default function LinksByRef({ refs = [], className, onClick, text = null, icon = null, value = null, delay = false }: Comp) {
   const siteData = useContext(SiteDataContext);
 
   if (!siteData) {
@@ -53,7 +54,7 @@ export default function LinksByRef({ refs = [], className, onClick, text = null,
               onClick={onClick}
               kind={kind}
               size={size}
-              style={{ transitionDelay: `${i * .2}s`}}
+              style={delay ? { transitionDelay: `${i * .2}s`} : {}}
             >
               {icon && _icon && <Icon iconRef={_icon} size={16} />}
               {text && _text && _text}

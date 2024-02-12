@@ -28,7 +28,7 @@ export default function AboutMe() {
               {subtitle && <h2 className="jd-about__role jd-fade-in">{subtitle}</h2>}
               {skills && <Skills items={skills} color="warm-gray" className="jd-fade-in" />}
               {description && <p className="jd-about__desc jd-fade-in">{description}</p>}
-              {actions && <LinksByRef className="jd-fade-in" refs={actions} text={true} icon={true} />}
+              {actions && <LinksByRef className="jd-fade-in" refs={actions} text={true} icon={true}  />}
             </div>
           </div>
         </div>
