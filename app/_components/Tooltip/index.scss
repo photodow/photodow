@@ -1,7 +1,9 @@
 @use "@carbon/styles/scss/components/tooltip";
+@use "@carbon/styles/scss/spacing";
 
 .cds--tooltip-content {
-  padding: 8px;
+  padding: spacing.$spacing-03;
+  border-radius: spacing.$spacing-03;
 }
 
 .cds--popover--hide .cds--popover {

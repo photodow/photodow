@@ -89,7 +89,7 @@
 
   &__role {
     @include type.type-style("heading-04");
-    margin: spacing.$spacing-03 0;
+    margin: 0 0 spacing.$spacing-03;
   }
 
   &__desc {
