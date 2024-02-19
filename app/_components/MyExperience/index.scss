@@ -1,11 +1,45 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/breakpoint" as *;
 
 .jd-experience {
-  //   &__title {
-  //     @include type.type-style("heading-03");
-  //     font-weight: bold;
-  //     color: theme.$text-secondary;
-  //   }
+  position: relative;
+
+  &__header {
+    // padding-top: 96px;
+    padding-bottom: spacing.$spacing-03 * 4 !important;
+
+    .jd-slant__bg {
+      background: linear-gradient(-45deg, theme.$layer-01, theme.$background);
+    }
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__bottom {
+    min-height: 100vh;
+    display: grid;
+
+    .jd-slant__content {
+      margin: auto 0;
+    }
+
+    .jd-slant__bg {
+      background: theme.$background;
+      background: linear-gradient(0deg, theme.$layer-01, theme.$background);
+    }
+
+    .jd-education {
+      margin-bottom: spacing.$spacing-03 * 6;
+    }
+
+    @include breakpoint("md") {
+      .jd-education {
+        margin-bottom: 0;
+      }
+    }
+  }
 }

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <App>
       <AboutMe />
-      {/* <MyExperience /> */}
+      <MyExperience />
       <MyWork />
     </App>
   );

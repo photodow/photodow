@@ -1,0 +1,53 @@
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/spacing";
+
+.jd-contact {
+  &__title {
+    margin: 0;
+    padding: 0;
+    margin-bottom: spacing.$spacing-03 * 4;
+  }
+
+  &__divider {
+    border: 0;
+    width: 50%;
+    margin: spacing.$spacing-03 * 2 0;
+
+    height: 1px;
+    background: theme.$border-subtle-00;
+  }
+
+  .jd-linklist__item {
+    margin-bottom: spacing.$spacing-03;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    svg {
+      height: spacing.$spacing-03 * 2;
+      width: spacing.$spacing-03 * 2;
+      margin-right: spacing.$spacing-03;
+      margin-top: spacing.$spacing-03 * 0.02;
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    &,
+    &:visited {
+      color: theme.$text-primary;
+    }
+
+    &:hover {
+      color: theme.$link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: theme.$link-primary;
+    }
+  }
+}

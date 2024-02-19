@@ -11,13 +11,13 @@ export default function AboutLoading() {
 
   return (
     <div className="jd-about-skeleton">
-        <SkeletonText heading={true}  className="jd-about-skeleton__title" />
-        <SkeletonText className="jd-about-skeleton__subtitle" />
-        
-        <TagSkeleton /> <TagSkeleton />
+      <SkeletonText heading={true}  className="jd-about-skeleton__title" />
+      <SkeletonText className="jd-about-skeleton__subtitle" />
+      
+      <TagSkeleton /> <TagSkeleton />
 
-        <SkeletonText className="jd-about-skeleton__content" paragraph={true} lineCount={3}  />
-        <ButtonSkeleton /> <ButtonSkeleton />
+      <SkeletonText className="jd-about-skeleton__content" paragraph={true} lineCount={3}  />
+      <ButtonSkeleton /> <ButtonSkeleton />
     </div>
   );
 }

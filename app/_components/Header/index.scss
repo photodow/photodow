@@ -12,6 +12,7 @@ $titleBase: $base + "__title";
   background: theme.$background;
   height: 100vh;
   position: relative;
+  z-index: 100;
 
   &--mini {
     height: 0;

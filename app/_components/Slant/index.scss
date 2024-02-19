@@ -1,0 +1,41 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+
+.jd-slant {
+  $padding: spacing.$spacing-03 * 8;
+
+  position: relative;
+  padding-top: $padding / 2;
+  padding-bottom: $padding * 1.5;
+
+  &__content {
+    z-index: 1;
+    position: relative;
+  }
+
+  &__bg {
+    position: absolute;
+    height: calc(100% + $padding);
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: theme.$background;
+    clip-path: polygon(0% $padding, 100% 0%, 100% 100%, 0% 100%);
+
+    &::before {
+      content: "";
+      filter: blur(10px);
+      border-radius: 50%;
+      width: 100%;
+      max-width: 1000px;
+      height: $padding;
+      position: absolute;
+      top: $padding * -0.25;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background: rgba(0, 0, 0, 1);
+      transform: rotate(-2.5deg);
+    }
+  }
+}

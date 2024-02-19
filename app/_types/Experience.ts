@@ -7,16 +7,17 @@ export type ExpKey = string;
 export const enum experienceType {
     Remote = "Remote",
     Hybrid = "Hybrid",
-    Onsite = "Onsite"
+    Onsite = "On-Site"
 }
 
 export type Experience = {
     _key: ExpKey,
     orgKey: OrgKey,
-    role: string,
+    title: string,
     start: number,
     end: number | 'Present',
     location?: string,
+    credential?: string,
     type?: experienceType,
     description?: Markdown,
     details?: Markdown[],

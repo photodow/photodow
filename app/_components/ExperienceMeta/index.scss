@@ -1,0 +1,42 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
+
+.jd-meta {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  color: theme.$text-secondary;
+  @include type.type-style("body-01");
+
+  a {
+    text-decoration: none;
+
+    &,
+    &:visited {
+      color: theme.$text-secondary;
+    }
+
+    &:hover {
+      color: theme.$link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: theme.$link-primary;
+    }
+  }
+
+  li {
+    display: inline-block;
+
+    &::after {
+      content: " · ";
+      margin-right: (spacing.$spacing-03 / 2);
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+}

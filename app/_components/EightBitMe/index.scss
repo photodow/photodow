@@ -313,4 +313,8 @@ $base: "jd-eightbitme";
       transform: rotate(-10deg);
     }
   }
+
+  @media print {
+    position: absolute;
+  }
 }

@@ -20,7 +20,9 @@ export function createFadeInObserver () {
         for (const mutation of mutationList) {
             if (mutation.type === "childList") {
                 mutation.addedNodes.forEach((node: Node) => {
-                    handleFadeIn(node as Element);
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        handleFadeIn(node as Element);
+                    }
                 });
             }
         }

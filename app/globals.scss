@@ -71,3 +71,15 @@ img {
 .cds--btn {
   border-radius: spacing.$spacing-03;
 }
+
+@media print {
+  html,
+  body {
+    // font-size: 14px;
+  }
+
+  .jd-fade-in {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}

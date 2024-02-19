@@ -7,7 +7,7 @@ import { SiteDataContext } from "../../_utils/contexts";
 import GetRefs from "../../_utils/getRefs";
 import { Ref, RefList } from "../../_types/Ref";
 import { LinkComp, Link as LinkData } from "../../_types/Link";
-import { Button, Link } from "@carbon/react";
+import { Button, Link, LinkProps } from "@carbon/react";
 import { Icon } from "../Icon";
 
 interface Comp {
@@ -15,12 +15,13 @@ interface Comp {
   className?: string,
   icon?: true | null,
   text?: true | null,
-  value?: true | null
-  onClick?: MouseEventHandler
-  delay?: boolean
+  value?: true | null,
+  onClick?: MouseEventHandler,
+  delay?: boolean,
+  size?: LinkProps['size'],
 }
 
-export default function LinksByRef({ refs = [], className, onClick, text = null, icon = null, value = null, delay = false }: Comp) {
+export default function LinksByRef({ refs = [], size, className, onClick, text = null, icon = null, value = null, delay = false }: Comp) {
   const siteData = useContext(SiteDataContext);
 
   if (!siteData) {
@@ -36,7 +37,7 @@ export default function LinksByRef({ refs = [], className, onClick, text = null,
           title,
           comp = LinkComp.Text,
           kind,
-          size,
+          size: _size,
           text: _text,
           value: _value,
           icon: _icon,
@@ -53,7 +54,7 @@ export default function LinksByRef({ refs = [], className, onClick, text = null,
               title={title || _text}
               onClick={onClick}
               kind={kind}
-              size={size}
+              size={size || _size}
               style={delay ? { transitionDelay: `${i * .2}s`} : {}}
             >
               {icon && _icon && <Icon iconRef={_icon} size={16} />}

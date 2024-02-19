@@ -1,0 +1,69 @@
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+
+.jd-education-item {
+  background: theme.$layer-01;
+  border-radius: spacing.$spacing-03;
+  padding: spacing.$spacing-03 * 2;
+  overflow: hidden;
+  position: relative;
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &::before {
+    content: "";
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    mix-blend-mode: overlay;
+    z-index: 0;
+    background: linear-gradient(-25deg, transparent, colors.$white);
+
+    @media print {
+      -webkit-filter: blur(0);
+    }
+  }
+
+  a {
+    text-decoration: none;
+
+    &,
+    &:visited {
+      color: theme.$text-primary;
+    }
+
+    &:hover {
+      color: theme.$link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: theme.$link-primary;
+    }
+  }
+
+  &__org {
+    margin: 0;
+    padding: 0;
+    color: theme.$text-primary;
+
+    @include type.type-style("heading-02");
+  }
+
+  &__title {
+    @include type.type-style("heading-04");
+    margin: 0;
+    padding: 0;
+    margin-bottom: spacing.$spacing-03;
+  }
+
+  &__meta {
+  }
+}
