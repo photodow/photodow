@@ -4,12 +4,13 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import GridOverlay from "./_components/GridOverlay";
 import type { Metadata } from 'next';
 
-const title = `James Dow's | Designer and Developer`;
+const title = `James Dow | Designer and Developer`;
 const description = `James Dow works at the intersection of design and development for companies like Peacock and IBM. James Dow pushes ideas from conception to their existence. James Dow collaborates using HTML, CSS, Javascript, and Design Thinking.`;
-const images = `https://jamesdow.me/james-dow-experiences.png`;
-const url = 'https://jamesdow.me';
+const images = `/james-dow-experiences.png`;
+const url = '/';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jamesdow.com'),
   title: {
     template: '%s | Designer and Developer',
     default: 'James Dow | Designer and Developer',
