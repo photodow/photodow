@@ -28,18 +28,15 @@
 
     &::before {
       content: "";
-      filter: blur(10px);
-      border-radius: 50%;
-      width: 100%;
-      max-width: 1000px;
-      height: $padding;
+      filter: blur(15px);
+      width: 120%;
+      height: spacing.$spacing-03 * 12;
       position: absolute;
-      top: $padding * -0.25;
+      top: spacing.$spacing-03 * -4;
       left: 0;
-      right: 0;
-      margin: auto;
-      background: rgba(0, 0, 0, 1);
-      transform: rotate(-2.5deg);
+      background: rgb(0, 0, 0);
+      transform: rotate(-2deg);
+      transform-origin: bottom left;
     }
   }
 }
