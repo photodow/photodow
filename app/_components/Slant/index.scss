@@ -14,6 +14,7 @@
   }
 
   &__bg {
+    overflow: hidden;
     position: absolute;
     height: calc(100% + $padding);
     width: 100%;
