@@ -22,6 +22,8 @@ export function transformOrgData (orgKey: OrgKey, siteData: SiteData | null): Or
         data.link = (GetRefs([data.link], RefList.Links, siteData) as Link[])[0];
     }
 
+console.log(orgKey, data.image)
+
     if (data.image) {
         data.image = (GetRefs([data.image], RefList.Images, siteData) as Image[])[0];
     }

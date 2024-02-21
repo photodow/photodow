@@ -28,11 +28,11 @@ export default function ExperienceMeta({ className, start, end, location, type, 
     setStartEnd(itemsData, start, end);
 
     if (location) {
-        itemsData.push(<a href={`https://www.google.com/maps/search/${location}`} target="_blank">{location}</a>);
+        itemsData.push(<a href={`https://www.google.com/maps/search/${location}`} target="_blank">{`${location} `}</a>);
     }
 
     if (type) {
-        itemsData.push(type);
+        itemsData.push(`${type} `);
     }
 
     setItems(itemsData);
@@ -42,9 +42,9 @@ export default function ExperienceMeta({ className, start, end, location, type, 
     setEndValueData();
   }, [setEndValueData]);
 
-  return (
+  return !items?.length ? null : (
     <List items={items}
-      className={`jd-meta${!className ? ` ${className}` : ''}`} />
+      className={`jd-meta${className ? ` ${className}` : ''}`} />
   );
 
   function setStartEnd (list: ReactNode[], start?: number, end?: number | string) {
@@ -54,7 +54,7 @@ export default function ExperienceMeta({ className, start, end, location, type, 
 
     const endValue = typeof end === 'number' ? end : new Date().getFullYear();
 
-    list.push(`${endValue - start} yrs`);
-    list.push(`${start}–${end}`);
+    list.push(`${endValue - start} yrs `);
+    list.push(`01/${start}–01/${end} `);
   }
 }

@@ -11,7 +11,7 @@ import { Button, Link, LinkProps } from "@carbon/react";
 import { Icon } from "../Icon";
 
 interface Comp {
-  refs: Ref[] | undefined,
+  refs?: Ref[] | undefined,
   className?: string,
   icon?: true | null,
   text?: true | null,
@@ -24,7 +24,7 @@ interface Comp {
 export default function LinksByRef({ refs = [], size, className, onClick, text = null, icon = null, value = null, delay = false }: Comp) {
   const siteData = useContext(SiteDataContext);
 
-  if (!siteData) {
+  if (!siteData || !refs?.length) {
     return null;
   }
 

@@ -26,7 +26,7 @@ export const enum RefList {
 
 export type Ref = {
     _key: KeyRef,
-    _override?: Overrides,
+    _override?: Partial<Overrides>,
     active?: boolean,
     order?: number,
 }

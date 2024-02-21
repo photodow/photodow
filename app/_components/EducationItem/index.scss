@@ -9,6 +9,18 @@
   padding: spacing.$spacing-03 * 2;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 spacing.$spacing-03 * 2 spacing.$spacing-03 * 4
+      rgba(0, 0, 0, 0.5);
+
+    &::before {
+      opacity: 0.5;
+    }
+  }
 
   &__content {
     position: relative;
@@ -23,8 +35,10 @@
     width: 100%;
     position: absolute;
     mix-blend-mode: overlay;
+    opacity: 0.25;
     z-index: 0;
-    background: linear-gradient(-25deg, transparent, colors.$white);
+    background: linear-gradient(-25deg, transparent, rgba(colors.$white, 1));
+    transition: opacity 0.5s ease-in-out;
 
     @media print {
       -webkit-filter: blur(0);
@@ -65,5 +79,15 @@
   }
 
   &__meta {
+    color: theme.$text-primary;
+    text-shadow: 0 -1px rgba(colors.$black, 0.2);
   }
+}
+
+#fullsailuniversity {
+  background-color: #f74a00;
+}
+
+#floridacollege {
+  background-color: #f30833;
 }

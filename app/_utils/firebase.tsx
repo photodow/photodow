@@ -1,4 +1,4 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { SiteData } from "../_types/SiteData";
@@ -12,6 +12,9 @@ import { Testimonials } from "../_types/Testimonial";
 import getDataId from "./getDataId";
 import resetData from "./resetData";
 import localStore from "./localStore";
+import { mergeWith } from "lodash";
+import handleOverride from "./handleOverride";
+import { MainItem } from "../_types/Main";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -56,6 +59,8 @@ async function init (): Promise<SiteData> {
     }
 
     if (!buildingData) {
+        const mainItem = await getData(`main/${getDataId()}`) as MainItem;
+
         // refresh data
         buildingData = {
             experiences: await getData(`experiences`) as Experiences,
@@ -65,9 +70,15 @@ async function init (): Promise<SiteData> {
             people: await getData(`people`) as People,
             portfolio: await getData(`portfolio`) as Portfolio,
             testimonials: await getData(`testimonials`) as Testimonials,
-            main: Object.assign(
-                await getData(`main/_default`),
-                await getData(`main/${getDataId()}`)
+            // main: Object.assign(
+            //     {},
+            //     await getData(`main/${mainItem?._base || '_default'}`) as MainItem,
+            //     mainItem
+            // )
+            main: mergeWith(
+                await getData(`main/${mainItem?._base || '_default'}`) as MainItem,
+                mainItem,
+                handleOverride
             )
         };
 

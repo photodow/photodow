@@ -22,6 +22,10 @@
     background: theme.$background;
     clip-path: polygon(0% $padding, 100% 0%, 100% 100%, 0% 100%);
 
+    @media print {
+      -wekit-filter: blur(0);
+    }
+
     &::before {
       content: "";
       filter: blur(10px);

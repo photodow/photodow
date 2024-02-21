@@ -1,5 +1,3 @@
-"use client";
-
 import "./index.scss";
 
 import { JSXElementConstructor } from "react";
@@ -16,6 +14,7 @@ import ArrowDown from "@carbon/icons-react/lib/ArrowDown";
 import Phone from "@carbon/icons-react/lib/Phone";
 import Email from "@carbon/icons-react/lib/Email";
 import Wikis from "@carbon/icons-react/lib/Wikis";
+import Location from "@carbon/icons-react/lib/Location";
 
 export const enum IconKeys {
     GitHub = 'github',
@@ -32,6 +31,7 @@ export const enum IconKeys {
     Phone = 'phone',
     Email = 'email',
     Website = 'website',
+    Map = 'map',
 }
 interface Comp {
     iconRef: IconKeys,
@@ -53,6 +53,7 @@ const icons: Record<IconKeys, JSXElementConstructor<any>> = {
     [IconKeys.Phone]: Phone,
     [IconKeys.Email]: Email,
     [IconKeys.Website]: Wikis,
+    [IconKeys.Map]: Location,
 }
 
 export function Icon({ iconRef, size }: Comp) {

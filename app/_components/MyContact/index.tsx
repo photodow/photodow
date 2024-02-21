@@ -6,9 +6,13 @@ import { useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import LinksByRef from "../LinksByRef";
 import { Ref } from "../../_types/Ref";
+import getDataId from "../../_utils/getDataId";
 
 const websiteRef: Ref = {
-    _key: 'website'
+    _key: 'website',
+    _override: {
+      value:  addUrlId('jamesdow.me')
+    }
 }
 
 export default function MyContact() {
@@ -22,7 +26,7 @@ export default function MyContact() {
         refs={siteData?.main.contact}
         className="jd-contact__links"
         icon={true}
-        value={true}
+        text={true}
         size="md"
       />
       <hr className="jd-contact__divider" />
@@ -35,4 +39,9 @@ export default function MyContact() {
       />
     </article>
   );
+}
+
+function addUrlId (url: string) {
+  const id = getDataId();
+  return url + (id ? `?id=${getDataId()}` : '')
 }

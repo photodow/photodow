@@ -4,6 +4,7 @@ import { PortfolioLayouts } from "./Portfolio"
 import { Ref } from "./Ref"
 
 export type MainItem = {
+    _base?: string,
     lastUpdate: string,
     actions?: Ref[],
     skills?: string[],

@@ -2,7 +2,7 @@
 
 import "./index.scss";
 
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import GetRefs from "../../_utils/getRefs";
 import { RefList } from "../../_types/Ref";
@@ -54,7 +54,7 @@ export default function MyExperience() {
             <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-4 cds--offset-lg-2 cds--col-lg-7">
               <MyEducation />
             </div>
-            <div className="cds--col-sm-4 cds--col-md-2 cds--offset-lg-0 cds--col-lg-3">
+            <div className="cds--col-sm-4 cds--col-md-2 cds--offset-lg-1 cds--col-lg-4">
               <MyContact />
             </div>
           </div>

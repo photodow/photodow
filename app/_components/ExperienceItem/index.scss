@@ -1,7 +1,9 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/type";
-@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
 @use "@carbon/styles/scss/breakpoint" as *;
+@use "@carbon/styles/scss/themes" as *;
+@use "@carbon/styles/scss/theme";
 
 $base: "jd-experience-item";
 
@@ -167,9 +169,82 @@ $base: "jd-experience-item";
     max-width: spacing.$spacing-03 * 60;
     margin: (spacing.$spacing-03 * 2) 0;
 
-    .cds--tag {
-      background: theme.$layer-01;
-      color: theme.$text-secondary;
+    // .cds--tag {
+    //   background: theme.$layer-01;
+    //   color: theme.$text-secondary;
+    // }
+  }
+}
+
+#experience {
+  &-peacock {
+    .jd-slant__bg {
+      background: linear-gradient(45deg, #020202, theme.$background);
     }
+  }
+
+  &-ibm-design {
+    .jd-slant__bg {
+      background: linear-gradient(45deg, colors.$blue-70, colors.$blue-50);
+
+      &::before {
+        opacity: 0.5;
+      }
+    }
+
+    .#{$base} {
+      &__meta {
+        &,
+        a {
+          color: theme.$text-primary;
+        }
+      }
+    }
+
+    // .jd-skills .cds--tag {
+    //   background: rgba(colors.$black, 0.35);
+    // }
+  }
+
+  &-fleetistics {
+    @include theme.theme($g10);
+    color: theme.$text-primary;
+
+    // .#{$base} {
+    //   &__meta {
+    //     &,
+    //     a {
+    //       color: theme.$text-secondary;
+    //     }
+    //   }
+    // }
+
+    .jd-slant__bg {
+      // background: linear-gradient(45deg, #116b9f, #0d5e8d);
+      background: linear-gradient(-45deg, colors.$gray-20, colors.$white);
+
+      &::before {
+        opacity: 0.35;
+      }
+
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   left: 0;
+      //   top: 0;
+      //   width: 100%;
+      //   height: 100%;
+      //   background: linear-gradient(
+      //     -45deg,
+      //     rgba(colors.$black, 0.8),
+      //     rgba(colors.$white, 0.8)
+      //   );
+      //   mix-blend-mode: overlay;
+      // }
+    } // 3394be 116B9F // 0D5E8D
+
+    // .jd-skills .cds--tag {
+    //   background: rgba(colors.$black, 0.35);
+    // }
   }
 }

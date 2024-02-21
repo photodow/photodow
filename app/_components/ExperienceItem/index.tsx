@@ -41,10 +41,11 @@ export default function ExperienceItem({ orgKey, title, description, details, st
               end={end}
               location={location}
               type={type}
+              className="jd-experience-item__meta"
             />
             <Skills items={skills} size={'sm'}
               className="jd-experience-item__skills" />
-            <p className="jd-experience-item__desc">{description}</p>
+            {renderDesc()}
             {renderDetails()}
           </div>
         </div>
@@ -62,6 +63,12 @@ export default function ExperienceItem({ orgKey, title, description, details, st
     return (org.link ?
       <a className="jd-experience-item__logo" href={org.link.protocol + org.link.value} target="_blank">{img}</a> :
       <div className="jd-experience-item__logo">{img}</div>);
+  }
+
+  function renderDesc () {
+    return !description ? null : (
+      <p className="jd-experience-item__desc">{description}</p>
+    )
   }
 
   function renderDetails () {

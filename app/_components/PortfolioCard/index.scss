@@ -8,7 +8,7 @@ $base: jd-portfolio-card;
   background: theme.$layer-01;
   border-radius: spacing.$spacing-03;
   overflow: hidden;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
   position: relative;
   min-height: 200px;
   transition: transform 0.5s ease-in-out, background 0.5s ease-in-out,
@@ -17,7 +17,8 @@ $base: jd-portfolio-card;
   &:hover {
     transform: scale(1.025);
     background: theme.$layer-hover-01;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 spacing.$spacing-03 * 2 spacing.$spacing-03 * 4
+      rgba(0, 0, 0, 0.5);
 
     .jd-skills {
       opacity: 1;
@@ -61,6 +62,7 @@ $base: jd-portfolio-card;
     margin: 0;
     padding: 0;
     margin-bottom: spacing.$spacing-03;
+    min-height: spacing.$spacing-03 * 7;
     @include type.type-style("body-compact-01");
 
     overflow: hidden;

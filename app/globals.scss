@@ -35,6 +35,10 @@
   @include theme.theme($g100);
 }
 
+[data-carbon-theme] {
+  color: theme.$text-primary;
+}
+
 html,
 body {
   scroll-behavior: smooth;
@@ -44,6 +48,8 @@ body {
   margin: 0;
   color: theme.$text-primary;
   background: theme.$background;
+  text-wrap: balance;
+  text-wrap: pretty;
 
   @include type.type-style("body-02");
 }
@@ -73,10 +79,10 @@ img {
 }
 
 @media print {
-  html,
-  body {
-    // font-size: 14px;
-  }
+  // html,
+  // body {
+  //   font-size: 14px;
+  // }
 
   .jd-fade-in {
     opacity: 1 !important;

@@ -59,7 +59,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
             <LinksByRef
               refs={siteData.main.contact}
               className="jd-nav__contact"
-              value={true}
+              text={true}
             />
           </div>
         </div>

@@ -52,7 +52,7 @@ export type Link = {
     icon?: IconKeys // react element, or maybe a key of icons?
     kind?: LinkKind,
     size?: LinkSize,
-    comp?: LinkComp
+    comp?: LinkComp,
 }
 
 export type Links = Record<LinkKey, Link>;

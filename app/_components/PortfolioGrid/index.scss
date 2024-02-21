@@ -11,21 +11,25 @@ $base: jd-portfolio-grid;
     margin: 0;
     padding: 0;
     column-gap: spacing.$spacing-03 * 4;
+    row-gap: spacing.$spacing-03 * 2;
+    display: grid;
 
     @include breakpoint("md") {
       columns: 2;
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @include breakpoint("lg") {
       columns: 3;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   &__item {
-    margin-bottom: spacing.$spacing-03 * 2;
+    height: 100%;
     opacity: 0 !important;
-    display: inline-block;
     visibility: hidden;
+    display: grid;
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
     .#{$base}--active & {
@@ -74,6 +78,7 @@ $base: jd-portfolio-grid;
     z-index: 1;
     width: 100%;
     display: grid;
+    // margin-bottom: spacing.$spacing-03 * 2;
 
     // todo hide wrapping loading cards.
 
@@ -88,7 +93,6 @@ $base: jd-portfolio-grid;
 
   .cds--skeleton__placeholder {
     width: auto;
-    margin-bottom: spacing.$spacing-03 * 2;
     border-radius: spacing.$spacing-03;
     overflow: hidden;
     min-height: spacing.$spacing-03 * 30;
@@ -96,12 +100,12 @@ $base: jd-portfolio-grid;
     display: none;
 
     &:first-child {
-      min-height: spacing.$spacing-03 * 32;
+      // min-height: spacing.$spacing-03 * 32;
       display: block;
     }
 
     &:last-child {
-      min-height: spacing.$spacing-03 * 35;
+      // min-height: spacing.$spacing-03 * 35;
     }
 
     @include breakpoint("md") {

@@ -1,5 +1,7 @@
+import { merge, mergeWith } from "lodash";
 import { KeyRef, Overrides, Ref, RefCollections, RefList } from "../_types/Ref";
 import { SiteData } from "../_types/SiteData";
+import handleOverride from "./handleOverride";
 
 export default function GetRefs (
   overrideRefs: Ref[] = [],
@@ -34,7 +36,9 @@ export default function GetRefs (
         overrideRef.active !== false &&
         defaultKey === overrideKey
       ) {
-        refs.push(Object.assign({}, defaultRef, overrideRef._override) as Overrides);
+        // refs.push(Object.assign({}, defaultRef, overrideRef._override) as Overrides);
+
+        refs.push(mergeWith(Object.assign({}, defaultRef), overrideRef._override, handleOverride) as Overrides);
         break; // should be unique _key, move onto next overrideRef
       }
     }
