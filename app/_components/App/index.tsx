@@ -13,11 +13,6 @@ import redirectIfR from "../../_utils/redirectIfR";
 import urlParams from "../../_utils/urlParams";
 import { createFadeInObserver } from "../../_utils/fadeIn";
 
-// get meta data
-// set meta data
-// then redirect or render page.
-// without flash is preferred in any instance
-
 type Comp = {
   id?: string,
   children?: React.ReactNode,
@@ -27,8 +22,10 @@ type Comp = {
 export default function App({ children, miniHeader }: Comp) {
   const [redirect, setRedirect] = useState<string | null>(null);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
+  const [editableContent, setEditableContent] = useState<boolean>(false);
 
   const setR = useCallback(() => setRedirect(urlParams().get('r')), []);
+  const setToEditContent = useCallback(() => setEditableContent(Boolean(urlParams().get('edit'))), []);
 
   useEffect(() => {
     sendGTMEvent({ 'oid': getDataId() });
@@ -41,12 +38,13 @@ export default function App({ children, miniHeader }: Comp) {
     }
 
     createFadeInObserver();
-  }, [redirect, setR]);
+    setToEditContent();
+  }, [redirect, setR, setToEditContent]);
 
   return (
     <SiteDataContext.Provider value={siteData}>
       <Header mini={miniHeader} redirect={!!redirect} />
-      <main className="jd-main">
+      <main className="jd-main" contentEditable={editableContent}>
         {children}
       </main>
     </SiteDataContext.Provider>

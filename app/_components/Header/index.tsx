@@ -11,10 +11,11 @@ import { MainItem } from "../../_types/Main";
 
 type Comp = {
   mini?: boolean,
-  redirect?: boolean
+  redirect?: boolean,
+  contentEditable?: boolean
 }
 
-export default function Header({ mini = false, redirect }: Comp) {
+export default function Header({ mini = false, redirect, contentEditable = false }: Comp) {
 
   const siteData = useContext(SiteDataContext);
 
@@ -37,7 +38,8 @@ export default function Header({ mini = false, redirect }: Comp) {
   }, [navOpen]);
 
   return (
-    <header className={`jd-header${mini ? ' jd-header--mini' : ''}${redirect ? ' jd-header--redirect' : ''}`} data-carbon-theme="g10">
+    <header data-carbon-theme="g10" contentEditable={contentEditable}
+      className={`jd-header${mini ? ' jd-header--mini' : ''}${redirect ? ' jd-header--redirect' : ''}`}>
       <div className="jd-header__inner cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-4">
