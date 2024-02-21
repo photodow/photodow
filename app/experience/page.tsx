@@ -6,15 +6,25 @@ import MyExperience from "../_components/MyExperience";
 import { LinkComp, LinkKind, LinkSize, Protocol } from "../_types/Link";
 import { IconKeys } from "../_components/Icon";
 import { Ref } from "../_types/Ref";
-import { useContext } from "react";
-import { SiteDataContext } from "../_utils/contexts";
-
 
 import { Metadata } from 'next';
- 
+import { descriptionBase, roleDefault } from "../_utils/metadata";
+
+const title = `James Dow's Experiences`;
+const description = `A list of James Dow's experiences and credentials as a ${roleDefault}.`;
+
 export const metadata: Metadata = {
-  title: `James Dow's Experiences`,
-}
+  title,
+  description: `${description} ${descriptionBase}`,
+  twitter: {
+    title,
+    description: `${description} ${descriptionBase}`
+  },
+  openGraph: {
+    title,
+    description: `${description} ${descriptionBase}`
+  }
+};
 
 const jumpToRef: Ref = {
   _key: "experience",
@@ -28,16 +38,6 @@ const jumpToRef: Ref = {
 };
 
 export default function Experience() {
-  // const { name, role } = useContext(SiteDataContext)?.main || {};
-
-  // useEffect(() => {
-  //   const titleElem = document.querySelector('title');
-
-  //   if (titleElem) {
-  //     titleElem.innerHTML = `Experiences | James Dow, Designer & Developer`;
-  //   }
-  // }, []);
-
   return (
     <App miniHeader={true}>
       <AboutMe replaceRefs={[jumpToRef]} nameRoleOverride={true} />
