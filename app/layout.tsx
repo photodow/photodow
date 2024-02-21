@@ -12,9 +12,6 @@ export const metadata: Metadata = {
     default: titleDefault,
   },
   description: descriptionBase,
-  other: {
-    'fb:app_id': '413427994472526'
-  },
   openGraph: {
     type: 'website',
     title: {
@@ -43,6 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta property="fb:app_id" content="413427994472526" />
+      </head>
       <body>
         {children}
         <GridOverlay />
