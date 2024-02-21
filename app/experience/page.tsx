@@ -22,6 +22,9 @@ const jumpToRef: Ref = {
   }
 };
 
+
+document.querySelector('title').innerHTML = `Experiences | ` + document.querySelector('title').innerHTML;
+
 export default function Experience() {
   const { name, role } = useContext(SiteDataContext)?.main || {};
 
