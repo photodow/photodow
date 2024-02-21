@@ -12,6 +12,7 @@ import getDataId from "../../_utils/getDataId";
 import redirectIfR from "../../_utils/redirectIfR";
 import urlParams from "../../_utils/urlParams";
 import { createFadeInObserver } from "../../_utils/fadeIn";
+import { clientMetaData } from "../../_utils/metadata";
 
 type Comp = {
   id?: string,
@@ -39,7 +40,9 @@ export default function App({ children, miniHeader }: Comp) {
 
     createFadeInObserver();
     setToEditContent();
-  }, [redirect, setR, setToEditContent]);
+
+    clientMetaData(siteData?.main.role);
+  }, [redirect, setR, setToEditContent, siteData]);
 
   return (
     <SiteDataContext.Provider value={siteData}>

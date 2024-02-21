@@ -35,6 +35,22 @@ export function metaDataObj (
     }
 }
 
-export function clientMetaData () {
+export function clientMetaData (role?: string) {
+    if (!role) {
+        return;
+    }
 
+    const titleElem = document.querySelector('title');
+    const metaElems = document.querySelectorAll('[name="description"], [property="og:title"], [property="og:description"], [name="twitter:title"], [name="twitter:description"]');
+
+    if (titleElem) {
+        titleElem.innerHTML = titleElem?.innerHTML.replaceAll(roleDefault, role)
+    }
+
+    if (metaElems.length) {
+        metaElems.forEach(metaItem => {
+            const text = metaItem.getAttribute('content') || '';
+            metaItem.setAttribute('content', text.replaceAll(roleDefault, role));
+        });
+    }
 }
