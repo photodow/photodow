@@ -1,16 +1,12 @@
-"use client";
-
 import "./index.scss";
 
-import { useEffect } from "react";
-import { getSiteData } from "../_utils/firebase";
+import ResumeRedirect from "../_components/ResumeRedirect";
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: `Download James Dow's Resume`,
+}
 
 export default function Resume() {
-  useEffect(() => {
-    getSiteData().then(d => {
-      location.href = '/resume/' + d.main.resume;
-    });
-  }, []);
-
-  return (<p>Loading...</p>);
+  return <ResumeRedirect />;
 }

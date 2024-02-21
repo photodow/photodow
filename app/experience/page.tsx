@@ -9,6 +9,13 @@ import { Ref } from "../_types/Ref";
 import { useContext } from "react";
 import { SiteDataContext } from "../_utils/contexts";
 
+
+import { Metadata } from 'next';
+ 
+export const metadata: Metadata = {
+  title: `James Dow's Experiences`,
+}
+
 const jumpToRef: Ref = {
   _key: "experience",
   _override: {
