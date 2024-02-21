@@ -7,6 +7,7 @@
   $padding: spacing.$spacing-03 * 8;
   $imageSize: 8vh * 7;
 
+  padding-top: $padding;
   min-height: 100vh;
   color: theme.$text-primary;
   position: relative;
