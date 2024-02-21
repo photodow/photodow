@@ -36,7 +36,7 @@ export default function ExperienceMeta({ className, start, end, location, type, 
     }
 
     setItems(itemsData);
-  }, [start, end, location, type]);
+  }, [start, end, location, type, credential]);
 
   useEffect(() => {
     setEndValueData();
