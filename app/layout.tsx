@@ -7,7 +7,6 @@ import type { Metadata } from 'next';
 const title = `James Dow | Designer and Developer`;
 const description = `James Dow works at the intersection of design and development for companies like Peacock and IBM. James Dow pushes ideas from conception to their existence. James Dow collaborates using HTML, CSS, Javascript, and Design Thinking.`;
 const images = `/james-dow-experiences.png`;
-const url = '/';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jamesdow.com'),
@@ -20,7 +19,6 @@ export const metadata: Metadata = {
     type: 'website',
     title,
     description,
-    url,
     images
   },
   twitter: {
