@@ -1,18 +1,18 @@
 import { Metadata } from "next";
 
+export const nameDefault = 'James Dow';
 export const roleDefault = 'Designer and Developer';
 export const skillsDefault = ['HTML', 'CSS', 'Javascript', 'Design Thinking']
-export const titleBase = `James Dow | ${roleDefault}`;
-export const titleTemplate = `%s | ${roleDefault}`;
+export const titleBase = `| ${roleDefault}`;
 export const descriptionBase = `James Dow works at the intersection of design and development for companies like Peacock and IBM. James Dow pushes ideas from conception to their existence. James Dow collaborates using ${skillsDefault}.`;
 export const images = `/james-dow-experiences.png`;
 
 export function metaDataObj (
-    title: string = '',
+    title: string = nameDefault,
     description: string = '',
     image: string = images
 ): Metadata {
-    const _title = `${title}${titleBase}`;
+    const _title = `${title} ${titleBase}`;
     const _description = `${description}${descriptionBase}`;
 
     return {
