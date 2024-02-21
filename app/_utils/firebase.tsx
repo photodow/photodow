@@ -70,11 +70,6 @@ async function init (): Promise<SiteData> {
             people: await getData(`people`) as People,
             portfolio: await getData(`portfolio`) as Portfolio,
             testimonials: await getData(`testimonials`) as Testimonials,
-            // main: Object.assign(
-            //     {},
-            //     await getData(`main/${mainItem?._base || '_default'}`) as MainItem,
-            //     mainItem
-            // )
             main: mergeWith(
                 await getData(`main/${mainItem?._base || '_default'}`) as MainItem,
                 mainItem,

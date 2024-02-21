@@ -43,7 +43,7 @@ export default function App({ children, miniHeader }: Comp) {
 
   return (
     <SiteDataContext.Provider value={siteData}>
-      <Header mini={miniHeader} redirect={!!redirect} />
+      <Header mini={miniHeader} redirect={!!redirect} contentEditable={editableContent} />
       <main className="jd-main" contentEditable={editableContent}>
         {children}
       </main>
