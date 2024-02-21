@@ -3,35 +3,9 @@ import "./globals.scss";
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import GridOverlay from "./_components/GridOverlay";
 import type { Metadata } from 'next';
-import { descriptionBase, images, titleDefault, titleTemplate } from "./_utils/metadata";
+import { metaDataObj } from "./_utils/metadata";
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://jamesdow.me'),
-  title: {
-    template: titleTemplate,
-    default: titleDefault,
-  },
-  description: descriptionBase,
-  openGraph: {
-    type: 'website',
-    title: {
-      template: titleTemplate,
-      default: titleDefault,
-    },
-    description: descriptionBase,
-    images: images,
-    url: '/'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: {
-      template: titleTemplate,
-      default: titleDefault,
-    },
-    description: descriptionBase,
-    images
-  }
-}
+export const metadata: Metadata = metaDataObj();
 
 export default function RootLayout({
   children,

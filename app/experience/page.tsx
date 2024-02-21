@@ -6,25 +6,13 @@ import MyExperience from "../_components/MyExperience";
 import { LinkComp, LinkKind, LinkSize, Protocol } from "../_types/Link";
 import { IconKeys } from "../_components/Icon";
 import { Ref } from "../_types/Ref";
-
 import { Metadata } from 'next';
-import { descriptionBase, roleDefault } from "../_utils/metadata";
+import { roleDefault, metaDataObj } from "../_utils/metadata";
 
 const title = `James Dow's Experiences`;
 const description = `A list of James Dow's experiences and credentials as a ${roleDefault}.`;
 
-export const metadata: Metadata = {
-  title,
-  description: `${description} ${descriptionBase}`,
-  twitter: {
-    title,
-    description: `${description} ${descriptionBase}`
-  },
-  openGraph: {
-    title,
-    description: `${description} ${descriptionBase}`
-  }
-};
+export const metadata: Metadata = metaDataObj(title, description);
 
 const jumpToRef: Ref = {
   _key: "experience",
