@@ -1,5 +1,3 @@
-"use client";
-
 import "./index.scss";
 
 import App from "../_components/App";
@@ -8,7 +6,7 @@ import MyExperience from "../_components/MyExperience";
 import { LinkComp, LinkKind, LinkSize, Protocol } from "../_types/Link";
 import { IconKeys } from "../_components/Icon";
 import { Ref } from "../_types/Ref";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { SiteDataContext } from "../_utils/contexts";
 
 const jumpToRef: Ref = {
@@ -23,15 +21,15 @@ const jumpToRef: Ref = {
 };
 
 export default function Experience() {
-  const { name, role } = useContext(SiteDataContext)?.main || {};
+  // const { name, role } = useContext(SiteDataContext)?.main || {};
 
-  useEffect(() => {
-    const titleElem = document.querySelector('title');
+  // useEffect(() => {
+  //   const titleElem = document.querySelector('title');
 
-    if (titleElem) {
-      titleElem.innerHTML = `Experiences | James Dow, Designer & Developer`;
-    }
-  }, []);
+  //   if (titleElem) {
+  //     titleElem.innerHTML = `Experiences | James Dow, Designer & Developer`;
+  //   }
+  // }, []);
 
   return (
     <App miniHeader={true}>

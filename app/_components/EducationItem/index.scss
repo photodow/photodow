@@ -31,14 +31,12 @@
 
   &__logo {
     position: absolute;
-    height: 150%;
+    height: 250%;
     width: 40%;
     top: spacing.$spacing-03 * -2;
     bottom: spacing.$spacing-03 * -2;
     margin: auto;
     left: -10%;
-    object-fit: cover;
-    object-position: right;
   }
 
   &__content {
