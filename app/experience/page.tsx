@@ -8,7 +8,7 @@ import MyExperience from "../_components/MyExperience";
 import { LinkComp, LinkKind, LinkSize, Protocol } from "../_types/Link";
 import { IconKeys } from "../_components/Icon";
 import { Ref } from "../_types/Ref";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SiteDataContext } from "../_utils/contexts";
 
 const jumpToRef: Ref = {
@@ -22,11 +22,16 @@ const jumpToRef: Ref = {
   }
 };
 
-
-document.querySelector('title').innerHTML = `Experiences | ` + document.querySelector('title').innerHTML;
-
 export default function Experience() {
   const { name, role } = useContext(SiteDataContext)?.main || {};
+
+  useEffect(() => {
+    const titleElem = document.querySelector('title');
+
+    if (titleElem) {
+      titleElem.innerHTML = `Experiences | James Dow, Designer & Developer`;
+    }
+  }, []);
 
   return (
     <App miniHeader={true}>
