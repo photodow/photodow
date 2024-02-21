@@ -14,7 +14,8 @@ $base: jd-portfolio-grid;
     row-gap: spacing.$spacing-03 * 2;
     display: grid;
 
-    @include breakpoint("md") {
+    // @include breakpoint("md") {
+    @media (min-width: (spacing.$spacing-03 * 69)) {
       columns: 2;
       grid-template-columns: repeat(2, 1fr);
     }
@@ -78,11 +79,9 @@ $base: jd-portfolio-grid;
     z-index: 1;
     width: 100%;
     display: grid;
-    // margin-bottom: spacing.$spacing-03 * 2;
 
-    // todo hide wrapping loading cards.
-
-    @include breakpoint("md") {
+    // @include breakpoint("md") {
+    @media (min-width: (spacing.$spacing-03 * 69)) {
       grid-template-columns: repeat(2, 1fr);
     }
 

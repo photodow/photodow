@@ -51,10 +51,10 @@ export default function MyExperience() {
       <Slant Type="article" className="jd-experience__bottom">
         <div className="cds--grid">
           <div className="cds--row">
-            <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-4 cds--offset-lg-2 cds--col-lg-7">
+            <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-6 cds--offset-lg-2 cds--col-lg-7">
               <MyEducation />
             </div>
-            <div className="cds--col-sm-4 cds--col-md-2 cds--offset-lg-1 cds--col-lg-4">
+            <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-6 cds--offset-lg-1 cds--col-lg-4">
               <MyContact />
             </div>
           </div>

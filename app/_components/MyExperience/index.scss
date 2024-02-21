@@ -36,7 +36,7 @@
       margin-bottom: spacing.$spacing-03 * 6;
     }
 
-    @include breakpoint("md") {
+    @include breakpoint("lg") {
       .jd-education {
         margin-bottom: 0;
       }
