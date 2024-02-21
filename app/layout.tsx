@@ -9,7 +9,7 @@ const description = `James Dow works at the intersection of design and developme
 const images = `/james-dow-experiences.png`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jamesdow.com'),
+  metadataBase: new URL('https://jamesdow.me'),
   title: {
     template: '%s | Designer and Developer',
     default: 'James Dow | Designer and Developer',
