@@ -14,9 +14,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta property="fb:app_id" content="413427994472526" />
-      </head>
       <body>
         {children}
         <GridOverlay />

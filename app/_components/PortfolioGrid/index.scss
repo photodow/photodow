@@ -103,10 +103,6 @@ $base: jd-portfolio-grid;
       display: block;
     }
 
-    &:last-child {
-      // min-height: spacing.$spacing-03 * 35;
-    }
-
     @include breakpoint("md") {
       margin-left: spacing.$spacing-03 * -2;
 
