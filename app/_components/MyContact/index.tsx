@@ -20,11 +20,12 @@ export default function MyContact() {
 
   return (
     <article className="jd-contact" id="education">
-      {siteData && <h3 className="jd-contact__title jd-body__section-title">Contact</h3>}
+      {siteData && <h3 className="jd-contact__title jd-body__section-title jd-fade-in">Contact</h3>}
       
       <LinksByRef
         refs={siteData?.main.contact}
         className="jd-contact__links"
+        itemClassName="jd-fade-in"
         icon={true}
         text={true}
         size="md"
@@ -33,6 +34,7 @@ export default function MyContact() {
       <LinksByRef
         refs={[websiteRef, ...siteData?.main.social || []]}
         className="jd-contact__links"
+        itemClassName="jd-fade-in"
         icon={true}
         value={true}
         size="md"

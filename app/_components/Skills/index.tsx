@@ -19,7 +19,7 @@ export default function Skills ({ items, size, color, className }: Comp) {
           type={color}
           size={size}
           className={className}
-          style={{ transitionDelay: `${i * .2}s`}}
+          style={{ transitionDelay: `${i * .1}s`}}
         >{skill}</Tag>)}
     </div>
   );

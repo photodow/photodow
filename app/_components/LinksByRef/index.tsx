@@ -19,9 +19,10 @@ interface Comp {
   onClick?: MouseEventHandler,
   delay?: boolean,
   size?: LinkProps['size'],
+  itemClassName?: string,
 }
 
-export default function LinksByRef({ refs = [], size, className, onClick, text = null, icon = null, value = null, delay = false }: Comp) {
+export default function LinksByRef({ refs = [], size, className, onClick, text = null, icon = null, value = null, delay = false, itemClassName = '' }: Comp) {
   const siteData = useContext(SiteDataContext);
 
   if (!siteData || !refs?.length) {
@@ -47,7 +48,7 @@ export default function LinksByRef({ refs = [], size, className, onClick, text =
         const Component = comp === LinkComp.Text ? Link : Button;
 
         return (
-          <li key={`${_text}${i}`} className="jd-linklist__item">
+          <li key={`${_text}${i}`} className={`jd-linklist__item ${itemClassName}`}>
             <Component className="jd-linklist__link"
               href={`${protocol}${_value}`}
               target={target}

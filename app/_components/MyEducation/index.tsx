@@ -35,7 +35,7 @@ export default function MyEducation() {
 
   return (
     <article className="jd-education" id="education">
-      {siteData && <h3 className="jd-education__title jd-body__section-title">Education</h3>}
+      {siteData && <h3 className="jd-education__title jd-body__section-title  jd-fade-in">Education</h3>}
       <List
         className="jd-education__list"
         items={education.map((item, i) => {

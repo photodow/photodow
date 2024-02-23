@@ -120,7 +120,8 @@ $base: "jd-experience-item";
     overflow: hidden;
     box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.5);
     position: relative;
-    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
+      opacity 0.5s ease-in-out;
 
     @media print {
       -webkit-filter: blur(0);

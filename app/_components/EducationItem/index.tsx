@@ -23,7 +23,7 @@ export default function EducationItem({ orgKey, title, start, end, credential }:
   }, [setOrgData]);
 
   return (
-    <div id={orgKey} className="jd-education-item">
+    <div id={orgKey} className="jd-education-item jd-fade-in">
       <div className="jd-education-item__content">
         <img src={org?.image?.src} alt={org?.image?.alt} className="jd-education-item__logo" />
         <OrgName {...org} className="jd-education-item__org" />

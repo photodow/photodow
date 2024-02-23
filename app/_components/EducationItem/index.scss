@@ -11,7 +11,8 @@
   overflow: hidden;
   position: relative;
   box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
 
   @include breakpoint("md") {
     margin-left: spacing.$spacing-03 * -2;
