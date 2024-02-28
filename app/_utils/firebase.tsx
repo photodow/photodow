@@ -60,6 +60,8 @@ async function init (): Promise<SiteData> {
 
     if (!buildingData) {
         const mainItem = await getData(`main/${getDataId()}`) as MainItem;
+        const defaultItem = await getData(`main/_default`);
+        const baseItem = await getData(`main/${mainItem?._base}`) as MainItem || {};
 
         // refresh data
         buildingData = {
@@ -71,7 +73,7 @@ async function init (): Promise<SiteData> {
             portfolio: await getData(`portfolio`) as Portfolio,
             testimonials: await getData(`testimonials`) as Testimonials,
             main: mergeWith(
-                await getData(`main/${mainItem?._base || '_default'}`) as MainItem,
+                mergeWith(defaultItem, baseItem, handleOverride),
                 mainItem,
                 handleOverride
             )
