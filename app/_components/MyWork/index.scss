@@ -5,7 +5,7 @@
 
 .jd-work {
   $sectionPadding: spacing.$spacing-03 * 8;
-  padding: $sectionPadding 0;
+  padding: $sectionPadding 0 ($sectionPadding * 2);
 
   &__title {
     margin: 0;

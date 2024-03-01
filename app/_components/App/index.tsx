@@ -13,6 +13,7 @@ import redirectIfR from "../../_utils/redirectIfR";
 import urlParams from "../../_utils/urlParams";
 import { createFadeInObserver } from "../../_utils/fadeIn";
 import { clientMetaData } from "../../_utils/metadata";
+import Slant from "../Slant";
 
 type Comp = {
   id?: string,
@@ -50,6 +51,7 @@ export default function App({ children, miniHeader }: Comp) {
       <main className="jd-main" contentEditable={editableContent}>
         {children}
       </main>
+      <Slant Type="footer" />
     </SiteDataContext.Provider>
   );
 }

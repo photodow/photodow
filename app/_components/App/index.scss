@@ -9,3 +9,11 @@
     opacity: 1;
   }
 }
+
+.jd-main {
+  $padding: spacing.$spacing-03 * 8;
+
+  & + .jd-slant {
+    padding-bottom: 0;
+  }
+}
