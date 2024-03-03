@@ -30,7 +30,6 @@ export default function App({ children, miniHeader }: Comp) {
   const setToEditContent = useCallback(() => setEditableContent(Boolean(urlParams().get('edit'))), []);
 
   useEffect(() => {
-    sendGTMEvent({ 'oid': getDataId() });
 
     setR();
     redirectIfR(redirect);
