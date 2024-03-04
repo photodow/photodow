@@ -35,7 +35,8 @@ const data: Promise<SiteData> = init();
 async function init (): Promise<SiteData> {
     resetData();
 
-    const id = getDataId();
+    const id = getDataId()?.replace(/-?test-?/g, '');
+    console.log(id);
     let buildingData: SiteData | null = null;
 
     buildingData = JSON.parse(localStore().getItem('siteData') as string);
@@ -59,7 +60,7 @@ async function init (): Promise<SiteData> {
     }
 
     if (!buildingData) {
-        const mainItem = await getData(`main/${getDataId()}`) as MainItem;
+        const mainItem = await getData(`main/${id}`) as MainItem;
         const defaultItem = await getData(`main/_default`);
         const baseItem = await getData(`main/${mainItem?._base}`) as MainItem || {};
 
