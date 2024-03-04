@@ -11,7 +11,7 @@ export interface OrgData extends Organization {
     className?: string,
 }
 
-export function transformOrgData (orgKey: OrgKey, siteData: SiteData | null): OrgData | null {
+export function transformOrgData (orgKey: OrgKey, siteData: Partial<SiteData> | null): OrgData | null {
     if (!siteData) {
         return null;
     }
