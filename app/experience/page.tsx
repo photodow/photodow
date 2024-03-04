@@ -14,7 +14,7 @@ const description = `A list of James Dow's experiences and credentials as a ${ro
 
 export const metadata: Metadata = metaDataObj(title, description);
 
-const jumpToRef: Ref = {
+const jumpToExperienceRef: Ref = {
   _key: "experience",
   _override: {
     protocol: Protocol.Hash,
@@ -28,7 +28,7 @@ const jumpToRef: Ref = {
 export default function Experience() {
   return (
     <App miniHeader={true}>
-      <AboutMe replaceRefs={[jumpToRef]} nameRoleOverride={true} />
+      <AboutMe replaceRefs={[jumpToExperienceRef]} nameRoleOverride={true} />
       <MyExperience />
     </App>
   );

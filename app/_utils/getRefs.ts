@@ -6,7 +6,7 @@ import handleOverride from "./handleOverride";
 export default function GetRefs (
   overrideRefs: Ref[] = [],
   scope: RefList,
-  siteData: SiteData
+  siteData: Partial<SiteData>
 ): Overrides[] {
   const defaultRefs = siteData[scope] as RefCollections;
 

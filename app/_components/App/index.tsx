@@ -4,11 +4,9 @@ import "./index.scss";
 
 import Header from "../../_components/Header";
 import { useCallback, useEffect, useState } from "react";
-import { getSiteData } from "../../_utils/firebase";
+import { initStateDB } from "../../_utils/firebase";
 import { SiteDataContext } from "../../_utils/contexts";
 import { SiteData } from "../../_types/SiteData";
-import { sendGTMEvent } from "@next/third-parties/google";
-import getDataId from "../../_utils/getDataId";
 import redirectIfR from "../../_utils/redirectIfR";
 import urlParams from "../../_utils/urlParams";
 import { createFadeInObserver } from "../../_utils/fadeIn";
@@ -35,13 +33,13 @@ export default function App({ children, miniHeader }: Comp) {
     redirectIfR(redirect);
 
     if (!redirect) {
-      getSiteData().then(d => setSiteData(d));
+      initStateDB(setSiteData);
     }
 
     createFadeInObserver();
     setToEditContent();
 
-    clientMetaData(siteData?.main.role);
+    clientMetaData(siteData?.main?.role);
   }, [redirect, setR, setToEditContent, siteData]);
 
   return (

@@ -23,7 +23,7 @@ export default function MyContact() {
       {siteData && <h3 className="jd-contact__title jd-body__section-title jd-fade-in">Contact</h3>}
       
       <LinksByRef
-        refs={siteData?.main.contact}
+        refs={siteData?.main?.contact}
         className="jd-contact__links"
         itemClassName="jd-fade-in"
         icon={true}
@@ -32,7 +32,7 @@ export default function MyContact() {
       />
       <hr className="jd-contact__divider" />
       <LinksByRef
-        refs={[websiteRef, ...siteData?.main.social || []]}
+        refs={[websiteRef, ...siteData?.main?.social || []]}
         className="jd-contact__links"
         itemClassName="jd-fade-in"
         icon={true}

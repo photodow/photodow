@@ -38,7 +38,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         <div className="cds--row">
           <div className="cds--col-sm-4">
             <LinksByRef
-              refs={siteData.main.navigation}
+              refs={siteData.main?.navigation}
               className="jd-nav__items"
               text={true}
               onClick={() => closeNav()}
@@ -48,7 +48,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         <div className="cds--row">
           <div className="cds--col-sm-4">
             <LinksByRef
-              refs={siteData.main.social}
+              refs={siteData.main?.social}
               className="jd-nav__social"
               icon={true}
             />
@@ -57,7 +57,7 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         <div className="cds--row">
           <div className="cds--col-sm-4">
             <LinksByRef
-              refs={siteData.main.contact}
+              refs={siteData.main?.contact}
               className="jd-nav__contact"
               text={true}
             />

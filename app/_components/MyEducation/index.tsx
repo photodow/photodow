@@ -17,7 +17,7 @@ export default function MyEducation() {
   const setEducationData = useCallback(() => {
     if (siteData) {
       setEducation(
-        (GetRefs(siteData?.main.education, RefList.Experiences, siteData) as Experience[])
+        (GetRefs(siteData.main?.education, RefList.Experiences, siteData) as Experience[])
         .sort((a, b) => {
           const presentYear = new Date().getFullYear();
           const bEnd = typeof b.end === 'number' ? b.end : presentYear;

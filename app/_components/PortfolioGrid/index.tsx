@@ -29,7 +29,7 @@ export default function PortfolioGrid({ filterBy = '', isLoading }: Comp) {
   useEffect(() => {
     loaded.current = true;
     if (siteData) {
-      const data = GetRefs(siteData.main.portfolio.items as Ref[], RefList.Portfolio, siteData) as PortfolioItem[];
+      const data = GetRefs(siteData.main?.portfolio.items as Ref[], RefList.Portfolio, siteData) as PortfolioItem[];
 
       setPortfolioItems(data.filter(({ card }) => {
         const value = filterBy.toLowerCase().trim();

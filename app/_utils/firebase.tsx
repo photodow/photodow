@@ -2,13 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { SiteData } from "../_types/SiteData";
-import { Experiences } from "../_types/Experience";
-import { Images } from "../_types/Image";
-import { Links } from "../_types/Link";
 import { Organization, Organizations } from "../_types/Organization";
-import { People } from "../_types/Person";
-import { Portfolio } from "../_types/Portfolio";
-import { Testimonials } from "../_types/Testimonial";
 import getDataId from "./getDataId";
 import resetData from "./resetData";
 import localStore from "./localStore";
@@ -30,20 +24,21 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const data: Promise<SiteData> = init();
+let setState: Function | undefined;
 
-async function init (): Promise<SiteData> {
+init();
+
+async function init () {
     resetData();
 
     const id = getDataId()?.replace(/-?test-?/g, '');
-    console.log(id);
-    let buildingData: SiteData | null = null;
+    let buildingData: Partial<SiteData> | null = null;
 
     buildingData = JSON.parse(localStore().getItem('siteData') as string);
 
     if (buildingData) {
         const weekAgo = new Date(new Date().valueOf() - (7 * 24 * 60 * 60 * 1000));
-        const storedLastUpdate = buildingData.main.lastUpdate;
+        const storedLastUpdate = buildingData.main?.lastUpdate;
         const dataLastUpdate = await getData(`main/${id}/lastUpdate`); // check for last update
 
         if (
@@ -60,37 +55,51 @@ async function init (): Promise<SiteData> {
     }
 
     if (!buildingData) {
+        buildingData = {};
+
+        const waitForOrganizations = getData(`organizations`, buildingData);
+        const waitForTheExtras = [
+            waitForOrganizations,
+            getData(`links`, buildingData),
+            getData(`images`, buildingData),
+            getData(`experiences`, buildingData),
+            getData(`portfolio`, buildingData),
+            // getData(`people`, buildingData),
+            // getData(`testimonials`, buildingData)
+        ]
+
         const mainItem = await getData(`main/${id}`) as MainItem;
         const defaultItem = await getData(`main/_default`);
         const baseItem = await getData(`main/${mainItem?._base}`) as MainItem || {};
 
-        // refresh data
-        buildingData = {
-            experiences: await getData(`experiences`) as Experiences,
-            images: await getData(`images`) as Images,
-            links: await getData(`links`) as Links,
-            organizations: await getData(`organizations`) as Organizations,
-            people: await getData(`people`) as People,
-            portfolio: await getData(`portfolio`) as Portfolio,
-            testimonials: await getData(`testimonials`) as Testimonials,
-            main: mergeWith(
-                mergeWith(defaultItem, baseItem, handleOverride),
-                mainItem,
-                handleOverride
-            )
-        };
+        buildingData.main = mergeWith(
+            mergeWith(defaultItem, baseItem, handleOverride),
+            mainItem,
+            handleOverride
+        );
 
-        const _metaOverride = buildingData.main._metaOverride;
+        updateState(buildingData);
 
-        if (_metaOverride) {
-            // retrieve organization data
-            _metaOverride.org = await getOrgData(buildingData.organizations, _metaOverride?.orgKey);
-        }
+        waitForOrganizations.then(() => {
+            if (!buildingData?.main || !buildingData.organizations) {
+                return;
+            }
 
-        localStore().setItem('siteData', JSON.stringify(buildingData));
+            const _metaOverride = buildingData.main._metaOverride;
+
+            if (_metaOverride) {
+                // retrieve organization data
+                getOrgData(buildingData.organizations, _metaOverride?.orgKey).then(d => {
+                    _metaOverride.org = d;
+                    updateState(buildingData);
+                });
+            }
+        });
+
+        Promise.all(waitForTheExtras).then(() => {
+            localStore().setItem('siteData', JSON.stringify(buildingData));
+        });
     }
-
-    return buildingData;
 }
 
 export async function getOrgData (orgs: Organizations, key: string | undefined): Promise<Organization | undefined> {
@@ -101,7 +110,7 @@ export async function getOrgData (orgs: Organizations, key: string | undefined):
     return orgs[key];
 }
 
-export async function getData (key: string): Promise<any> {
+export async function getData (key: string, dataStore?: Record<string, object>): Promise<any> {
 
     const cache = JSON.parse(localStore().getItem('c') || '{}') || {};
 
@@ -122,11 +131,31 @@ export async function getData (key: string): Promise<any> {
             cache[key] = data;
 
             localStore().setItem('c', JSON.stringify(cache));
+
+            updateStateByKey(dataStore, key as keyof SiteData, data);
             resolve(data);
         });
     });
 }
 
-export async function getSiteData(): Promise<SiteData> {
-    return data;
+function updateState (data?: Partial<SiteData> | null) {
+    if (!data || typeof setState !== 'function') {
+        return;
+    }
+
+    setState({...data});
+}
+
+function updateStateByKey<T extends keyof SiteData>(siteData?: Partial<SiteData> | null, key?: T, data?: SiteData[T]) {
+    if (!siteData || !key || !data) {
+        return;
+    }
+
+    siteData[key] = data;
+
+    updateState(siteData as Partial<SiteData>);
+}
+
+export function initStateDB (cb?: Function) {
+    setState = cb;
 }

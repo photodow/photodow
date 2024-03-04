@@ -19,7 +19,7 @@ export default function MyExperience() {
   const setExperienceData = useCallback(() => {
     if (siteData) {
       setExperiences(
-        (GetRefs(siteData?.main.experience, RefList.Experiences, siteData) as Experience[])
+        (GetRefs(siteData.main?.experience, RefList.Experiences, siteData) as Experience[])
         .sort((a, b) => {
           const presentYear = new Date().getFullYear();
           const bEnd = typeof b.end === 'number' ? b.end : presentYear;
