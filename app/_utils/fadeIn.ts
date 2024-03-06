@@ -5,7 +5,7 @@ const visible = 'visible';
 const className = 'jd-fade-in';
 
 export function createFadeInObserver () {
-    if (urlParams().has('disableScrollFade')) {
+    if (urlParams().has('disableScrollFade') || urlParams().has('disableMotion')) {
         document.body.classList.add('disable-scroll-fade');
         return;
     }

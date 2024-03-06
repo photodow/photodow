@@ -1,7 +1,10 @@
 import * as THREE from 'three';
-import { createImageURL, initTMDB } from './tmdb';
+import { createImageURL, initTMDB, shuffleList } from './tmdb';
 import { PeacockBgSettings } from '../../_types/peacockBG';
-import { PosterSizes, TMDB, TMDB_Config, TMDB_Movie, TMDB_Result, TMDB_TV } from '../../_types/TMDB';
+import { PosterSizes, TMDB, TMDB_Movie, TMDB_TV } from '../../_types/TMDB';
+import urlParams from '../urlParams';
+
+// todo: add a motion pause button?
 
 let assetGroupY = 0;
 let tmdb: TMDB;
@@ -10,24 +13,17 @@ let renderer: THREE.WebGLRenderer;
 let camera: THREE.PerspectiveCamera;
 let _settings: PeacockBgSettings;
 let assetGroup: THREE.Group;
-const posterCollection: THREE.Group[] = [];
+const posterRows: THREE.Group[] = [];
 
 export function initPeacockBG () {
     const selector = `#experience-peacock`;
     const container = document.querySelector(selector);
 
     if (container && !renderer) {
-        tmdb = initTMDB(4);
         initCanvas(container);
         initScene();
 
-        tmdb.config.then(config => {
-            tmdb.results.then(results => {
-                renderPosters(config, results.splice(0, settings().poster.cols * settings().poster.rows));
-                // animate();
-            });
-        })
-        // set event listeners
+        renderPosters();
     }
 }
 
@@ -45,7 +41,7 @@ function settings () {
                 cols: 11,
                 rows: 10,
                 padding: 2,
-                resIndex: PosterSizes.w92,
+                resIndex: PosterSizes.w154,
             },
             startingY: 0,
         };
@@ -57,11 +53,12 @@ function settings () {
 }
 
 function initCanvas (parent: Element) {
+    const _settings = settings();
     const container = document.createElement('div');
     renderer = new THREE.WebGLRenderer();
 
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(settings().canvas.w, settings().canvas.h);
+    renderer.setSize(_settings.canvas.w, _settings.canvas.h);
 
     container.classList.add('jd-peacock-bg');
     container.append(renderer.domElement);
@@ -79,9 +76,9 @@ function initScene () {
 }
 
 function animate() {
-    // if (!scrollStatus && !disableAnimate) {
-    //     scrollPosters();
-    // }
+    if (!urlParams().has('disableMotion') && !urlParams().has('disablePeacockMotion')) {
+        scrollPosters();
+    }
 
     assetGroup.position.y = assetGroupY;
 
@@ -93,11 +90,12 @@ function animate() {
 }
 
 function initCamera () {
-    const aspect = settings().canvas.w / settings().canvas.h * .5;
+    const _settings = settings();
+    const aspect = _settings.canvas.w / _settings.canvas.h * .5;
     camera = new THREE.PerspectiveCamera(75, aspect, .01, 1000);
     camera.rotation.x = .6;
     camera.position.z = 100;
-    camera.position.y = settings().poster.h * 1.5;
+    camera.position.y = _settings.poster.h * 1.5;
 }
 
 function initSpotlight () {
@@ -109,30 +107,67 @@ function initSpotlight () {
 }
 
 function initAssetGroup () {
+    const _settings = settings();
     assetGroup = new THREE.Group();
-    assetGroup.position.y = settings().startingY;
-    assetGroup.position.x = -((settings().poster.w * settings().poster.cols) + (settings().poster.padding * settings().poster.cols-1)) / 2; // offset and center
+    assetGroup.position.y = _settings.startingY;
+    assetGroup.position.x = -((_settings.poster.w * _settings.poster.cols) + (_settings.poster.padding * _settings.poster.cols-1)) / 2; // offset and center
     scene.add(assetGroup);
 }
 
-function Poster (url: string) {
+function PosterSymbol () {
+    const _settings = settings();
     const posterShape = new THREE.Shape();
-    roundedRect(posterShape, 0, 0, settings().poster.w, settings().poster.h, 3);
+    roundedRect(posterShape, 0, 0, _settings.poster.w, _settings.poster.h, 3);
 
-    const textureLoader = new THREE.TextureLoader();
     const posterGeometry = new THREE.ShapeGeometry(posterShape);
 
-    const posterTexture = textureLoader.load(url);
-    posterTexture.colorSpace = THREE.SRGBColorSpace;
-    posterTexture.wrapS = posterTexture.wrapT = THREE.RepeatWrapping;
-    posterTexture.repeat.set(.037, .025);
-
     const material = new THREE.MeshStandardMaterial({
-        color: 0xFFFFFF,
-        map: posterTexture,
+        color: 0x555555,
     });
 
     return new THREE.Mesh(posterGeometry, material);
+}
+
+function loadPosterImages () {
+    tmdb = initTMDB(4);
+
+    tmdb.config.then(config => {
+        tmdb.results.then(results => {
+            const shuffledResults = shuffleList(results);
+            const _settings = settings();
+            const totalRows = posterRows.length;
+
+            for (let rowIndex = 0; rowIndex < totalRows; rowIndex++) {
+                const row = posterRows[rowIndex].children;
+                const rowLength = row.length;
+
+                for (let colIndex = 0; colIndex < rowLength; colIndex++) {
+                    const poster = row[colIndex];
+                    const textureLoader = new THREE.TextureLoader();
+                    const resultIndex = rowIndex * _settings.poster.rows + colIndex;
+                    const asset = shuffledResults[resultIndex];
+
+                    const url = createImageURL(
+                        config.images.secure_base_url,
+                        config.images.poster_sizes[_settings.poster.resIndex],
+                        asset.poster_path
+                    );
+
+                    const posterTexture = textureLoader.load(url);
+                    posterTexture.colorSpace = THREE.SRGBColorSpace;
+                    posterTexture.wrapS = posterTexture.wrapT = THREE.RepeatWrapping;
+                    posterTexture.repeat.set(.037, .025);
+
+                    (poster as THREE.Mesh).material = new THREE.MeshStandardMaterial({
+                        color: 0xFFFFFF,
+                        map: posterTexture,
+                    });
+
+                    poster.name = (asset as TMDB_TV).name || (asset as TMDB_Movie).title;
+                }
+            }
+        });
+    })
 }
 
 function roundedRect(
@@ -154,109 +189,59 @@ function roundedRect(
     ctx.quadraticCurveTo(x, y, x, y + radius);
 }
 
-function renderPosters (config: TMDB_Config, assetList: TMDB_Result[]) {
-    // add poster placeholders, and then load images later?
+function renderPosters () {
+    const _settings = settings();
+    const count = _settings.poster.rows * _settings.poster.cols;
 
     let x = 0;
     let y = 0;
-    let rowGroup: THREE.Group;
+    let rowGroup: THREE.Group = new THREE.Group();
 
-    assetList.forEach((asset, i) => {
-        if (i % settings().poster.cols === 0) {
-            y += settings().poster.h + settings().poster.padding;
+    for (let i = 0; i < count; i++) {
+        if (i % _settings.poster.cols === 0) {
+            y += _settings.poster.h + _settings.poster.padding;
             x = 0;
 
             rowGroup = new THREE.Group();
             rowGroup.position.y = y;
             assetGroup.add(rowGroup);
-            posterCollection.push(rowGroup);
+            posterRows.push(rowGroup);
         } else {
-            x += settings().poster.w + settings().poster.padding;
+            x += _settings.poster.w + _settings.poster.padding;
         }
 
-        const url = createImageURL(config.images.secure_base_url, config.images.poster_sizes[settings().poster.resIndex], asset.poster_path);
-
-        const poster = Poster(url);
+        const poster = PosterSymbol();
         poster.position.x = x;
-        poster.name = (asset as TMDB_TV).name || (asset as TMDB_Movie).title;
         
         rowGroup.add(poster);
-        rowGroup.name += `${poster.name},`;
-    });
+    }
+
+    loadPosterImages();
 }
 
+function scrollPosters (moveY = .1) {
+    if (assetGroup.position.y >= 0) {
+        loopPosters();
+        assetGroupY = settings().startingY;
+    } else {
+        assetGroupY += moveY;
+    }
+}
 
+function loopPosters () {
+    const _settings = settings();
 
+    if (posterRows.length) {
+        const lastY = (_settings.poster.h * posterRows.length) + (_settings.poster.padding * (posterRows.length-1));
 
+        for (let i = 0; i < posterRows.length; i++) {
+            const row = posterRows[i];
 
-
-
-
-
-
-
-
-
-
-// load data
-
-// let assetGroupY = 0;
-// let scrollStatus = false;
-// let waitForIt;
-
-
-
-
-
-
-
-
-
-// init();
-// animate();
-
-// document.addEventListener('mousewheel', e => {
-//     clearTimeout(waitForIt);
-//     scrollStatus = true;
-//     scrollPosters(Math. abs(e.deltaY));
-    
-//     waitForIt = window.setTimeout(() => {
-//         scrollStatus = false;
-//     }, 50);
-// });
-
-// function scrollPosters (moveY = .1) {
-//     if (assetGroup.position.y >= 0) {
-//         loopPosters();
-//         assetGroupY = startingY;
-//     } else {
-//         assetGroupY += moveY;
-//     }
-// }
-
-// function loopPosters () {
-//     if (posterCollection.length) {
-//         const lastY = (settings.poster.h * posterCollection.length) + (settings.poster.padding * (posterCollection.length-1));
-
-//         for (let i = 0; i < posterCollection.length; i++) {
-//             const row = posterCollection[i];
-
-//             if (row.position.y >= lastY) {
-//                 row.position.y = -startingY;
-//             } else {
-//                 row.position.y += -startingY;;
-//             }     
-//         }
-//     }
-// }
-
-// async function init () {
-//     const assetList = shuffleList([
-//         // ...(await fetchAssetList('tv', 1)).results,
-//         // ...(await fetchAssetList('tv', 2)).results,
-//         // ...(await fetchAssetList('tv', 3)).results,
-//         // ...(await fetchAssetList('movie', 1)).results,
-//         // ...(await fetchAssetList('movie', 2)).results,
-//         // ...(await fetchAssetList('movie', 3)).results
-//     ]).splice(0, settings.poster.cols * settings.poster.rows);
-// }
+            if (row.position.y >= lastY) {
+                row.position.y = -_settings.startingY;
+            } else {
+                row.position.y += -_settings.startingY;
+            }     
+        }
+    }
+}

@@ -75,11 +75,12 @@ export function createImageURL (baseUrl: string, size: PosterSizes, path: string
 }
 
 export function shuffleList (list: TMDB_Result[]) {
+    const copiedList = [...list];
     const newList = [];
 
-    while (list.length > 0) {
-        const random = Math.floor(Math.random() * list.length);
-        newList.push(list.splice(random, 1)[0]);
+    while (copiedList.length > 0) {
+        const random = Math.floor(Math.random() * copiedList.length);
+        newList.push(copiedList.splice(random, 1)[0]);
     }
 
     return newList;
