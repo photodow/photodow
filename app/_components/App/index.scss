@@ -1,11 +1,17 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/theme";
 
+@import "../../_utils/peacockBG/index";
+
 .jd-fade-in {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 
   &.visible {
+    opacity: 1;
+  }
+
+  .disable-scroll-fade & {
     opacity: 1;
   }
 }

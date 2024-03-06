@@ -3,13 +3,19 @@
 import "./index.scss";
 
 import { Experience } from "../../_types/Experience";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { createElement, useCallback, useContext, useEffect, useState } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import Skills from "../Skills";
 import { OrgData, transformOrgData } from "../../_utils/getOrgData";
 import OrgName from "../OrgName";
 import ExperienceMeta from "../ExperienceMeta";
 import Slant from "../Slant";
+import { initTMDB } from "../../_utils/peacockBG/tmdb";
+import { initPeacockBG } from "../../_utils/peacockBG";
+
+const initOrgKey: Record<string, Function> = {
+  'peacock': initPeacockBG
+}
 
 export default function ExperienceItem({ orgKey, title, description, details, start, end, location, type, skills }: Experience) {
   const siteData = useContext(SiteDataContext);
@@ -23,6 +29,10 @@ export default function ExperienceItem({ orgKey, title, description, details, st
   useEffect(() => {
     setOrgData();
   }, [setOrgData]);
+
+  useEffect(() => {
+    initOrgKey[orgKey]?.(orgKey);
+  }, [orgKey]);
 
   return (
     <Slant Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>

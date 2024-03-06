@@ -1,8 +1,15 @@
+import urlParams from "./urlParams";
+
 let interObserver: IntersectionObserver | null = null;
 const visible = 'visible';
 const className = 'jd-fade-in';
 
 export function createFadeInObserver () {
+    if (urlParams().has('disableScrollFade')) {
+        document.body.classList.add('disable-scroll-fade');
+        return;
+    }
+
     const main = document.querySelector('.jd-main');
 
     interObserver = new IntersectionObserver(entries => {

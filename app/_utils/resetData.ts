@@ -1,4 +1,5 @@
 import localStore from "./localStore";
+import { clearTMDB } from "./peacockBG/tmdb";
 import urlParams from "./urlParams";
 
 export default function resetData () {
@@ -6,5 +7,6 @@ export default function resetData () {
         localStore().removeItem("id");
         localStore().removeItem("siteData");
         localStore().removeItem("c");
+        clearTMDB();
     }
 }
