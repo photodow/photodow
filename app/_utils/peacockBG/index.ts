@@ -33,10 +33,11 @@ export function initPeacockBG () {
 
 function settings () {
     if (!_settings) {
+        const windowWidth = 1056;
         _settings = {
             canvas: {
-                h: window.innerWidth * 414 / 1075,
-                w: window.innerWidth,
+                h: windowWidth * 414 / 1075,
+                w: windowWidth,
             },
             poster: {
                 h: 40,
