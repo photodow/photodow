@@ -1,10 +1,20 @@
+@use "@carbon/styles/scss/breakpoint" as *;
 @use "@carbon/styles/scss/themes" as *;
 @use "@carbon/styles/scss/theme";
 @use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/spacing";
 
 #experience-fleetistics {
   @include theme.theme($g10);
   color: theme.$text-primary;
+
+  .jd-slant__content {
+    margin-bottom: spacing.$spacing-03 * 16;
+
+    @include breakpoint("md") {
+      margin-bottom: auto;
+    }
+  }
 
   .jd-slant__bg {
     background: theme.$background;
@@ -14,7 +24,7 @@
     }
 
     & > div {
-      opacity: 0.65;
+      opacity: 0.5;
     }
 
     &::before {
