@@ -13,6 +13,10 @@
       outline-color: transparent;
     }
 
+    & > div {
+      opacity: 0.65;
+    }
+
     &::before {
       opacity: 0.5;
       z-index: 1;

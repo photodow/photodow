@@ -17,7 +17,7 @@ export default function Slant({ Type = 'section', children, className, id }: Com
       <div className="jd-slant__content">
         {children}
       </div>
-      <div className="jd-slant__bg" />
+      <div className="jd-slant__bg jd-in-view" />
     </Type>
   );
 }

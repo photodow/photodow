@@ -2,7 +2,8 @@ import urlParams from "./urlParams";
 
 let interObserver: IntersectionObserver | null = null;
 const visible = 'visible';
-const className = 'jd-fade-in';
+const fadeInClass = 'jd-fade-in';
+const inViewClass = 'jd-in-view';
 
 export function createFadeInObserver () {
     if (urlParams().has('disableScrollFade') || urlParams().has('disableMotion')) {
@@ -42,13 +43,13 @@ export function createFadeInObserver () {
 }
 
 function handleFadeIn (node: Element) {
-    const nodes = node.querySelectorAll(`.${className}`);
+    const nodes = node.querySelectorAll(`.${fadeInClass}, .${inViewClass}`);
 
     nodes.forEach((node: Element) => {
         interObserver?.observe(node);
     });
 
-    if (node.classList.contains(className)) {
+    if (node.classList.contains(fadeInClass) || node.classList.contains(inViewClass)) {
         interObserver?.observe(node);
     }
 }
