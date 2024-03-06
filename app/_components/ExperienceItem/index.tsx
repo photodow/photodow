@@ -3,18 +3,19 @@
 import "./index.scss";
 
 import { Experience } from "../../_types/Experience";
-import { createElement, useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import Skills from "../Skills";
 import { OrgData, transformOrgData } from "../../_utils/getOrgData";
 import OrgName from "../OrgName";
 import ExperienceMeta from "../ExperienceMeta";
 import Slant from "../Slant";
-import { initTMDB } from "../../_utils/peacockBG/tmdb";
 import { initPeacockBG } from "../../_utils/peacockBG";
+import { initFleetisticsBG } from "../../_utils/fleetisticsBG";
 
 const initOrgKey: Record<string, Function> = {
-  'peacock': initPeacockBG
+  'peacock': initPeacockBG,
+  'fleetistics': initFleetisticsBG
 }
 
 export default function ExperienceItem({ orgKey, title, description, details, start, end, location, type, skills }: Experience) {

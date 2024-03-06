@@ -203,46 +203,4 @@ $base: "jd-experience-item";
     //   background: rgba(colors.$black, 0.35);
     // }
   }
-
-  &-fleetistics {
-    @include theme.theme($g10);
-    color: theme.$text-primary;
-
-    // .#{$base} {
-    //   &__meta {
-    //     &,
-    //     a {
-    //       color: theme.$text-secondary;
-    //     }
-    //   }
-    // }
-
-    .jd-slant__bg {
-      // background: linear-gradient(45deg, #116b9f, #0d5e8d);
-      background: linear-gradient(-45deg, colors.$gray-20, colors.$white);
-
-      &::before {
-        opacity: 0.35;
-      }
-
-      // &::after {
-      //   content: "";
-      //   position: absolute;
-      //   left: 0;
-      //   top: 0;
-      //   width: 100%;
-      //   height: 100%;
-      //   background: linear-gradient(
-      //     -45deg,
-      //     rgba(colors.$black, 0.8),
-      //     rgba(colors.$white, 0.8)
-      //   );
-      //   mix-blend-mode: overlay;
-      // }
-    } // 3394be 116B9F // 0D5E8D
-
-    // .jd-skills .cds--tag {
-    //   background: rgba(colors.$black, 0.35);
-    // }
-  }
 }
