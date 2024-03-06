@@ -1,5 +1,18 @@
-#experience-peacock .jd-slant__bg {
-  background: #000;
+@use "@carbon/styles/scss/breakpoint" as *;
+@use "@carbon/styles/scss/spacing";
+
+#experience-peacock {
+  .jd-slant__content {
+    margin-bottom: spacing.$spacing-03 * 16;
+
+    @include breakpoint("md") {
+      margin-bottom: 0;
+    }
+  }
+
+  .jd-slant__bg {
+    background: #000;
+  }
 }
 
 .jd-peacock-bg {
