@@ -5,7 +5,24 @@ let mapElem: Element | null = null;
 const latlng = {
     lat: 27.9517579,
     lng: -82.4600397
-}
+};
+
+// var myStyles = [
+//     {
+//         featureType: "all",
+//         elementType: "labels",
+//         stylers: [
+//               { visibility: "off" }
+//         ]
+//     },
+//     {
+//         featureType: "poi",
+//         elementType: "labels",
+//         stylers: [
+//               { visibility: "off" }
+//         ]
+//     }
+// ];
 
 export function initFleetisticsBG () {
     new Loader({
@@ -29,10 +46,12 @@ export function initFleetisticsBG () {
                 disableDefaultUI: true,
                 gestureHandling: "none",
                 // suppressMarkers: true
+                // styles: myStyles
             });
 
             window.map = map;
 
+            
             animate();
         })
         .catch(e => {
@@ -42,12 +61,16 @@ export function initFleetisticsBG () {
 
 function animate () {
     if (map && mapElem?.classList.contains('visible')) {
-        const addBy = .0000005;
+        const addBy = -0.000001;
 
         latlng.lat += addBy;
         latlng.lng += addBy;
 
         map.setCenter(latlng);
+
+        // map.moveCamera({
+        //     center: latlng
+        // });
     }
 
     requestAnimationFrame(animate);

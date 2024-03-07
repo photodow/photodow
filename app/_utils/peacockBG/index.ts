@@ -13,14 +13,15 @@ let renderer: THREE.WebGLRenderer;
 let camera: THREE.PerspectiveCamera;
 let _settings: PeacockBgSettings;
 let assetGroup: THREE.Group;
+let container: null | Element;
 const posterRows: THREE.Group[] = [];
 
 export function initPeacockBG () {
     const selector = `#experience-peacock`;
-    const container = document.querySelector(selector);
+    const parent = document.querySelector(selector);
 
-    if (container && !renderer) {
-        initCanvas(container);
+    if (parent && !renderer) {
+        initCanvas(parent);
         initScene();
 
         renderPosters();
@@ -54,13 +55,14 @@ function settings () {
 
 function initCanvas (parent: Element) {
     const _settings = settings();
-    const container = document.createElement('div');
+    container = document.createElement('div');
     renderer = new THREE.WebGLRenderer();
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(_settings.canvas.w, _settings.canvas.h);
 
     container.classList.add('jd-peacock-bg');
+    container.classList.add('jd-in-view');
     container.append(renderer.domElement);
     parent.append(container);
 }
@@ -76,13 +78,14 @@ function initScene () {
 }
 
 function animate() {
-    if (!urlParams().has('disableMotion') && !urlParams().has('disablePeacockMotion')) {
+    if (
+        renderer && scene && camera
+        && container?.classList.contains('visible')
+        && !urlParams().has('disableMotion')
+        && !urlParams().has('disablePeacockMotion')
+    ) {
         scrollPosters();
-    }
-
-    assetGroup.position.y = assetGroupY;
-
-    if (renderer && scene && camera) {
+        assetGroup.position.y = assetGroupY;
         renderer.render(scene, camera);
     }
 
@@ -166,6 +169,8 @@ function loadPosterImages () {
                     poster.name = (asset as TMDB_TV).name || (asset as TMDB_Movie).title;
                 }
             }
+
+            renderer.render(scene, camera);
         });
     })
 }
@@ -216,6 +221,7 @@ function renderPosters () {
         rowGroup.add(poster);
     }
 
+    renderer.render(scene, camera);
     loadPosterImages();
 }
 
