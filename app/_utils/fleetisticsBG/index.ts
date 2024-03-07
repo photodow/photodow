@@ -3,8 +3,8 @@ import { Loader } from '@googlemaps/js-api-loader';
 let map: google.maps.Map;
 let mapElem: Element | null = null;
 const latlng = {
-    lat: 27.9517579,
-    lng: -82.4600397
+    lat: 28.0882103,
+    lng: -82.4576896
 };
 
 // var myStyles = [
@@ -40,7 +40,7 @@ export function initFleetisticsBG () {
             map = new google.Map(mapElem as HTMLElement, {
                 center: latlng,
                 zoom: 18,
-                heading: 20,
+                heading: -50,
                 tilt: 150,
                 mapId: "5d1feb3d85ffb2af",
                 disableDefaultUI: true,
@@ -50,7 +50,6 @@ export function initFleetisticsBG () {
             });
 
             window.map = map;
-
             
             animate();
         })
@@ -61,10 +60,10 @@ export function initFleetisticsBG () {
 
 function animate () {
     if (map && mapElem?.classList.contains('visible')) {
-        const addBy = -0.000001;
+        const addBy = 0.000001;
 
-        latlng.lat += addBy;
-        latlng.lng += addBy;
+        latlng.lat -= addBy;
+        // latlng.lng -= addBy;
 
         map.setCenter(latlng);
 
