@@ -1,13 +1,14 @@
 "use client";
 
 import "./index.scss";
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import Navigation from '../Navigation';
 import EightBitMe from '../EightBitMe';
 import { SiteDataContext } from "../../_utils/contexts";
 import { SkeletonText } from "@carbon/react";
 import { MainItem } from "../../_types/Main";
+import { Icon, IconKeys } from "../Icon";
 
 type Comp = {
   mini?: boolean,
@@ -16,13 +17,22 @@ type Comp = {
 }
 
 export default function Header({ mini = false, redirect, contentEditable = false }: Comp) {
-
   const siteData = useContext(SiteDataContext);
 
   const eightBitMe = useRef<HTMLButtonElement>(null);
   const navOpenFocusRef = useRef<HTMLButtonElement>(null);
 
   const [navOpen, setNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const handleIsScrolled = useCallback(() => {
+    setIsScrolled(true);
+    document.removeEventListener('scroll', handleIsScrolled);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleIsScrolled);
+  }, [handleIsScrolled]);
 
   useEffect(() => {
     const noScrollClass = 'jd-body--noscroll';
@@ -49,6 +59,9 @@ export default function Header({ mini = false, redirect, contentEditable = false
       </div>
       <Navigation open={navOpen} toggleNav={() => setNavOpen(!navOpen)} firstFocusItem={navOpenFocusRef} />
       <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={mini} />
+      <p className={`jd-header__scroll-indicator ${isScrolled ? 'jd-header__scroll-indicator--hide' : ''}`}>
+        <Icon iconRef={IconKeys.ChevronDown} />
+      </p>
     </header>
   );
 

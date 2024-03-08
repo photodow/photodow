@@ -63,6 +63,35 @@ $titleBase: $base + "__title";
   &__role {
     @include type.type-style("body-compact-01");
   }
+
+  &__scroll-indicator {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: spacing.$spacing-03 * 2;
+    margin: auto;
+    text-align: center;
+    transition: opacity 2s ease-in-out;
+
+    &--hide {
+      opacity: 0;
+    }
+
+    svg {
+      width: spacing.$spacing-03 * 4;
+      height: spacing.$spacing-03 * 4;
+      animation-name: bounce;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      opacity: 0.5;
+    }
+  }
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-50%);
+  }
 }
 
 .#{$titleBase} {

@@ -15,6 +15,7 @@ import Phone from "@carbon/icons-react/lib/Phone";
 import Email from "@carbon/icons-react/lib/Email";
 import Wikis from "@carbon/icons-react/lib/Wikis";
 import Location from "@carbon/icons-react/lib/Location";
+import ChevronDown from "@carbon/icons-react/lib/ChevronDown";
 
 export const enum IconKeys {
     GitHub = 'github',
@@ -32,6 +33,7 @@ export const enum IconKeys {
     Email = 'email',
     Website = 'website',
     Map = 'map',
+    ChevronDown = 'ChevronDown'
 }
 interface Comp {
     iconRef: IconKeys,
@@ -54,6 +56,7 @@ const icons: Record<IconKeys, JSXElementConstructor<any>> = {
     [IconKeys.Email]: Email,
     [IconKeys.Website]: Wikis,
     [IconKeys.Map]: Location,
+    [IconKeys.ChevronDown]: ChevronDown
 }
 
 export function Icon({ iconRef, size }: Comp) {
