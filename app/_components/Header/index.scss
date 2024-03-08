@@ -72,6 +72,7 @@ $titleBase: $base + "__title";
     margin: auto;
     text-align: center;
     transition: opacity 2s ease-in-out;
+    color: theme.$text-placeholder;
 
     &--hide {
       opacity: 0;
@@ -83,7 +84,7 @@ $titleBase: $base + "__title";
       animation-name: bounce;
       animation-duration: 1s;
       animation-iteration-count: infinite;
-      opacity: 0.5;
+      // opacity: 0.5;
     }
   }
 }
