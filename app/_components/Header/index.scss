@@ -68,7 +68,7 @@ $titleBase: $base + "__title";
     position: absolute;
     left: 0;
     right: 0;
-    bottom: spacing.$spacing-03 * 2;
+    bottom: spacing.$spacing-03 * 4;
     margin: auto;
     text-align: center;
     transition: opacity 2s ease-in-out;
@@ -84,7 +84,6 @@ $titleBase: $base + "__title";
       animation-name: bounce;
       animation-duration: 1s;
       animation-iteration-count: infinite;
-      // opacity: 0.5;
     }
   }
 }
