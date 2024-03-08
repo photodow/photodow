@@ -1,4 +1,5 @@
 import { Loader } from '@googlemaps/js-api-loader';
+import { disableMotion } from '../disableMotion';
 
 let map: google.maps.Map;
 let mapElem: Element | null = null;
@@ -48,8 +49,6 @@ export function initFleetisticsBG () {
                 // suppressMarkers: true
                 // styles: myStyles
             });
-
-            window.map = map;
             
             animate();
         })
@@ -59,7 +58,10 @@ export function initFleetisticsBG () {
 }
 
 function animate () {
-    if (map && mapElem?.classList.contains('visible')) {
+    if (
+        map
+        && !disableMotion('disableFleetisticsMotion')
+        && mapElem?.classList.contains('visible')) {
         const addBy = 0.000001;
 
         latlng.lat -= addBy;

@@ -3,7 +3,7 @@
 import "./index.scss";
 
 import { Experience } from "../../_types/Experience";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import Skills from "../Skills";
 import { OrgData, transformOrgData } from "../../_utils/getOrgData";
@@ -12,15 +12,18 @@ import ExperienceMeta from "../ExperienceMeta";
 import Slant from "../Slant";
 import { initPeacockBG } from "../../_utils/peacockBG";
 import { initFleetisticsBG } from "../../_utils/fleetisticsBG";
+import { initIBMBG } from "../../_utils/ibmBG";
 
 const initOrgKey: Record<string, Function> = {
   'peacock': initPeacockBG,
+  'ibm-design': initIBMBG,
   'fleetistics': initFleetisticsBG
 }
 
 export default function ExperienceItem({ orgKey, title, description, details, start, end, location, type, skills }: Experience) {
   const siteData = useContext(SiteDataContext);
 
+  const bgRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const [org, setOrg] = useState<OrgData | null>(null);
 
   const setOrgData = useCallback(() => {
@@ -32,11 +35,11 @@ export default function ExperienceItem({ orgKey, title, description, details, st
   }, [setOrgData]);
 
   useEffect(() => {
-    initOrgKey[orgKey]?.(orgKey);
+    initOrgKey[orgKey]?.(`experience-${orgKey}`, bgRef);
   }, [orgKey]);
 
   return (
-    <Slant Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>
+    <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>
       <div className="cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-2 cds--col-md-1 cds--offset-lg-2 cds--col-lg-2">

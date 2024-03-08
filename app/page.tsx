@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <App>
       <AboutMe addedRefs={[addedRefs]} />
-      {/* <MyExperience /> */}
+      <MyExperience />
       <MyWork />
     </App>
   );

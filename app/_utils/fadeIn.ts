@@ -1,4 +1,4 @@
-import urlParams from "./urlParams";
+import { disableMotion } from "./disableMotion";
 
 let interObserver: IntersectionObserver | null = null;
 const visible = 'visible';
@@ -6,7 +6,7 @@ const fadeInClass = 'jd-fade-in';
 const inViewClass = 'jd-in-view';
 
 export function createFadeInObserver () {
-    if (urlParams().has('disableScrollFade') || urlParams().has('disableMotion')) {
+    if (disableMotion('disableScrollFade')) {
         document.body.classList.add('disable-scroll-fade');
         return;
     }

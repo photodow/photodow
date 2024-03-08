@@ -3,8 +3,7 @@ import { createImageURL, initTMDB, shuffleList } from './tmdb';
 import { PeacockBgSettings } from '../../_types/peacockBG';
 import { PosterSizes, TMDB, TMDB_Movie, TMDB_TV } from '../../_types/TMDB';
 import urlParams from '../urlParams';
-
-// todo: add a motion pause button?
+import { disableMotion } from '../disableMotion';
 
 let assetGroupY = 0;
 let tmdb: TMDB;
@@ -74,22 +73,27 @@ function initScene () {
     initSpotlight();
     initCamera();
 
-    animate(); // fire only when in view? and/or when scrolling?
+    animate();
 }
 
 function animate() {
     if (
-        renderer && scene && camera
-        && container?.classList.contains('visible')
-        && !urlParams().has('disableMotion')
-        && !urlParams().has('disablePeacockMotion')
+        container?.classList.contains('visible')
+        && !disableMotion('disablePeacockMotion')
     ) {
         scrollPosters();
+    }
+
+    singleRender();
+
+	requestAnimationFrame(animate);
+}
+
+function singleRender() {
+    if (renderer && scene && camera && assetGroup) {
         assetGroup.position.y = assetGroupY;
         renderer.render(scene, camera);
     }
-
-	requestAnimationFrame(animate);
 }
 
 function initCamera () {
@@ -169,8 +173,6 @@ function loadPosterImages () {
                     poster.name = (asset as TMDB_TV).name || (asset as TMDB_Movie).title;
                 }
             }
-
-            renderer.render(scene, camera);
         });
     })
 }
@@ -221,7 +223,6 @@ function renderPosters () {
         rowGroup.add(poster);
     }
 
-    renderer.render(scene, camera);
     loadPosterImages();
 }
 
