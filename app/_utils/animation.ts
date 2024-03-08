@@ -53,8 +53,9 @@ export function animationTimeout (cb: Function, delay: number) {
 function pauseAnimationOnScroll () {
     isScrolling = true;
 
-    clearTimeout(isScrollingTimeout);
+    // maybe add a delay here too?
 
+    clearTimeout(isScrollingTimeout);
     isScrollingTimeout = setTimeout(() => {
         isScrolling = false;
     }, 250);
