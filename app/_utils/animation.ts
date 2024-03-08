@@ -4,7 +4,7 @@ import { animatePeacockBG } from "./peacockBG";
 
 const animationRunning = false;
 
-// should we build a registration function instead?
+// should we build a registration model instead?
 
 export function startAnimation () {
     if (animationRunning) {

@@ -50,8 +50,6 @@ export function initFleetisticsBG () {
                 // suppressMarkers: true
                 // styles: myStyles
             });
-            
-            animate();
         })
         .catch(e => {
             // do something
