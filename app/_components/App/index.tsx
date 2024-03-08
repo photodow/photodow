@@ -12,6 +12,7 @@ import urlParams from "../../_utils/urlParams";
 import { createFadeInObserver } from "../../_utils/fadeIn";
 import { clientMetaData } from "../../_utils/metadata";
 import Slant from "../Slant";
+import { startAnimation } from "../../_utils/animation";
 
 type Comp = {
   id?: string,
@@ -26,6 +27,10 @@ export default function App({ children, miniHeader }: Comp) {
 
   const setR = useCallback(() => setRedirect(urlParams().get('r')), []);
   const setToEditContent = useCallback(() => setEditableContent(Boolean(urlParams().get('edit'))), []);
+
+  useEffect(() => {
+    startAnimation();
+  }, []);
 
   useEffect(() => {
 

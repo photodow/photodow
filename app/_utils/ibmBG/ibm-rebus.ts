@@ -1,5 +1,5 @@
 const Eye = `
-    <svg class="ibm-rebus-eye" style="fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199.18 199.16">
+    <svg class="ibm-rebus-eye jd-in-view" style="fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199.18 199.16">
         <path class="ibm-rebus-eye__brow" d="M99.59,0C59.75,0,24.97,22.52,6.23,56.02v18.67C28.53,48.07,62.07,31.12,99.59,31.12s71.06,16.95,93.36,43.57v-18.67C174.21,22.52,139.42,0,99.59,0Z" />
         <g class="ibm-rebus-eye__ball">
             <path class="ibm-rebus-eye__outline" d="M99.59,62.24c-44.78,0-83.19,28.23-99.59,68.46,16.4,40.23,54.81,68.46,99.59,68.46s83.19-28.23,99.59-68.46c-16.4-40.23-54.81-68.46-99.59-68.46h0ZM99.59,186.72c-30.94,0-56.02-25.08-56.02-56.02s25.08-56.02,56.02-56.02,56.02,25.08,56.02,56.02-25.08,56.02-56.02,56.02Z" />
@@ -9,7 +9,7 @@ const Eye = `
 `;
 
 const Bee = `
-    <svg class="ibm-rebus-bee" style="fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252.07 191.4">
+    <svg class="ibm-rebus-bee jd-in-view" style="fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 252.07 191.4">
         <g class="ibm-rebus-bee__eyes">
             <circle class="cls-1" cx="102.66" cy="18.64" r="18.64" />
             <circle class="cls-1" cx="149.41" cy="18.64" r="18.64" />
@@ -26,7 +26,7 @@ const Bee = `
 `;
 
 const M = `
-    <svg class="ibm-rebus-m" style="fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205.35 184.35">
+    <svg class="ibm-rebus-m jd-in-view" style="fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205.35 184.35">
         <g class="ibm-rebus-m__row">
             <polygon points="77.97 12.84 73.51 0 0 0 0 12.84 77.97 12.84"></polygon>
             <polygon points="131.85 0 127.38 12.84 205.35 12.84 205.35 0 131.85 0"></polygon>

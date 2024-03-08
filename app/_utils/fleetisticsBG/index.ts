@@ -3,6 +3,7 @@ import { disableMotion } from '../disableMotion';
 
 let map: google.maps.Map;
 let mapElem: Element | null = null;
+const moveMapBy = 0.000001;
 const latlng = {
     lat: 28.0882103,
     lng: -82.4576896
@@ -57,14 +58,13 @@ export function initFleetisticsBG () {
         });
 }
 
-function animate () {
+export function animateFleetisticsBG () {
     if (
         map
         && !disableMotion('disableFleetisticsMotion')
         && mapElem?.classList.contains('visible')) {
-        const addBy = 0.000001;
 
-        latlng.lat -= addBy;
+        latlng.lat -= moveMapBy;
         // latlng.lng -= addBy;
 
         map.setCenter(latlng);
@@ -73,6 +73,4 @@ function animate () {
         //     center: latlng
         // });
     }
-
-    requestAnimationFrame(animate);
 }

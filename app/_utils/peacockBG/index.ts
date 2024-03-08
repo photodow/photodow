@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { createImageURL, initTMDB, shuffleList } from './tmdb';
+import { createImageURL, initTMDB } from './tmdb';
 import { PeacockBgSettings } from '../../_types/peacockBG';
 import { PosterSizes, TMDB, TMDB_Movie, TMDB_TV } from '../../_types/TMDB';
-import urlParams from '../urlParams';
 import { disableMotion } from '../disableMotion';
+import { shuffleList } from '../shuffleList';
 
 let assetGroupY = 0;
 let tmdb: TMDB;
@@ -72,11 +72,9 @@ function initScene () {
     initAssetGroup();
     initSpotlight();
     initCamera();
-
-    animate();
 }
 
-function animate() {
+export function animatePeacockBG() {
     if (
         container?.classList.contains('visible')
         && !disableMotion('disablePeacockMotion')
@@ -85,8 +83,6 @@ function animate() {
     }
 
     singleRender();
-
-	requestAnimationFrame(animate);
 }
 
 function singleRender() {
