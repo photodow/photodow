@@ -31,14 +31,15 @@
     bottom: 0;
     width: 100%;
     opacity: 0.1;
-    padding: 0 spacing.$spacing-03 * 4;
     display: grid;
     column-gap: spacing.$spacing-03 * 4;
     row-gap: spacing.$spacing-03 * 2;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(12, 1fr);
+    padding: 0 spacing.$spacing-03 * 2;
 
     @include breakpoint("md") {
+      padding: 0 spacing.$spacing-03 * 4;
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(6, 1fr);
     }
