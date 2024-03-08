@@ -222,7 +222,7 @@ function renderPosters () {
     loadPosterImages();
 }
 
-function scrollPosters (moveY = .1) {
+function scrollPosters (moveY = .2) {
     if (assetGroup.position.y >= 0) {
         loopPosters();
         assetGroupY = settings().startingY;

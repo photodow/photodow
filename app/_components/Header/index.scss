@@ -79,11 +79,15 @@ $titleBase: $base + "__title";
     }
 
     svg {
-      width: spacing.$spacing-03 * 4;
-      height: spacing.$spacing-03 * 4;
-      animation-name: bounce;
+      width: spacing.$spacing-03 * 5;
+      height: spacing.$spacing-03 * 5;
       animation-duration: 1s;
-      animation-iteration-count: infinite;
+      animation-iteration-count: 3;
+    }
+
+    &:not(.#{$base}__scroll-indicator--hide) svg {
+      animation-name: bounce;
+      animation-delay: 1s;
     }
   }
 }

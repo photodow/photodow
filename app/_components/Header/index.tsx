@@ -21,17 +21,25 @@ export default function Header({ mini = false, redirect, contentEditable = false
 
   const eightBitMe = useRef<HTMLButtonElement>(null);
   const navOpenFocusRef = useRef<HTMLButtonElement>(null);
+  const scrollReminderTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const [navOpen, setNavOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollReminder, setScrollReminder] = useState(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const handleIsScrolled = useCallback(() => {
-    setIsScrolled(true);
+    setHasScrolled(true);
+    clearTimeout(scrollReminderTimeout.current);
     document.removeEventListener('scroll', handleIsScrolled);
   }, []);
 
   useEffect(() => {
     document.addEventListener('scroll', handleIsScrolled);
+
+    clearTimeout(scrollReminderTimeout.current);
+    scrollReminderTimeout.current = setTimeout(() => {
+      setScrollReminder(false)
+    }, 1000 * 4);
   }, [handleIsScrolled]);
 
   useEffect(() => {
@@ -59,7 +67,7 @@ export default function Header({ mini = false, redirect, contentEditable = false
       </div>
       <Navigation open={navOpen} toggleNav={() => setNavOpen(!navOpen)} firstFocusItem={navOpenFocusRef} />
       <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={mini} />
-      <p className={`jd-header__scroll-indicator ${isScrolled ? 'jd-header__scroll-indicator--hide' : ''}`}>
+      <p className={`jd-header__scroll-indicator${hasScrolled || scrollReminder ? ' jd-header__scroll-indicator--hide' : ''}`}>
         <Icon iconRef={IconKeys.ChevronDown} />
       </p>
     </header>
