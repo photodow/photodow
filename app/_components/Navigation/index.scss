@@ -1,6 +1,7 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
 
 $base: "jd-nav";
 $linkListBase: "jd-linklist";
@@ -90,8 +91,22 @@ $linkListBase: "jd-linklist";
   }
 
   &__name {
-    @include type.type-style("heading-04");
-    font-weight: bold;
+    a.cds--link {
+      @include type.type-style("heading-04");
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+
+      &,
+      &:visited {
+        color: theme.$text-primary;
+      }
+
+      &:hover {
+        color: theme.$text-secondary;
+        transform: scale(1.05);
+      }
+    }
   }
 
   &__role {

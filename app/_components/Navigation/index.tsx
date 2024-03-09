@@ -6,6 +6,7 @@ import CloseIcon from "../CloseIcon";
 import { useRef, KeyboardEvent, FocusEvent, RefObject, useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import LinksByRef from "../LinksByRef";
+import { Link } from "@carbon/react";
 
 type Comp = {
   open: boolean,
@@ -30,7 +31,9 @@ export default function Navigation({ open, toggleNav, firstFocusItem }: Comp) {
         />
         <div className="cds--row">
           <div className="cds--col-sm-4 jd-nav__header">
-            <p className="jd-nav__name">{siteData?.main?.name}</p>
+            <p className="jd-nav__name">
+              <Link href="/">{siteData?.main?.name}</Link>
+            </p>
             <p className="jd-nav__role">{siteData?.main?.role}</p>
           </div>
         </div>
