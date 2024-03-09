@@ -19,8 +19,8 @@ export function startAnimation () {
 
     animate();
 
-    window.addEventListener('scroll', pauseAnimationOnScroll);
-    window.addEventListener("touchmove", pauseAnimationOnScroll);
+    window.addEventListener('scroll', () => pauseAnimationOnScroll(250));
+    window.addEventListener("touchmove", () => pauseAnimationOnScroll(50));
 }
 
 function animate() {
@@ -50,7 +50,7 @@ export function animationTimeout (cb: Function, delay: number) {
     }
 }
 
-function pauseAnimationOnScroll () {
+function pauseAnimationOnScroll (delay: number) {
     isScrolling = true;
 
     // maybe add a delay here too?
@@ -58,5 +58,5 @@ function pauseAnimationOnScroll () {
     clearTimeout(isScrollingTimeout);
     isScrollingTimeout = setTimeout(() => {
         isScrolling = false;
-    }, 250);
+    }, delay);
 }

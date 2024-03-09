@@ -70,6 +70,7 @@ $titleBase: $base + "__title";
     right: 0;
     bottom: spacing.$spacing-03 * 8;
     margin: auto;
+    user-select: none;
     text-align: center;
     transition: opacity 0.5s ease-in-out;
     color: theme.$text-placeholder;
