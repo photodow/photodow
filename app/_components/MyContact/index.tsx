@@ -15,12 +15,14 @@ const websiteRef: Ref = {
     }
 }
 
+const id = "contact";
+
 export default function MyContact() {
   const siteData = useContext(SiteDataContext);
 
   return (
-    <article className="jd-contact" id="education">
-      {siteData && <h3 className="jd-contact__title jd-body__section-title jd-fade-in">Contact</h3>}
+    <article className="jd-contact" id={id}>
+      {siteData && <h3 className="jd-contact__title jd-body__section-title jd-fade-in" data-page={id}>Contact</h3>}
       
       <LinksByRef
         refs={siteData?.main?.contact}

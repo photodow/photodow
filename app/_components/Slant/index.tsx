@@ -9,12 +9,15 @@ type Comp = {
     children?: ReactNode,
     className?: string,
     id?: string,
-    bgRef?: MutableRefObject<HTMLDivElement | null>,
+    bgRef?: MutableRefObject<HTMLDivElement | null>
 }
 
 export default function Slant({ Type = 'section', children, className, id, bgRef }: Comp) {
   return (
-    <Type className={`jd-slant${className ? ` ${className}` : ''}`} id={id}>
+    <Type
+      className={`jd-slant${className ? ` ${className}` : ''}`}
+      id={id}
+    >
       <div className="jd-slant__content">
         {children}
       </div>

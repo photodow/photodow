@@ -12,6 +12,8 @@ import MyEducation from "../MyEducation";
 import Slant from "../Slant";
 import MyContact from "../MyContact";
 
+const id = 'experience';
+
 export default function MyExperience() {
   const siteData = useContext(SiteDataContext);
   const [experiences, setExperiences] = useState<Experience[]>([]);
@@ -35,12 +37,12 @@ export default function MyExperience() {
   }, [setExperienceData]);
 
   return (
-    <article className="jd-experience" id="experience">
+    <article className="jd-experience" id={id}>
       <Slant Type="header" className="jd-experience__header">
         <div className="cds--grid">
           <div className="cds--row">
             <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-3 cds--offset-lg-2 cds--col-lg-8">
-              {siteData && <h3 className="jd-experience__title jd-body__section-title jd-fade-in">Experience</h3>}
+              {siteData && <h3 className="jd-experience__title jd-body__section-title jd-fade-in" data-page={id}>Experience</h3>}
             </div>
           </div>
         </div>

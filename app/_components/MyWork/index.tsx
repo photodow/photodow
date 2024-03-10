@@ -8,6 +8,8 @@ import PortfolioGrid from "../PortfolioGrid";
 import { Search } from "@carbon/react";
 import Slant from "../Slant";
 
+const id = "work";
+
 export default function MyWork() {
   const siteData = useContext(SiteDataContext);
 
@@ -17,11 +19,11 @@ export default function MyWork() {
   const [isTyping, setIsTyping] = useState(false);
 
   return (
-    <Slant Type="article" className="jd-work jd-section--slant" id="work">
+    <Slant Type="article" className="jd-work jd-section--slant" id={id}>
         <div className="cds--grid">
           <div className="cds--row">
             <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-3 cds--offset-lg-2 cds--col-lg-8">
-              <h3 className="jd-work__title jd-body__section-title">My Projects</h3>
+              <h3 className="jd-work__title jd-body__section-title" data-page={id}>My Projects</h3>
             </div>
             <div className="cds--col-sm-4 cds--col-md-3 cds--col-lg-4">
               <Search
@@ -42,8 +44,20 @@ export default function MyWork() {
     setIsTyping(true);
     clearTimeout(keyupTimeout.current);
     keyupTimeout.current = setTimeout(() => {
-      setSearchValue((e.target as HTMLInputElement).value as string);
+      const value = (e.target as HTMLInputElement).value as string;
+      let url = new URL(location.toString());
+  
       setIsTyping(false);
+      setSearchValue(value);
+
+      if (value) {
+        url.searchParams.set('search', value);
+      } else {
+        url.searchParams.delete('search');
+      }
+
+      history.replaceState({}, "", url);
     }, 1000);
   }
 }
+

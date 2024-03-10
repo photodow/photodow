@@ -39,7 +39,7 @@ export default function ExperienceItem({ orgKey, title, description, details, st
   }, [orgKey]);
 
   return (
-    <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>
+    <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`} dataPage={true}>
       <div className="cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-2 cds--col-md-1 cds--offset-lg-2 cds--col-lg-2">
@@ -49,7 +49,7 @@ export default function ExperienceItem({ orgKey, title, description, details, st
             {org && <p className="jd-experience-item__org jd-fade-in">
               <OrgName className="jd-experience-item__org" {...org} />
             </p>}
-            <h4 className="jd-experience-item__title jd-fade-in">{title}</h4>
+            <h4 className="jd-experience-item__title jd-fade-in" data-page={`experience-${orgKey}`}>{title}</h4>
             <ExperienceMeta
               start={start}
               end={end}

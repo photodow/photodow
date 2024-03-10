@@ -10,6 +10,8 @@ import GetRefs from "../../_utils/getRefs";
 import EducationItem from "../EducationItem";
 import List from "../List";
 
+const id = "experience-education";
+
 export default function MyEducation() {
   const siteData = useContext(SiteDataContext);
   const [education, setEducation] = useState<Experience[]>([]);
@@ -34,8 +36,8 @@ export default function MyEducation() {
   }, [setEducationData]);
 
   return (
-    <article className="jd-education" id="education">
-      {siteData && <h3 className="jd-education__title jd-body__section-title  jd-fade-in">Education</h3>}
+    <article className="jd-education" id={id}>
+      {siteData && <h3 className="jd-education__title jd-body__section-title jd-fade-in" data-page={id}>Education</h3>}
       <List
         className="jd-education__list"
         items={education.map((item, i) => {

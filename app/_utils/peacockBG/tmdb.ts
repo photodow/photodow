@@ -74,18 +74,6 @@ export function createImageURL (baseUrl: string, size: PosterSizes, path: string
     return `${baseUrl}${size}${path}`;
 }
 
-export function shuffleList (list: TMDB_Result[]) {
-    const copiedList = [...list];
-    const newList = [];
-
-    while (copiedList.length > 0) {
-        const random = Math.floor(Math.random() * copiedList.length);
-        newList.push(copiedList.splice(random, 1)[0]);
-    }
-
-    return newList;
-}
-
 export function clearTMDB () {
     localStore().removeItem(StorageKeys.TMDB_Date);
     localStore().removeItem(StorageKeys.TMDB_Results);
