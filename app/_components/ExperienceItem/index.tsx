@@ -39,7 +39,7 @@ export default function ExperienceItem({ orgKey, title, description, details, st
   }, [orgKey]);
 
   return (
-    <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`} dataPage={true}>
+    <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>
       <div className="cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-2 cds--col-md-1 cds--offset-lg-2 cds--col-lg-2">

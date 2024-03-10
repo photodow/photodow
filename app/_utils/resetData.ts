@@ -8,5 +8,9 @@ export default function resetData () {
         localStore().removeItem("siteData");
         localStore().removeItem("c");
         clearTMDB();
+
+        let url = new URL(location.toString());
+        url.searchParams.delete('clear');
+        history.replaceState({}, "", url);
     }
 }

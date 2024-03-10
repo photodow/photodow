@@ -7,6 +7,7 @@ import { SiteDataContext } from "../../_utils/contexts";
 import PortfolioGrid from "../PortfolioGrid";
 import { Search } from "@carbon/react";
 import Slant from "../Slant";
+import urlParams from "../../_utils/urlParams";
 
 const id = "work";
 
@@ -15,7 +16,7 @@ export default function MyWork() {
 
   const keyupTimeout = useRef<NodeJS.Timeout>();
 
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState(urlParams().get('search') || '');
   const [isTyping, setIsTyping] = useState(false);
 
   return (
@@ -27,6 +28,7 @@ export default function MyWork() {
             </div>
             <div className="cds--col-sm-4 cds--col-md-3 cds--col-lg-4">
               <Search
+                defaultValue={searchValue}
                 className="jd-work__search"
                 labelText=''
                 placeholder="Search projects..."
