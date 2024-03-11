@@ -9,12 +9,7 @@ import { SiteDataContext } from "../../_utils/contexts";
 import { SkeletonText } from "@carbon/react";
 import { MainItem } from "../../_types/Main";
 import { Icon, IconKeys } from "../Icon";
-
-export const enum HeaderSize {
-  Small = 'sm',
-  Medium = 'md',
-  Large = 'lg',
-}
+import { HeaderSize } from "../../_types/Header";
 
 type Comp = {
   mini?: boolean,

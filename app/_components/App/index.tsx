@@ -2,7 +2,7 @@
 
 import "./index.scss";
 
-import Header, { HeaderSize } from "../../_components/Header";
+import Header from "../../_components/Header";
 import { useCallback, useEffect, useState } from "react";
 import { initStateDB } from "../../_utils/firebase";
 import { SiteDataContext } from "../../_utils/contexts";
@@ -14,6 +14,7 @@ import { clientMetaData } from "../../_utils/metadata";
 import Slant from "../Slant";
 import { startAnimation } from "../../_utils/animation";
 import { CarbonTheme } from "../../_types/carbon";
+import { HeaderSize } from "../../_types/Header";
 
 type Comp = {
   id?: string,

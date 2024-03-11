@@ -3,7 +3,7 @@
 import Error from "next/error";
 import App from "./_components/App";
 import { CarbonTheme } from "./_types/carbon";
-import { HeaderSize } from "./_components/Header";
+import { HeaderSize } from "./_types/Header";
 
 export default function NotFound() {
   return (

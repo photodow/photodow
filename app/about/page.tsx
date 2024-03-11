@@ -5,7 +5,7 @@ import AboutMe from "../_components/AboutMe";
 
 import { Metadata } from 'next';
 import { descriptionBase, roleDefault } from "../_utils/metadata";
-import { HeaderSize } from "../_components/Header";
+import { HeaderSize } from "../_types/Header";
 
 const title = `About James Dow`;
 const description = `Learn a little about James Dow. ${roleDefault}.`;
