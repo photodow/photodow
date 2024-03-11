@@ -34,7 +34,7 @@ export default function MyExperience() {
 
   useEffect(() => {
     setExperienceData();
-  }, [setExperienceData]);
+  }, [setExperienceData, siteData]);
 
   return (
     <article className="jd-experience" id={id}>

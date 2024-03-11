@@ -24,6 +24,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+let localState: Partial<SiteData> | null = null;
 let setState: Function | undefined;
 
 init();
@@ -143,7 +144,8 @@ function updateState (data?: Partial<SiteData> | null) {
         return;
     }
 
-    setState({...data});
+    localState = {...data};
+    setState(localState);
 }
 
 function updateStateByKey<T extends keyof SiteData>(siteData?: Partial<SiteData> | null, key?: T, data?: SiteData[T]) {
@@ -156,6 +158,10 @@ function updateStateByKey<T extends keyof SiteData>(siteData?: Partial<SiteData>
     updateState(siteData as Partial<SiteData>);
 }
 
-export function initStateDB (cb?: Function) {
-    setState = cb;
+export function initStateDB (callback?: Function) {
+    setState = callback;
+
+    if (localState && setState) {
+        setState(localState);
+    }
 }

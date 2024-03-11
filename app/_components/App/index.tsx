@@ -28,6 +28,7 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
   const [redirect, setRedirect] = useState<string | null>(null);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
   const [editableContent, setEditableContent] = useState<boolean>(false);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   const setR = useCallback(() => setRedirect(urlParams().get('r')), []);
   const setToEditContent = useCallback(() => setEditableContent(Boolean(urlParams().get('edit'))), []);
@@ -37,6 +38,11 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
   }, []);
 
   useEffect(() => {
+    if (initialized) {
+      return;
+    }
+
+    setInitialized(true);
 
     setR();
     redirectIfR(redirect);
@@ -49,7 +55,8 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
     setToEditContent();
 
     clientMetaData(siteData?.main?.role);
-  }, [redirect, setR, setToEditContent, siteData]);
+
+  }, [redirect, setR, setToEditContent, siteData, initialized]);
 
   return (
     <SiteDataContext.Provider value={siteData}>

@@ -54,3 +54,12 @@ export function clientMetaData (role?: string) {
         });
     }
 }
+
+export function overrideTitle (title: string) {
+    if (title) {
+        const titleElem = document.querySelector('title');
+        if (titleElem) {
+            titleElem.innerHTML = title;
+        }
+    }
+}
