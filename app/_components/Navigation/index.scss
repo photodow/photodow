@@ -94,7 +94,6 @@ $linkListBase: "jd-linklist";
     a.cds--link {
       @include type.type-style("heading-04");
       font-weight: bold;
-      text-decoration: none;
       transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
 
       &,

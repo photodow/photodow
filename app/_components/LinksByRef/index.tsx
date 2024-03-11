@@ -2,13 +2,14 @@
 
 import "./index.scss";
 
-import { MouseEventHandler, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { MouseEventHandler, useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import GetRefs from "../../_utils/getRefs";
 import { Ref, RefList } from "../../_types/Ref";
-import { LinkComp, Link as LinkData } from "../../_types/Link";
-import { Button, Link, LinkProps } from "@carbon/react";
+import { Link as LinkData } from "../../_types/Link";
+import { LinkProps } from "@carbon/react";
 import { Icon } from "../Icon";
+import { Link } from "../Link";
 
 interface Comp {
   refs?: Ref[] | undefined,
@@ -36,7 +37,7 @@ export default function LinksByRef({ refs = [], size, className, onClick, text =
       {links.map(({
           protocol,
           title,
-          comp = LinkComp.Text,
+          comp,
           kind,
           size: _size,
           text: _text,
@@ -45,23 +46,22 @@ export default function LinksByRef({ refs = [], size, className, onClick, text =
           target = undefined
         }, i) => {
 
-        const Component = comp === LinkComp.Text ? Link : Button;
-
         return (
           <li key={`${_text}${i}`} className={`jd-linklist__item ${itemClassName}`}>
-            <Component className="jd-linklist__link"
-              href={`${protocol}${_value}`}
+            <Link className="jd-linklist__link"
+              href={`${protocol.replace(location.pathname, '')}${_value}`}
               target={target}
               title={title || _text}
               onClick={onClick}
               kind={kind}
               size={size || _size}
               style={delay ? { transitionDelay: `${i * .2}s`} : {}}
+              compType={comp}
             >
               {icon && _icon && <Icon iconRef={_icon} size={16} />}
               {text && _text && _text}
               {value && _value && _value}
-            </Component>
+            </Link>
           </li>
         );
       })}

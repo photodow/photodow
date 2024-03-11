@@ -41,7 +41,6 @@
 
 html,
 body {
-  scroll-behavior: smooth;
   min-height: 100%;
   position: relative;
   padding: 0;
@@ -50,8 +49,10 @@ body {
   background: theme.$background;
   text-wrap: balance;
   text-wrap: pretty;
+}
 
-  @include type.type-style("body-02");
+html.initialized {
+  scroll-behavior: smooth;
 }
 
 .jd-body--noscroll {

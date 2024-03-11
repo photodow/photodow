@@ -46,6 +46,8 @@ export default function Header({ mini = false, redirect, contentEditable = false
     const noScrollClass = 'jd-body--noscroll';
     const body = document.body.classList;
 
+    body.add('loaded');
+
     if (navOpen && !body.contains(noScrollClass)) {
       body.add(noScrollClass);
       navOpenFocusRef.current?.focus();

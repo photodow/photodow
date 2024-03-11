@@ -1,5 +1,6 @@
 import localStore from "./localStore";
 import { clearTMDB } from "./peacockBG/tmdb";
+import { updateURL } from "./updateURL";
 import urlParams from "./urlParams";
 
 export default function resetData () {
@@ -11,6 +12,6 @@ export default function resetData () {
 
         let url = new URL(location.toString());
         url.searchParams.delete('clear');
-        history.replaceState({}, "", url);
+        updateURL(url);
     }
 }

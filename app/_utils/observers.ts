@@ -1,4 +1,5 @@
 import { disableMotion } from "./disableMotion";
+import { updateURL } from "./updateURL";
 
 const visible = 'visible';
 const fadeInClass = 'jd-fade-in';
@@ -7,7 +8,7 @@ const pageAttr = 'data-page';
 let interObserver: IntersectionObserver | null = null;
 let registerIntersectObserver: Set<HTMLElement>;
 
-export function createFadeInObserver () {
+export function initObservers () {
     if (registerIntersectObserver) {
         return;
     }
@@ -17,13 +18,13 @@ export function createFadeInObserver () {
         return;
     }
 
-    console.log('createFadeInObserver');
-
     const main = document.body;
+
+    document.querySelector('html')?.classList.add('initialized');
 
     registerIntersectObserver = new Set();
 
-    interObserver = new IntersectionObserver(entries => {
+    interObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
             const target = (entry.target as HTMLElement);
             const classList = target.classList;
@@ -87,5 +88,5 @@ function registerIntersectObservers (node: HTMLElement) {
 function inPageChange (id: string) {
     const url = new URL(location.toString());
     url.hash = `#${id}`;
-    history.replaceState({}, "", url);    
+    updateURL(url);
 }

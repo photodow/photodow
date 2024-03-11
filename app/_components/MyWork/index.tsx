@@ -8,6 +8,7 @@ import PortfolioGrid from "../PortfolioGrid";
 import { Search } from "@carbon/react";
 import Slant from "../Slant";
 import urlParams from "../../_utils/urlParams";
+import { updateURL } from "../../_utils/updateURL";
 
 const id = "work";
 
@@ -58,7 +59,7 @@ export default function MyWork() {
         url.searchParams.delete('search');
       }
 
-      history.replaceState({}, "", url);
+      updateURL(url);
     }, 1000);
   }
 }

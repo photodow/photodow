@@ -9,7 +9,7 @@ import { SiteDataContext } from "../../_utils/contexts";
 import { SiteData } from "../../_types/SiteData";
 import redirectIfR from "../../_utils/redirectIfR";
 import urlParams from "../../_utils/urlParams";
-import { createFadeInObserver } from "../../_utils/fadeIn";
+import { initObservers } from "../../_utils/observers";
 import { clientMetaData } from "../../_utils/metadata";
 import Slant from "../Slant";
 import { startAnimation } from "../../_utils/animation";
@@ -41,7 +41,7 @@ export default function App({ children, miniHeader }: Comp) {
       initStateDB(setSiteData);
     }
 
-    createFadeInObserver();
+    initObservers();
     setToEditContent();
 
     clientMetaData(siteData?.main?.role);
