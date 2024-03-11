@@ -103,6 +103,7 @@ $linkListBase: "jd-linklist";
 
       &:hover {
         color: theme.$text-secondary;
+        text-decoration: none;
         transform: scale(1.05);
       }
     }

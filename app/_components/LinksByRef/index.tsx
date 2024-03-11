@@ -49,7 +49,7 @@ export default function LinksByRef({ refs = [], size, className, onClick, text =
         return (
           <li key={`${_text}${i}`} className={`jd-linklist__item ${itemClassName}`}>
             <Link className="jd-linklist__link"
-              href={`${protocol.replace(location.pathname, '')}${_value}`}
+              href={`${samePageHashProtocol(protocol)}${_value}`}
               target={target}
               title={title || _text}
               onClick={onClick}
@@ -67,4 +67,14 @@ export default function LinksByRef({ refs = [], size, className, onClick, text =
       })}
     </ul>
   );
+}
+
+function samePageHashProtocol (protocol: string) {
+  const path = location.pathname;
+
+  if (protocol.indexOf('#') > -1 && protocol.indexOf(path) === 0) {
+    return protocol.replace(path, '');
+  }
+
+  return protocol;
 }

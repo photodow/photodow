@@ -8,6 +8,7 @@ import { IconKeys } from "../_components/Icon";
 import { Ref } from "../_types/Ref";
 import { Metadata } from 'next';
 import { roleDefault, metaDataObj } from "../_utils/metadata";
+import { HeaderSize } from "../_components/Header";
 
 const title = `James Dow's Experiences`;
 const description = `A list of James Dow's experiences and credentials as a ${roleDefault}.`;
@@ -27,7 +28,7 @@ const jumpToExperienceRef: Ref = {
 
 export default function Experience() {
   return (
-    <App miniHeader={true}>
+    <App headerSize={HeaderSize.Small}>
       <AboutMe replaceRefs={[jumpToExperienceRef]} nameRoleOverride={true} />
       <MyExperience />
     </App>

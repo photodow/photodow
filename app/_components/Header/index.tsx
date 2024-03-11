@@ -10,13 +10,20 @@ import { SkeletonText } from "@carbon/react";
 import { MainItem } from "../../_types/Main";
 import { Icon, IconKeys } from "../Icon";
 
+export const enum HeaderSize {
+  Small = 'sm',
+  Medium = 'md',
+  Large = 'lg',
+}
+
 type Comp = {
   mini?: boolean,
   redirect?: boolean,
   contentEditable?: boolean
+  size?: HeaderSize
 }
 
-export default function Header({ mini = false, redirect, contentEditable = false }: Comp) {
+export default function Header({ size = HeaderSize.Large, redirect, contentEditable = false }: Comp) {
   const siteData = useContext(SiteDataContext);
 
   const eightBitMe = useRef<HTMLButtonElement>(null);
@@ -46,8 +53,6 @@ export default function Header({ mini = false, redirect, contentEditable = false
     const noScrollClass = 'jd-body--noscroll';
     const body = document.body.classList;
 
-    body.add('loaded');
-
     if (navOpen && !body.contains(noScrollClass)) {
       body.add(noScrollClass);
       navOpenFocusRef.current?.focus();
@@ -59,7 +64,7 @@ export default function Header({ mini = false, redirect, contentEditable = false
 
   return (
     <header data-carbon-theme="g10" contentEditable={contentEditable}
-      className={`jd-header${mini ? ' jd-header--mini' : ''}${redirect ? ' jd-header--redirect' : ''}`}>
+      className={`jd-header ${`jd-header--size--${size}`}${redirect ? ' jd-header--redirect' : ''}`}>
       <div className="jd-header__inner cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-4">
@@ -68,7 +73,7 @@ export default function Header({ mini = false, redirect, contentEditable = false
         </div>
       </div>
       <Navigation open={navOpen} toggleNav={() => setNavOpen(!navOpen)} firstFocusItem={navOpenFocusRef} />
-      <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={mini} />
+      <EightBitMe refObj={eightBitMe} onClick={() => setNavOpen(!navOpen)} miniMe={size !== HeaderSize.Large} />
       <p className={`jd-header__scroll-indicator${hasScrolled || scrollReminder ? ' jd-header__scroll-indicator--hide' : ''}`}>
         <Icon iconRef={IconKeys.ChevronDown} />
       </p>
@@ -82,7 +87,7 @@ export default function Header({ mini = false, redirect, contentEditable = false
           <SkeletonText />
           <SkeletonText />
         </div>
-        <span className="jd-header__name">{main?.name}</span>
+        <a href="/" className="jd-header__name">{main?.name}</a>
         <span className="jd-header__role">{main?.role}</span>
       </h1>
     )

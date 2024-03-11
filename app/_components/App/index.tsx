@@ -2,7 +2,7 @@
 
 import "./index.scss";
 
-import Header from "../../_components/Header";
+import Header, { HeaderSize } from "../../_components/Header";
 import { useCallback, useEffect, useState } from "react";
 import { initStateDB } from "../../_utils/firebase";
 import { SiteDataContext } from "../../_utils/contexts";
@@ -13,14 +13,17 @@ import { initObservers } from "../../_utils/observers";
 import { clientMetaData } from "../../_utils/metadata";
 import Slant from "../Slant";
 import { startAnimation } from "../../_utils/animation";
+import { CarbonTheme } from "../../_types/carbon";
 
 type Comp = {
   id?: string,
   children?: React.ReactNode,
   miniHeader?: boolean,
+  theme?: CarbonTheme,
+  headerSize?: HeaderSize,
 }
 
-export default function App({ children, miniHeader }: Comp) {
+export default function App({ headerSize, theme = CarbonTheme.g90, children }: Comp) {
   const [redirect, setRedirect] = useState<string | null>(null);
   const [siteData, setSiteData] = useState<SiteData | null>(null);
   const [editableContent, setEditableContent] = useState<boolean>(false);
@@ -49,8 +52,8 @@ export default function App({ children, miniHeader }: Comp) {
 
   return (
     <SiteDataContext.Provider value={siteData}>
-      <Header mini={miniHeader} redirect={!!redirect} contentEditable={editableContent} />
-      <main className="jd-main" contentEditable={editableContent}>
+      <Header size={headerSize} redirect={!!redirect} contentEditable={editableContent} />
+      <main className="jd-main" contentEditable={editableContent} data-carbon-theme={theme}>
         {children}
       </main>
       <Slant Type="footer" />

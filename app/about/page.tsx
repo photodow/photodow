@@ -5,6 +5,7 @@ import AboutMe from "../_components/AboutMe";
 
 import { Metadata } from 'next';
 import { descriptionBase, roleDefault } from "../_utils/metadata";
+import { HeaderSize } from "../_components/Header";
 
 const title = `About James Dow`;
 const description = `Learn a little about James Dow. ${roleDefault}.`;
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <App miniHeader={true}>
+    <App headerSize={HeaderSize.Small}>
       <AboutMe />
     </App>
   );
