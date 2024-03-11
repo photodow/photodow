@@ -3,7 +3,7 @@ import { disableMotion } from '../disableMotion';
 
 let map: google.maps.Map;
 let mapElem: Element | null = null;
-const moveMapBy = 0.000001 * 3;
+const moveMapBy = 0.000005;
 const latlng = {
     lat: 28.0882103,
     lng: -82.4576896
