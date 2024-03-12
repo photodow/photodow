@@ -38,37 +38,40 @@ async function init () {
     buildingData = JSON.parse(localStore().getItem('siteData') as string);
 
     if (buildingData) {
-        const weekAgo = new Date(new Date().valueOf() - (7 * 24 * 60 * 60 * 1000));
-        const storedLastUpdate = buildingData.main?.lastUpdate;
-        const dataLastUpdate = await getData(`main/${id}/lastUpdate`); // check for last update
+        const nowDate = new Date();
+        const sevenDays = 1000 * 60 * 60 * 24 * 7;
+
+        // check for last update in localStorage
+        const localLastUpdate = buildingData.lastUpdate && new Date(buildingData.lastUpdate);
+
+        const dbLastUpdate = await getData(`lastUpdate`);
 
         if (
-         !(
-            dataLastUpdate
-         && storedLastUpdate
-         && new Date(dataLastUpdate) <= new Date(storedLastUpdate)
-         && new Date(dataLastUpdate) > weekAgo
-         )
+            // did we register a lastUpdate? If not just pull data again to be safe.
+            !localLastUpdate
+            // Has it been over 7 days since our last update? If so, update it again.
+            || (nowDate.valueOf() - localLastUpdate.valueOf()) > sevenDays
+            // Has the database been updated since the last local store? If so, update it.
+            || (dbLastUpdate && (new Date(dbLastUpdate) > localLastUpdate))
         ) {
-            // unset data so we can refresh downstream.
             buildingData = null;
         }
     }
 
-    if (!buildingData) {
-        buildingData = {};
+    buildingData ??= { lastUpdate: new Date().valueOf() };
 
-        const waitForOrganizations = getData(`organizations`, buildingData);
-        const waitForTheExtras = [
-            waitForOrganizations,
-            getData(`links`, buildingData),
-            getData(`images`, buildingData),
-            getData(`experiences`, buildingData),
-            getData(`portfolio`, buildingData),
-            // getData(`people`, buildingData),
-            // getData(`testimonials`, buildingData)
-        ]
+    const waitForTheExtras = [];
+    let waitForOrgs: Promise<SiteData['organizations']> | undefined;
 
+    !buildingData.organizations && waitForTheExtras.push(waitForOrgs = getData(`organizations`, buildingData))
+    !buildingData.links && waitForTheExtras.push(getData(`links`, buildingData));
+    !buildingData.images && waitForTheExtras.push(getData(`images`, buildingData));
+    !buildingData.experiences && waitForTheExtras.push(getData(`experiences`, buildingData));
+    !buildingData.portfolio && waitForTheExtras.push(getData(`portfolio`, buildingData));
+    // !buildingData.people && waitForTheExtras.push(getData(`people`, buildingData));
+    // !buildingData.testimonials && waitForTheExtras.push(getData(`testimonials`, buildingData));
+
+    if (!buildingData.main) {
         const mainItem = await getData(`main/${id}`) as MainItem;
         const defaultItem = await getData(`main/_default`);
         const baseItem = await getData(`main/${mainItem?._base}`) as MainItem || {};
@@ -80,27 +83,28 @@ async function init () {
         );
 
         updateState(buildingData);
-
-        waitForOrganizations.then(() => {
-            if (!buildingData?.main || !buildingData.organizations) {
-                return;
-            }
-
-            const _metaOverride = buildingData.main._metaOverride;
-
-            if (_metaOverride) {
-                // retrieve organization data
-                getOrgData(buildingData.organizations, _metaOverride?.orgKey).then(d => {
-                    _metaOverride.org = d;
-                    updateState(buildingData);
-                });
-            }
-        });
-
-        Promise.all(waitForTheExtras).then(() => {
-            localStore().setItem('siteData', JSON.stringify(buildingData));
-        });
     }
+
+    waitForOrgs?.then(() => {
+        if (!buildingData?.main || !buildingData.organizations) {
+            return;
+        }
+
+        const _metaOverride = buildingData.main._metaOverride;
+
+        if (_metaOverride) {
+            // retrieve organization data
+            getOrgData(buildingData.organizations, _metaOverride?.orgKey).then(d => {
+                _metaOverride.org = d;
+                updateState(buildingData);
+            });
+        }
+    });
+
+    Promise.all(waitForTheExtras).then(() => {
+        localStore().setItem('siteData', JSON.stringify(buildingData));
+        updateState(buildingData);
+    });
 }
 
 export async function getOrgData (orgs: Organizations, key: string | undefined): Promise<Organization | undefined> {
@@ -111,14 +115,7 @@ export async function getOrgData (orgs: Organizations, key: string | undefined):
     return orgs[key];
 }
 
-export async function getData (key: string, dataStore?: Record<string, object>): Promise<any> {
-
-    const cache = JSON.parse(localStore().getItem('c') || '{}') || {};
-
-    if (cache[key]) {
-        return cache[key];
-    }
-
+export async function getData (key: string, dataStore?: Partial<SiteData>): Promise<any> {
     const starCountRef = ref(db, key);
 
     return new Promise((resolve) => {
@@ -128,10 +125,6 @@ export async function getData (key: string, dataStore?: Record<string, object>):
             if (snapshot && snapshot.val()) {
                 data = snapshot.val();
             }
-
-            cache[key] = data;
-
-            localStore().setItem('c', JSON.stringify(cache));
 
             updateStateByKey(dataStore, key as keyof SiteData, data);
             resolve(data);

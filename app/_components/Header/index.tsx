@@ -82,7 +82,7 @@ export default function Header({ size = HeaderSize.Large, redirect, contentEdita
           <SkeletonText />
           <SkeletonText />
         </div>
-        <a href="/" className="jd-header__name">{main?.name}</a>
+        <a href="/" className="jd-header__name" data-page={`home`}>{main?.name}</a>
         <span className="jd-header__role">{main?.role}</span>
       </h1>
     )

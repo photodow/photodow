@@ -87,6 +87,6 @@ function registerIntersectObservers (node: HTMLElement) {
 
 function inPageChange (id: string) {
     const url = new URL(location.toString());
-    url.hash = `#${id}`;
+    url.hash = id === 'home' ? '' : `#${id}`;
     updateURL(url);
 }

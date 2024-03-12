@@ -5,7 +5,7 @@ import { Ref } from "./Ref"
 
 export type MainItem = {
     _base?: string,
-    lastUpdate: string,
+    lastUpdate?: string,
     actions?: Ref[],
     skills?: string[],
     name: string,

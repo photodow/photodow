@@ -9,6 +9,7 @@ import { MainItem } from "./Main";
 import { Redirects } from "./Redirect";
 
 export type SiteData = {
+    lastUpdate?: number | string,
     experiences: Experiences,
     // educations: Experience[],
     images: Images,
