@@ -139,6 +139,7 @@ function loadPosterImages () {
             const shuffledResults = shuffleList(results);
             const _settings = settings();
             const totalRows = posterRows.length;
+            let skipAmount = 0; // skip if data is missing, and need to offset array
 
             for (let rowIndex = 0; rowIndex < totalRows; rowIndex++) {
                 const row = posterRows[rowIndex].children;
@@ -147,14 +148,28 @@ function loadPosterImages () {
                 for (let colIndex = 0; colIndex < rowLength; colIndex++) {
                     const poster = row[colIndex];
                     const textureLoader = new THREE.TextureLoader();
-                    const resultIndex = rowIndex * _settings.poster.rows + colIndex;
-                    const asset = shuffledResults[resultIndex];
+                    let resultIndex, asset, url;
+                    
+                    do {
+                        resultIndex = rowIndex * _settings.poster.rows + colIndex + skipAmount;
+                        asset = shuffledResults[resultIndex];
 
-                    const url = createImageURL(
-                        config.images.secure_base_url,
-                        config.images.poster_sizes[_settings.poster.resIndex],
-                        asset.poster_path
-                    );
+                        if (!asset?.poster_path) {
+                            skipAmount++;
+                        }
+                    } while (asset && !asset.poster_path);
+
+                    if (asset && asset.poster_path) {
+                        url = createImageURL(
+                            config.images.secure_base_url,
+                            config.images.poster_sizes[_settings.poster.resIndex],
+                            asset.poster_path
+                        );
+                    }
+
+                    if (!url) {
+                        break;
+                    }
 
                     const posterTexture = textureLoader.load(url);
                     posterTexture.colorSpace = THREE.SRGBColorSpace;

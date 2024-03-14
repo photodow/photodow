@@ -36,7 +36,7 @@ export default function AboutMe({ nameRoleOverride, replaceRefs, addedRefs = [] 
               {!_subtitle ? null : <h2 className="jd-about__role jd-fade-in">{_subtitle}</h2>}
               <Skills items={_skills} color="warm-gray" className="jd-fade-in" />
               {!_description ? null : <p className="jd-about__desc jd-fade-in">{_description}</p>}
-              <LinksByRef className="jd-fade-in" refs={[..._actions, ...addedRefs]} text={true} icon={true}  />
+              <LinksByRef className="jd-fade-in no-select" refs={[..._actions, ...addedRefs]} text={true} icon={true}  />
             </div>
           </div>
         </div>

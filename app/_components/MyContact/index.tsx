@@ -22,6 +22,7 @@ export default function MyContact() {
 
   return (
     <article className="jd-contact" id={id}>
+      <div className="hidden-copy-paste-formatting"><br /></div>
       {siteData && <h3 className="jd-contact__title jd-body__section-title jd-fade-in" data-page={id}>Contact</h3>}
       
       <LinksByRef

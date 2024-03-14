@@ -40,6 +40,7 @@ export default function ExperienceItem({ orgKey, title, description, details, st
 
   return (
     <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>
+      <div className="hidden-copy-paste-formatting"><br /></div>
       <div className="cds--grid">
         <div className="cds--row">
           <div className="cds--col-sm-2 cds--col-md-1 cds--offset-lg-2 cds--col-lg-2">
@@ -90,7 +91,11 @@ export default function ExperienceItem({ orgKey, title, description, details, st
       <ul className="jd-experience-item__details">
         {details.map((detail, i) => {
           return (
-            <li key={`details-${detail}`} className={'jd-fade-in'}>{detail}</li>
+            <li key={`details-${detail}`} className={'jd-fade-in'}>
+              <span className="hidden-copy-paste-formatting">{'-'}&nbsp;</span>
+              {detail}
+              <div className="hidden-copy-paste-formatting"><br /></div>
+            </li>
           )}
         )}
       </ul>

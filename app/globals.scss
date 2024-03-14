@@ -95,3 +95,12 @@ img {
     visibility: visible !important;
   }
 }
+
+.hidden-copy-paste-formatting {
+  opacity: 0;
+  position: absolute;
+}
+
+.no-select {
+  user-select: none;
+}

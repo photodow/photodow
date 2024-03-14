@@ -1,11 +1,12 @@
 import { merge } from "lodash";
 
 export default function handleOverride (value: any, srcValue: any, key: string, object: any, source: any) {
-    if (Array.isArray(value) || Array.isArray(srcValue)) {
+    if (Array.isArray(value) && Array.isArray(srcValue)) {
         const mergedItems: any[] = srcValue;
-
+console.log(srcValue);
         srcValue.forEach((srcVal: any, srcIndex: number) => {
             if (srcVal._key) {
+                console.log(value);
                 value.forEach((val: any) => {
                     if (srcVal._key && srcVal._key === val._key) {
                         mergedItems[srcIndex] = merge(val, srcVal);

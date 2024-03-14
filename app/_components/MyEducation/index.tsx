@@ -37,6 +37,7 @@ export default function MyEducation() {
 
   return (
     <article className="jd-education" id={id}>
+      <div className="hidden-copy-paste-formatting"><br /></div>
       {siteData && <h3 className="jd-education__title jd-body__section-title jd-fade-in" data-page={id}>Education</h3>}
       <List
         className="jd-education__list"

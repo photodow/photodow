@@ -10,7 +10,7 @@
 
   .jd-slant__content {
     margin-bottom: spacing.$spacing-03 * 16;
-    text-shadow: 0 1px 1px colors.$white;
+    // text-shadow: 0 1px 1px colors.$white;
 
     @include breakpoint("md") {
       margin-bottom: auto;

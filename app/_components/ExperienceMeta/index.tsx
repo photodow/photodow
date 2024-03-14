@@ -22,7 +22,7 @@ export default function ExperienceMeta({ className, start, end, location, type, 
     const itemsData: ReactNode[] = [];
 
     if (credential) {
-        itemsData.push(credential);
+        itemsData.push(`${credential} `);
     }
 
     setStartEnd(itemsData, start, end);

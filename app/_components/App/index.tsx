@@ -31,7 +31,7 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
   const [initialized, setInitialized] = useState<boolean>(false);
 
   const setR = useCallback(() => setRedirect(urlParams().get('r')), []);
-  const setToEditContent = useCallback(() => setEditableContent(Boolean(urlParams().get('edit'))), []);
+  const setToEditContent = useCallback(() => setEditableContent(urlParams().has('edit')), []);
 
   useEffect(() => {
     startAnimation();
