@@ -13,6 +13,7 @@ import Slant from "../Slant";
 import { initPeacockBG } from "../../_utils/peacockBG";
 import { initFleetisticsBG } from "../../_utils/fleetisticsBG";
 import { initIBMBG } from "../../_utils/ibmBG";
+import Link from "next/link";
 
 const initOrgKey: Record<string, Function> = {
   'peacock': initPeacockBG,
@@ -36,7 +37,7 @@ export default function ExperienceItem({ orgKey, title, description, details, st
 
   useEffect(() => {
     initOrgKey[orgKey]?.(`experience-${orgKey}`, bgRef);
-  }, [orgKey]);
+  }, [orgKey, bgRef]);
 
   return (
     <Slant bgRef={bgRef} Type="section" className="jd-experience-item" id={`experience-${orgKey}`}>
@@ -76,7 +77,7 @@ export default function ExperienceItem({ orgKey, title, description, details, st
     const img = (<img className="jd-experience-item__image" src={org.image.src} alt={org.image?.alt} />);
 
     return (org.link ?
-      <a className="jd-experience-item__logo jd-fade-in" href={org.link.protocol + org.link.value} target="_blank">{img}</a> :
+      <Link className="jd-experience-item__logo jd-fade-in" href={org.link.protocol + org.link.value} target="_blank">{img}</Link> :
       <div className="jd-experience-item__logo jd-fade-in">{img}</div>);
   }
 

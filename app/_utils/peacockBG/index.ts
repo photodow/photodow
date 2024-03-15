@@ -19,11 +19,13 @@ export function initPeacockBG () {
     const selector = `#experience-peacock`;
     const parent = document.querySelector(selector);
 
-    if (parent && !renderer) {
-        initCanvas(parent);
-        initScene();
+    if (parent) {
+        if(!renderer) {
+            initScene();
+            renderPosters();
+        }
 
-        renderPosters();
+        initCanvas(parent);
     }
 }
 
@@ -75,14 +77,13 @@ function initScene () {
 }
 
 export function animatePeacockBG() {
-    if (
-        container?.classList.contains('visible')
-        && !disableMotion('disablePeacockMotion')
-    ) {
-        scrollPosters();
-    }
+    if (container?.classList.contains('visible')) {
+        if (!disableMotion('disablePeacockMotion')) {
+            scrollPosters();
+        }
 
-    singleRender();
+        singleRender();
+    }
 }
 
 function singleRender() {

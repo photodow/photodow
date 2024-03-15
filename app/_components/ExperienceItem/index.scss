@@ -104,9 +104,20 @@ $base: "jd-experience-item";
   &__org {
     margin: 0;
     padding: 0;
+    display: inline-block;
     color: theme.$text-primary;
+    transform: scale(1);
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
 
     @include type.type-style("heading-02");
+
+    &:hover {
+      transform: scale(1.025);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
   }
 
   &__logo {

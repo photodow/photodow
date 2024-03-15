@@ -5,6 +5,7 @@ import "./index.scss";
 import List from "../List";
 
 import { ReactNode, useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 
 type Comp = {
     start?: number,
@@ -28,7 +29,7 @@ export default function ExperienceMeta({ className, start, end, location, type, 
     setStartEnd(itemsData, start, end);
 
     if (location) {
-        itemsData.push(<a href={`https://www.google.com/maps/search/${location}`} target="_blank">{`${location} `}</a>);
+        itemsData.push(<Link href={`https://www.google.com/maps/search/${location}`} target="_blank">{`${location} `}</Link>);
     }
 
     if (type) {

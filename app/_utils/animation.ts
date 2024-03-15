@@ -2,14 +2,13 @@ import { animateFleetisticsBG } from "./fleetisticsBG";
 import { animateIBMBG } from "./ibmBG";
 import { animatePeacockBG } from "./peacockBG";
 
-const animationRunning = false;
+let animationRunning = false;
 let isScrolling = false;
 let isScrollingTimeout: NodeJS.Timeout;
 let i = 1;
 
 
 // should we build a registration model instead?
-// pause on scroll?
 // aim for 30 frames per second vs 60?
 
 export function startAnimation () {
@@ -21,6 +20,8 @@ export function startAnimation () {
 
     window.addEventListener('scroll', () => pauseAnimationOnScroll(250));
     window.addEventListener("touchmove", () => pauseAnimationOnScroll(50));
+
+    animationRunning = true;
 }
 
 function animate() {

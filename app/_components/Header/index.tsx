@@ -10,6 +10,7 @@ import { SkeletonText } from "@carbon/react";
 import { MainItem } from "../../_types/Main";
 import { Icon, IconKeys } from "../Icon";
 import { HeaderSize } from "../../_types/Header";
+import Link from "next/link";
 
 type Comp = {
   mini?: boolean,
@@ -82,7 +83,7 @@ export default function Header({ size = HeaderSize.Large, redirect, contentEdita
           <SkeletonText />
           <SkeletonText />
         </div>
-        <a href="/" className="jd-header__name" data-page={`home`}>{main?.name}</a>
+        <Link href="/" className="jd-header__name" data-page={`home`}>{main?.name}</Link>
         <span className="jd-header__role">{main?.role}</span>
       </h1>
     )

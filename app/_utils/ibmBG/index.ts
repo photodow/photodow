@@ -17,7 +17,7 @@ const animationInterval = 2000;
 const animations = shuffleList([animateEye, animateBee, animateMmmm]);
 
 export function initIBMBG (key: string, containerRef: MutableRefObject<HTMLDivElement>) {
-    if (!containerRef || rebusBG) {
+    if (!containerRef || containerRef.current === container) {
         return;
     }
 

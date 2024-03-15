@@ -72,12 +72,17 @@ $titleBase: $base + "__title";
     @include type.type-style("heading-02");
     color: theme.$text-primary;
     text-decoration: none;
+    transform: scale(1);
     transition: opacity 0.5s ease-in-out, color 0.2s ease-in-out,
       transform 0.2s ease-in-out;
 
     &:hover {
       color: theme.$text-secondary;
       transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1);
     }
   }
 

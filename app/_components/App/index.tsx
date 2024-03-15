@@ -34,10 +34,6 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
   const setToEditContent = useCallback(() => setEditableContent(urlParams().has('edit')), []);
 
   useEffect(() => {
-    startAnimation();
-  }, []);
-
-  useEffect(() => {
     if (initialized) {
       return;
     }
@@ -51,10 +47,10 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
       initStateDB(setSiteData);
     }
 
-    initObservers();
-    setToEditContent();
-
     clientMetaData(siteData?.main?.role);
+    initObservers();
+    startAnimation();
+    setToEditContent();
 
   }, [redirect, setR, setToEditContent, siteData, initialized]);
 

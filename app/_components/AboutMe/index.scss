@@ -71,9 +71,26 @@
   }
 
   &__name {
-    @include type.type-style("heading-07");
-    font-weight: bold;
-    margin: 0;
+    &,
+    a {
+      @include type.type-style("heading-07");
+      font-weight: bold;
+      margin: 0;
+      color: theme.$text-primary;
+      text-decoration: none;
+      display: inline-block;
+      transform: scale(1);
+      transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    a:hover {
+      color: theme.$text-secondary;
+      transform: scale(1.05);
+    }
+
+    a:active {
+      transform: scale(1);
+    }
   }
 
   &__role {
