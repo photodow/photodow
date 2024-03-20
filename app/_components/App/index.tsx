@@ -30,18 +30,18 @@ export default function App({ headerSize, theme = CarbonTheme.g90, children }: C
   const [editableContent, setEditableContent] = useState<boolean>(false);
   const [initialized, setInitialized] = useState<boolean>(false);
 
-  const setR = useCallback(() => setRedirect(urlParams().get('r')), []);
+  const setR = useCallback((r: string | null) => setRedirect(r), []);
   const setToEditContent = useCallback(() => setEditableContent(urlParams().has('edit')), []);
 
   useEffect(() => {
+    setR(urlParams().get('r'));
+    redirectIfR(redirect);
+
     if (initialized) {
       return;
     }
 
     setInitialized(true);
-
-    setR();
-    redirectIfR(redirect);
 
     if (!redirect) {
       initStateDB(setSiteData);
