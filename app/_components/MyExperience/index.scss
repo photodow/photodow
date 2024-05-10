@@ -4,46 +4,54 @@
 @use "@carbon/styles/scss/breakpoint" as *;
 
 .jd-experience {
-  position: relative;
+    position: relative;
 
-  &__header {
-    // padding-top: 96px;
-    padding-bottom: spacing.$spacing-03 * 4 !important;
+    &__header {
+        // padding-top: 96px;
+        padding-bottom: spacing.$spacing-03 * 4 !important;
 
-    .jd-slant__bg {
-      background: linear-gradient(-45deg, theme.$layer-01, theme.$background);
-    }
-  }
-
-  &__title {
-    margin: 0;
-  }
-
-  &__bottom {
-    min-height: 100vh;
-    display: grid;
-
-    .jd-slant__content {
-      margin: auto 0;
+        .jd-slant__bg {
+            background: linear-gradient(
+                -45deg,
+                theme.$layer-01,
+                theme.$background
+            );
+        }
     }
 
-    .jd-slant__bg {
-      background: theme.$background;
-      background: linear-gradient(0deg, theme.$layer-01, theme.$background);
+    &__title {
+        margin: 0;
     }
 
-    .jd-education {
-      margin-bottom: spacing.$spacing-03 * 6;
-    }
+    &__bottom {
+        min-height: 100vh;
+        display: grid;
 
-    @include breakpoint("lg") {
-      .jd-education {
-        margin-bottom: 0;
-      }
-    }
+        .jd-slant__content {
+            margin: auto 0;
+        }
 
-    @media print {
-      min-height: auto;
+        .jd-slant__bg {
+            background: theme.$background;
+            background: linear-gradient(
+                0deg,
+                theme.$layer-01,
+                theme.$background
+            );
+        }
+
+        .jd-education {
+            margin-bottom: spacing.$spacing-03 * 6;
+        }
+
+        @include breakpoint("lg") {
+            .jd-education {
+                margin-bottom: 0;
+            }
+        }
+
+        @media print {
+            min-height: auto;
+        }
     }
-  }
 }

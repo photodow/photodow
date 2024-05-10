@@ -1,6 +1,6 @@
 import urlParams from "./urlParams";
 
-export function disableMotion (uniqueId: string) {
+export function disableMotion(uniqueId: string) {
     const uid = urlParams().has(uniqueId);
-    return uid || urlParams().has('disableMotion')
+    return uid || urlParams().has("disableMotion");
 }

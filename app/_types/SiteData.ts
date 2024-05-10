@@ -9,15 +9,15 @@ import { MainItem } from "./Main";
 import { Redirects } from "./Redirect";
 
 export type SiteData = {
-    lastUpdate?: number | string,
-    experiences: Experiences,
+    lastUpdate?: number | string;
+    experiences: Experiences;
     // educations: Experience[],
-    images: Images,
-    links: Links,
-    organizations: Organizations,
-    people: People,
-    portfolio: Portfolio,
-    testimonials: Testimonials,
-    redirects?: Redirects,
-    main: MainItem
-}
+    images: Images;
+    links: Links;
+    organizations: Organizations;
+    people: People;
+    portfolio: Portfolio;
+    testimonials: Testimonials;
+    redirects?: Redirects;
+    main: MainItem;
+};

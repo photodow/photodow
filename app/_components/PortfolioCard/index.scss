@@ -5,122 +5,132 @@
 $base: jd-portfolio-card;
 
 .#{$base} {
-  background: theme.$layer-01;
-  border-radius: spacing.$spacing-03;
-  overflow: hidden;
-  box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
-  position: relative;
-  min-height: 200px;
-  transition: transform 0.5s ease-in-out, background 0.5s ease-in-out,
-    box-shadow 0.5s ease-in-out;
+    background: theme.$layer-01;
+    border-radius: spacing.$spacing-03;
+    overflow: hidden;
+    box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
+    position: relative;
+    min-height: 200px;
+    transition:
+        transform 0.5s ease-in-out,
+        background 0.5s ease-in-out,
+        box-shadow 0.5s ease-in-out;
 
-  &:hover {
-    transform: scale(1.025);
-    background: theme.$layer-hover-01;
-    box-shadow: 0 spacing.$spacing-03 * 2 spacing.$spacing-03 * 4
-      rgba(0, 0, 0, 0.5);
+    &:hover {
+        transform: scale(1.025);
+        background: theme.$layer-hover-01;
+        box-shadow: 0 spacing.$spacing-03 * 2 spacing.$spacing-03 * 4
+            rgba(0, 0, 0, 0.5);
+
+        .jd-skills {
+            opacity: 1;
+            visibility: visible;
+            transition:
+                opacity 0s ease-in-out,
+                visibility 0s ease-in-out; // in
+
+            .cds--tag {
+                opacity: 1;
+                transform: translateX(spacing.$spacing-03);
+            }
+        }
+    }
+
+    &__cover {
+        height: auto;
+        width: 100%;
+        aspect-ratio: 2 / 1;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__content {
+        padding: spacing.$spacing-03 * 2;
+        padding-bottom: spacing.$spacing-03;
+    }
+
+    &__title {
+        margin: 0;
+        padding: 0;
+        color: theme.$text-primary;
+        margin-bottom: spacing.$spacing-03 / 2;
+        @include type.type-style("heading-compact-01");
+    }
+
+    &__description {
+        color: theme.$text-secondary;
+        margin: 0;
+        padding: 0;
+        margin-bottom: spacing.$spacing-03;
+        min-height: spacing.$spacing-03 * 7;
+        @include type.type-style("body-compact-01");
+
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    &__actions {
+        margin-top: spacing.$spacing-03 * 3;
+        text-align: right;
+
+        li {
+            margin-left: spacing.$spacing-03 * 2;
+            display: inline-block;
+        }
+
+        a {
+            width: 100%;
+        }
+
+        svg {
+            margin-right: spacing.$spacing-03 / 2;
+        }
+    }
 
     .jd-skills {
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0s ease-in-out, visibility 0s ease-in-out; // in
+        position: absolute;
+        z-index: 1;
+        top: spacing.$spacing-03 / 2;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.2s ease-in-out,
+            visibility 0.2s ease-in-out; // out
 
-      .cds--tag {
+        .cds--tag {
+            @include type.type-style("helper-text-01");
+            margin-left: 0;
+            opacity: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            transform: translateX(spacing.$spacing-03 / 2);
+            transition:
+                opacity 0.5s ease-in-out,
+                transform 0.5s ease-in-out;
+        }
+    }
+
+    &__loading {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
         opacity: 1;
-        transform: translateX(spacing.$spacing-03);
-      }
+        visibility: visible;
+        transition:
+            opacity 0.5s ease-in-out,
+            visibility 0.5s ease-in-out;
+
+        .visible .active & {
+            opacity: 0;
+            visibility: hidden;
+        }
     }
-  }
-
-  &__cover {
-    height: auto;
-    width: 100%;
-    aspect-ratio: 2 / 1;
-  }
-
-  &__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  &__content {
-    padding: spacing.$spacing-03 * 2;
-    padding-bottom: spacing.$spacing-03;
-  }
-
-  &__title {
-    margin: 0;
-    padding: 0;
-    color: theme.$text-primary;
-    margin-bottom: spacing.$spacing-03 / 2;
-    @include type.type-style("heading-compact-01");
-  }
-
-  &__description {
-    color: theme.$text-secondary;
-    margin: 0;
-    padding: 0;
-    margin-bottom: spacing.$spacing-03;
-    min-height: spacing.$spacing-03 * 7;
-    @include type.type-style("body-compact-01");
-
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-
-  &__actions {
-    margin-top: spacing.$spacing-03 * 3;
-    text-align: right;
-
-    li {
-      margin-left: spacing.$spacing-03 * 2;
-      display: inline-block;
-    }
-
-    a {
-      width: 100%;
-    }
-
-    svg {
-      margin-right: spacing.$spacing-03 / 2;
-    }
-  }
-
-  .jd-skills {
-    position: absolute;
-    z-index: 1;
-    top: spacing.$spacing-03 / 2;
-    left: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; // out
-
-    .cds--tag {
-      @include type.type-style("helper-text-01");
-      margin-left: 0;
-      opacity: 0;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-      transform: translateX(spacing.$spacing-03 / 2);
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    }
-  }
-
-  &__loading {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-
-    .visible .active & {
-      opacity: 0;
-      visibility: hidden;
-    }
-  }
 }

@@ -5,109 +5,115 @@
 @use "@carbon/styles/scss/breakpoint" as *;
 
 .jd-education-item {
-  background: theme.$layer-01;
-  border-radius: spacing.$spacing-03;
-  padding: spacing.$spacing-03 * 2;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
-  transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out,
-    opacity 0.5s ease-in-out;
-
-  @include breakpoint("md") {
-    margin-left: spacing.$spacing-03 * -2;
-    margin-right: spacing.$spacing-03 * -2;
-    max-width: spacing.$spacing-03 * 67;
-  }
-
-  &:hover {
-    transform: scale(1.025);
-    box-shadow: 0 spacing.$spacing-03 * 2 spacing.$spacing-03 * 4
-      rgba(0, 0, 0, 0.5);
-
-    &::before {
-      opacity: 0.5;
-    }
-  }
-
-  &__logo {
-    position: absolute;
-    height: 250%;
-    width: 40%;
-    top: spacing.$spacing-03 * -2;
-    bottom: spacing.$spacing-03 * -2;
-    margin: auto;
-    left: -10%;
-  }
-
-  &__content {
+    background: theme.$layer-01;
+    border-radius: spacing.$spacing-03;
+    padding: spacing.$spacing-03 * 2;
+    overflow: hidden;
     position: relative;
-    z-index: 1;
-    padding-left: calc(30% + spacing.$spacing-03 * 2);
-  }
+    box-shadow: 0 spacing.$spacing-03 spacing.$spacing-03 * 2 rgba(0, 0, 0, 0.5);
+    transition:
+        transform 0.5s ease-in-out,
+        box-shadow 0.5s ease-in-out,
+        opacity 0.5s ease-in-out;
 
-  &::before {
-    content: "";
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    mix-blend-mode: overlay;
-    opacity: 0.25;
-    z-index: 0;
-    background: linear-gradient(-25deg, transparent, rgba(colors.$white, 1));
-    transition: opacity 0.5s ease-in-out;
-
-    @media print {
-      -webkit-filter: blur(0);
-    }
-  }
-
-  a {
-    text-decoration: none;
-
-    &,
-    &:visited {
-      color: theme.$text-primary;
+    @include breakpoint("md") {
+        margin-left: spacing.$spacing-03 * -2;
+        margin-right: spacing.$spacing-03 * -2;
+        max-width: spacing.$spacing-03 * 67;
     }
 
     &:hover {
-      color: theme.$link-primary-hover;
-      text-decoration: underline;
+        transform: scale(1.025);
+        box-shadow: 0 spacing.$spacing-03 * 2 spacing.$spacing-03 * 4
+            rgba(0, 0, 0, 0.5);
+
+        &::before {
+            opacity: 0.5;
+        }
     }
 
-    &:active {
-      color: theme.$link-primary;
+    &__logo {
+        position: absolute;
+        height: 250%;
+        width: 40%;
+        top: spacing.$spacing-03 * -2;
+        bottom: spacing.$spacing-03 * -2;
+        margin: auto;
+        left: -10%;
     }
-  }
 
-  &__org {
-    margin: 0;
-    padding: 0;
-    color: theme.$text-primary;
+    &__content {
+        position: relative;
+        z-index: 1;
+        padding-left: calc(30% + spacing.$spacing-03 * 2);
+    }
 
-    @include type.type-style("heading-01");
-  }
+    &::before {
+        content: "";
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        mix-blend-mode: overlay;
+        opacity: 0.25;
+        z-index: 0;
+        background: linear-gradient(
+            -25deg,
+            transparent,
+            rgba(colors.$white, 1)
+        );
+        transition: opacity 0.5s ease-in-out;
 
-  &__title {
-    @include type.type-style("heading-04");
-    font-size: 22px;
-    margin: 0;
-    padding: 0;
-    margin-bottom: spacing.$spacing-03;
-  }
+        @media print {
+            -webkit-filter: blur(0);
+        }
+    }
 
-  &__meta {
-    color: theme.$text-primary;
-    text-shadow: 0 -1px rgba(colors.$black, 0.2);
-  }
+    a {
+        text-decoration: none;
+
+        &,
+        &:visited {
+            color: theme.$text-primary;
+        }
+
+        &:hover {
+            color: theme.$link-primary-hover;
+            text-decoration: underline;
+        }
+
+        &:active {
+            color: theme.$link-primary;
+        }
+    }
+
+    &__org {
+        margin: 0;
+        padding: 0;
+        color: theme.$text-primary;
+
+        @include type.type-style("heading-01");
+    }
+
+    &__title {
+        @include type.type-style("heading-04");
+        font-size: 22px;
+        margin: 0;
+        padding: 0;
+        margin-bottom: spacing.$spacing-03;
+    }
+
+    &__meta {
+        color: theme.$text-primary;
+        text-shadow: 0 -1px rgba(colors.$black, 0.2);
+    }
 }
 
 #fullsailuniversity {
-  background-color: #f74a00;
+    background-color: #f74a00;
 }
 
 #floridacollege {
-  background-color: #f30833;
+    background-color: #f30833;
 }

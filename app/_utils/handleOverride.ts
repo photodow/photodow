@@ -1,6 +1,12 @@
 import { merge } from "lodash";
 
-export default function handleOverride (value: any, srcValue: any, key: string, object: any, source: any) {
+export default function handleOverride(
+    value: any,
+    srcValue: any,
+    key: string,
+    object: any,
+    source: any,
+) {
     if (Array.isArray(value) && Array.isArray(srcValue)) {
         const mergedItems: any[] = srcValue;
 
@@ -14,11 +20,13 @@ export default function handleOverride (value: any, srcValue: any, key: string, 
             }
         });
 
-        return mergedItems.length ? mergedItems : removeDuplicates(merge(value, srcValue));
+        return mergedItems.length
+            ? mergedItems
+            : removeDuplicates(merge(value, srcValue));
     }
 }
 
-function removeDuplicates (src: any[]) {
+function removeDuplicates(src: any[]) {
     const newArray: any[] = [];
 
     for (let i = 0; i < src.length; i++) {

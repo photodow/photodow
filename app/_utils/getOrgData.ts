@@ -6,24 +6,37 @@ import { Image } from "../_types/Image";
 import { SiteData } from "../_types/SiteData";
 
 export interface OrgData extends Organization {
-    image?: Image,
-    link?: Link,
-    className?: string,
+    image?: Image;
+    link?: Link;
+    className?: string;
 }
 
-export function transformOrgData (orgKey: OrgKey, siteData: Partial<SiteData> | null): OrgData | null {
+export function transformOrgData(
+    orgKey: OrgKey,
+    siteData: Partial<SiteData> | null,
+): OrgData | null {
     if (!siteData) {
         return null;
     }
 
-    const data = (GetRefs([{ "_key": orgKey }], RefList.Organizations, siteData) as Organization[])[0];
+    const data = (
+        GetRefs(
+            [{ _key: orgKey }],
+            RefList.Organizations,
+            siteData,
+        ) as Organization[]
+    )[0];
 
     if (data.link) {
-        data.link = (GetRefs([data.link], RefList.Links, siteData) as Link[])[0];
+        data.link = (
+            GetRefs([data.link], RefList.Links, siteData) as Link[]
+        )[0];
     }
 
     if (data.image) {
-        data.image = (GetRefs([data.image], RefList.Images, siteData) as Image[])[0];
+        data.image = (
+            GetRefs([data.image], RefList.Images, siteData) as Image[]
+        )[0];
     }
 
     return data as OrgData;

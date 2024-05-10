@@ -1,12 +1,12 @@
 import { animationTimeout } from "../animation";
 import { random, uniqueRandom } from "../random";
 
-const classBase = 'ibm-rebus-eye';
+const classBase = "ibm-rebus-eye";
 const className = `${classBase}--closed`;
 
-export function animateEye () {
+export function animateEye() {
     const items = document.querySelectorAll(`.${classBase}.visible`);
-    const index = uniqueRandom({ id: 'eye-index', end: items.length - 1 });
+    const index = uniqueRandom({ id: "eye-index", end: items.length - 1 });
     const item = items[index];
 
     if (!item) {

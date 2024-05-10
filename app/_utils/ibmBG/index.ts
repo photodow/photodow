@@ -12,18 +12,21 @@ let container: ParentNode | null;
 const icons = [ibmRebus.Eye, ibmRebus.Bee, ibmRebus.M];
 const columns = 4;
 const rows = 6;
-const loops = rows * columns / icons.length;
+const loops = (rows * columns) / icons.length;
 const animationInterval = 2000;
 const animations = shuffleList([animateEye, animateBee, animateMmmm]);
 
-export function initIBMBG (key: string, containerRef: MutableRefObject<HTMLDivElement>) {
+export function initIBMBG(
+    key: string,
+    containerRef: MutableRefObject<HTMLDivElement>,
+) {
     if (!containerRef || containerRef.current === container) {
         return;
     }
 
     container = containerRef.current;
-    rebusBG = document.createElement('div');
-    rebusBG.classList.add('jd-ibm__bg');
+    rebusBG = document.createElement("div");
+    rebusBG.classList.add("jd-ibm__bg");
 
     for (let i = 0; i < loops; i++) {
         rebusBG.innerHTML += icons[0] + icons[1] + icons[2];
@@ -34,17 +37,19 @@ export function initIBMBG (key: string, containerRef: MutableRefObject<HTMLDivEl
 
 let lastRunTime: number;
 
-export function animateIBMBG () {
+export function animateIBMBG() {
     const now = performance.now();
     if (
-        (!lastRunTime || (lastRunTime + animationInterval) <= now)
-        && (container as Element)?.classList.contains('visible')
-        && !disableMotion('disableIbmMotion')
+        (!lastRunTime || lastRunTime + animationInterval <= now) &&
+        (container as Element)?.classList.contains("visible") &&
+        !disableMotion("disableIbmMotion")
     ) {
-        animations[uniqueRandom({
-            id: 'ibm-animation-index',
-            end: animations.length - 1
-        })]();
+        animations[
+            uniqueRandom({
+                id: "ibm-animation-index",
+                end: animations.length - 1,
+            })
+        ]();
         lastRunTime = now;
     }
 }

@@ -3,24 +3,24 @@
 @use "@carbon/styles/scss/theme";
 
 .jd-skills {
-  .cds--tag {
-    background: colors.$yellow-20;
-    color: colors.$warm-gray-100;
-    margin-left: 0;
-    display: inline-block;
+    .cds--tag {
+        background: colors.$yellow-20;
+        color: colors.$warm-gray-100;
+        margin-left: 0;
+        display: inline-block;
 
-    span {
-      margin: 3px 0;
-      display: inline-block;
+        span {
+            margin: 3px 0;
+            display: inline-block;
+        }
+
+        &--sm span {
+            margin: 0;
+        }
     }
 
-    &--sm span {
-      margin: 0;
+    ::selection {
+        background: colors.$blue-50;
+        color: colors.$white;
     }
-  }
-
-  ::selection {
-    background: colors.$blue-50;
-    color: colors.$white;
-  }
 }

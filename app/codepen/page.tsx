@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import redirectIfR from "../_utils/redirectIfR";
 
 export default function Codepen() {
-  useEffect(() => {
-    redirectIfR('cp');
-  }, []);
+    useEffect(() => {
+        redirectIfR("cp");
+    }, []);
 
-  return null;
+    return null;
 }

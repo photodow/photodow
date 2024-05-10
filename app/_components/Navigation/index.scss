@@ -9,177 +9,188 @@ $linkListBase: "jd-linklist";
 // - [] build in elements one at a time on open at least
 
 .#{$base} {
-  visibility: hidden;
-  float: right;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  position: fixed;
-  z-index: 1000;
-  transition: visibility 0s 0.5s linear; // out
-
-  .jd-close {
-    position: fixed;
-    right: 0;
-    top: 0;
-  }
-
-  &__inner {
-    $eightbitmeTop: spacing.$spacing-03;
-    $eightbitmeHeight: (spacing.$spacing-03 * 25);
-
-    opacity: 0;
+    visibility: hidden;
+    float: right;
+    width: 100%;
     height: 100%;
-    overflow: auto;
-    z-index: 1;
-    position: relative;
-    padding-top: $eightbitmeTop + $eightbitmeHeight + (spacing.$spacing-03 * 2);
-    padding-bottom: spacing.$spacing-03 * 8;
-    transition: opacity 0.25s ease-in-out; // out
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+    transition: visibility 0s 0.5s linear; // out
 
-    &::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: $eightbitmeTop + $eightbitmeHeight + (spacing.$spacing-03 * 2);
-      width: 100%;
-      background: linear-gradient(theme.$layer-01 90%, transparent 100%);
+    .jd-close {
+        position: fixed;
+        right: 0;
+        top: 0;
     }
-  }
 
-  &__bg {
-    z-index: 0;
-    background: theme.$layer-01;
-    height: 2px;
-    width: 0;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    transition: width 0.125s 0.375s ease-in-out, height 0.125s 0.25s ease-in-out; // out
-  }
+    &__inner {
+        $eightbitmeTop: spacing.$spacing-03;
+        $eightbitmeHeight: (spacing.$spacing-03 * 25);
 
-  &--open {
-    visibility: visible;
-    transition: visibility 0s 0s linear; // in
-
-    .#{$base} {
-      &__inner {
-        opacity: 1;
-        transition: opacity 0.5s 0.5s ease-in-out; // in
-      }
-
-      &__bg {
+        opacity: 0;
         height: 100%;
-        width: 100%;
-        transition: width 0.125s ease-in-out, height 0.125s 0.125s ease-in-out; // in
-      }
+        overflow: auto;
+        z-index: 1;
+        position: relative;
+        padding-top: $eightbitmeTop + $eightbitmeHeight +
+            (spacing.$spacing-03 * 2);
+        padding-bottom: spacing.$spacing-03 * 8;
+        transition: opacity 0.25s ease-in-out; // out
+
+        &::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: $eightbitmeTop + $eightbitmeHeight +
+                (spacing.$spacing-03 * 2);
+            width: 100%;
+            background: linear-gradient(theme.$layer-01 90%, transparent 100%);
+        }
     }
-  }
 
-  &__header {
-    margin-bottom: (spacing.$spacing-03 * 4);
-  }
-
-  &__name,
-  &__role {
-    text-align: center;
-    padding: 0;
-    margin: 0;
-  }
-
-  &__name {
-    a.cds--link {
-      @include type.type-style("heading-04");
-      font-weight: bold;
-      transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-
-      &,
-      &:visited {
-        color: theme.$text-primary;
-      }
-
-      &:hover {
-        color: theme.$text-secondary;
-        text-decoration: none;
-        transform: scale(1.05);
-      }
+    &__bg {
+        z-index: 0;
+        background: theme.$layer-01;
+        height: 2px;
+        width: 0;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        transition:
+            width 0.125s 0.375s ease-in-out,
+            height 0.125s 0.25s ease-in-out; // out
     }
-  }
 
-  &__role {
-    @include type.type-style("heading-03");
-  }
+    &--open {
+        visibility: visible;
+        transition: visibility 0s 0s linear; // in
 
-  .#{$linkListBase} {
-    text-align: center;
-    max-width: 350px;
-    margin-left: auto;
-    margin-right: auto;
+        .#{$base} {
+            &__inner {
+                opacity: 1;
+                transition: opacity 0.5s 0.5s ease-in-out; // in
+            }
 
-    &__link {
-      padding: spacing.$spacing-03;
-      color: theme.$text-secondary;
-      display: block;
-      border-radius: spacing.$spacing-03;
-      outline: none;
-      box-shadow: inset 0 0 0 0 theme.$border-interactive;
-      transition: background 0.2s ease-in-out, color 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-
-      svg {
-        display: block;
-        height: spacing.$spacing-03 * 4;
-        width: auto;
-        aspect-ratio: 1 / 1;
-      }
-
-      &:visited {
-        color: theme.$text-secondary;
-      }
-
-      &:focus {
-        box-shadow: inset 0 0 0 2px theme.$border-interactive;
-      }
-
-      &:hover {
-        text-decoration: none;
-        color: theme.$text-primary;
-        background: theme.$background-hover;
-        transform: scale(1.05);
-      }
-
-      &:active {
-        background: theme.$background-active;
-        transform: scale(1);
-      }
+            &__bg {
+                height: 100%;
+                width: 100%;
+                transition:
+                    width 0.125s ease-in-out,
+                    height 0.125s 0.125s ease-in-out; // in
+            }
+        }
     }
-  }
 
-  &__items .#{$linkListBase}__link {
-    @include type.type-style("heading-04");
-  }
-
-  &__social.#{$linkListBase} {
-    margin-top: spacing.$spacing-03 * 4;
-
-    .#{$linkListBase}__item {
-      display: inline-block;
+    &__header {
+        margin-bottom: (spacing.$spacing-03 * 4);
     }
-  }
 
-  &__contact.#{$linkListBase} {
+    &__name,
+    &__role {
+        text-align: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__name {
+        a.cds--link {
+            @include type.type-style("heading-04");
+            font-weight: bold;
+            transition:
+                color 0.2s ease-in-out,
+                transform 0.2s ease-in-out;
+
+            &,
+            &:visited {
+                color: theme.$text-primary;
+            }
+
+            &:hover {
+                color: theme.$text-secondary;
+                text-decoration: none;
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    &__role {
+        @include type.type-style("heading-03");
+    }
+
     .#{$linkListBase} {
-      &__item {
-        display: inline-block;
-      }
+        text-align: center;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
 
-      &__link:hover {
-        text-decoration: underline;
-        background: transparent;
-      }
+        &__link {
+            padding: spacing.$spacing-03;
+            color: theme.$text-secondary;
+            display: block;
+            border-radius: spacing.$spacing-03;
+            outline: none;
+            box-shadow: inset 0 0 0 0 theme.$border-interactive;
+            transition:
+                background 0.2s ease-in-out,
+                color 0.2s ease-in-out,
+                box-shadow 0.2s ease-in-out,
+                transform 0.2s ease-in-out;
+
+            svg {
+                display: block;
+                height: spacing.$spacing-03 * 4;
+                width: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            &:visited {
+                color: theme.$text-secondary;
+            }
+
+            &:focus {
+                box-shadow: inset 0 0 0 2px theme.$border-interactive;
+            }
+
+            &:hover {
+                text-decoration: none;
+                color: theme.$text-primary;
+                background: theme.$background-hover;
+                transform: scale(1.05);
+            }
+
+            &:active {
+                background: theme.$background-active;
+                transform: scale(1);
+            }
+        }
     }
-  }
+
+    &__items .#{$linkListBase}__link {
+        @include type.type-style("heading-04");
+    }
+
+    &__social.#{$linkListBase} {
+        margin-top: spacing.$spacing-03 * 4;
+
+        .#{$linkListBase}__item {
+            display: inline-block;
+        }
+    }
+
+    &__contact.#{$linkListBase} {
+        .#{$linkListBase} {
+            &__item {
+                display: inline-block;
+            }
+
+            &__link:hover {
+                text-decoration: underline;
+                background: transparent;
+            }
+        }
+    }
 }

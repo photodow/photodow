@@ -1,9 +1,9 @@
-import * as THREE from 'three';
-import { createImageURL, initTMDB } from './tmdb';
-import { PeacockBgSettings } from '../../_types/peacockBG';
-import { PosterSizes, TMDB, TMDB_Movie, TMDB_TV } from '../../_types/TMDB';
-import { disableMotion } from '../disableMotion';
-import { shuffleList } from '../shuffleList';
+import * as THREE from "three";
+import { createImageURL, initTMDB } from "./tmdb";
+import { PeacockBgSettings } from "../../_types/peacockBG";
+import { PosterSizes, TMDB, TMDB_Movie, TMDB_TV } from "../../_types/TMDB";
+import { disableMotion } from "../disableMotion";
+import { shuffleList } from "../shuffleList";
 
 let assetGroupY = 0;
 let tmdb: TMDB;
@@ -15,12 +15,12 @@ let assetGroup: THREE.Group;
 let container: null | Element;
 const posterRows: THREE.Group[] = [];
 
-export function initPeacockBG () {
+export function initPeacockBG() {
     const selector = `#experience-peacock`;
     const parent = document.querySelector(selector);
 
     if (parent) {
-        if(!renderer) {
+        if (!renderer) {
             initScene();
             renderPosters();
         }
@@ -29,12 +29,12 @@ export function initPeacockBG () {
     }
 }
 
-function settings () {
+function settings() {
     if (!_settings) {
         const windowWidth = 1056;
         _settings = {
             canvas: {
-                h: windowWidth * 414 / 1075,
+                h: (windowWidth * 414) / 1075,
                 w: windowWidth,
             },
             poster: {
@@ -54,21 +54,21 @@ function settings () {
     return _settings;
 }
 
-function initCanvas (parent: Element) {
+function initCanvas(parent: Element) {
     const _settings = settings();
-    container = document.createElement('div');
+    container = document.createElement("div");
     renderer = new THREE.WebGLRenderer();
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(_settings.canvas.w, _settings.canvas.h);
 
-    container.classList.add('jd-peacock-bg');
-    container.classList.add('jd-in-view');
+    container.classList.add("jd-peacock-bg");
+    container.classList.add("jd-in-view");
     container.append(renderer.domElement);
     parent.append(container);
 }
 
-function initScene () {
+function initScene() {
     scene = new THREE.Scene();
 
     initAssetGroup();
@@ -77,8 +77,8 @@ function initScene () {
 }
 
 export function animatePeacockBG() {
-    if (container?.classList.contains('visible')) {
-        if (!disableMotion('disablePeacockMotion')) {
+    if (container?.classList.contains("visible")) {
+        if (!disableMotion("disablePeacockMotion")) {
             scrollPosters();
         }
 
@@ -93,16 +93,16 @@ function singleRender() {
     }
 }
 
-function initCamera () {
+function initCamera() {
     const _settings = settings();
-    const aspect = _settings.canvas.w / _settings.canvas.h * .5;
-    camera = new THREE.PerspectiveCamera(75, aspect, .01, 1000);
-    camera.rotation.x = .6;
+    const aspect = (_settings.canvas.w / _settings.canvas.h) * 0.5;
+    camera = new THREE.PerspectiveCamera(75, aspect, 0.01, 1000);
+    camera.rotation.x = 0.6;
     camera.position.z = 100;
     camera.position.y = _settings.poster.h * 1.5;
 }
 
-function initSpotlight () {
+function initSpotlight() {
     const spotLight = new THREE.PointLight(0xffffff, 2500, 500);
     spotLight.position.x = 0;
     spotLight.position.y = settings().poster.h * 1.5;
@@ -110,15 +110,19 @@ function initSpotlight () {
     scene.add(spotLight);
 }
 
-function initAssetGroup () {
+function initAssetGroup() {
     const _settings = settings();
     assetGroup = new THREE.Group();
     assetGroup.position.y = _settings.startingY;
-    assetGroup.position.x = -((_settings.poster.w * _settings.poster.cols) + (_settings.poster.padding * _settings.poster.cols-1)) / 2; // offset and center
+    assetGroup.position.x =
+        -(
+            _settings.poster.w * _settings.poster.cols +
+            (_settings.poster.padding * _settings.poster.cols - 1)
+        ) / 2; // offset and center
     scene.add(assetGroup);
 }
 
-function PosterSymbol () {
+function PosterSymbol() {
     const _settings = settings();
     const posterShape = new THREE.Shape();
     roundedRect(posterShape, 0, 0, _settings.poster.w, _settings.poster.h, 3);
@@ -132,11 +136,11 @@ function PosterSymbol () {
     return new THREE.Mesh(posterGeometry, material);
 }
 
-function loadPosterImages () {
+function loadPosterImages() {
     tmdb = initTMDB(4);
 
-    tmdb.config.then(config => {
-        tmdb.results.then(results => {
+    tmdb.config.then((config) => {
+        tmdb.results.then((results) => {
             const shuffledResults = shuffleList(results);
             const _settings = settings();
             const totalRows = posterRows.length;
@@ -150,9 +154,12 @@ function loadPosterImages () {
                     const poster = row[colIndex];
                     const textureLoader = new THREE.TextureLoader();
                     let resultIndex, asset, url;
-                    
+
                     do {
-                        resultIndex = rowIndex * _settings.poster.rows + colIndex + skipAmount;
+                        resultIndex =
+                            rowIndex * _settings.poster.rows +
+                            colIndex +
+                            skipAmount;
                         asset = shuffledResults[resultIndex];
 
                         if (!asset?.poster_path) {
@@ -163,8 +170,10 @@ function loadPosterImages () {
                     if (asset && asset.poster_path) {
                         url = createImageURL(
                             config.images.secure_base_url,
-                            config.images.poster_sizes[_settings.poster.resIndex],
-                            asset.poster_path
+                            config.images.poster_sizes[
+                                _settings.poster.resIndex
+                            ],
+                            asset.poster_path,
                         );
                     }
 
@@ -174,19 +183,22 @@ function loadPosterImages () {
 
                     const posterTexture = textureLoader.load(url);
                     posterTexture.colorSpace = THREE.SRGBColorSpace;
-                    posterTexture.wrapS = posterTexture.wrapT = THREE.RepeatWrapping;
-                    posterTexture.repeat.set(.037, .025);
+                    posterTexture.wrapS = posterTexture.wrapT =
+                        THREE.RepeatWrapping;
+                    posterTexture.repeat.set(0.037, 0.025);
 
-                    (poster as THREE.Mesh).material = new THREE.MeshStandardMaterial({
-                        color: 0xFFFFFF,
-                        map: posterTexture,
-                    });
+                    (poster as THREE.Mesh).material =
+                        new THREE.MeshStandardMaterial({
+                            color: 0xffffff,
+                            map: posterTexture,
+                        });
 
-                    poster.name = (asset as TMDB_TV).name || (asset as TMDB_Movie).title;
+                    poster.name =
+                        (asset as TMDB_TV).name || (asset as TMDB_Movie).title;
                 }
             }
         });
-    })
+    });
 }
 
 function roundedRect(
@@ -195,7 +207,7 @@ function roundedRect(
     y: number,
     width: number,
     height: number,
-    radius: number
+    radius: number,
 ) {
     ctx.moveTo(x, y + radius);
     ctx.lineTo(x, y + height - radius);
@@ -208,7 +220,7 @@ function roundedRect(
     ctx.quadraticCurveTo(x, y, x, y + radius);
 }
 
-function renderPosters () {
+function renderPosters() {
     const _settings = settings();
     const count = _settings.poster.rows * _settings.poster.cols;
 
@@ -231,14 +243,14 @@ function renderPosters () {
 
         const poster = PosterSymbol();
         poster.position.x = x;
-        
+
         rowGroup.add(poster);
     }
 
     loadPosterImages();
 }
 
-function scrollPosters (moveY = .2) {
+function scrollPosters(moveY = 0.2) {
     if (assetGroup.position.y >= 0) {
         loopPosters();
         assetGroupY = settings().startingY;
@@ -247,11 +259,13 @@ function scrollPosters (moveY = .2) {
     }
 }
 
-function loopPosters () {
+function loopPosters() {
     const _settings = settings();
 
     if (posterRows.length) {
-        const lastY = (_settings.poster.h * posterRows.length) + (_settings.poster.padding * (posterRows.length-1));
+        const lastY =
+            _settings.poster.h * posterRows.length +
+            _settings.poster.padding * (posterRows.length - 1);
 
         for (let i = 0; i < posterRows.length; i++) {
             const row = posterRows[i];
@@ -260,7 +274,7 @@ function loopPosters () {
                 row.position.y = -_settings.startingY;
             } else {
                 row.position.y += -_settings.startingY;
-            }     
+            }
         }
     }
 }

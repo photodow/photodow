@@ -2,29 +2,29 @@
 @use "@carbon/styles/scss/theme";
 
 .jd-linklist {
-  &,
-  &__item {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  svg {
-    fill: currentColor !important;
-    margin-right: spacing.$spacing-03 / 2;
-  }
-
-  .cds--btn {
-    transform: scale(1);
-    transition: transform 0.25s ease-in-out;
-    margin-right: spacing.$spacing-03;
-
-    &:hover {
-      transform: scale(1.05);
+    &,
+    &__item {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
 
-    &:active {
-      transform: scale(1);
+    svg {
+        fill: currentColor !important;
+        margin-right: spacing.$spacing-03 / 2;
     }
-  }
+
+    .cds--btn {
+        transform: scale(1);
+        transition: transform 0.25s ease-in-out;
+        margin-right: spacing.$spacing-03;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(1);
+        }
+    }
 }

@@ -12,22 +12,22 @@ export const enum PortfolioLayouts {
 export const enum PortfolioSize {
     Small = "Small",
     Medium = "Medium",
-    Large = "Large"
+    Large = "Large",
 }
 
 export type PortfolioCard = {
-    _key: PortfolioKey,
-    image: Ref,
-    title: string,
-    description?: Markdown,
-    actions?: Ref[],
-    skills?: string[]
-}
+    _key: PortfolioKey;
+    image: Ref;
+    title: string;
+    description?: Markdown;
+    actions?: Ref[];
+    skills?: string[];
+};
 
 export type PortfolioItem = {
-    _key: PortfolioKey,
-    orgKey: OrgKey,
-    card: PortfolioCard,
-}
+    _key: PortfolioKey;
+    orgKey: OrgKey;
+    card: PortfolioCard;
+};
 
 export type Portfolio = Record<PortfolioKey, PortfolioItem>;

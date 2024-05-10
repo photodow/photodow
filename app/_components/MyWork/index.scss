@@ -4,29 +4,29 @@
 @use "@carbon/styles/scss/breakpoint" as *;
 
 .jd-work {
-  $sectionPadding: spacing.$spacing-03 * 8;
-  padding: $sectionPadding 0 ($sectionPadding * 2);
+    $sectionPadding: spacing.$spacing-03 * 8;
+    padding: $sectionPadding 0 ($sectionPadding * 2);
 
-  &__title {
-    margin: 0;
-    padding: 0;
-    padding-bottom: $sectionPadding / 2;
-  }
-
-  &__search {
-    width: auto;
-    margin-bottom: spacing.$spacing-03 * 2;
-
-    @include breakpoint("md") {
-      margin-left: spacing.$spacing-03 * -2;
+    &__title {
+        margin: 0;
+        padding: 0;
+        padding-bottom: $sectionPadding / 2;
     }
 
-    input {
-      border-radius: spacing.$spacing-03;
-    }
+    &__search {
+        width: auto;
+        margin-bottom: spacing.$spacing-03 * 2;
 
-    button {
-      border-radius: 0 spacing.$spacing-03 spacing.$spacing-03 0;
+        @include breakpoint("md") {
+            margin-left: spacing.$spacing-03 * -2;
+        }
+
+        input {
+            border-radius: spacing.$spacing-03;
+        }
+
+        button {
+            border-radius: 0 spacing.$spacing-03 spacing.$spacing-03 0;
+        }
     }
-  }
 }

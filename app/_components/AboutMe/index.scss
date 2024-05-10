@@ -4,180 +4,184 @@
 @use "@carbon/styles/scss/theme";
 
 .jd-about {
-  $padding: spacing.$spacing-03 * 8;
-  $imageSize: 8vh * 7;
+    $padding: spacing.$spacing-03 * 8;
+    $imageSize: 8vh * 7;
 
-  padding-top: $padding;
-  min-height: 100vh;
-  color: theme.$text-primary;
-  position: relative;
-  background-color: theme.$background;
-  padding-bottom: $imageSize;
-  display: grid;
-  overflow: hidden;
-
-  &__inner {
-    margin: auto;
-    width: 100%;
-
-    [class*="cds--col-"] {
-      position: relative;
-      min-height: spacing.$spacing-03 * 53;
-    }
-  }
-
-  @include breakpoint("md") {
-    padding: $padding 0;
-  }
-
-  &::after {
-    content: "";
+    padding-top: $padding;
+    min-height: 100vh;
+    color: theme.$text-primary;
+    position: relative;
+    background-color: theme.$background;
+    padding-bottom: $imageSize;
+    display: grid;
     overflow: hidden;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    background-image: url("/jamesdow.png");
-    background-position: bottom right 64px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    transform: scaleX(-1);
-    height: $imageSize + 5vh;
-    max-width: 100%;
-    aspect-ratio: 1 / 1;
+
+    &__inner {
+        margin: auto;
+        width: 100%;
+
+        [class*="cds--col-"] {
+            position: relative;
+            min-height: spacing.$spacing-03 * 53;
+        }
+    }
 
     @include breakpoint("md") {
-      position: absolute;
-      background-position: bottom right;
-      background-size: contain;
-      top: 0;
-      bottom: auto;
-      margin: auto;
-      min-height: 90vh;
-      height: 100%;
-      width: auto;
-      aspect-ratio: 1 / 1;
-      right: (100 / 8 * 5) + vw; // more exact number? Might need it down the road
-
-      transform: scaleX(1);
+        padding: $padding 0;
     }
 
-    @include breakpoint("lg") {
-      right: (100 / 16 * 10) + vw; // more exact number? Might need it down the road
-    }
-
-    @include breakpoint("xlg") {
-      right: (100 / 16 * 11) + vw; // more exact number? Might need it down the road
-    }
-  }
-
-  &__name {
-    &,
-    a {
-      @include type.type-style("heading-07");
-      font-weight: bold;
-      margin: 0;
-      color: theme.$text-primary;
-      text-decoration: none;
-      display: inline-block;
-      transform: scale(1);
-      transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-    }
-
-    a:hover {
-      color: theme.$text-secondary;
-      transform: scale(1.05);
-    }
-
-    a:active {
-      transform: scale(1);
-    }
-  }
-
-  &__role {
-    @include type.type-style("heading-04");
-    margin: 0 0 spacing.$spacing-03;
-    color: theme.$text-secondary;
-  }
-
-  &__desc {
-    @include type.type-style("heading-03");
-    margin: spacing.$spacing-03 * 3 0 spacing.$spacing-03 * 6;
-  }
-
-  .jd-linklist {
-    margin-bottom: spacing.$spacing-03 * 2;
-
-    &__item {
-      display: inline-block;
-    }
-  }
-
-  .jd-skills .cds--tag {
-    margin-left: 0;
-  }
-
-  @media print {
-    padding-top: spacing.$spacing-03 * 6;
-    padding-bottom: spacing.$spacing-03 * 14;
-
-    &,
-    [class*="cds--col-"],
     &::after {
-      min-height: auto;
+        content: "";
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-image: url("/jamesdow.png");
+        background-position: bottom right 64px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transform: scaleX(-1);
+        height: $imageSize + 5vh;
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+
+        @include breakpoint("md") {
+            position: absolute;
+            background-position: bottom right;
+            background-size: contain;
+            top: 0;
+            bottom: auto;
+            margin: auto;
+            min-height: 90vh;
+            height: 100%;
+            width: auto;
+            aspect-ratio: 1 / 1;
+            right: (100 / 8 * 5) + vw; // more exact number? Might need it down the road
+
+            transform: scaleX(1);
+        }
+
+        @include breakpoint("lg") {
+            right: (100 / 16 * 10) + vw; // more exact number? Might need it down the road
+        }
+
+        @include breakpoint("xlg") {
+            right: (100 / 16 * 11) + vw; // more exact number? Might need it down the road
+        }
+    }
+
+    &__name {
+        &,
+        a {
+            @include type.type-style("heading-07");
+            font-weight: bold;
+            margin: 0;
+            color: theme.$text-primary;
+            text-decoration: none;
+            display: inline-block;
+            transform: scale(1);
+            transition:
+                color 0.2s ease-in-out,
+                transform 0.2s ease-in-out;
+        }
+
+        a:hover {
+            color: theme.$text-secondary;
+            transform: scale(1.05);
+        }
+
+        a:active {
+            transform: scale(1);
+        }
+    }
+
+    &__role {
+        @include type.type-style("heading-04");
+        margin: 0 0 spacing.$spacing-03;
+        color: theme.$text-secondary;
     }
 
     &__desc {
-      margin-bottom: 0;
+        @include type.type-style("heading-03");
+        margin: spacing.$spacing-03 * 3 0 spacing.$spacing-03 * 6;
     }
 
-    .jd-about-skeleton,
     .jd-linklist {
-      display: none;
+        margin-bottom: spacing.$spacing-03 * 2;
+
+        &__item {
+            display: inline-block;
+        }
     }
-  }
+
+    .jd-skills .cds--tag {
+        margin-left: 0;
+    }
+
+    @media print {
+        padding-top: spacing.$spacing-03 * 6;
+        padding-bottom: spacing.$spacing-03 * 14;
+
+        &,
+        [class*="cds--col-"],
+        &::after {
+            min-height: auto;
+        }
+
+        &__desc {
+            margin-bottom: 0;
+        }
+
+        .jd-about-skeleton,
+        .jd-linklist {
+            display: none;
+        }
+    }
 }
 
 .jd-about-skeleton {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  top: 0;
-  padding: 0 16px;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 0;
+    padding: 0 16px;
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 0.5s ease-in-out,
+        visibility 0.5s ease-in-out;
 
-  .jd-about--visible & {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  &__title {
-    min-height: spacing.$spacing-03 * 8;
-    max-width: 50%;
-    margin: 0;
-  }
-
-  &__subtitle {
-    max-width: 75%;
-    min-height: spacing.$spacing-03 * 5;
-    margin: spacing.$spacing-03 0;
-  }
-
-  &__content {
-    min-height: spacing.$spacing-03 * 3;
-
-    &:first-child {
-      margin-top: spacing.$spacing-03 * 3;
+    .jd-about--visible & {
+        opacity: 0;
+        visibility: hidden;
     }
 
-    &:last-child {
-      margin-bottom: spacing.$spacing-03 * 6;
+    &__title {
+        min-height: spacing.$spacing-03 * 8;
+        max-width: 50%;
+        margin: 0;
     }
-  }
 
-  .cds--btn {
-    border-radius: spacing.$spacing-03;
-    overflow: hidden;
-  }
+    &__subtitle {
+        max-width: 75%;
+        min-height: spacing.$spacing-03 * 5;
+        margin: spacing.$spacing-03 0;
+    }
+
+    &__content {
+        min-height: spacing.$spacing-03 * 3;
+
+        &:first-child {
+            margin-top: spacing.$spacing-03 * 3;
+        }
+
+        &:last-child {
+            margin-bottom: spacing.$spacing-03 * 6;
+        }
+    }
+
+    .cds--btn {
+        border-radius: spacing.$spacing-03;
+        overflow: hidden;
+    }
 }

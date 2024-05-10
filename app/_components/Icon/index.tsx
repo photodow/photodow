@@ -18,26 +18,26 @@ import Location from "@carbon/icons-react/lib/Location";
 import ChevronDown from "@carbon/icons-react/lib/ChevronDown";
 
 export const enum IconKeys {
-    GitHub = 'github',
-    LinkedIn = 'linkedin',
-    Codepen = 'codepen',
-    Install = 'install',
-    Download = 'download',
-    Rocket = 'rocket',
-    Launch = 'launch',
-    View = 'view',
-    Document = 'document',
-    DownloadDocument = 'download-document',
-    ArrowDown = 'arrow-down',
-    Phone = 'phone',
-    Email = 'email',
-    Website = 'website',
-    Map = 'map',
-    ChevronDown = 'ChevronDown'
+    GitHub = "github",
+    LinkedIn = "linkedin",
+    Codepen = "codepen",
+    Install = "install",
+    Download = "download",
+    Rocket = "rocket",
+    Launch = "launch",
+    View = "view",
+    Document = "document",
+    DownloadDocument = "download-document",
+    ArrowDown = "arrow-down",
+    Phone = "phone",
+    Email = "email",
+    Website = "website",
+    Map = "map",
+    ChevronDown = "ChevronDown",
 }
 interface Comp {
-    iconRef: IconKeys,
-    size?: number
+    iconRef: IconKeys;
+    size?: number;
 }
 
 const icons: Record<IconKeys, JSXElementConstructor<any>> = {
@@ -56,10 +56,10 @@ const icons: Record<IconKeys, JSXElementConstructor<any>> = {
     [IconKeys.Email]: Email,
     [IconKeys.Website]: Wikis,
     [IconKeys.Map]: Location,
-    [IconKeys.ChevronDown]: ChevronDown
-}
+    [IconKeys.ChevronDown]: ChevronDown,
+};
 
 export function Icon({ iconRef, size }: Comp) {
-  const IconJSX = icons[iconRef];
-  return !IconJSX ? null : <IconJSX size={size} />;
+    const IconJSX = icons[iconRef];
+    return !IconJSX ? null : <IconJSX size={size} />;
 }

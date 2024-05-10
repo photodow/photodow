@@ -7,117 +7,123 @@ $base: jd-portfolio-grid;
 $minHeight: spacing.$spacing-03 * 30;
 
 .#{$base} {
-  min-height: $minHeight;
+    min-height: $minHeight;
 
-  &__items {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    column-gap: spacing.$spacing-03 * 4;
-    row-gap: spacing.$spacing-03 * 2;
-    display: grid;
+    &__items {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        column-gap: spacing.$spacing-03 * 4;
+        row-gap: spacing.$spacing-03 * 2;
+        display: grid;
 
-    // @include breakpoint("md") {
-    @media (min-width: (spacing.$spacing-03 * 69)) {
-      columns: 2;
-      grid-template-columns: repeat(2, 1fr);
+        // @include breakpoint("md") {
+        @media (min-width: (spacing.$spacing-03 * 69)) {
+            columns: 2;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include breakpoint("lg") {
+            columns: 3;
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
-    @include breakpoint("lg") {
-      columns: 3;
-      grid-template-columns: repeat(3, 1fr);
+    &__item {
+        height: 100%;
+        opacity: 0 !important;
+        visibility: hidden;
+        display: grid;
+        transition:
+            opacity 0.5s ease-in-out,
+            visibility 0.5s ease-in-out;
+
+        .#{$base}--active & {
+            opacity: 1 !important;
+            visibility: visible;
+        }
+
+        @include breakpoint("md") {
+            margin-left: spacing.$spacing-03 * 2 * -1;
+        }
     }
-  }
 
-  &__item {
-    height: 100%;
-    opacity: 0 !important;
-    visibility: hidden;
-    display: grid;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    &__empty {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        width: 80%;
+        max-width: spacing.$spacing-03 * 50;
+        margin: spacing.$spacing-03 * 10 auto;
+        opacity: 0;
+        visibility: hidden;
+        @include type.type-style("heading-03");
+        color: theme.$text-secondary;
+        transition:
+            opacity 0.5s 0.5s ease-in-out,
+            visibility 0.5s 0.5s ease-in-out;
 
-    .#{$base}--active & {
-      opacity: 1 !important;
-      visibility: visible;
+        .#{$base}--active & {
+            opacity: 1 !important;
+            visibility: visible;
+        }
     }
-
-    @include breakpoint("md") {
-      margin-left: spacing.$spacing-03 * 2 * -1;
-    }
-  }
-
-  &__empty {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    width: 80%;
-    max-width: spacing.$spacing-03 * 50;
-    margin: spacing.$spacing-03 * 10 auto;
-    opacity: 0;
-    visibility: hidden;
-    @include type.type-style("heading-03");
-    color: theme.$text-secondary;
-    transition: opacity 0.5s 0.5s ease-in-out, visibility 0.5s 0.5s ease-in-out;
-
-    .#{$base}--active & {
-      opacity: 1 !important;
-      visibility: visible;
-    }
-  }
 }
 
 .jd-portfolio-grid__loading {
-  position: relative;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 0.5s ease-in-out,
+        visibility 0.5s ease-in-out;
 
-  .jd-portfolio-grid--active & {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  &__inner {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    display: grid;
-
-    // @include breakpoint("md") {
-    @media (min-width: (spacing.$spacing-03 * 69)) {
-      grid-template-columns: repeat(2, 1fr);
+    .jd-portfolio-grid--active & {
+        opacity: 0;
+        visibility: hidden;
     }
 
-    @include breakpoint("lg") {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
+    &__inner {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        display: grid;
 
-  .cds--skeleton__placeholder {
-    width: auto;
-    border-radius: spacing.$spacing-03;
-    overflow: hidden;
-    min-height: spacing.$spacing-03 * 30;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    display: none;
+        // @include breakpoint("md") {
+        @media (min-width: (spacing.$spacing-03 * 69)) {
+            grid-template-columns: repeat(2, 1fr);
+        }
 
-    &:first-child {
-      // min-height: spacing.$spacing-03 * 32;
-      display: block;
+        @include breakpoint("lg") {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 
-    @include breakpoint("md") {
-      margin-left: spacing.$spacing-03 * -2;
-    }
+    .cds--skeleton__placeholder {
+        width: auto;
+        border-radius: spacing.$spacing-03;
+        overflow: hidden;
+        min-height: spacing.$spacing-03 * 30;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        display: none;
 
-    @media (min-width: (spacing.$spacing-03 * 69)) {
-      &:last-child {
-        display: block;
-      }
-    }
+        &:first-child {
+            // min-height: spacing.$spacing-03 * 32;
+            display: block;
+        }
 
-    @include breakpoint("lg") {
-      display: block;
+        @include breakpoint("md") {
+            margin-left: spacing.$spacing-03 * -2;
+        }
+
+        @media (min-width: (spacing.$spacing-03 * 69)) {
+            &:last-child {
+                display: block;
+            }
+        }
+
+        @include breakpoint("lg") {
+            display: block;
+        }
     }
-  }
 }

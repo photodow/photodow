@@ -1,4 +1,3 @@
-
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { SiteData } from "../_types/SiteData";
@@ -12,13 +11,13 @@ import { MainItem } from "../_types/Main";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAk-EtPkIkvUvU1YeaY9057fvKmgWYro-I",
-  authDomain: "jamesdowme.firebaseapp.com",
-  databaseURL: "https://jamesdowme-default-rtdb.firebaseio.com",
-  projectId: "jamesdowme",
-  storageBucket: "jamesdowme.appspot.com",
-  messagingSenderId: "614771609443",
-  appId: "1:614771609443:web:8c671a765277992d934d56"
+    apiKey: "AIzaSyAk-EtPkIkvUvU1YeaY9057fvKmgWYro-I",
+    authDomain: "jamesdowme.firebaseapp.com",
+    databaseURL: "https://jamesdowme-default-rtdb.firebaseio.com",
+    projectId: "jamesdowme",
+    storageBucket: "jamesdowme.appspot.com",
+    messagingSenderId: "614771609443",
+    appId: "1:614771609443:web:8c671a765277992d934d56",
 };
 
 // Initialize Firebase
@@ -29,30 +28,31 @@ let setState: Function | undefined;
 
 init();
 
-async function init () {
+async function init() {
     resetData();
 
-    const id = getDataId()?.replace(/-?test-?/g, '');
+    const id = getDataId()?.replace(/-?test-?/g, "");
     let buildingData: Partial<SiteData> | null = null;
 
-    buildingData = JSON.parse(localStore().getItem('siteData') as string);
+    buildingData = JSON.parse(localStore().getItem("siteData") as string);
 
     if (buildingData) {
         const nowDate = new Date();
         const sevenDays = 1000 * 60 * 60 * 24 * 7;
 
         // check for last update in localStorage
-        const localLastUpdate = buildingData.lastUpdate && new Date(buildingData.lastUpdate);
+        const localLastUpdate =
+            buildingData.lastUpdate && new Date(buildingData.lastUpdate);
 
         const dbLastUpdate = await getData(`lastUpdate`);
 
         if (
             // did we register a lastUpdate? If not just pull data again to be safe.
-            !localLastUpdate
+            !localLastUpdate ||
             // Has it been over 7 days since our last update? If so, update it again.
-            || (nowDate.valueOf() - localLastUpdate.valueOf()) > sevenDays
+            nowDate.valueOf() - localLastUpdate.valueOf() > sevenDays ||
             // Has the database been updated since the last local store? If so, update it.
-            || (dbLastUpdate && (new Date(dbLastUpdate) > localLastUpdate))
+            (dbLastUpdate && new Date(dbLastUpdate) > localLastUpdate)
         ) {
             buildingData = null;
         }
@@ -61,25 +61,33 @@ async function init () {
     buildingData ??= { lastUpdate: new Date().valueOf() };
 
     const waitForTheExtras = [];
-    let waitForOrgs: Promise<SiteData['organizations']> | undefined;
+    let waitForOrgs: Promise<SiteData["organizations"]> | undefined;
 
-    !buildingData.organizations && waitForTheExtras.push(waitForOrgs = getData(`organizations`, buildingData))
-    !buildingData.links && waitForTheExtras.push(getData(`links`, buildingData));
-    !buildingData.images && waitForTheExtras.push(getData(`images`, buildingData));
-    !buildingData.experiences && waitForTheExtras.push(getData(`experiences`, buildingData));
-    !buildingData.portfolio && waitForTheExtras.push(getData(`portfolio`, buildingData));
+    !buildingData.organizations &&
+        waitForTheExtras.push(
+            (waitForOrgs = getData(`organizations`, buildingData)),
+        );
+    !buildingData.links &&
+        waitForTheExtras.push(getData(`links`, buildingData));
+    !buildingData.images &&
+        waitForTheExtras.push(getData(`images`, buildingData));
+    !buildingData.experiences &&
+        waitForTheExtras.push(getData(`experiences`, buildingData));
+    !buildingData.portfolio &&
+        waitForTheExtras.push(getData(`portfolio`, buildingData));
     // !buildingData.people && waitForTheExtras.push(getData(`people`, buildingData));
     // !buildingData.testimonials && waitForTheExtras.push(getData(`testimonials`, buildingData));
 
     if (!buildingData.main) {
-        const mainItem = await getData(`main/${id}`) as MainItem;
+        const mainItem = (await getData(`main/${id}`)) as MainItem;
         const defaultItem = await getData(`main/_default`);
-        const baseItem = await getData(`main/${mainItem?._base}`) as MainItem || {};
+        const baseItem =
+            ((await getData(`main/${mainItem?._base}`)) as MainItem) || {};
 
         buildingData.main = mergeWith(
             mergeWith(defaultItem, baseItem, handleOverride),
             mainItem,
-            handleOverride
+            handleOverride,
         );
 
         updateState(buildingData);
@@ -94,20 +102,25 @@ async function init () {
 
         if (_metaOverride) {
             // retrieve organization data
-            getOrgData(buildingData.organizations, _metaOverride?.orgKey).then(d => {
-                _metaOverride.org = d;
-                updateState(buildingData);
-            });
+            getOrgData(buildingData.organizations, _metaOverride?.orgKey).then(
+                (d) => {
+                    _metaOverride.org = d;
+                    updateState(buildingData);
+                },
+            );
         }
     });
 
     Promise.all(waitForTheExtras).then(() => {
-        localStore().setItem('siteData', JSON.stringify(buildingData));
+        localStore().setItem("siteData", JSON.stringify(buildingData));
         updateState(buildingData);
     });
 }
 
-export async function getOrgData (orgs: Organizations, key: string | undefined): Promise<Organization | undefined> {
+export async function getOrgData(
+    orgs: Organizations,
+    key: string | undefined,
+): Promise<Organization | undefined> {
     if (!key) {
         return;
     }
@@ -115,7 +128,10 @@ export async function getOrgData (orgs: Organizations, key: string | undefined):
     return orgs[key];
 }
 
-export async function getData (key: string, dataStore?: Partial<SiteData>): Promise<any> {
+export async function getData(
+    key: string,
+    dataStore?: Partial<SiteData>,
+): Promise<any> {
     const starCountRef = ref(db, key);
 
     return new Promise((resolve) => {
@@ -132,16 +148,20 @@ export async function getData (key: string, dataStore?: Partial<SiteData>): Prom
     });
 }
 
-function updateState (data?: Partial<SiteData> | null) {
-    if (!data || typeof setState !== 'function') {
+function updateState(data?: Partial<SiteData> | null) {
+    if (!data || typeof setState !== "function") {
         return;
     }
 
-    localState = {...data};
+    localState = { ...data };
     setState(localState);
 }
 
-function updateStateByKey<T extends keyof SiteData>(siteData?: Partial<SiteData> | null, key?: T, data?: SiteData[T]) {
+function updateStateByKey<T extends keyof SiteData>(
+    siteData?: Partial<SiteData> | null,
+    key?: T,
+    data?: SiteData[T],
+) {
     if (!siteData || !key || !data) {
         return;
     }
@@ -151,7 +171,7 @@ function updateStateByKey<T extends keyof SiteData>(siteData?: Partial<SiteData>
     updateState(siteData as Partial<SiteData>);
 }
 
-export function initStateDB (callback?: Function) {
+export function initStateDB(callback?: Function) {
     setState = callback;
 
     if (localState && setState) {

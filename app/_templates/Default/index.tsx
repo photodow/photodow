@@ -24,7 +24,7 @@ export function DefaultTemplate({
 
     const setToEditContent = useCallback(
         () => setEditableContent(urlParams().has("edit")),
-        []
+        [],
     );
 
     useEffect(() => {

@@ -1,32 +1,32 @@
 import { disableMotion } from "./disableMotion";
 import { updateURL } from "./updateURL";
 
-const visible = 'visible';
-const fadeInClass = 'jd-fade-in';
-const inViewClass = 'jd-in-view';
-const pageAttr = 'data-page';
+const visible = "visible";
+const fadeInClass = "jd-fade-in";
+const inViewClass = "jd-in-view";
+const pageAttr = "data-page";
 let interObserver: IntersectionObserver | null = null;
 let registerIntersectObserver: Set<HTMLElement>;
 
-export function initObservers () {
+export function initObservers() {
     if (registerIntersectObserver) {
         return;
     }
 
-    if (disableMotion('disableScrollFade')) {
-        document.body.classList.add('disable-scroll-fade');
+    if (disableMotion("disableScrollFade")) {
+        document.body.classList.add("disable-scroll-fade");
         return;
     }
 
     const main = document.body;
 
-    document.querySelector('html')?.classList.add('initialized');
+    document.querySelector("html")?.classList.add("initialized");
 
     registerIntersectObserver = new Set();
 
     interObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
-            const target = (entry.target as HTMLElement);
+            const target = entry.target as HTMLElement;
             const classList = target.classList;
 
             if (entry.isIntersecting) {
@@ -56,24 +56,31 @@ export function initObservers () {
         }
     });
 
-    main && mutObserver.observe(main, {
-        childList: true,
-        subtree: true,
-    });
+    main &&
+        mutObserver.observe(main, {
+            childList: true,
+            subtree: true,
+        });
 }
 
-function registerIntersectObservers (node: HTMLElement) {
+function registerIntersectObservers(node: HTMLElement) {
     if (registerIntersectObserver.has(node)) {
         return;
     }
 
-    if (node.classList.contains(fadeInClass) || node.classList.contains(inViewClass) || node.hasAttribute(pageAttr)) {
+    if (
+        node.classList.contains(fadeInClass) ||
+        node.classList.contains(inViewClass) ||
+        node.hasAttribute(pageAttr)
+    ) {
         interObserver?.observe(node);
         registerIntersectObserver.add(node);
     }
 
     // registering children of node
-    const children = node.querySelectorAll(`.${fadeInClass}, .${inViewClass}, [${pageAttr}]`);
+    const children = node.querySelectorAll(
+        `.${fadeInClass}, .${inViewClass}, [${pageAttr}]`,
+    );
 
     for (let i = 0, l = children.length; i < l; i++) {
         const child = children[i] as HTMLElement;
@@ -85,8 +92,8 @@ function registerIntersectObservers (node: HTMLElement) {
     }
 }
 
-function inPageChange (id: string) {
+function inPageChange(id: string) {
     const url = new URL(location.toString());
-    url.hash = id === 'home' ? '' : `#${id}`;
+    url.hash = id === "home" ? "" : `#${id}`;
     updateURL(url);
 }

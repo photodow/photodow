@@ -2,66 +2,66 @@
 @use "@carbon/styles/scss/colors";
 
 .jd-gridoverlay {
-  $bg-color: rgba(colors.$gray-50, 0.04);
-  pointer-events: none;
+    $bg-color: rgba(colors.$gray-50, 0.04);
+    pointer-events: none;
 
-  &__2xgrid,
-  &__mini-unit {
-    position: absolute;
-    z-index: 999;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    min-width: 100vw;
+    &__2xgrid,
+    &__mini-unit {
+        position: absolute;
+        z-index: 999;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        min-width: 100vw;
 
-    @media print {
-      position: fixed;
+        @media print {
+            position: fixed;
+        }
     }
-  }
 
-  &__mini-unit {
-    z-index: 1000;
-    background-attachment: scroll;
-    background-size: 0.5rem 0.5rem;
-    background-image: linear-gradient(
-        90deg,
-        $bg-color 0.0625rem,
-        transparent 0px
-      ),
-      linear-gradient($bg-color 0.0625rem, transparent 0px);
-  }
-
-  &__2xgrid * {
-    height: 100%;
-  }
-
-  &__2xcol__inner {
-    background: $bg-color;
-  }
-
-  // &__2xcol {
-  //     display: none;
-  // }
-
-  &__2xcol:nth-child(n + 5) {
-    display: none;
-  }
-
-  @include breakpoint("md") {
-    &__2xcol:nth-child(-n + 8) {
-      display: block !important;
+    &__mini-unit {
+        z-index: 1000;
+        background-attachment: scroll;
+        background-size: 0.5rem 0.5rem;
+        background-image: linear-gradient(
+                90deg,
+                $bg-color 0.0625rem,
+                transparent 0px
+            ),
+            linear-gradient($bg-color 0.0625rem, transparent 0px);
     }
-  }
 
-  @include breakpoint("lg") {
-    &__2xcol {
-      display: block !important;
+    &__2xgrid * {
+        height: 100%;
     }
-  }
+
+    &__2xcol__inner {
+        background: $bg-color;
+    }
+
+    // &__2xcol {
+    //     display: none;
+    // }
+
+    &__2xcol:nth-child(n + 5) {
+        display: none;
+    }
+
+    @include breakpoint("md") {
+        &__2xcol:nth-child(-n + 8) {
+            display: block !important;
+        }
+    }
+
+    @include breakpoint("lg") {
+        &__2xcol {
+            display: block !important;
+        }
+    }
 }
 
 *:not(.jd-gridoverlay *) {
-  outline: 1px solid rgba(colors.$gray-50, 0.1);
+    outline: 1px solid rgba(colors.$gray-50, 0.1);
 }

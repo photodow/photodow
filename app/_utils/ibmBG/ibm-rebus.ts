@@ -69,7 +69,7 @@ const M = `
 const ibmRebus = {
     Eye,
     Bee,
-    M
+    M,
 };
 
 export default ibmRebus;

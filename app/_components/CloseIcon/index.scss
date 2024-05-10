@@ -4,73 +4,79 @@
 // pull out and shares button icon interactions
 
 .jd-close {
-  $thick: 3px;
-  $size: spacing.$spacing-03 * 4;
+    $thick: 3px;
+    $size: spacing.$spacing-03 * 4;
 
-  width: $size;
-  height: $size;
-  margin: spacing.$spacing-03;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: spacing.$spacing-03;
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out,
-    background 0.2s ease-in-out;
+    width: $size;
+    height: $size;
+    margin: spacing.$spacing-03;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: spacing.$spacing-03;
+    transition:
+        box-shadow 0.2s ease-in-out,
+        transform 0.2s ease-in-out,
+        background 0.2s ease-in-out;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  &:focus {
-    box-shadow: 0 0 0 2px theme.$border-interactive;
-  }
+    &:focus {
+        box-shadow: 0 0 0 2px theme.$border-interactive;
+    }
 
-  &:hover {
-    transform: scale(1.05);
-    background-color: theme.$background-hover;
+    &:hover {
+        transform: scale(1.05);
+        background-color: theme.$background-hover;
+
+        &::before,
+        &::after {
+            background: theme.$text-primary;
+        }
+    }
+
+    &:active {
+        transform: scale(1);
+        background-color: theme.$background-active;
+    }
 
     &::before,
     &::after {
-      background: theme.$text-primary;
-    }
-  }
+        content: "";
 
-  &:active {
-    transform: scale(1);
-    background-color: theme.$background-active;
-  }
+        display: block;
+        height: $thick;
+        width: 0;
+        border-radius: $thick;
+        background: theme.$text-secondary;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: rotate(0deg) translate(-50%, -50%);
+        transform-origin: 0 0;
 
-  &::before,
-  &::after {
-    content: "";
-
-    display: block;
-    height: $thick;
-    width: 0;
-    border-radius: $thick;
-    background: theme.$text-secondary;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: rotate(0deg) translate(-50%, -50%);
-    transform-origin: 0 0;
-
-    transition: width 0.25s 0.25s ease-in-out, transform 0.25s 0s ease-in-out,
-      color 0.2s ease-in-out; // out
-  }
-
-  &--active {
-    &::after,
-    &::before {
-      width: calc(100% - $thick * 2);
-      transition: width 0.25s 0s ease-in-out, transform 0.25s 0.75s ease-in-out,
-        color 0.2s ease-in-out; // in
+        transition:
+            width 0.25s 0.25s ease-in-out,
+            transform 0.25s 0s ease-in-out,
+            color 0.2s ease-in-out; // out
     }
 
-    &::after {
-      transform: rotate(-45deg) translate(-50%, -50%);
-    }
+    &--active {
+        &::after,
+        &::before {
+            width: calc(100% - $thick * 2);
+            transition:
+                width 0.25s 0s ease-in-out,
+                transform 0.25s 0.75s ease-in-out,
+                color 0.2s ease-in-out; // in
+        }
 
-    &::before {
-      transform: rotate(45deg) translate(-50%, -50%);
+        &::after {
+            transform: rotate(-45deg) translate(-50%, -50%);
+        }
+
+        &::before {
+            transform: rotate(45deg) translate(-50%, -50%);
+        }
     }
-  }
 }

@@ -1,27 +1,26 @@
-
 import { IconKeys } from "../_components/Icon";
 
-export type LinkKey = 'string';
+export type LinkKey = "string";
 
 export const enum LinkComp {
-    Button = 'button',
-    Text = 'text'
+    Button = "button",
+    Text = "text",
 }
 
 export const enum LinkKind {
-    Primary = 'primary',
-    Secondary = 'secondary',
-    Tertiary = 'tertiary',
-    Ghost = 'ghost',
-    Danger = 'danger',
-    DangerTertiary = 'danger--tertiary',
-    DangerGhost = 'danger--ghost',
+    Primary = "primary",
+    Secondary = "secondary",
+    Tertiary = "tertiary",
+    Ghost = "ghost",
+    Danger = "danger",
+    DangerTertiary = "danger--tertiary",
+    DangerGhost = "danger--ghost",
 }
 
 export const enum LinkSize {
-    Small = 'sm',
-    Medium = 'md',
-    Large = 'lg',
+    Small = "sm",
+    Medium = "md",
+    Large = "lg",
     // xLarge = 'xl',
     // '2xl'
 }
@@ -42,17 +41,17 @@ export const enum Protocol {
 }
 
 export type Link = {
-    _key: string,
-    type: LinkType,
-    text: string,
-    title?: string,
-    protocol: Protocol,
-    value: string,
-    target?: string,
-    icon?: IconKeys // react element, or maybe a key of icons?
-    kind?: LinkKind,
-    size?: LinkSize,
-    comp?: LinkComp,
-}
+    _key: string;
+    type: LinkType;
+    text: string;
+    title?: string;
+    protocol: Protocol;
+    value: string;
+    target?: string;
+    icon?: IconKeys; // react element, or maybe a key of icons?
+    kind?: LinkKind;
+    size?: LinkSize;
+    comp?: LinkComp;
+};
 
 export type Links = Record<LinkKey, Link>;

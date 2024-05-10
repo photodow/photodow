@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import redirectIfR from "../_utils/redirectIfR";
 
 export default function Github() {
-  useEffect(() => {
-    redirectIfR('gh');
-  }, []);
+    useEffect(() => {
+        redirectIfR("gh");
+    }, []);
 
-  return null;
+    return null;
 }

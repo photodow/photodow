@@ -1,12 +1,12 @@
-import { Loader } from '@googlemaps/js-api-loader';
-import { disableMotion } from '../disableMotion';
+import { Loader } from "@googlemaps/js-api-loader";
+import { disableMotion } from "../disableMotion";
 
 let map: google.maps.Map;
 let mapElem: Element | null = null;
 const moveMapBy = 0.000005;
 const latlng = {
     lat: 28.0882103,
-    lng: -82.4576896
+    lng: -82.4576896,
 };
 
 // var myStyles = [
@@ -26,14 +26,17 @@ const latlng = {
 //     }
 // ];
 
-export function initFleetisticsBG () {
+export function initFleetisticsBG() {
     new Loader({
         apiKey: "AIzaSyDrktX3psQRb99tv96YY4HxnJf_Tqv-UvY",
         version: "weekly",
         //   ...additionalOptions,
-    }).importLibrary('maps')
+    })
+        .importLibrary("maps")
         .then((google) => {
-            mapElem = document.querySelector("#experience-fleetistics .jd-slant__bg");
+            mapElem = document.querySelector(
+                "#experience-fleetistics .jd-slant__bg",
+            );
 
             if (!mapElem) {
                 return;
@@ -51,17 +54,17 @@ export function initFleetisticsBG () {
                 // styles: myStyles
             });
         })
-        .catch(e => {
+        .catch((e) => {
             // do something
         });
 }
 
-export function animateFleetisticsBG () {
+export function animateFleetisticsBG() {
     if (
-        map
-        && !disableMotion('disableFleetisticsMotion')
-        && mapElem?.classList.contains('visible')) {
-
+        map &&
+        !disableMotion("disableFleetisticsMotion") &&
+        mapElem?.classList.contains("visible")
+    ) {
         latlng.lat -= moveMapBy;
         // latlng.lng -= addBy;
 

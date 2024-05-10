@@ -3,62 +3,64 @@
 @use "@carbon/styles/scss/spacing";
 
 .jd-contact {
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 
-  &__title {
-    margin: 0;
-    padding: 0;
-    margin-bottom: spacing.$spacing-03 * 4;
-  }
-
-  &__divider {
-    border: 0;
-    width: 50%;
-    margin: spacing.$spacing-03 * 2 0;
-
-    height: 1px;
-    background: theme.$border-subtle-00;
-  }
-
-  .jd-linklist__item {
-    margin-bottom: spacing.$spacing-03;
-
-    @media print {
-      white-space: nowrap;
+    &__title {
+        margin: 0;
+        padding: 0;
+        margin-bottom: spacing.$spacing-03 * 4;
     }
 
-    &:last-child {
-      margin-bottom: 0;
+    &__divider {
+        border: 0;
+        width: 50%;
+        margin: spacing.$spacing-03 * 2 0;
+
+        height: 1px;
+        background: theme.$border-subtle-00;
     }
 
-    svg {
-      height: spacing.$spacing-03 * 2;
-      width: spacing.$spacing-03 * 2;
-      margin-right: spacing.$spacing-03;
-      margin-top: spacing.$spacing-03 * 0.02;
-    }
-  }
+    .jd-linklist__item {
+        margin-bottom: spacing.$spacing-03;
 
-  a {
-    text-decoration: none;
-    transform: scale(1);
-    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        @media print {
+            white-space: nowrap;
+        }
 
-    &,
-    &:visited {
-      color: theme.$text-primary;
-    }
+        &:last-child {
+            margin-bottom: 0;
+        }
 
-    &:hover {
-      color: theme.$link-primary-hover;
-      text-decoration: underline;
-      transform: scale(1.05);
+        svg {
+            height: spacing.$spacing-03 * 2;
+            width: spacing.$spacing-03 * 2;
+            margin-right: spacing.$spacing-03;
+            margin-top: spacing.$spacing-03 * 0.02;
+        }
     }
 
-    &:active {
-      color: theme.$link-primary;
-      transform: scale(1);
+    a {
+        text-decoration: none;
+        transform: scale(1);
+        transition:
+            color 0.2s ease-in-out,
+            transform 0.2s ease-in-out;
+
+        &,
+        &:visited {
+            color: theme.$text-primary;
+        }
+
+        &:hover {
+            color: theme.$link-primary-hover;
+            text-decoration: underline;
+            transform: scale(1.05);
+        }
+
+        &:active {
+            color: theme.$link-primary;
+            transform: scale(1);
+        }
     }
-  }
 }

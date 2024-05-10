@@ -13,7 +13,7 @@ I'm James Dow, a passionate Web Designer & Developer. I thrive at the intersecti
 
 #### Let's connect!
 
-- Visit my [website](https://jamesdow.me?utm_source=github&utm_medium=repository)
-- Connect with me on [LinkedIn](https://jamesdow.me?r=in&utm_source=github&utm_medium=repository)
-- Check out some of my work on [Codepen](https://jamesdow.me?r=cp&utm_source=github&utm_medium=repository)
-- Continue exploring my [GitHub](https://jamesdow.me?r=gh&utm_source=github&utm_medium=repository)
+-   Visit my [website](https://jamesdow.me?utm_source=github&utm_medium=repository)
+-   Connect with me on [LinkedIn](https://jamesdow.me?r=in&utm_source=github&utm_medium=repository)
+-   Check out some of my work on [Codepen](https://jamesdow.me?r=cp&utm_source=github&utm_medium=repository)
+-   Continue exploring my [GitHub](https://jamesdow.me?r=gh&utm_source=github&utm_medium=repository)
