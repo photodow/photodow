@@ -7,24 +7,27 @@ import MyWork from "./_components/MyWork";
 import { LinkComp, LinkKind, LinkSize, Protocol } from "./_types/Link";
 import { Ref } from "./_types/Ref";
 import { IconKeys } from "./_components/Icon";
+import { DefaultTemplate } from "./_templates/Default";
 
 const addedRefs: Ref = {
-  _key: "mywork",
-  _override: {
-    protocol: Protocol.Hash,
-    icon: IconKeys.ArrowDown,
-    kind: LinkKind.Ghost,
-    size: LinkSize.Large,
-    comp: LinkComp.Button
-  }
+    _key: "mywork",
+    _override: {
+        protocol: Protocol.Hash,
+        icon: IconKeys.ArrowDown,
+        kind: LinkKind.Ghost,
+        size: LinkSize.Large,
+        comp: LinkComp.Button,
+    },
 };
 
 export default function Home() {
-  return (
-    <App>
-      <AboutMe addedRefs={[addedRefs]} />
-      <MyExperience />
-      <MyWork />
-    </App>
-  );
+    return (
+        <App>
+            <DefaultTemplate>
+                <AboutMe addedRefs={[addedRefs]} />
+                <MyExperience />
+                <MyWork />
+            </DefaultTemplate>
+        </App>
+    );
 }
