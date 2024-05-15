@@ -9,6 +9,7 @@ import { Experience } from "../../_types/Experience";
 import GetRefs from "../../_utils/getRefs";
 import EducationItem from "../EducationItem";
 import List from "../List";
+import { sortExperiences } from "../../_utils/sortExperiences";
 
 const id = "experience-education";
 
@@ -25,15 +26,7 @@ export default function MyEducation() {
                         RefList.Experiences,
                         siteData,
                     ) as Experience[]
-                ).sort((a, b) => {
-                    const presentYear = new Date().getFullYear();
-                    const bEnd =
-                        typeof b.end === "number" ? b.end : presentYear;
-                    const aEnd =
-                        typeof a.end === "number" ? a.end : presentYear;
-
-                    return b.start - a.start || bEnd - aEnd;
-                }),
+                ).sort(sortExperiences),
             );
         }
     }, [siteData]);

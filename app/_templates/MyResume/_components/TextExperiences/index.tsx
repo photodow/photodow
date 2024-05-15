@@ -9,6 +9,7 @@ import { TextOrgName } from "../TextOrgName";
 import Skills from "../../../../_components/Skills";
 import ExperienceMeta from "../../../../_components/ExperienceMeta";
 import { TextOrgImage } from "../TextOrgImage";
+import { sortExperiences } from "../../../../_utils/sortExperiences";
 
 type Comp = {
     className?: string;
@@ -24,22 +25,7 @@ export function TextExperiences({ refs, className }: Comp) {
             setExperiences(
                 (
                     GetRefs(refs, RefList.Experiences, siteData) as Experience[]
-                ).sort((a, b) => {
-                    const presentYear = new Date().getFullYear();
-                    const bEndYear =
-                        !b.end?.present && b.end?.year
-                            ? b.end?.year
-                            : presentYear;
-                    const aEndYear =
-                        !a.end?.present && a.end?.year
-                            ? a.end?.year
-                            : presentYear;
-                    // const bStartYear = b.start?.year || 0;
-                    // const aStartYear = a.start?.year || 0;
-
-                    return bEndYear - aEndYear;
-                    // return bStartYear - aStartYear || bEndYear - aEndYear;
-                }),
+                ).sort(sortExperiences),
             );
         }
     }, [siteData, refs]);

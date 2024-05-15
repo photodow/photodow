@@ -11,6 +11,7 @@ import ExperienceItem from "../ExperienceItem";
 import MyEducation from "../MyEducation";
 import Slant from "../Slant";
 import MyContact from "../MyContact";
+import { sortExperiences } from "../../_utils/sortExperiences";
 
 const id = "experience";
 
@@ -27,15 +28,7 @@ export default function MyExperience() {
                         RefList.Experiences,
                         siteData,
                     ) as Experience[]
-                ).sort((a, b) => {
-                    const presentYear = new Date().getFullYear();
-                    const bEnd =
-                        typeof b.end === "number" ? b.end : presentYear;
-                    const aEnd =
-                        typeof a.end === "number" ? a.end : presentYear;
-
-                    return b.start - a.start || bEnd - aEnd;
-                }),
+                ).sort(sortExperiences),
             );
         }
     }, [siteData]);
