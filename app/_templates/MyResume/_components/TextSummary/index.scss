@@ -1,0 +1,6 @@
+@use "@carbon/styles/scss/spacing";
+
+.jd-text-resume-summary {
+    grid-column: 1 / span 8;
+    margin-top: spacing.$spacing-05 * 2;
+}

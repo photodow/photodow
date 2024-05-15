@@ -20,8 +20,18 @@ export default function App({ children }: Comp) {
     const [redirect, setRedirect] = useState<string | null>(null);
     const [siteData, setSiteData] = useState<SiteData | null>(null);
     const [initialized, setInitialized] = useState<boolean>(false);
+    const [editableContent, setEditableContent] = useState<boolean>(false);
+
+    const setToEditContent = useCallback(
+        () => setEditableContent(urlParams().has("edit")),
+        [],
+    );
 
     const setR = useCallback((r: string | null) => setRedirect(r), []);
+
+    useEffect(() => {
+        setToEditContent();
+    }, [setToEditContent]);
 
     useEffect(() => {
         setR(urlParams().get("r"));
@@ -44,7 +54,7 @@ export default function App({ children }: Comp) {
 
     return (
         <SiteDataContext.Provider value={siteData}>
-            {children}
+            <div contentEditable={editableContent}>{children}</div>
         </SiteDataContext.Provider>
     );
 }

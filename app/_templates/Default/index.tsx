@@ -20,25 +20,10 @@ export function DefaultTemplate({
     theme = CarbonTheme.g90,
     children,
 }: Comp) {
-    const [editableContent, setEditableContent] = useState<boolean>(false);
-
-    const setToEditContent = useCallback(
-        () => setEditableContent(urlParams().has("edit")),
-        [],
-    );
-
-    useEffect(() => {
-        setToEditContent();
-    }, [setToEditContent]);
-
     return (
         <>
-            <Header size={headerSize} contentEditable={editableContent} />
-            <main
-                className="jd-main"
-                contentEditable={editableContent}
-                data-carbon-theme={theme}
-            >
+            <Header size={headerSize} />
+            <main className="jd-main" data-carbon-theme={theme}>
                 {children}
             </main>
             <Slant Type="footer" />

@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { SiteDataContext } from "../../_utils/contexts";
 import LinksByRef from "../LinksByRef";
 import { Ref } from "../../_types/Ref";
-import getDataId from "../../_utils/getDataId";
+import { addUrlId } from "../../_utils/addUrlId";
 
 const websiteRef: Ref = {
     _key: "website",
@@ -53,9 +53,4 @@ export default function MyContact() {
             />
         </article>
     );
-}
-
-function addUrlId(url: string) {
-    const id = getDataId();
-    return url + (id ? `?id=${getDataId()}` : "");
 }

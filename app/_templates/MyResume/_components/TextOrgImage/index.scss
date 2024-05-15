@@ -1,0 +1,57 @@
+@use "@carbon/styles/scss/breakpoint" as *;
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+
+.jd-org-image {
+    display: inline-block;
+    height: spacing.$spacing-05 * 3.5;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    margin-bottom: spacing.$spacing-05;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    @include breakpoint("md") {
+        float: right;
+    }
+
+    &.fullsailuniversity span {
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #f74a00;
+            z-index: 1;
+            mix-blend-mode: overlay;
+        }
+
+        img {
+            filter: invert(1);
+            filter: brightness(0.5);
+        }
+    }
+
+    &.floridacollege {
+        background: #f30833;
+
+        img {
+            padding: 2px;
+        }
+    }
+
+    &.peacock {
+        padding: 5px;
+        background: #000;
+    }
+}

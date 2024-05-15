@@ -1,0 +1,92 @@
+@use "@carbon/styles/scss/breakpoint" as *;
+@use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/themes" as *;
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/spacing";
+
+:root {
+    @include theme.theme($white);
+}
+
+*:not(.jd-gridoverlay *) {
+    outline: initial;
+}
+
+.jd-gridoverlay {
+    display: none;
+}
+
+.jd-text-resume {
+    min-height: 100vh;
+    max-width: spacing.$spacing-05 * 125 / 2;
+    margin: auto;
+
+    &__main {
+        grid-column: 1 / span 3;
+    }
+
+    &__aside {
+        grid-column: 4;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p {
+        margin: 0;
+        padding: 0;
+        color: theme.$text-primary;
+    }
+
+    h3 {
+        @include type.type-style("heading-01");
+        text-transform: uppercase;
+        margin-bottom: spacing.$spacing-05;
+    }
+
+    &__layout-section {
+        padding-left: spacing.$spacing-05;
+        padding-right: spacing.$spacing-05;
+        margin: spacing.$spacing-05 * 4 0;
+
+        @include breakpoint("md") {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            padding-left: spacing.$spacing-05 * 2;
+            padding-right: spacing.$spacing-05 * 2;
+            column-gap: spacing.$spacing-05 * 2;
+        }
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    &__layout-title {
+        @include breakpoint("md") {
+            grid-column: 1 / span 2;
+            text-align: right;
+        }
+    }
+
+    &__layout-content {
+        grid-column: 3 / span 5;
+    }
+
+    &__websites,
+    &__contact {
+        a {
+            @include type.type-style("body-02");
+        }
+
+        svg {
+            margin-top: 5px;
+            margin-right: 0.5rem !important;
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+}

@@ -1,0 +1,59 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/type";
+
+.jd-text-experience {
+    margin-bottom: spacing.$spacing-05 * 2;
+    position: relative;
+
+    &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    &__title {
+        @include type.type-style("heading-03");
+        font-weight: 800;
+    }
+
+    &__desc {
+        @include type.type-style("body-02");
+    }
+
+    &__details {
+        @include type.type-style("body-01");
+
+        li {
+            margin-bottom: spacing.$spacing-05 * 0.5;
+            color: theme.$text-primary;
+        }
+
+        .jd-skills + & {
+            padding-left: spacing.$spacing-05;
+        }
+    }
+
+    &__meta {
+        @include type.type-style("body-01");
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        margin-bottom: spacing.$spacing-05;
+
+        li {
+            display: inline-block;
+            color: theme.$text-secondary;
+        }
+    }
+
+    .jd-skills {
+        margin: spacing.$spacing-05 0;
+        margin-left: spacing.$spacing-05 * -0.5;
+
+        .cds--tag {
+            background: theme.$layer-01;
+            color: theme.$text-secondary;
+            margin: 1px;
+        }
+    }
+}

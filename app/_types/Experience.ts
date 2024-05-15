@@ -10,12 +10,18 @@ export const enum experienceType {
     Onsite = "On-Site",
 }
 
+export type StartEndDate = {
+    year: number;
+    month: string;
+    present: boolean;
+};
+
 export type Experience = {
     _key: ExpKey;
     orgKey: OrgKey;
     title: string;
-    start: number;
-    end: number | "Present";
+    start?: StartEndDate;
+    end?: StartEndDate;
     location?: string;
     credential?: string;
     type?: experienceType;

@@ -6,15 +6,11 @@ import List from "../List";
 
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { Experience, StartEndDate } from "../../_types/Experience";
 
-type Comp = {
-    start?: number;
-    end?: number | string;
-    location?: string;
-    type?: string;
-    credential?: string;
+interface Comp extends Partial<Experience> {
     className?: string;
-};
+}
 
 export default function ExperienceMeta({
     className,
@@ -30,7 +26,7 @@ export default function ExperienceMeta({
         const itemsData: ReactNode[] = [];
 
         if (credential) {
-            itemsData.push(`${credential} `);
+            itemsData.push(`${credential}`);
         }
 
         setStartEnd(itemsData, start, end);
@@ -64,17 +60,26 @@ export default function ExperienceMeta({
 
     function setStartEnd(
         list: ReactNode[],
-        start?: number,
-        end?: number | string,
+        start?: StartEndDate,
+        end?: StartEndDate,
     ) {
         if (!start || !end) {
             return;
         }
 
-        const endValue =
-            typeof end === "number" ? end : new Date().getFullYear();
+        let startDate = formatDate(start.year, start.month);
+        let endDate = formatDate(end.year, end.month);
 
-        list.push(`${endValue - start} yrs `);
-        list.push(`01/${start}–01/${end} `);
+        if (end.present) {
+            end.year = new Date().getFullYear();
+            endDate = "Present";
+        }
+
+        list.push(`${end.year - start.year} yrs `);
+        list.push(`${startDate}–${endDate} `);
+    }
+
+    function formatDate(year?: number, month?: string) {
+        return (month ? `${month}/` : "") + year;
     }
 }

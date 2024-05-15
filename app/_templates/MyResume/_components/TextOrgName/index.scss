@@ -1,0 +1,17 @@
+@use "@carbon/styles/scss/breakpoint" as *;
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/theme";
+
+.jd-org-name {
+    position: relative;
+
+    a {
+        @include type.type-style("heading-01");
+
+        &,
+        &:visited {
+            color: theme.$text-primary;
+        }
+    }
+}

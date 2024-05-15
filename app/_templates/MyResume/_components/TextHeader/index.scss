@@ -1,0 +1,51 @@
+@use "@carbon/styles/scss/breakpoint" as *;
+@use "@carbon/styles/scss/colors";
+@use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/spacing";
+
+.jd-text-resume .jd-text-resume-header {
+    margin: spacing.$spacing-05 * 4 0;
+    text-align: center;
+
+    &__title {
+        @include type.type-style("heading-07");
+        font-family: "IBM Plex Serif", serif;
+        font-weight: 400;
+        color: theme.$text-primary;
+    }
+
+    &__role {
+        @include type.type-style("heading-04");
+        font-weight: 300;
+        color: theme.$text-helper;
+    }
+
+    &__initial {
+        display: inline-block;
+        margin-bottom: spacing.$spacing-05 * -3;
+    }
+
+    .jd-skills {
+        max-width: 400px;
+        display: inline-block;
+        margin: spacing.$spacing-05 * 2 auto 0;
+    }
+
+    .jd-linklist {
+        max-width: 400px;
+        margin: spacing.$spacing-05 auto 0;
+
+        li {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+            margin-top: 0.1rem;
+        }
+    }
+}
