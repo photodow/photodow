@@ -26,12 +26,14 @@ export function TextExperiences({ refs, className }: Comp) {
                     GetRefs(refs, RefList.Experiences, siteData) as Experience[]
                 ).sort((a, b) => {
                     const presentYear = new Date().getFullYear();
-                    const bEndYear = !b.end?.present
-                        ? b.end?.year
-                        : presentYear;
-                    const aEndYear = !a.end?.present
-                        ? a.end?.year
-                        : presentYear;
+                    const bEndYear =
+                        !b.end?.present && b.end?.year
+                            ? b.end?.year
+                            : presentYear;
+                    const aEndYear =
+                        !a.end?.present && a.end?.year
+                            ? a.end?.year
+                            : presentYear;
                     // const bStartYear = b.start?.year || 0;
                     // const aStartYear = a.start?.year || 0;
 
