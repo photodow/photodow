@@ -1,14 +1,15 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
 @use "@carbon/styles/scss/breakpoint" as *;
 
 .jd-experience {
     position: relative;
+    background: #000;
 
     &__header {
-        // padding-top: 96px;
-        padding-bottom: spacing.$spacing-03 * 4 !important;
+        padding-bottom: 0 !important;
 
         .jd-slant__bg {
             background: linear-gradient(
@@ -16,6 +17,13 @@
                 theme.$layer-01,
                 theme.$background
             );
+            background: colors.$black;
+        }
+
+        @media (min-width: (spacing.$spacing-03 * 106)) {
+            .jd-slant__content {
+                top: 2rem;
+            }
         }
     }
 

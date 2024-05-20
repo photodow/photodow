@@ -14,9 +14,7 @@ const id = "work";
 
 export default function MyWork() {
     const siteData = useContext(SiteDataContext);
-
     const keyupTimeout = useRef<NodeJS.Timeout>();
-
     const [searchValue, setSearchValue] = useState(
         urlParams().get("search") || "",
     );

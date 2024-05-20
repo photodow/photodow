@@ -27,13 +27,13 @@
     }
 
     .jd-skills {
-        max-width: 400px;
+        max-width: spacing.$spacing-05 * 25;
         display: inline-block;
-        margin: spacing.$spacing-05 * 2 auto 0;
+        margin: spacing.$spacing-05 * 4 auto 0;
     }
 
     .jd-linklist {
-        max-width: 400px;
+        max-width: spacing.$spacing-05 * 25;
         margin: spacing.$spacing-05 auto 0;
 
         li {

@@ -9,6 +9,7 @@ import Skills from "../Skills";
 import AboutLoading from "./loading";
 import { Ref } from "../../_types/Ref";
 import Link from "next/link";
+import Markdown from "react-markdown";
 
 type Comp = {
     replaceRefs?: Ref[];
@@ -61,9 +62,9 @@ export default function AboutMe({
                                 className="jd-fade-in"
                             />
                             {!_description ? null : (
-                                <p className="jd-about__desc jd-fade-in">
+                                <Markdown className="jd-about__desc jd-fade-in">
                                     {_description}
-                                </p>
+                                </Markdown>
                             )}
                             <LinksByRef
                                 className="jd-fade-in no-select"

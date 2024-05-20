@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Markdown from "react-markdown";
 import { SiteDataContext } from "../../../../_utils/contexts";
 
 import "./index.scss";
@@ -12,7 +13,11 @@ export function TextSummary() {
                 Summary
             </h3>
             <div className="jd-text-resume__layout-content">
-                <p className="jd-text-resume-summary__text">{description}</p>
+                {description && (
+                    <Markdown className="jd-text-resume-summary__text">
+                        {description}
+                    </Markdown>
+                )}
             </div>
         </section>
     );

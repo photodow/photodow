@@ -10,6 +10,7 @@ import Skills from "../../../../_components/Skills";
 import ExperienceMeta from "../../../../_components/ExperienceMeta";
 import { TextOrgImage } from "../TextOrgImage";
 import { sortExperiences } from "../../../../_utils/sortExperiences";
+import Markdown from "react-markdown";
 
 type Comp = {
     className?: string;
@@ -38,37 +39,36 @@ export function TextExperiences({ refs, className }: Comp) {
         <>
             {experiences.map((experience, i) => {
                 return (
-                    <>
-                        <article
-                            className={`jd-text-experience ${className} ${experience.orgKey}`}
-                            key={i + experience.title + experience.orgKey}
-                        >
-                            <TextOrgImage _key={experience.orgKey} />
-                            <TextOrgName _key={experience.orgKey} />
-                            <h5 className="jd-text-experience__title">
-                                {experience.title}
-                            </h5>
-                            <ExperienceMeta
-                                start={experience.start}
-                                end={experience.end}
-                                location={experience.location}
-                                type={experience.type}
-                                credential={experience.credential}
-                                className="jd-text-experience__meta"
-                            />
-                            <Skills
-                                items={experience.skills}
-                                size={"sm"}
-                                className="jd-text-experience__skills"
-                            />
-                            {experience.description && (
-                                <p className="jd-text-experience__desc">
-                                    {experience.description}
-                                </p>
-                            )}
-                            {renderDetails(experience.details)}
-                        </article>
-                    </>
+                    <article
+                        className={`jd-text-experience ${className} ${experience.orgKey}`}
+                        key={i + experience.title + experience.orgKey}
+                    >
+                        <TextOrgImage _key={experience.orgKey} />
+                        <TextOrgName _key={experience.orgKey} />
+                        <h5 className="jd-text-experience__title">
+                            {experience.title}
+                        </h5>
+                        <ExperienceMeta
+                            start={experience.start}
+                            end={experience.end}
+                            location={experience.location}
+                            type={experience.type}
+                            credential={experience.credential}
+                            className="jd-text-experience__meta"
+                        />
+                        <Skills
+                            items={experience.skills}
+                            size={"sm"}
+                            className="jd-text-experience__skills"
+                        />
+
+                        {experience.description && (
+                            <Markdown className="jd-text-experience__desc">
+                                {experience.description}
+                            </Markdown>
+                        )}
+                        {renderDetails(experience.details)}
+                    </article>
                 );
             })}
         </>
@@ -84,7 +84,14 @@ function renderDetails(details: Experience["details"]) {
                         <span className="hidden-copy-paste-formatting">
                             {"-"}&nbsp;
                         </span>
-                        {detail}
+                        {
+                            <Markdown
+                                disallowedElements={["p"]}
+                                unwrapDisallowed={true}
+                            >
+                                {detail}
+                            </Markdown>
+                        }
                         <div className="hidden-copy-paste-formatting">
                             <br />
                         </div>

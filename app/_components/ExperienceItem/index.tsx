@@ -21,6 +21,7 @@ import { initPeacockBG } from "../../_utils/peacockBG";
 import { initFleetisticsBG } from "../../_utils/fleetisticsBG";
 import { initIBMBG } from "../../_utils/ibmBG";
 import Link from "next/link";
+import Markdown from "react-markdown";
 
 const initOrgKey: Record<string, Function> = {
     peacock: initPeacockBG,
@@ -134,7 +135,9 @@ export default function ExperienceItem({
 
     function renderDesc() {
         return !description ? null : (
-            <p className="jd-experience-item__desc jd-fade-in">{description}</p>
+            <Markdown className="jd-experience-item__desc jd-fade-in">
+                {description}
+            </Markdown>
         );
     }
 
@@ -147,7 +150,12 @@ export default function ExperienceItem({
                             <span className="hidden-copy-paste-formatting">
                                 {"-"}&nbsp;
                             </span>
-                            {detail}
+                            <Markdown
+                                disallowedElements={["p"]}
+                                unwrapDisallowed={true}
+                            >
+                                {detail}
+                            </Markdown>
                             <div className="hidden-copy-paste-formatting">
                                 <br />
                             </div>

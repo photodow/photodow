@@ -23,6 +23,7 @@
 
     &.fullsailuniversity span {
         position: relative;
+        display: block;
 
         &::before {
             content: "";

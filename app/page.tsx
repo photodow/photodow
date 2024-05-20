@@ -9,24 +9,34 @@ import { Ref } from "./_types/Ref";
 import { IconKeys } from "./_components/Icon";
 import { DefaultTemplate } from "./_templates/Default";
 
-const addedRefs: Ref = {
-    _key: "mywork",
-    _override: {
-        protocol: Protocol.Hash,
-        icon: IconKeys.ArrowDown,
-        kind: LinkKind.Ghost,
-        size: LinkSize.Large,
-        comp: LinkComp.Button,
+const addedRefs: Ref[] = [
+    {
+        _key: "experience",
+        _override: {
+            kind: LinkKind.Primary,
+            size: LinkSize.Large,
+            comp: LinkComp.Button,
+        },
     },
-};
+    {
+        _key: "mywork",
+        _override: {
+            protocol: Protocol.Hash,
+            icon: IconKeys.ArrowDown,
+            kind: LinkKind.Ghost,
+            size: LinkSize.Large,
+            comp: LinkComp.Button,
+        },
+    },
+];
 
 export default function Home() {
     return (
         <App>
             <DefaultTemplate>
-                <AboutMe addedRefs={[addedRefs]} />
-                <MyExperience />
+                <AboutMe addedRefs={addedRefs} />
                 <MyWork />
+                <MyExperience />
             </DefaultTemplate>
         </App>
     );

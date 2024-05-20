@@ -16,25 +16,35 @@ const description = `A list of James Dow's experiences and credentials as a ${ro
 
 export const metadata: Metadata = metaDataObj(title, description);
 
-const jumpToExperienceRef: Ref = {
-    _key: "experience",
-    _override: {
-        protocol: Protocol.Hash,
-        icon: IconKeys.ArrowDown,
-        kind: LinkKind.Ghost,
-        size: LinkSize.Large,
-        comp: LinkComp.Button,
+const jumpToExperienceRef: Ref[] = [
+    {
+        _key: "mywork",
+        _override: {
+            kind: LinkKind.Primary,
+            size: LinkSize.Large,
+            comp: LinkComp.Button,
+        },
     },
-};
+    {
+        _key: "experience",
+        _override: {
+            protocol: Protocol.Hash,
+            icon: IconKeys.ArrowDown,
+            kind: LinkKind.Ghost,
+            size: LinkSize.Large,
+            comp: LinkComp.Button,
+        },
+    },
+];
 
 export default function Experience() {
     return (
         <App>
             <DefaultTemplate headerSize={HeaderSize.Small}>
-                <AboutMe
-                    replaceRefs={[jumpToExperienceRef]}
+                {/* <AboutMe
+                    replaceRefs={jumpToExperienceRef}
                     nameRoleOverride={true}
-                />
+                /> */}
                 <MyExperience />
             </DefaultTemplate>
         </App>

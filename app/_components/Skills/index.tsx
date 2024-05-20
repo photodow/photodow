@@ -14,18 +14,16 @@ export default function Skills({ items, size, color, className }: Comp) {
         <div className="jd-skills">
             {items?.length &&
                 items.map((skill, i) => (
-                    <>
-                        <Tag
-                            key={skill}
-                            type={color}
-                            size={size}
-                            className={className}
-                            style={{ transitionDelay: `${i * 0.1}s` }}
-                        >
-                            {skill}
-                        </Tag>
+                    <Tag
+                        key={skill}
+                        type={color}
+                        size={size}
+                        className={className}
+                        style={{ transitionDelay: `${i * 0.1}s` }}
+                    >
+                        {skill}
                         {addComma(items.length, i)}
-                    </>
+                    </Tag>
                 ))}
             <div className="hidden-copy-paste-formatting">
                 <br />
