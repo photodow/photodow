@@ -1,0 +1,10 @@
+@use "@carbon/styles/scss/themes" as *;
+@use "@carbon/styles/scss/theme";
+
+#experience-klaviyo {
+    @include theme.theme($g100);
+
+    .jd-slant__bg {
+        background: #000 !important;
+    }
+}
