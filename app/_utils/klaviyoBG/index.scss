@@ -1,10 +1,13 @@
 @use "@carbon/styles/scss/themes" as *;
 @use "@carbon/styles/scss/theme";
 
+$cotton: #fffaf3;
+
 #experience-klaviyo {
-    @include theme.theme($g100);
+    @include theme.theme($white);
+    color: theme.$text-primary;
 
     .jd-slant__bg {
-        background: #000 !important;
+        background: $cotton !important;
     }
 }
