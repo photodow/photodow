@@ -1,0 +1,102 @@
+@use "@carbon/styles/scss/spacing";
+@use "@carbon/styles/scss/type";
+@use "@carbon/styles/scss/theme";
+
+.jd-case-study {
+    background: theme.$background;
+    color: theme.$text-primary;
+
+    &__hero {
+        padding: (spacing.$spacing-03 * 16) 0 (spacing.$spacing-03 * 10);
+    }
+
+    &__back {
+        display: block;
+        margin-bottom: spacing.$spacing-03 * 4;
+    }
+
+    &__title {
+        @include type.type-style("heading-06");
+        margin: spacing.$spacing-03 0;
+    }
+
+    &__subtitle {
+        @include type.type-style("heading-03");
+        font-weight: 400;
+        color: theme.$text-secondary;
+        max-width: spacing.$spacing-03 * 70;
+        margin-bottom: spacing.$spacing-03 * 6;
+    }
+
+    &__stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: spacing.$spacing-03 * 6;
+        list-style: none;
+        margin: 0 0 (spacing.$spacing-03 * 6);
+        padding: 0;
+
+        li {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__stat-value {
+        @include type.type-style("heading-03");
+        font-weight: 600;
+    }
+
+    &__stat-label {
+        @include type.type-style("caption-01");
+        color: theme.$text-secondary;
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: spacing.$spacing-03 * 2;
+    }
+
+    &__section {
+        padding: (spacing.$spacing-03 * 10) 0;
+
+        &--alt {
+            background: theme.$layer-01;
+        }
+
+        p {
+            @include type.type-style("body-02");
+            max-width: spacing.$spacing-03 * 90;
+        }
+    }
+
+    &__section-title {
+        @include type.type-style("heading-04");
+        margin-bottom: spacing.$spacing-03 * 3;
+    }
+
+    &__gallery {
+        margin-top: spacing.$spacing-03 * 4;
+        row-gap: spacing.$spacing-03 * 6;
+    }
+
+    &__gallery-item {
+        img {
+            width: 100%;
+            border-radius: spacing.$spacing-03;
+            border: 1px solid theme.$border-subtle;
+            margin-bottom: spacing.$spacing-03 * 2;
+        }
+
+        h3 {
+            @include type.type-style("heading-compact-01");
+            margin-bottom: spacing.$spacing-03;
+        }
+
+        p {
+            @include type.type-style("body-01");
+            color: theme.$text-secondary;
+        }
+    }
+}
