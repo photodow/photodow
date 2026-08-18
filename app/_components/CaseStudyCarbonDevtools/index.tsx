@@ -3,7 +3,9 @@
 import "./index.scss";
 
 import { Button, Link as CarbonLink, Tag } from "@carbon/react";
-import NextLink from "next/link";
+import { Link } from "../Link";
+import { Icon, IconKeys } from "../Icon";
+import MyContact from "../MyContact";
 
 const stats = [
     { value: "928", label: "active users today" },
@@ -29,7 +31,7 @@ const screenshots = [
         src: "/case-studies/carbon-devtools/screenshot-5.png",
         alt: "Token detail tooltip showing a component's typography spec",
         title: "Inspect on hover",
-        desc: "Hovering an element surfaces its exact token, here a heading's IBM Plex Sans spec down to the line-height.",
+        desc: "Hover any element to see its exact token spec, like this heading's IBM Plex Sans details down to the line-height.",
     },
     {
         src: "/case-studies/carbon-devtools/screenshot-6.png",
@@ -52,13 +54,13 @@ export function CaseStudyCarbonDevtools() {
                 <div className="cds--grid">
                     <div className="cds--row">
                         <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-6 cds--offset-lg-3 cds--col-lg-8">
-                            <NextLink
-                                href="/"
-                                className="jd-case-study__back"
-                            >
-                                ← Back
-                            </NextLink>
-                            <Tag type="high-contrast">Case study</Tag>
+                            <Link href="/" className="jd-case-study__back">
+                                <Icon iconRef={IconKeys.ArrowLeft} size={16} />
+                                Back
+                            </Link>
+                            <Tag className="jd-case-study__eyebrow">
+                                Case study
+                            </Tag>
                             <h1 className="jd-case-study__title">
                                 Carbon Devtools
                             </h1>
@@ -68,18 +70,31 @@ export function CaseStudyCarbonDevtools() {
                                 usage on any live page, without leaving the
                                 browser.
                             </p>
-                            <ul className="jd-case-study__stats">
-                                {stats.map((stat) => (
-                                    <li key={stat.label}>
-                                        <span className="jd-case-study__stat-value">
-                                            {stat.value}
-                                        </span>
-                                        <span className="jd-case-study__stat-label">
-                                            {stat.label}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
+                        </div>
+                    </div>
+                    <div className="cds--row jd-case-study__stats">
+                        {stats.map((stat, i) => (
+                            <div
+                                key={stat.label}
+                                className={`cds--col-sm-4 cds--col-md-3 cds--col-lg-2 jd-case-study__stat${
+                                    i === 0
+                                        ? " cds--offset-md-1 cds--offset-lg-3"
+                                        : i === 2
+                                          ? " cds--offset-md-1 cds--offset-lg-0"
+                                          : ""
+                                }`}
+                            >
+                                <span className="jd-case-study__stat-value">
+                                    {stat.value}
+                                </span>
+                                <span className="jd-case-study__stat-label">
+                                    {stat.label}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="cds--row">
+                        <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-6 cds--offset-lg-3 cds--col-lg-8">
                             <div className="jd-case-study__actions">
                                 <Button
                                     href="https://chromewebstore.google.com/detail/carbon-devtools/oejjaglcafcolafkjecfkoojgnpfpgca"
@@ -219,8 +234,8 @@ export function CaseStudyCarbonDevtools() {
                                 on version 3.0.0, with{" "}
                                 <strong>928 active users</strong> today.
                                 Outliving the person who built it and getting
-                                adopted as real infrastructure is the outcome
-                                I care about most.
+                                adopted as real infrastructure that users love
+                                to use is the outcome I care about most.
                             </p>
                             <p>
                                 <CarbonLink
@@ -235,6 +250,19 @@ export function CaseStudyCarbonDevtools() {
                     </div>
                 </div>
             </section>
+
+            <footer
+                className="jd-case-study__section jd-case-study__footer"
+                data-carbon-theme="g90"
+            >
+                <div className="cds--grid">
+                    <div className="cds--row">
+                        <div className="cds--col-sm-4 cds--offset-md-1 cds--col-md-6 cds--offset-lg-3 cds--col-lg-8">
+                            <MyContact />
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </article>
     );
 }

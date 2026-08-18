@@ -1,6 +1,7 @@
 @use "@carbon/styles/scss/spacing";
 @use "@carbon/styles/scss/type";
 @use "@carbon/styles/scss/theme";
+@use "@carbon/styles/scss/colors";
 
 .jd-case-study {
     background: theme.$background;
@@ -11,8 +12,20 @@
     }
 
     &__back {
-        display: block;
+        display: flex;
+        width: fit-content;
+        align-items: center;
         margin-bottom: spacing.$spacing-03 * 4;
+
+        svg {
+            fill: currentColor !important;
+            margin-right: spacing.$spacing-03 / 2;
+        }
+    }
+
+    &__eyebrow.cds--tag {
+        background: colors.$yellow-20;
+        color: colors.$warm-gray-100;
     }
 
     &__title {
@@ -29,17 +42,14 @@
     }
 
     &__stats {
-        display: flex;
-        flex-wrap: wrap;
-        gap: spacing.$spacing-03 * 6;
-        list-style: none;
-        margin: 0 0 (spacing.$spacing-03 * 6);
-        padding: 0;
+        margin-block-end: 3rem;
+        row-gap: spacing.$spacing-03 * 3;
+        align-items: flex-start;
+    }
 
-        li {
-            display: flex;
-            flex-direction: column;
-        }
+    &__stat {
+        display: flex;
+        flex-direction: column;
     }
 
     &__stat-value {

@@ -11,6 +11,7 @@ import View from "@carbon/icons-react/lib/View";
 import Document from "@carbon/icons-react/lib/Document";
 import DownloadDocument from "@carbon/icons-react/lib/DocumentDownload";
 import ArrowDown from "@carbon/icons-react/lib/ArrowDown";
+import ArrowLeft from "@carbon/icons-react/lib/ArrowLeft";
 import Phone from "@carbon/icons-react/lib/Phone";
 import Email from "@carbon/icons-react/lib/Email";
 import Wikis from "@carbon/icons-react/lib/Wikis";
@@ -29,6 +30,7 @@ export const enum IconKeys {
     Document = "document",
     DownloadDocument = "download-document",
     ArrowDown = "arrow-down",
+    ArrowLeft = "arrow-left",
     Phone = "phone",
     Email = "email",
     Website = "website",
@@ -52,6 +54,7 @@ const icons: Record<IconKeys, JSXElementConstructor<any>> = {
     [IconKeys.Document]: Document,
     [IconKeys.DownloadDocument]: DownloadDocument,
     [IconKeys.ArrowDown]: ArrowDown,
+    [IconKeys.ArrowLeft]: ArrowLeft,
     [IconKeys.Phone]: Phone,
     [IconKeys.Email]: Email,
     [IconKeys.Website]: Wikis,

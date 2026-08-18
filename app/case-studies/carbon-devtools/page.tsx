@@ -16,7 +16,7 @@ export const metadata: Metadata = metaDataObj(title, description);
 export default function CarbonDevtoolsCaseStudy() {
     return (
         <App>
-            <DefaultTemplate headerSize={HeaderSize.Small}>
+            <DefaultTemplate headerSize={HeaderSize.Medium}>
                 <CaseStudyCarbonDevtools />
             </DefaultTemplate>
         </App>
